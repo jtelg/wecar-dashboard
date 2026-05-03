@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeCar — Plan de Medición y Arquitectura de Datos 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple: #9949FF;
+            --blue: #0E6FD1;
+            --cyan: #0EB5D1;
+            --dark: #1a1a1a;
+            --text: #3a3a4a;
+            --text-light: #666;
+            --bg: #ffffff;
+            --light-bg: #f7f8fa;
+            --border: #e8eaef;
+            --success: #2e7d32;
+            --warning: #e65100;
+            --danger: #c62828;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* ═══════════════════════════════════════════
+           COVER
+        ═══════════════════════════════════════════ */
+        .cover {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 50%, var(--cyan) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .cover-divider {
+            width: 80px;
+            height: 3px;
+            background: rgba(255,255,255,0.5);
+            margin: 0 auto 35px;
+        }
+
+        .cover-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 38px;
+            font-weight: 700;
+            line-height: 1.3;
+            max-width: 800px;
+            margin-bottom: 12px;
+        }
+
+        .cover-subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 650px;
+            margin-bottom: 50px;
+        }
+
+        .cover-meta {
+            font-size: 15px;
+            opacity: 0.75;
+            line-height: 1.9;
+        }
+
+        .cover-tag {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.35);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+        }
+
+        /* ═══════════════════════════════════════════
+           LAYOUT
+        ═══════════════════════════════════════════ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section {
+            padding: 90px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-of-type { border-bottom: none; }
+
+        .section-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--blue), var(--cyan));
+            margin-top: 15px;
+            border-radius: 3px;
+        }
+
+        .section-intro {
+            font-size: 19px;
+            color: var(--text-light);
+            max-width: 850px;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        h3.subsection-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--blue);
+            margin: 55px 0 20px;
+        }
+
+        /* ═══════════════════════════════════════════
+           STATS / KPI GRID
+        ═══════════════════════════════════════════ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(14,181,209,0.12);
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 52px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple), var(--blue), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .stat-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-info { background: #e3f2fd; color: var(--blue); }
+        .tag-warning { background: #fff3e0; color: var(--warning); }
+        .tag-danger { background: #ffebee; color: var(--danger); }
+        .tag-success { background: #e8f5e9; color: var(--success); }
+
+        /* ═══════════════════════════════════════════
+           TABLES
+        ═══════════════════════════════════════════ */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: var(--bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            color: white;
+        }
+
+        .data-table th {
+            padding: 18px 22px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+
+        .data-table tbody tr:last-child td { border-bottom: none; }
+        .data-table tbody tr:hover { background: rgba(14,111,209,0.03); }
+
+        /* ═══════════════════════════════════════════
+           HIGHLIGHT / INFO BOXES
+        ═══════════════════════════════════════════ */
+        .premisa {
+            background: linear-gradient(135deg, rgba(153,73,255,0.07), rgba(14,181,209,0.07));
+            border-left: 5px solid var(--purple);
+            padding: 35px 40px;
+            border-radius: 0 12px 12px 0;
+            margin: 35px 0;
+        }
+
+        .premisa-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--purple);
+            margin-bottom: 12px;
+        }
+
+        .premisa p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .hallazgo-critico {
+            background: linear-gradient(135deg, #fff5f5, #fff0f0);
+            border: 2px solid #ffcdd2;
+            border-left: 5px solid var(--danger);
+            padding: 30px 35px;
+            border-radius: 0 12px 12px 0;
+            margin: 35px 0;
+        }
+
+        .hallazgo-critico .label {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--danger);
+            margin-bottom: 10px;
+        }
+
+        .hallazgo-critico p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #4a2020;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(14,111,209,0.06), rgba(14,181,209,0.06));
+            border-left: 5px solid var(--blue);
+            padding: 28px 35px;
+            border-radius: 0 12px 12px 0;
+            margin: 30px 0;
+        }
+
+        .info-box p {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, rgba(46,125,50,0.06), rgba(46,125,50,0.03));
+            border-left: 5px solid var(--success);
+            padding: 28px 35px;
+            border-radius: 0 12px 12px 0;
+            margin: 30px 0;
+        }
+
+        .success-box p {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════════════════════
+           CRM FIELDS / DATA FIELDS
+        ═══════════════════════════════════════════ */
+        .crm-field {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin: 20px 0;
+            transition: border-color 0.3s;
+        }
+
+        .crm-field:hover { border-color: var(--cyan); }
+
+        .crm-field-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .crm-field-title .icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .crm-field p, .crm-field ul {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════════════════════
+           OPTION CARDS
+        ═══════════════════════════════════════════ */
+        .option-card {
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 30px 0;
+            transition: all 0.3s;
+        }
+
+        .option-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 8px 30px rgba(14,181,209,0.1);
+        }
+
+        .option-card.recommended {
+            border-color: var(--success);
+            box-shadow: 0 8px 30px rgba(46,125,50,0.12);
+        }
+
+        .option-header {
+            padding: 25px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .option-card:nth-of-type(1) .option-header { background: linear-gradient(135deg, rgba(153,73,255,0.08), rgba(153,73,255,0.03)); }
+        .option-card:nth-of-type(2) .option-header { background: linear-gradient(135deg, rgba(14,111,209,0.08), rgba(14,111,209,0.03)); }
+        .option-card:nth-of-type(3) .option-header { background: linear-gradient(135deg, rgba(46,125,50,0.08), rgba(46,125,50,0.03)); }
+
+        .option-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .option-card:nth-of-type(1) .option-num { color: var(--purple); }
+        .option-card:nth-of-type(2) .option-num { color: var(--blue); }
+        .option-card:nth-of-type(3) .option-num { color: var(--success); }
+
+        .option-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .option-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-simple { background: #f3e5f5; color: var(--purple); }
+        .badge-medium { background: #e3f2fd; color: var(--blue); }
+        .badge-recommended { background: #e8f5e9; color: var(--success); }
+
+        .option-body {
+            padding: 30px 35px;
+        }
+
+        .option-body p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .pros, .cons {
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .pros {
+            background: rgba(46,125,50,0.05);
+            border: 1px solid rgba(46,125,50,0.2);
+        }
+
+        .cons {
+            background: rgba(198,40,40,0.04);
+            border: 1px solid rgba(198,40,40,0.15);
+        }
+
+        .pros h5 {
+            color: var(--success);
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .cons h5 {
+            color: var(--danger);
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pros li, .cons li {
+            padding: 6px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            padding-left: 22px;
+            position: relative;
+        }
+
+        .pros li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .cons li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .option-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        .option-meta-item {
+            font-size: 14px;
+        }
+
+        .option-meta-item .meta-label {
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .option-meta-item .meta-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* ═══════════════════════════════════════════
+           FLOW DIAGRAM
+        ═══════════════════════════════════════════ */
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 35px 0;
+        }
+
+        .flow-node {
+            background: var(--light-bg);
+            border: 2px solid var(--border);
+            padding: 16px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 130px;
+        }
+
+        .flow-node.highlight {
+            background: linear-gradient(135deg, rgba(14,111,209,0.1), rgba(14,181,209,0.1));
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
+        .flow-arrow {
+            font-size: 22px;
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        /* ═══════════════════════════════════════════
+           DASHBOARD PREVIEW
+        ═══════════════════════════════════════════ */
+        .dashboard-preview {
+            background: var(--dark);
+            border-radius: 16px;
+            padding: 35px;
+            margin: 40px 0;
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            font-family: 'Syne', sans-serif;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .dashboard-nsm {
+            text-align: right;
+        }
+
+        .dashboard-nsm .nsm-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .dashboard-nsm .nsm-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .dashboard-card .dc-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+        }
+
+        .dashboard-card .dc-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .dashboard-card .dc-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .dashboard-card .dc-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .bar-purple { background: var(--purple); }
+        .bar-blue { background: var(--blue); }
+        .bar-cyan { background: var(--cyan); }
+
+        .dashboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .dashboard-table th {
+            text-align: left;
+            padding: 10px 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dashboard-table td {
+            padding: 12px 15px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .dashboard-table tbody tr:hover td {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .partner-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .badge-active { background: rgba(46,125,50,0.2); color: #81c784; }
+        .badge-low { background: rgba(198,40,40,0.2); color: #ef9a9a; }
+
+        /* ═══════════════════════════════════════════
+           TIMELINE
+        ═══════════════════════════════════════════ */
+        .timeline {
+            position: relative;
+            margin: 50px 0;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--purple), var(--blue), var(--cyan), var(--success));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 3px solid var(--blue);
+            background: white;
+        }
+
+        .timeline-item:nth-child(1)::before { border-color: var(--purple); }
+        .timeline-item:nth-child(2)::before { border-color: var(--blue); }
+        .timeline-item:nth-child(3)::before { border-color: var(--cyan); }
+        .timeline-item:nth-child(4)::before { border-color: var(--success); }
+
+        .timeline-week {
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .timeline-item:nth-child(1) .timeline-week { color: var(--purple); }
+        .timeline-item:nth-child(2) .timeline-week { color: var(--blue); }
+        .timeline-item:nth-child(3) .timeline-week { color: var(--cyan); }
+        .timeline-item:nth-child(4) .timeline-week { color: var(--success); }
+
+        .timeline-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .timeline-desc ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 8px;
+        }
+
+        .timeline-desc li {
+            padding: 4px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .timeline-desc li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        /* ═══════════════════════════════════════════
+           PRIORITIES
+        ═══════════════════════════════════════════ */
+        .priority-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 180px 140px;
+            align-items: center;
+            padding: 20px 25px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            margin: 12px 0;
+            transition: all 0.3s;
+        }
+
+        .priority-row:hover {
+            border-color: var(--blue);
+            box-shadow: 0 4px 15px rgba(14,111,209,0.08);
+        }
+
+        .priority-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .priority-text {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--dark);
+        }
+
+        .priority-impact {
+            font-size: 13px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .priority-urgency { text-align: center; }
+
+        .urgency-tag {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .urgency-inmediata { background: #ffebee; color: var(--danger); }
+        .urgency-corto { background: #fff3e0; color: var(--warning); }
+        .urgency-medio { background: #e3f2fd; color: var(--blue); }
+
+        /* ═══════════════════════════════════════════
+           CUSTER BLOCK
+        ═══════════════════════════════════════════ */
+        .custer-block {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a3a 100%);
+            color: white;
+            padding: 45px;
+            border-radius: 16px;
+            margin: 40px 0;
+        }
+
+        .custer-block h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--cyan);
+        }
+
+        .custer-block p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.88);
+        }
+
+        /* ═══════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════ */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 50px 40px;
+            margin-top: 40px;
+        }
+
+        .footer-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .footer-sub {
+            font-size: 15px;
+            opacity: 0.7;
+            margin-bottom: 25px;
+        }
+
+        .footer-credits {
+            font-size: 14px;
+            opacity: 0.5;
+            line-height: 1.9;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     COVER
+═══════════════════════════════════════════ -->
+<div class="cover">
+    <div class="cover-logo">WeCar</div>
+    <div class="cover-tag">Arquitectura de Datos</div>
+    <div class="cover-divider"></div>
+    <div class="cover-title">Plan de Medición y Arquitectura de Datos</div>
+    <div class="cover-subtitle">Implementación técnica para medir la NSM y gestionar el crecimiento del marketplace</div>
+    <div class="cover-meta">
+        Marzo 2026 · Documento Interno — Directorio<br>
+        Grupo Le Parc — WeCar<br>
+        Elaborado por: Custer Marketing
+    </div>
+</div>
+
+<div class="container">
+
+<!-- ╔══════════════════════════════════════════════╗
+     ║      1. EL PROBLEMA                          ║
+     ╚══════════════════════════════════════════════╝ -->
+<section class="section">
+    <div class="section-number">Sección 01</div>
+    <h2 class="section-title">El Problema: Lo Que No Se Puede Medir</h2>
+
+    <p class="section-intro">La estrategia 2026 de WeCar define una North Star Metric clara: alcanzar el 75% de stock proveniente de terceros. Sin embargo, la infraestructura tecnológica actual no permite medir esta métrica de manera automatizada ni hacer un seguimiento del progreso.</p>
+
+    <div class="hallazgo-critico">
+        <div class="label">⚠️ Hallazgo crítico de auditoría</div>
+        <p>WordPress (wecar.com.ar) opera como un catálogo web sin distinción de origen. No existe ningún campo, taxonomía ni sistema que diferencie si un vehículo publicado es stock propio, de un partner (concesionaria) o de un particular. Esto implica que la métrica más importante del negocio —la NSM— solo puede calcularse manualmente contando autos en una planilla.</p>
+    </div>
+
+    <h3 class="subsection-title">Lo que hoy NO se puede responder</h3>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">?</div>
+            <div class="stat-label">Mix actual del inventario</div>
+            <span class="stat-tag tag-danger">Sin tracking</span>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">?</div>
+            <div class="stat-label">Autos por partner</div>
+            <span class="stat-tag tag-danger">Sin tracking</span>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">?</div>
+            <div class="stat-label">Rotación por origen</div>
+            <span class="stat-tag tag-danger">Sin tracking</span>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">?</div>
+            <div class="stat-label">Días promedio publicado</div>
+            <span class="stat-tag tag-danger">Sin tracking</span>
+        </div>
+    </div>
+
+    <div class="premisa">
+        <div class="premisa-label">Premisa estratégica</div>
+        <p>No se puede gestionar lo que no se mide. Todas las estrategias planteadas en esta consultoría —Plan Táctico Partners, Validación de Particulares, Estrategia de Demanda— dependen de contar con datos estructurados del lado de la oferta. Sin esta arquitectura de datos, las decisiones seguirán siendo intuitivas y la NSM quedará como una aspiración sin métricas objetivas de progreso.</p>
+    </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗
+     ║      2. DATOS MÍNIMOS NECESARIOS              ║
+     ╚══════════════════════════════════════════════╝ -->
+<section class="section">
+    <div class="section-number">Sección 02</div>
+    <h2 class="section-title">Datos Mínimos Necesarios</h2>
+
+    <p class="section-intro">Cada vehículo publicado en WeCar debe capturar un conjunto mínimo de campos adicionales a los que ya existen (marca, modelo, año, precio, fotos). Estos campos son los que habilitan toda la capa de medición.</p>
+
+    <h3 class="subsection-title">Campos requeridos por vehículo</h3>
+
+    <div class="crm-field">
+        <div class="crm-field-title"><span class="icon">🏷️</span> Origen del vehículo</div>
+        <p>Campo obligatorio que clasifica cada unidad publicada según su procedencia. Es el dato más crítico de toda la arquitectura, ya que es el que permite calcular la NSM directamente.</p>
+        <div style="display:flex; gap:15px; flex-wrap:wrap; margin-top:12px; font-family:'Exo 2',sans-serif;">
+            <span style="background:rgba(153,73,255,0.12); padding:8px 16px; border-radius:8px; color:var(--purple); font-weight:600;">PROPIO</span>
+            <span style="background:rgba(14,111,209,0.12); padding:8px 16px; border-radius:8px; color:var(--blue); font-weight:600;">PARTNER</span>
+            <span style="background:rgba(14,181,209,0.12); padding:8px 16px; border-radius:8px; color:var(--cyan); font-weight:600;">PARTICULAR</span>
+        </div>
+    </div>
+
+    <div class="crm-field">
+        <div class="crm-field-title"><span class="icon">🏢</span> Identificación del partner</div>
+        <p>Cuando el origen es "PARTNER", se debe registrar el nombre de la concesionaria asociada. Este campo habilita la medición de rendimiento individual por partner: cuántos autos tiene publicados, cuántos vendió, rotación promedio, etc.</p>
+    </div>
+
+    <div class="crm-field">
+        <div class="crm-field-title"><span class="icon">📅</span> Fecha de publicación</div>
+        <p>Registro automático de cuándo se publicó el vehículo. Combinado con la fecha de baja, permite calcular el tiempo promedio de exposición y la velocidad de rotación del inventario por tipo de origen.</p>
+    </div>
+
+    <div class="crm-field">
+        <div class="crm-field-title"><span class="icon">📊</span> Estado del vehículo</div>
+        <p>Campo que refleja el ciclo de vida de cada publicación dentro del marketplace. Permite diferenciar stock activo de histórico y calcular métricas de conversión.</p>
+        <div style="display:flex; gap:15px; flex-wrap:wrap; margin-top:12px; font-family:'Exo 2',sans-serif;">
+            <span style="background:rgba(46,125,50,0.12); padding:8px 16px; border-radius:8px; color:var(--success); font-weight:600;">ACTIVO</span>
+            <span style="background:rgba(14,111,209,0.12); padding:8px 16px; border-radius:8px; color:var(--blue); font-weight:600;">VENDIDO</span>
+            <span style="background:rgba(198,40,40,0.12); padding:8px 16px; border-radius:8px; color:var(--danger); font-weight:600;">RETIRADO</span>
+        </div>
+    </div>
+
+    <div class="crm-field">
+        <div class="crm-field-title"><span class="icon">🔚</span> Fecha de baja / venta</div>
+        <p>Registro de cuándo el vehículo salió del catálogo activo, ya sea por venta o por retiro del vendedor. Este dato, combinado con la fecha de publicación, es la base para calcular la rotación y el tiempo promedio hasta la venta.</p>
+    </div>
+
+    <div class="info-box">
+        <p><strong>Principio de diseño:</strong> Estos cinco campos son el mínimo necesario para habilitar el tracking de la NSM y el rendimiento del marketplace. No es un CRM de leads ni un sistema de ventas — eso lo resuelve Pilot Solutions del lado de demanda. Esto es exclusivamente la <strong>capa de datos de inventario</strong> que hoy no existe.</p>
+    </div>
+
+    <h3 class="subsection-title">Métricas que se desbloquean</h3>
+
+    <table class="data-table">
+        <thead>
+            <tr><th>Métrica</th><th>Fórmula</th><th>Impacto estratégico</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>NSM — % Stock de Terceros</strong></td>
+                <td>(Partners + Particulares activos) ÷ Total activos × 100</td>
+                <td>Métrica principal del negocio</td>
+            </tr>
+            <tr>
+                <td><strong>Mix del inventario</strong></td>
+                <td>% Propio / % Partner / % Particular</td>
+                <td>Monitoreo del ratio 25/67/8</td>
+            </tr>
+            <tr>
+                <td><strong>Stock activo por partner</strong></td>
+                <td>Unidades activas filtradas por partner</td>
+                <td>Gestión activa de la red de concesionarios</td>
+            </tr>
+            <tr>
+                <td><strong>Días promedio hasta venta</strong></td>
+                <td>(Fecha venta − Fecha publicación) por origen</td>
+                <td>Velocidad de rotación por segmento</td>
+            </tr>
+            <tr>
+                <td><strong>Tasa de conversión del inventario</strong></td>
+                <td>Vendidos ÷ (Vendidos + Retirados) × 100</td>
+                <td>Efectividad del marketplace como canal de venta</td>
+            </tr>
+            <tr>
+                <td><strong>Altas y bajas por período</strong></td>
+                <td>Nuevas publicaciones vs. bajas por semana/mes</td>
+                <td>Salud del pipeline de inventario</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗
+     ║      3. PROPUESTA TÉCNICA                      ║
+     ╚══════════════════════════════════════════════╝ -->
+<section class="section">
+    <div class="section-number">Sección 03</div>
+    <h2 class="section-title">Propuesta Técnica: Dashboard Integrado en WordPress</h2>
+
+    <p class="section-intro">La solución propuesta consiste en agregar los campos de datos definidos en la sección anterior directamente en WordPress y desarrollar un dashboard de gestión dentro del panel de administración (wp-admin), donde el equipo operativo ya trabaja todos los días.</p>
+
+    <div class="option-card recommended">
+        <div class="option-header">
+            <div>
+                <div class="option-num">Propuesta</div>
+                <div class="option-title">Dashboard de NSM integrado en wp-admin</div>
+            </div>
+            <span class="option-badge badge-recommended">★ Propuesta</span>
+        </div>
+        <div class="option-body">
+            <p>Los campos custom se integran en WordPress y se desarrolla una <strong>página de dashboard dentro del panel de administración</strong> (wp-admin) que muestra la NSM, el mix de inventario, el stock por partner y las métricas de rotación en tiempo real. El equipo operativo ve los datos cada vez que entra al admin de WordPress — sin necesidad de abrir otra herramienta.</p>
+
+            <p>Opcionalmente, se complementa con un export a Looker Studio para reportes de directorio más elaborados con vistas históricas y comparativas.</p>
+
+            <div class="option-meta">
+                <div class="option-meta-item">
+                    <div class="meta-label">Tiempo estimado</div>
+                    <div class="meta-value">3-4 semanas</div>
+                </div>
+                <div class="option-meta-item">
+                    <div class="meta-label">Complejidad técnica</div>
+                    <div class="meta-value">Media-Alta</div>
+                </div>
+                <div class="option-meta-item">
+                    <div class="meta-label">Mantenimiento</div>
+                    <div class="meta-value">Automático — actualizaciones de WP</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-box">
+        <p><strong>¿Por qué esta solución?</strong> El equipo operativo de WeCar ya trabaja dentro de WordPress para cargar y gestionar vehículos. Si la NSM y las métricas clave viven en el mismo entorno, la barrera para consultarlas es cero. Alternativas que dependen de herramientas externas (como exportar a Google Sheets o Looker Studio) generan abandono progresivo del seguimiento. Esta propuesta pone los datos donde ya están las personas.</p>
+    </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗
+     ║      4. QUÉ DEBE MOSTRAR EL DASHBOARD        ║
+     ╚══════════════════════════════════════════════╝ -->
+<section class="section">
+    <div class="section-number">Sección 04</div>
+    <h2 class="section-title">Qué Debe Mostrar el Dashboard</h2>
+
+    <p class="section-intro">El dashboard integrado en wp-admin debe presentar la información de manera inmediata y accionable. Se propone una vista principal con tres niveles de información: el indicador principal (NSM), el breakdown del mix, y el detalle por partner.</p>
+
+    <h3 class="subsection-title">Preview conceptual del dashboard</h3>
+
+    <div class="dashboard-preview">
+        <div class="dashboard-header">
+            <div class="dashboard-title">📊 WeCar — Panel de Control Marketplace</div>
+            <div class="dashboard-nsm">
+                <div class="nsm-value">48%</div>
+                <div class="nsm-label">NSM — Stock de Terceros</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="dc-value" style="color: var(--purple);">63</div>
+                <div class="dc-label">Stock Propio</div>
+                <div class="dc-bar"><div class="dc-bar-fill bar-purple" style="width: 52%;"></div></div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dc-value" style="color: var(--blue);">57</div>
+                <div class="dc-label">Stock Partners</div>
+                <div class="dc-bar"><div class="dc-bar-fill bar-blue" style="width: 47%;"></div></div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dc-value" style="color: var(--cyan);">2</div>
+                <div class="dc-label">Stock Particulares</div>
+                <div class="dc-bar"><div class="dc-bar-fill bar-cyan" style="width: 1%;"></div></div>
+            </div>
+        </div>
+
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Partner</th>
+                    <th>Autos Activos</th>
+                    <th>Vendidos (mes)</th>
+                    <th>Días Prom.</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Concesionaria Martínez</td>
+                    <td>18</td>
+                    <td>3</td>
+                    <td>22</td>
+                    <td><span class="partner-badge badge-active">Activo</span></td>
+                </tr>
+                <tr>
+                    <td>AutoSur Villa María</td>
+                    <td>14</td>
+                    <td>2</td>
+                    <td>35</td>
+                    <td><span class="partner-badge badge-active">Activo</span></td>
+                </tr>
+                <tr>
+                    <td>Autos del Centro</td>
+                    <td>12</td>
+                    <td>1</td>
+                    <td>18</td>
+                    <td><span class="partner-badge badge-active">Activo</span></td>
+                </tr>
+                <tr>
+                    <td>Garage Norte</td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td>45</td>
+                    <td><span class="partner-badge badge-low">Baja rotación</span></td>
+                </tr>
+                <tr>
+                    <td>Car Express</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>60+</td>
+                    <td><span class="partner-badge badge-low">Requiere acción</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="info-box">
+        <p><strong>Nota:</strong> Los datos del preview son ilustrativos. Los nombres de partners son ficticios y las cifras reflejan la composición actual del inventario según la auditoría. El diseño final del dashboard se ajustará durante la fase de desarrollo según las capacidades del equipo técnico.</p>
+    </div>
+
+    <h3 class="subsection-title">Vistas del dashboard</h3>
+
+    <table class="data-table">
+        <thead>
+            <tr><th>Vista</th><th>Contenido</th><th>Usuario principal</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Vista Principal</strong></td>
+                <td>NSM actual, mix del inventario (propio/partner/particular), total de unidades activas, altas y bajas del período</td>
+                <td>Directorio / Gerencia</td>
+            </tr>
+            <tr>
+                <td><strong>Vista Partners</strong></td>
+                <td>Tabla de partners con autos activos, vendidos, días promedio de publicación, y estado (activo/baja rotación)</td>
+                <td>Operaciones / Aylén</td>
+            </tr>
+            <tr>
+                <td><strong>Vista Particulares</strong></td>
+                <td>Cantidad de vehículos de particulares activos, tasa de conversión, funnel de ingreso (si se implementa cotizador)</td>
+                <td>Comercial / Bruno</td>
+            </tr>
+            <tr>
+                <td><strong>Vista Histórica</strong></td>
+                <td>Evolución semanal/mensual de la NSM, tendencia del mix, progreso hacia los targets semestrales</td>
+                <td>Directorio (reportes)</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗
+     ║      5. SÍNTESIS Y PRÓXIMOS PASOS             ║
+     ╚══════════════════════════════════════════════╝ -->
+<section class="section">
+    <div class="section-number">Sección 05</div>
+    <h2 class="section-title">Síntesis y Próximos Pasos</h2>
+
+    <p class="section-intro">La arquitectura de datos propuesta cierra el circuito estratégico de la consultoría. Sin datos estructurados del lado de la oferta, las estrategias de Partners, Particulares y Demanda operan sin visibilidad de progreso. Con esta implementación, WeCar pasa de operar "a ciegas" a tener un sistema de gestión basado en métricas objetivas.</p>
+
+    <div class="premisa">
+        <div class="premisa-label">Conexión con la estrategia</div>
+        <p>Este sistema de medición es la infraestructura que conecta todo lo planteado en la consultoría. El <strong>Plan Táctico Partners</strong> necesita medir stock activo y rendimiento por concesionaria. La <strong>Validación de Particulares</strong> necesita trackear altas de vehículos y conversión. La <strong>Estrategia de Demanda</strong> (vía Pilot Solutions) necesita saber qué tipo de stock se vendió. Sin esta capa de datos, ninguna de esas estrategias puede evaluarse con rigor.</p>
+    </div>
+
+    <p style="margin-top:30px; font-size:18px; font-weight:600; color:var(--dark);">Las acciones inmediatas se priorizan de la siguiente manera:</p>
+
+    <div style="margin-top:30px;">
+        <div class="priority-row">
+            <div class="priority-num">1</div>
+            <div class="priority-text">Definir el desarrollador responsable y asignar el proyecto</div>
+            <div class="priority-impact">Desbloquea todo el plan</div>
+            <div class="priority-urgency"><span class="urgency-tag urgency-inmediata">Inmediata</span></div>
+        </div>
+        <div class="priority-row">
+            <div class="priority-num">2</div>
+            <div class="priority-text">Implementar campos custom + migración del stock actual</div>
+            <div class="priority-impact">Semanas 1-2</div>
+            <div class="priority-urgency"><span class="urgency-tag urgency-inmediata">Inmediata</span></div>
+        </div>
+        <div class="priority-row">
+            <div class="priority-num">3</div>
+            <div class="priority-text">Desarrollar dashboard en wp-admin con métricas principales</div>
+            <div class="priority-impact">Semanas 3-4</div>
+            <div class="priority-urgency"><span class="urgency-tag urgency-corto">Corto plazo</span></div>
+        </div>
+        <div class="priority-row">
+            <div class="priority-num">4</div>
+            <div class="priority-text">Capacitación del equipo + validación de datos</div>
+            <div class="priority-impact">Semana 4</div>
+            <div class="priority-urgency"><span class="urgency-tag urgency-corto">Corto plazo</span></div>
+        </div>
+        <div class="priority-row">
+            <div class="priority-num">5</div>
+            <div class="priority-text">Conectar con Looker Studio para reportes de directorio (opcional)</div>
+            <div class="priority-impact">Post-implementación</div>
+            <div class="priority-urgency"><span class="urgency-tag urgency-medio">Medio plazo</span></div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<div class="footer">
+    <div class="footer-brand">WeCar Marketplace</div>
+    <div class="footer-sub">Plan de Medición y Arquitectura de Datos — 2026</div>
+    <div class="footer-credits">
+        Elaborado por: Facundo Busso — Custer Marketing<br>
+        Marzo 2026 · Documento Interno — Directorio<br>
+        Grupo Le Parc — WeCar
+    </div>
+</div>
+
+</body>
+</html>

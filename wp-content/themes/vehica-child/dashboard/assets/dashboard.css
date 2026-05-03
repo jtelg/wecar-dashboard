@@ -1,0 +1,682 @@
+/* ═══════════════════════════════════════════
+   WeCar Dashboard — Estilos v5
+   CERO tamaños fijos, 100% responsive
+   ═══════════════════════════════════════════ */
+
+@import url(https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap);
+
+/* ─── Layout raíz: ocupa todo lo que WP le da ── */
+.wecar-dashboard {
+    font-family: 'Muli', -apple-system, sans-serif;
+    color: #3a3a4a;
+    padding: clamp(8px, 1.5vw, 24px);
+    min-height: calc(100vh - 100px);
+    box-sizing: border-box;
+}
+
+.wecar-dashboard h1,
+.wecar-dashboard h2,
+.wecar-dashboard h3 {
+    font-family: "Muli", sans-serif;
+}
+
+.wecar-dashboard p {
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.6;
+}
+
+/* ─── Header ────────────────────────────────── */
+.wecar-header {
+    display: flex;
+    gap: clamp(12px, 2vw, 24px);
+    margin-bottom: clamp(16px, 2vw, 28px);
+    padding-bottom: clamp(12px, 1.2vw, 20px);
+    border-bottom: 2px solid #e8eaef;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.wecar-header-left {
+    flex: 1 1 60%;
+    min-width: 0;
+}
+
+.wecar-header-left h1 {
+    font-size: clamp(18px, 2vw, 28px);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+    padding: 0;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.wecar-subtitle {
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: #666;
+    margin: 0;
+}
+
+/* ─── NSM Box ──────────────────────────────── */
+.wecar-nsm-big {
+    flex: 0 0 auto;
+    text-align: center;
+    background: #f8f9fb;
+    border: 2px solid #e8eaef;
+    border-radius: clamp(12px, 1vw, 16px);
+    padding: clamp(12px, 1.5vw, 24px) clamp(16px, 2vw, 32px);
+}
+
+.wecar-nsm-value {
+    font-family: "Muli", sans-serif;
+    font-size: clamp(28px, 3.5vw, 52px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #9949FF, #0E6FD1, #0EB5D1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    line-height: 1;
+}
+
+.wecar-nsm-label {
+    font-size: clamp(9px, 0.7vw, 11px);
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: block;
+}
+
+.wecar-nsm-bar {
+    height: 6px;
+    background: #e8eaef;
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.wecar-nsm-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #9949FF, #0EB5D1);
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+.wecar-nsm-target {
+    font-size: clamp(9px, 0.7vw, 11px);
+    color: #999;
+    margin-top: 4px;
+    display: block;
+}
+
+/* ─── Stats Grid ───────────────────────────── */
+.wecar-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(8px, 1.2vw, 16px);
+    margin-bottom: clamp(16px, 2vw, 28px);
+}
+
+.wecar-stat-card {
+    background: #fff;
+    border: 2px solid #e8eaef;
+    border-radius: clamp(10px, 1vw, 14px);
+    padding: clamp(12px, 1.5vw, 24px) clamp(10px, 1.2vw, 20px);
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.wecar-stat-card:hover {
+    border-color: #0EB5D1;
+    box-shadow: 0 4px 20px rgba(14,181,209,0.08);
+}
+
+.wecar-stat-number {
+    font-family: "Muli", sans-serif;
+    font-size: clamp(22px, 2.8vw, 42px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2px;
+}
+
+.wecar-stat-label {
+    font-size: clamp(10px, 0.85vw, 13px);
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.wecar-stat-bar {
+    height: 5px;
+    background: #e8eaef;
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.wecar-stat-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+.wecar-stat-pct {
+    font-size: clamp(10px, 0.8vw, 12px);
+    color: #999;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.wecar-stat-meta {
+    display: flex;
+    justify-content: center;
+    gap: clamp(6px, 0.8vw, 12px);
+    margin-top: 8px;
+    font-size: clamp(10px, 0.8vw, 12px);
+    flex-wrap: wrap;
+}
+
+.wecar-up { color: #2e7d32; font-weight: 600; }
+.wecar-down { color: #c62828; font-weight: 600; }
+
+/* ─── Section ───────────────────────────────── */
+.wecar-section {
+    margin-bottom: clamp(16px, 2vw, 28px);
+    background: #fff;
+    border: 1px solid #e8eaef;
+    border-radius: clamp(10px, 1vw, 14px);
+    padding: clamp(14px, 1.8vw, 28px);
+}
+
+.wecar-section h2 {
+    font-size: clamp(16px, 1.4vw, 22px);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 clamp(10px, 1vw, 16px);
+    padding: 0 0 clamp(8px, 0.8vw, 12px);
+    border-bottom: 1px solid #e8eaef;
+}
+
+/* ─── Table ──────────────────────────────────── */
+.wecar-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -2px;
+}
+
+.wecar-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(11px, 0.9vw, 14px);
+    min-width: auto;
+}
+
+.wecar-table thead {
+    background: linear-gradient(135deg, #9949FF, #0E6FD1);
+    color: white;
+}
+
+.wecar-table th {
+    padding: clamp(8px, 0.8vw, 14px) clamp(8px, 1vw, 14px);
+    text-align: left;
+    font-weight: 700;
+    font-size: clamp(10px, 0.75vw, 12px);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.wecar-table td {
+    padding: clamp(6px, 0.8vw, 12px) clamp(8px, 1vw, 14px);
+    border-bottom: 1px solid #e8eaef;
+    font-size: clamp(11px, 0.85vw, 13px);
+}
+
+.wecar-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.wecar-table tbody tr:hover {
+    background: rgba(14, 111, 209, 0.03);
+}
+
+.wecar-table-compact td,
+.wecar-table-compact th {
+    padding: clamp(5px, 0.6vw, 10px) clamp(6px, 0.8vw, 12px);
+    font-size: clamp(10px, 0.75vw, 12px);
+}
+
+.wecar-table-footer {
+    text-align: right;
+    margin-top: 8px;
+    font-size: clamp(11px, 0.85vw, 13px);
+}
+
+.wecar-link {
+    color: #0E6FD1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.wecar-link:hover {
+    text-decoration: underline;
+}
+
+/* ─── Pagination ─────────────────────────────── */
+.wecar-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: clamp(12px, 1.2vw, 20px);
+    padding-top: clamp(10px, 1vw, 16px);
+    border-top: 1px solid #e8eaef;
+}
+
+.wecar-pagination-info {
+    font-size: clamp(11px, 0.85vw, 13px);
+    color: #888;
+}
+
+.wecar-pagination-links {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.wecar-page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: clamp(28px, 2.4vw, 38px);
+    min-width: clamp(28px, 2.4vw, 38px);
+    padding: 0 clamp(6px, 0.5vw, 10px);
+    background: #fff;
+    color: #0E6FD1;
+    border: 1.5px solid #e0e3e8;
+    border-radius: clamp(6px, 0.6vw, 10px);
+    text-decoration: none;
+    font-size: clamp(11px, 0.9vw, 14px);
+    font-weight: 600;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.wecar-page-link:hover {
+    background: #f0f4ff;
+    border-color: #0E6FD1;
+    box-shadow: 0 2px 8px rgba(14,111,209,0.12);
+    transform: translateY(-1px);
+}
+
+.wecar-page-link:active {
+    transform: translateY(0);
+}
+
+.wecar-page-current {
+    background: linear-gradient(135deg, #9949FF, #0E6FD1) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(153,73,255,0.25) !important;
+}
+
+.wecar-page-dots {
+    color: #aaa;
+    font-size: clamp(11px, 0.9vw, 14px);
+    padding: 0 2px;
+    user-select: none;
+}
+
+.wecar-page-arrow {
+    font-size: clamp(14px, 1.1vw, 18px);
+    line-height: 1;
+    font-weight: 700;
+}
+
+/* ─── Badges ──────────────────────────────────── */
+.wecar-badge {
+    display: inline-block;
+    padding: 2px clamp(6px, 0.6vw, 10px);
+    border-radius: 10px;
+    font-size: clamp(9px, 0.7vw, 11px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.wecar-badge-active {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.wecar-badge-warning {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.wecar-badge-danger {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* ─── Funnel  ─────────────────────────────────── */
+.wecar-funnel {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 0.6vw, 10px);
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.wecar-funnel-step {
+    background: #f7f8fa;
+    border: 2px solid #e8eaef;
+    border-radius: clamp(8px, 0.8vw, 12px);
+    padding: clamp(10px, 1.2vw, 20px) clamp(14px, 1.5vw, 28px);
+    text-align: center;
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.wecar-funnel-label {
+    display: block;
+    font-size: clamp(10px, 0.8vw, 12px);
+    color: #666;
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+.wecar-funnel-value {
+    display: block;
+    font-family: "Muli", sans-serif;
+    font-size: clamp(20px, 2vw, 30px);
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.wecar-funnel-arrow {
+    font-size: clamp(16px, 1.4vw, 22px);
+    color: #0EB5D1;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* ─── Empty State ────────────────────────────── */
+.wecar-empty {
+    background: #f7f8fa;
+    border: 2px dashed #d0d5dd;
+    border-radius: clamp(10px, 1vw, 14px);
+    padding: clamp(24px, 3vw, 48px);
+    text-align: center;
+    color: #666;
+    font-size: clamp(13px, 0.95vw, 15px);
+}
+
+/* ─── Target Box ─────────────────────────────── */
+.wecar-target-box {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a3a);
+    border-radius: clamp(12px, 1vw, 16px);
+    padding: clamp(16px, 2vw, 30px);
+    color: white;
+}
+
+.wecar-target-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: clamp(12px, 0.95vw, 14px);
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.wecar-target-label strong {
+    color: #0EB5D1;
+}
+
+.wecar-target-bar {
+    height: clamp(6px, 0.6vw, 10px);
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.wecar-target-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0EB5D1, #9949FF);
+    border-radius: 5px;
+    transition: width 0.8s ease;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — el corazon
+   ═══════════════════════════════════════════ */
+
+/* ─── 1200px y menos ─── */
+@media screen and (max-width: 1200px) {
+    .wecar-header {
+        flex-direction: column;
+    }
+
+    .wecar-header-left {
+        flex: 1 1 100%;
+    }
+
+    .wecar-nsm-big {
+        align-self: flex-start;
+    }
+
+    .wecar-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wecar-funnel {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .wecar-funnel-arrow {
+        transform: rotate(90deg);
+    }
+
+    .wecar-funnel-step {
+        width: 100%;
+    }
+}
+
+/* ─── 960px y menos ─── */
+@media screen and (max-width: 960px) {
+    .wecar-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .wecar-section {
+        padding: clamp(10px, 1.5vw, 16px);
+    }
+
+    .wecar-pagination {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wecar-pagination-info {
+        width: 100%;
+    }
+
+    .wecar-pagination-links {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ─── 782px y menos (sidebar WP colapsa) ─── */
+@media screen and (max-width: 782px) {
+    .wecar-dashboard {
+        padding: 8px;
+        min-height: calc(100vh - 50px);
+    }
+
+    .wecar-stats-grid {
+        gap: 6px;
+    }
+
+    .wecar-stat-card {
+        padding: clamp(8px, 1.5vw, 12px);
+    }
+
+    .wecar-stat-label {
+        font-size: clamp(9px, 1.2vw, 10px);
+    }
+
+    .wecar-section {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .wecar-table td,
+    .wecar-table th {
+        padding: 6px;
+        font-size: clamp(10px, 1.4vw, 11px);
+    }
+
+    .wecar-table-compact td,
+    .wecar-table-compact th {
+        padding: 4px 5px;
+        font-size: clamp(9px, 1.2vw, 10px);
+    }
+
+    .wecar-target-label {
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
+/* ─── 600px y menos ─── */
+@media screen and (max-width: 600px) {
+    .wecar-dashboard {
+        padding: 6px;
+    }
+
+    .wecar-stats-grid {
+        gap: 5px;
+    }
+
+    .wecar-stat-card {
+        padding: 8px 5px;
+        border-radius: 8px;
+    }
+
+    .wecar-nsm-big {
+        width: 100%;
+        padding: 10px 14px;
+    }
+
+    .wecar-funnel-step {
+        padding: 10px 14px;
+    }
+
+    .wecar-table th,
+    .wecar-table td {
+        padding: 4px 5px;
+        font-size: 10px;
+    }
+
+    .wecar-table-compact th,
+    .wecar-table-compact td {
+        font-size: 9px;
+        padding: 3px 4px;
+    }
+
+    .wecar-page-link {
+        height: 26px;
+        min-width: 26px;
+        font-size: 10px;
+        padding: 0 5px;
+        border-radius: 6px;
+    }
+
+    .wecar-pagination {
+        gap: 8px;
+    }
+
+    .wecar-empty {
+        padding: 20px 14px;
+    }
+}
+
+/* ─── 400px y menos ─── */
+@media screen and (max-width: 400px) {
+    .wecar-stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+    }
+
+    .wecar-stat-card {
+        padding: 6px 4px;
+        border-radius: 6px;
+        border-width: 1px;
+    }
+
+    .wecar-stat-number {
+        font-size: 18px;
+    }
+
+    .wecar-stat-label {
+        font-size: 8px;
+        letter-spacing: 0;
+    }
+
+    .wecar-section {
+        padding: 8px;
+        border-radius: 6px;
+        border-width: 1px;
+    }
+
+    .wecar-section h2 {
+        font-size: 14px;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+    }
+
+    .wecar-pagination-links {
+        gap: 2px;
+    }
+
+    .wecar-page-link {
+        height: 22px;
+        min-width: 22px;
+        font-size: 9px;
+        padding: 0 4px;
+    }
+
+    .wecar-table thead {
+        /* el gradiente se mantiene, no hay problema */
+    }
+
+    .wecar-table th,
+    .wecar-table td {
+        padding: 3px 3px;
+        font-size: 9px;
+    }
+
+    .wecar-table-compact th,
+    .wecar-table-compact td {
+        font-size: 8px;
+        padding: 2px 3px;
+    }
+}
+
+/* ─── Print ─── */
+@media print {
+    .wecar-dashboard { margin: 0; padding: 0; }
+    .wecar-header { break-after: avoid; }
+    .wecar-stat-card { break-inside: avoid; box-shadow: none; }
+    .wecar-pagination { display: none; }
+}

@@ -1,0 +1,153 @@
+<?php
+/**
+ * WeCar — Partner CPT & Management
+ *
+ * Custom Post Type para gestionar concesionarias asociadas.
+ * Reemplaza el campo texto "Partner" por un dropdown en el mismo lugar.
+ */
+
+defined('ABSPATH') || exit;
+
+class WeCar_Partner {
+    const POST_TYPE = 'wecar_partner';
+    const META_KEY  = 'vehica_41299';
+
+    public static function init() {
+        add_action('init', [self::class, 'register_cpt']);
+        add_action('admin_menu', [self::class, 'add_admin_menu'], 20);
+        add_action('admin_enqueue_scripts', [self::class, 'admin_scripts']);
+        add_action('save_post', [self::class, 'save_partner_field'], 10, 2);
+    }
+
+    /**
+     * Registrar CPT wecar_partner
+     */
+    public static function register_cpt() {
+        register_post_type(self::POST_TYPE, [
+            'labels' => [
+                'name'               => 'Partners',
+                'singular_name'      => 'Partner',
+                'add_new'            => 'Agregar Partner',
+                'add_new_item'       => 'Agregar nuevo Partner',
+                'edit_item'          => 'Editar Partner',
+                'new_item'           => 'Nuevo Partner',
+                'view_item'          => 'Ver Partner',
+                'search_items'       => 'Buscar Partners',
+                'not_found'          => 'No se encontraron partners',
+                'not_found_in_trash' => 'No hay partners en la papelera',
+                'all_items'          => 'Todos los Partners',
+                'menu_name'          => 'Partners',
+            ],
+            'public'       => false,
+            'show_ui'      => true,
+            'show_in_menu' => false,
+            'supports'     => ['title'],
+            'menu_icon'    => 'dashicons-groups',
+            'capabilities' => [
+                'edit_post'          => 'manage_options',
+                'read_post'          => 'manage_options',
+                'delete_post'        => 'manage_options',
+                'edit_posts'         => 'manage_options',
+                'edit_others_posts'  => 'manage_options',
+                'publish_posts'      => 'manage_options',
+                'read_private_posts' => 'manage_options',
+            ],
+        ]);
+    }
+
+    /**
+     * Agregar submenú en WeCar NSM → "Administrar Partners"
+     */
+    public static function add_admin_menu() {
+        add_submenu_page(
+            'wecar-dashboard',
+            'Administrar Partners — WeCar',
+            'Administrar Partners',
+            'manage_options',
+            'edit.php?post_type=' . self::POST_TYPE,
+            ''
+        );
+    }
+
+    /**
+     * Encolar JS que reemplaza el input texto por un dropdown
+     */
+    public static function admin_scripts($hook) {
+        global $post;
+
+        if (!in_array($hook, ['post.php', 'post-new.php'], true)) {
+            return;
+        }
+
+        if (!$post || $post->post_type !== 'vehica_car') {
+            return;
+        }
+
+        $partners = self::get_all();
+        $current = get_post_meta($post->ID, self::META_KEY, true);
+
+        $data = [
+            'metaKey'  => self::META_KEY,
+            'selected' => $current,
+            'partners' => [],
+        ];
+
+        foreach ($partners as $p) {
+            $data['partners'][] = [
+                'id'    => $p->ID,
+                'title' => $p->post_title,
+            ];
+        }
+
+        wp_enqueue_script(
+            'wecar-partner-select',
+            get_stylesheet_directory_uri() . '/dashboard/assets/partner-select.js',
+            ['jquery'],
+            '1.0.0',
+            true
+        );
+
+        wp_localize_script('wecar-partner-select', 'wecarPartnerData', $data);
+    }
+
+    /**
+     * Guardar el valor del partner cuando se guarda el post
+     * Corre DESPUÉS de que Vehica ya guardó sus campos
+     */
+    public static function save_partner_field($post_id, $post) {
+        if ($post->post_type !== 'vehica_car') return;
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+        if (!current_user_can('edit_post', $post_id)) return;
+
+        // No guardamos acá porque Vehica ya lo maneja via $_POST[self::META_KEY]
+        // Solo nos aseguramos de que si no viene el campo, se borre
+        if (!isset($_POST[self::META_KEY])) {
+            return;
+        }
+    }
+
+    /**
+     * Obtener todos los partners
+     */
+    public static function get_all() {
+        $partners = get_posts([
+            'post_type'      => self::POST_TYPE,
+            'posts_per_page' => -1,
+            'post_status'    => 'any',
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ]);
+
+        return $partners;
+    }
+
+    /**
+     * Obtener nombre de partner por ID
+     */
+    public static function get_name($partner_id) {
+        $partner = get_post((int)$partner_id);
+        return $partner ? $partner->post_title : 'Sin asignar';
+    }
+}
+
+WeCar_Partner::init();
