@@ -673,24 +673,35 @@
     }
 }
 
-/* ─── Entity Select Search (Vehica editor) ─── */
-.wecar-entity-select-wrap {
+/* ─── Entity Select with Search (Vehica editor) ─── */
+.wec-wrap {
     margin-top: 6px;
+    position: relative;
 }
 
-.wecar-entity-search:focus {
+.wec-search:focus {
     border-color: #2271b1 !important;
     box-shadow: 0 0 0 1px #2271b1 !important;
     outline: none !important;
 }
 
-.wecar-entity-search::-webkit-calendar-picker-indicator {
-    opacity: 0.5;
-    cursor: pointer;
+.wec-options {
+    position: absolute;
+    z-index: 99999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.wecar-entity-search::placeholder {
-    color: #999;
+.wec-opt:hover {
+    background: #f0f7ff !important;
+}
+
+.wec-opt-sel {
+    background: #e5f0fa;
+    font-weight: 600;
+}
+
+.wec-selected:hover {
+    border-color: #2271b1 !important;
 }
 
 /* ─── Print ─── */

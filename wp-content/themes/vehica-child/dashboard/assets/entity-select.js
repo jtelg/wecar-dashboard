@@ -1,246 +1,209 @@
 /**
- * WeCar — Entity Select Dropdown with Search
+ * WeCar — Entity Select with Live Search Filter
  *
- * Reemplaza el campo "Partner" de Vehica por un <select> con buscador
- * que cambia según el Origen seleccionado (PARTNER, PARTICULAR, PROPIO).
- * Mantiene el input original oculto para no romper Vue.
+ * Reemplaza el campo "Partner" de Vehica por un select buscable
+ * que cambia según el Origen seleccionado.
  */
 (function ($) {
     'use strict';
 
-    var metaKey      = wecarEntityData.metaKey;
-    var selected     = wecarEntityData.selected;
-    var origenTax    = wecarEntityData.origenTax;
-    var partners     = wecarEntityData.partners  || [];
-    var particulares = wecarEntityData.particulares || [];
-    var propios      = wecarEntityData.propios   || [];
+    var D = wecarEntityData || window.wecarEntityData || {};
 
-    /**
-     * Obtener el valor actual del campo Origen usando múltiples estrategias
-     */
-    function getOrigenValue() {
-        // Estrategia 1: select con name del taxonomy slug
-        var $el = $('select[name="' + origenTax + '"]');
-        if ($el.length > 0 && $el.val()) return $el.val();
+    var metaKey      = D.metaKey      || 'vehica_41299';
+    var selected     = D.selected     || '';
+    var origenTax    = D.origenTax    || 'vehica_41298';
+    var partners     = D.partners     || [];
+    var particulares = D.particulares || [];
+    var propios      = D.propios      || [];
 
-        // Estrategia 2: select con name="tax_input[{tax}]"
-        $el = $('select[name="tax_input[' + origenTax + ']"]');
-        if ($el.length > 0 && $el.val()) return $el.val();
-
-        // Estrategia 3: radio buttons
-        var $radio = $('input[name="' + origenTax + '"]:checked');
-        if ($radio.length > 0) return $radio.val();
-
-        // Estrategia 4: cualquier campo dentro de .vehica-field con data-id que contenga 41298
-        $el = $('.vehica-field[data-id="41298"] select, .vehica-field[data-id="41298"] input[type="radio"]:checked');
-        if ($el.length > 0 && $el.val()) return $el.val();
-
-        // Estrategia 5: buscar por label que contenga "Origen"
-        var $field = $('.vehica-field:has(label:contains("Origen"))');
-        $el = $field.find('select');
-        if ($el.length > 0 && $el.val()) return $el.val();
-        $el = $field.find('input[type="radio"]:checked');
-        if ($el.length > 0) return $el.val();
-
-        return '';
-    }
-
-    function getOrigenLabel(origen) {
-        switch (origen) {
-            case 'partner':    return 'partner';
-            case 'particular': return 'particular';
-            case 'propio':     return 'concesionaria propia';
-            default:           return 'entidad';
-        }
-    }
-
-    function getEntitiesForOrigen(origen) {
-        switch (origen) {
-            case 'partner':    return { items: partners,     label: 'Seleccionar partner' };
-            case 'particular': return { items: particulares, label: 'Seleccionar particular' };
-            case 'propio':     return { items: propios,      label: 'Seleccionar concesionaria propia' };
-            default:           return { items: [],           label: '— Seleccionar entidad —' };
-        }
-    }
-
-    function escHtml(str) {
+    function esc(str) {
         return $('<span>').text(str).html();
     }
 
-    /**
-     * Construye un select buscable: input + datalist
-     */
-    function buildSearchableSelect(currentVal, entities, placeholder) {
-        var uid = 'wecar-entity-' + Math.random().toString(36).substr(2, 9);
-        var listId = uid + '-list';
+    function getOrigen() {
+        var v = '';
+        // Intentar todas las formas posibles
+        $('select[name="' + origenTax + '"], select[name="tax_input[' + origenTax + ']"], .vehica-field[data-id="41298"] select').each(function () {
+            if ($(this).val()) v = $(this).val();
+        });
+        if (v) return v;
+        $('input[name="' + origenTax + '"]:checked').each(function () {
+            v = $(this).val();
+        });
+        return v || '';
+    }
 
-        var html = '<div class="wecar-entity-select-wrap">';
-        html += '<input type="text" id="' + uid + '" class="wecar-entity-search" list="' + listId + '"';
-        html += ' placeholder="' + escHtml(placeholder) + '"';
-        html += ' style="width:100%;max-width:400px;padding:6px 10px;border:1px solid #ddd;border-radius:4px;font-size:13px;box-sizing:border-box;"';
-        html += ' autocomplete="off"';
+    function getList() {
+        var o = getOrigen();
+        if (o === 'partner')    return { items: partners,     label: 'Partner' };
+        if (o === 'particular') return { items: particulares, label: 'Particular' };
+        if (o === 'propio')     return { items: propios,      label: 'Concesionaria propia' };
+        // Fallback: mostrar todos combinados
+        var all = [];
+        $.each(partners, function (_, e) { all.push({ id: e.id, title: '🏢 ' + e.title }); });
+        $.each(particulares, function (_, e) { all.push({ id: e.id, title: '👤 ' + e.title }); });
+        $.each(propios, function (_, e) { all.push({ id: e.id, title: '🏠 ' + e.title }); });
+        return { items: all, label: 'Entidad' };
+    }
 
-        // Si hay un valor actual, mostrar el nombre
-        if (currentVal) {
-            for (var i = 0; i < entities.length; i++) {
-                if (String(entities[i].id) === String(currentVal)) {
-                    html += ' value="' + escHtml(entities[i].title) + '"';
-                    break;
-                }
+    function buildHTML(list, cur) {
+        var label = list.label;
+        var items = list.items;
+        var uid   = 'wec-' + Math.random().toString(36).substr(2, 6);
+
+        var h = '';
+        // Input de búsqueda
+        h += '<div class="wec-wrap" data-uid="' + uid + '">';
+        h += '<input type="text" class="wec-search" placeholder="🔍 Buscar ' + label.toLowerCase() + '..."';
+        h += ' style="width:100%;max-width:400px;padding:6px 10px;border:1px solid #bbb;border-radius:4px;font-size:13px;box-sizing:border-box;margin-bottom:4px;"';
+        h += ' autocomplete="off">';
+
+        // Select con TODAS las opciones
+        h += '<select class="wec-select" name="' + metaKey + '"';
+        h += ' style="width:100%;max-width:400px;height:0;padding:0;border:none;overflow:hidden;position:absolute;opacity:0;">';
+        h += '<option value="">— Sin ' + label.toLowerCase() + ' —</option>';
+        for (var i = 0; i < items.length; i++) {
+            var s = (String(items[i].id) === String(cur)) ? ' selected' : '';
+            h += '<option value="' + items[i].id + '"' + s + '>' + esc(items[i].title) + '</option>';
+        }
+        h += '</select>';
+
+        // Lista visual de opciones
+        h += '<div class="wec-options" style="width:100%;max-width:400px;max-height:180px;overflow-y:auto;border:1px solid #ddd;border-radius:4px;background:#fff;display:none;">';
+        var hasSelected = false;
+        for (var i = 0; i < items.length; i++) {
+            var s = (String(items[i].id) === String(cur)) ? ' selected' : '';
+            var selClass = s ? ' wec-opt-sel' : '';
+            if (s) hasSelected = true;
+            h += '<div class="wec-opt' + selClass + '" data-val="' + items[i].id + '"';
+            h += ' style="padding:6px 10px;cursor:pointer;font-size:13px;border-bottom:1px solid #f0f0f0;">';
+            h += esc(items[i].title) + '</div>';
+        }
+        if (!hasSelected && cur) {
+            // Mostrar el valor actual aunque no esté en la lista
+        }
+        h += '</div>';
+
+        // Valor seleccionado visible
+        var showLabel = '— Sin ' + label.toLowerCase() + ' —';
+        for (var i = 0; i < items.length; i++) {
+            if (String(items[i].id) === String(cur)) {
+                showLabel = items[i].title;
+                break;
             }
         }
+        h += '<div class="wec-selected" style="padding:6px 10px;border:1px solid #bbb;border-radius:4px;font-size:13px;background:#fff;cursor:pointer;width:100%;max-width:400px;box-sizing:border-box;">';
+        h += esc(showLabel);
+        h += ' <span style="float:right;color:#999;">▼</span></div>';
+        h += '</div>';
 
-        html += '>';
-        html += '<datalist id="' + listId + '">';
-        for (var i = 0; i < entities.length; i++) {
-            html += '<option value="' + escHtml(entities[i].title) + '" data-id="' + entities[i].id + '">';
-        }
-        html += '</datalist>';
+        return h;
+    }
 
-        // Select oculto para mantener compatibilidad con el formulario
-        html += '<select name="' + metaKey + '" class="wecar-entity-select-hidden" style="display:none;">';
-        html += '<option value="">' + escHtml(placeholder) + '</option>';
-        for (var i = 0; i < entities.length; i++) {
-            var sel = (String(entities[i].id) === String(currentVal)) ? ' selected' : '';
-            html += '<option value="' + entities[i].id + '"' + sel + '>' + escHtml(entities[i].title) + '</option>';
-        }
-        html += '</select>';
+    function bindEvents($wrap, $input) {
+        var $search   = $wrap.find('.wec-search');
+        var $select   = $wrap.find('.wec-select');
+        var $opts     = $wrap.find('.wec-options');
+        var $selected = $wrap.find('.wec-selected');
 
-        html += '</div>';
-        return html;
+        // Click en el selected muestra/oculta opciones
+        $selected.on('click', function (e) {
+            e.stopPropagation();
+            $opts.slideToggle(120);
+            $search.val('').show().focus();
+            filterOptions($search, $opts);
+        });
+
+        // Búsqueda filtra opciones
+        $search.on('input', function () {
+            filterOptions($(this), $opts);
+        });
+
+        // Click en opción selecciona
+        $opts.on('click', '.wec-opt', function () {
+            var val = $(this).data('val');
+            var txt = $(this).text();
+            $select.val(val);
+            $input.val(val);
+            $selected.html(esc(txt) + ' <span style="float:right;color:#999;">▼</span>');
+            $opts.slideUp(120);
+            $search.hide();
+        });
+
+        // Click afuera cierra
+        $(document).on('click', function () {
+            $opts.slideUp(120);
+            $search.hide();
+        });
+    }
+
+    function filterOptions($search, $opts) {
+        var q = $search.val().toLowerCase();
+        $opts.find('.wec-opt').each(function () {
+            var t = $(this).text().toLowerCase();
+            $(this).toggle(t.indexOf(q) !== -1);
+        });
     }
 
     function replaceField() {
         var $input = $('input[name="' + metaKey + '"]');
-        if ($input.length === 0) return false;
+        if (!$input.length) return false;
 
-        var $wrapper = $input.closest('.vehica-field');
-        if ($wrapper.length === 0) $wrapper = $input.closest('div');
+        var $wrapper = $input.closest('.vehica-field') || $input.closest('div');
+        if ($wrapper.find('.wec-wrap').length) return true;
 
-        // Ya reemplazamos? No hacerlo de nuevo
-        if ($wrapper.find('.wecar-entity-select-wrap').length > 0) return true;
-
-        var origen     = getOrigenValue() || 'partner';
-        var entityData = getEntitiesForOrigen(origen);
-        var currentVal = $input.val() || selected;
+        var cur  = $input.val() || selected;
+        var list = getList();
 
         $input.hide();
 
-        var $sectionInner = $input.closest('.vehica-edit__section__inner');
-        var $selectHtml = $(buildSearchableSelect(currentVal, entityData.items, entityData.label));
+        var $inner = $input.closest('.vehica-edit__section__inner');
+        var $html  = $(buildHTML(list, cur));
 
-        if ($sectionInner.length > 0) {
-            $sectionInner.append($selectHtml);
+        if ($inner.length) {
+            $inner.append($html);
         } else {
-            $input.after($selectHtml);
+            $input.after($html);
         }
 
-        // Sincronizar: cuando se selecciona del datalist, actualizar el select oculto y el input
-        bindSearchEvents($wrapper, $input);
-
+        bindEvents($wrapper.find('.wec-wrap'), $input);
         return true;
     }
 
-    function bindSearchEvents($wrapper, $input) {
-        var $search = $wrapper.find('.wecar-entity-search');
-        var $hidden = $wrapper.find('.wecar-entity-select-hidden');
-
-        $search.on('input', function () {
-            var val = $(this).val();
-            var $opt = $hidden.find('option').filter(function () {
-                return $(this).text() === val;
-            });
-            if ($opt.length > 0) {
-                $hidden.val($opt.val());
-                $input.val($opt.val());
-            } else {
-                $hidden.val('');
-                $input.val('');
-            }
-        });
-
-        // Si el usuario borra el campo, limpiar también
-        $search.on('change', function () {
-            var val = $(this).val();
-            var $opt = $hidden.find('option').filter(function () {
-                return $(this).text() === val;
-            });
-            if ($opt.length === 0) {
-                $hidden.val('');
-                $input.val('');
-            }
-        });
-    }
-
-    function updateSelect() {
+    function rebuild() {
         var $input = $('input[name="' + metaKey + '"]');
-        if ($input.length === 0) return;
+        if (!$input.length) return;
+        var cur  = $input.val() || selected;
+        var list = getList();
 
-        var $wrap     = $('.wecar-entity-select-wrap');
-        var origen    = getOrigenValue();
-        var entityData = getEntitiesForOrigen(origen);
-        var currentVal = $input.val() || selected;
+        var $old = $('.wec-wrap');
+        var $html = $(buildHTML(list, cur));
+        $old.replaceWith($html);
 
-        if ($wrap.length === 0) {
-            replaceField();
-            return;
-        }
-
-        // Reemplazar el contenido del wrap
-        var $newHtml = $(buildSearchableSelect(currentVal, entityData.items, entityData.label));
-        $wrap.replaceWith($newHtml);
-
-        // Re-bindear eventos
-        var $newWrap = $('.wecar-entity-select-wrap');
-        var $newInput = $('input[name="' + metaKey + '"]');
-        bindSearchEvents($newWrap, $newInput);
+        bindEvents($('.wec-wrap'), $input);
     }
 
-    function init() {
-        if (replaceField()) {
-            // Escuchar cambios en el Origen
-            listenOrigenChanges();
-            return;
-        }
-
-        // Esperar a que Vue renderice los campos
-        var observer = new MutationObserver(function () {
-            if (replaceField()) {
-                observer.disconnect();
-                listenOrigenChanges();
-            }
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-        });
-
-        setTimeout(function () {
-            observer.disconnect();
-        }, 15000);
-    }
-
-    function listenOrigenChanges() {
-        // Escuchar en TODOS los posibles selectores del campo Origen
-        var selectors = [
+    function listenOrigen() {
+        var sels = [
             'select[name="' + origenTax + '"]',
             'select[name="tax_input[' + origenTax + ']"]',
             '.vehica-field[data-id="41298"] select',
             '.vehica-field:has(label:contains("Origen")) select',
         ];
-
-        for (var i = 0; i < selectors.length; i++) {
-            $(document).on('change', selectors[i], function () {
-                updateSelect();
-            });
-        }
-
-        // También escuchar radio buttons
-        $(document).on('change', 'input[name="' + origenTax + '"]', function () {
-            updateSelect();
+        $.each(sels, function (_, sel) {
+            $(document).on('change', sel, rebuild);
         });
+        $(document).on('change', 'input[name="' + origenTax + '"]', rebuild);
     }
 
-    $(document).ready(init);
+    function init() {
+        if (replaceField()) { listenOrigen(); return; }
+        var obs = new MutationObserver(function () {
+            if (replaceField()) { obs.disconnect(); listenOrigen(); }
+        });
+        obs.observe(document.body, { childList: true, subtree: true });
+        setTimeout(function () { obs.disconnect(); }, 15000);
+    }
+
+    $(init);
 })(jQuery);
