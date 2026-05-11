@@ -2,7 +2,7 @@
  * WeCar — Entity Select (Propietario)
  *
  * Reemplaza el campo "Partner" por "Propietario" con select buscable.
- * Muestra partners / particulares / propios según el Origen elegido.
+ * Muestra partners/particulares/propios según el Origen elegido.
  */
 (function ($) {
     'use strict';
@@ -21,15 +21,17 @@
     }
 
     /**
-     * Detectar el Origen actual mirando TODOS los selects y radios de la página
+     * Detectar Origen: buscar en TODOS los selectores posibles
      */
     function getOrigen() {
         var val = '';
+        // Buscar en todos los select
         $('select').each(function () {
             var v = $(this).val();
             if (ORIGINS.indexOf(v) !== -1) val = v;
         });
         if (val) return val;
+        // Buscar en radios
         $('input[type="radio"]:checked').each(function () {
             var v = $(this).val();
             if (ORIGINS.indexOf(v) !== -1) val = v;
@@ -225,23 +227,45 @@
             // Esperar a que Vue renderice
             var obs = new MutationObserver(function () {
                 $input = $('input[name="' + metaKey + '"]');
-                if ($input.length) { obs.disconnect(); render($input); listenChanges(); }
+                if ($input.length) { obs.disconnect(); render($input); watchOrigen(); }
             });
             obs.observe(document.body, { childList: true, subtree: true });
             setTimeout(function () { obs.disconnect(); }, 15000);
             return;
         }
         render($input);
-        listenChanges();
+        watchOrigen();
     }
 
-    function listenChanges() {
-        // Escuchar TODOS los cambios de select y radio en la página
+    /**
+     * Observar cambios en el campo Origen usando MutationObserver
+     * (más confiable que eventos con Vue)
+     */
+    function watchOrigen() {
+        // Observar TODOS los selectores del documento
+        var obs = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+                    var val = $(mutation.target).val();
+                    if (ORIGINS.indexOf(val) !== -1) {
+                        rebuild();
+                    }
+                }
+            });
+        });
+
+        $('select').each(function () {
+            obs.observe(this, { attributes: true, attributeFilter: ['value'] });
+        });
+
+        // También escuchar eventos change como fallback
         $(document).on('change', 'select', function () {
             var v = $(this).val();
             if (ORIGINS.indexOf(v) !== -1) rebuild();
         });
-        $(document).on('change', 'input[type="radio"]', function () {
+
+        // Y escuchar inputs (Vue a veces dispara input en vez de change)
+        $(document).on('input', 'select', function () {
             var v = $(this).val();
             if (ORIGINS.indexOf(v) !== -1) rebuild();
         });
