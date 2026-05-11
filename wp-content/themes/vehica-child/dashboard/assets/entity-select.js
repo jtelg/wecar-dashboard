@@ -1,164 +1,127 @@
 /**
- * WeCar — Entity Select with Live Search Filter
+ * WeCar — Entity Select (Propietario)
  *
- * Reemplaza el campo "Partner" de Vehica por un select buscable
- * que cambia según el Origen seleccionado.
+ * Reemplaza el campo "Partner" por "Propietario" con select buscable.
+ * Muestra partners / particulares / propios según el Origen elegido.
  */
 (function ($) {
     'use strict';
 
-    var D = wecarEntityData || window.wecarEntityData || {};
-
+    var D = window.wecarEntityData || {};
     var metaKey      = D.metaKey      || 'vehica_41299';
     var selected     = D.selected     || '';
-    var origenTax    = D.origenTax    || 'vehica_41298';
     var partners     = D.partners     || [];
     var particulares = D.particulares || [];
     var propios      = D.propios      || [];
+
+    var ORIGINS = ['propio', 'partner', 'particular'];
 
     function esc(str) {
         return $('<span>').text(str).html();
     }
 
+    /**
+     * Detectar el Origen actual mirando TODOS los selects y radios de la página
+     */
     function getOrigen() {
-        var v = '';
-        // Intentar todas las formas posibles
-        $('select[name="' + origenTax + '"], select[name="tax_input[' + origenTax + ']"], .vehica-field[data-id="41298"] select').each(function () {
-            if ($(this).val()) v = $(this).val();
+        var val = '';
+        $('select').each(function () {
+            var v = $(this).val();
+            if (ORIGINS.indexOf(v) !== -1) val = v;
         });
-        if (v) return v;
-        $('input[name="' + origenTax + '"]:checked').each(function () {
-            v = $(this).val();
+        if (val) return val;
+        $('input[type="radio"]:checked').each(function () {
+            var v = $(this).val();
+            if (ORIGINS.indexOf(v) !== -1) val = v;
         });
-        return v || '';
+        return val;
     }
 
-    function getList() {
+    function getEntities() {
         var o = getOrigen();
         if (o === 'partner')    return { items: partners,     label: 'Partner' };
         if (o === 'particular') return { items: particulares, label: 'Particular' };
-        if (o === 'propio')     return { items: propios,      label: 'Concesionaria propia' };
-        // Fallback: mostrar todos combinados
-        var all = [];
-        $.each(partners, function (_, e) { all.push({ id: e.id, title: '🏢 ' + e.title }); });
-        $.each(particulares, function (_, e) { all.push({ id: e.id, title: '👤 ' + e.title }); });
-        $.each(propios, function (_, e) { all.push({ id: e.id, title: '🏠 ' + e.title }); });
-        return { items: all, label: 'Entidad' };
+        if (o === 'propio')     return { items: propios,      label: 'Propio' };
+        return { items: [], label: 'Entidad' };
     }
 
-    function buildHTML(list, cur) {
-        var label = list.label;
-        var items = list.items;
-        var uid   = 'wec-' + Math.random().toString(36).substr(2, 6);
-
-        var h = '';
-        // Input de búsqueda
-        h += '<div class="wec-wrap" data-uid="' + uid + '">';
-        h += '<input type="text" class="wec-search" placeholder="🔍 Buscar ' + label.toLowerCase() + '..."';
-        h += ' style="width:100%;max-width:400px;padding:6px 10px;border:1px solid #bbb;border-radius:4px;font-size:13px;box-sizing:border-box;margin-bottom:4px;"';
-        h += ' autocomplete="off">';
-
-        // Select con TODAS las opciones
-        h += '<select class="wec-select" name="' + metaKey + '"';
-        h += ' style="width:100%;max-width:400px;height:0;padding:0;border:none;overflow:hidden;position:absolute;opacity:0;">';
-        h += '<option value="">— Sin ' + label.toLowerCase() + ' —</option>';
-        for (var i = 0; i < items.length; i++) {
-            var s = (String(items[i].id) === String(cur)) ? ' selected' : '';
-            h += '<option value="' + items[i].id + '"' + s + '>' + esc(items[i].title) + '</option>';
+    function findLabel($input) {
+        var $field = $input.closest('.vehica-field');
+        if ($field.length) {
+            var $lbl = $field.find('label').first();
+            if ($lbl.length) return $lbl;
         }
-        h += '</select>';
+        return null;
+    }
 
-        // Lista visual de opciones
-        h += '<div class="wec-options" style="width:100%;max-width:400px;max-height:180px;overflow-y:auto;border:1px solid #ddd;border-radius:4px;background:#fff;display:none;">';
-        var hasSelected = false;
+    function buildPanel(items, cur) {
+        var uid = 'wec-' + Math.random().toString(36).substr(2, 6);
+        var h = '<div class="wec-panel" data-uid="' + uid + '" style="display:none;">';
+        h += '<div class="wec-panel-inner" style="border:1px solid #ccc;border-radius:4px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.15);">';
+
+        // Buscador
+        h += '<div style="padding:8px;border-bottom:1px solid #eee;">';
+        h += '<input type="text" class="wec-search" placeholder="Buscar..."';
+        h += ' style="width:100%;padding:6px 8px;border:1px solid #ddd;border-radius:3px;font-size:13px;box-sizing:border-box;"';
+        h += ' autocomplete="off">';
+        h += '</div>';
+
+        // Opciones
+        h += '<div class="wec-list" style="max-height:200px;overflow-y:auto;">';
+        h += '<div class="wec-opt" data-val="" style="padding:8px 12px;cursor:pointer;font-size:13px;color:#888;border-bottom:1px solid #f5f5f5;">— Sin seleccionar —</div>';
         for (var i = 0; i < items.length; i++) {
-            var s = (String(items[i].id) === String(cur)) ? ' selected' : '';
-            var selClass = s ? ' wec-opt-sel' : '';
-            if (s) hasSelected = true;
-            h += '<div class="wec-opt' + selClass + '" data-val="' + items[i].id + '"';
-            h += ' style="padding:6px 10px;cursor:pointer;font-size:13px;border-bottom:1px solid #f0f0f0;">';
+            var s = (String(items[i].id) === String(cur)) ? ' style="background:#e5f0fa;font-weight:600;"' : '';
+            h += '<div class="wec-opt" data-val="' + items[i].id + '"' + s;
+            h += ' style="padding:8px 12px;cursor:pointer;font-size:13px;border-bottom:1px solid #f5f5f5;">';
             h += esc(items[i].title) + '</div>';
         }
-        if (!hasSelected && cur) {
-            // Mostrar el valor actual aunque no esté en la lista
-        }
         h += '</div>';
-
-        // Valor seleccionado visible
-        var showLabel = '— Sin ' + label.toLowerCase() + ' —';
-        for (var i = 0; i < items.length; i++) {
-            if (String(items[i].id) === String(cur)) {
-                showLabel = items[i].title;
-                break;
-            }
-        }
-        h += '<div class="wec-selected" style="padding:6px 10px;border:1px solid #bbb;border-radius:4px;font-size:13px;background:#fff;cursor:pointer;width:100%;max-width:400px;box-sizing:border-box;">';
-        h += esc(showLabel);
-        h += ' <span style="float:right;color:#999;">▼</span></div>';
-        h += '</div>';
-
+        h += '</div></div>';
         return h;
     }
 
-    function bindEvents($wrap, $input) {
-        var $search   = $wrap.find('.wec-search');
-        var $select   = $wrap.find('.wec-select');
-        var $opts     = $wrap.find('.wec-options');
-        var $selected = $wrap.find('.wec-selected');
-
-        // Click en el selected muestra/oculta opciones
-        $selected.on('click', function (e) {
-            e.stopPropagation();
-            $opts.slideToggle(120);
-            $search.val('').show().focus();
-            filterOptions($search, $opts);
-        });
-
-        // Búsqueda filtra opciones
-        $search.on('input', function () {
-            filterOptions($(this), $opts);
-        });
-
-        // Click en opción selecciona
-        $opts.on('click', '.wec-opt', function () {
-            var val = $(this).data('val');
-            var txt = $(this).text();
-            $select.val(val);
-            $input.val(val);
-            $selected.html(esc(txt) + ' <span style="float:right;color:#999;">▼</span>');
-            $opts.slideUp(120);
-            $search.hide();
-        });
-
-        // Click afuera cierra
-        $(document).on('click', function () {
-            $opts.slideUp(120);
-            $search.hide();
-        });
+    function buildTrigger(label, cur, items) {
+        var txt = '— Seleccionar ' + label.toLowerCase() + ' —';
+        for (var i = 0; i < items.length; i++) {
+            if (String(items[i].id) === String(cur)) {
+                txt = items[i].title;
+                break;
+            }
+        }
+        return '<div class="wec-trigger" style="padding:8px 12px;border:1px solid #bbb;border-radius:4px;background:#fff;cursor:pointer;font-size:13px;width:100%;max-width:400px;box-sizing:border-box;position:relative;z-index:1;">' +
+            esc(txt) + ' <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#999;font-size:10px;">▼</span>' +
+            '</div>';
     }
 
-    function filterOptions($search, $opts) {
-        var q = $search.val().toLowerCase();
-        $opts.find('.wec-opt').each(function () {
-            var t = $(this).text().toLowerCase();
-            $(this).toggle(t.indexOf(q) !== -1);
-        });
-    }
+    function render($input) {
+        var $field  = $input.closest('.vehica-field') || $input.closest('div');
+        var $inner  = $input.closest('.vehica-edit__section__inner');
+        var cur     = $input.val() || selected;
+        var list    = getEntities();
 
-    function replaceField() {
-        var $input = $('input[name="' + metaKey + '"]');
-        if (!$input.length) return false;
+        // Cambiar label a "Propietario"
+        var $lbl = findLabel($input);
+        if ($lbl && $lbl.text().indexOf('Propietario') === -1) {
+            $lbl.text('Propietario');
+        }
 
-        var $wrapper = $input.closest('.vehica-field') || $input.closest('div');
-        if ($wrapper.find('.wec-wrap').length) return true;
-
-        var cur  = $input.val() || selected;
-        var list = getList();
-
+        // Input oculto real
         $input.hide();
 
-        var $inner = $input.closest('.vehica-edit__section__inner');
-        var $html  = $(buildHTML(list, cur));
+        // HTML del componente
+        var html = '<div class="wec-wrap" style="position:relative;">';
+        html += buildTrigger(list.label, cur, list.items);
+        html += '<select name="' + metaKey + '" style="display:none;">';
+        html += '<option value="">—</option>';
+        for (var i = 0; i < list.items.length; i++) {
+            var s = (String(list.items[i].id) === String(cur)) ? ' selected' : '';
+            html += '<option value="' + list.items[i].id + '"' + s + '>' + esc(list.items[i].title) + '</option>';
+        }
+        html += '</select>';
+        html += buildPanel(list.items, cur);
+        html += '</div>';
+
+        var $html = $(html);
 
         if ($inner.length) {
             $inner.append($html);
@@ -166,43 +129,122 @@
             $input.after($html);
         }
 
-        bindEvents($wrapper.find('.wec-wrap'), $input);
-        return true;
+        bindEvents($html, $input);
+    }
+
+    function bindEvents($wrap, $input) {
+        var $trigger = $wrap.find('.wec-trigger');
+        var $panel   = $wrap.find('.wec-panel');
+        var $search  = $wrap.find('.wec-search');
+        var $select  = $wrap.find('select');
+
+        // Abrir/cerrar panel
+        $trigger.on('click', function (e) {
+            e.stopPropagation();
+            $('.wec-panel').not($panel).hide();
+            $panel.toggle();
+            if ($panel.is(':visible')) {
+                $search.val('').focus();
+                filterOptions($search, $panel);
+            }
+        });
+
+        // Filtrar al escribir
+        $search.on('input', function () {
+            filterOptions($(this), $panel);
+        });
+
+        // Seleccionar opción
+        $panel.on('click', '.wec-opt', function (e) {
+            e.stopPropagation();
+            var val = $(this).data('val');
+            var txt = $(this).text();
+            $select.val(val);
+            $input.val(val);
+            $trigger.html(esc(txt) + ' <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#999;font-size:10px;">▼</span>');
+            $panel.hide();
+        });
+
+        // Cerrar al click afuera
+        $(document).on('click', function () {
+            $panel.hide();
+        });
+    }
+
+    function filterOptions($search, $panel) {
+        var q = $search.val().toLowerCase();
+        $panel.find('.wec-opt').each(function () {
+            var t = $(this).text().toLowerCase();
+            $(this).toggle(t.indexOf(q) !== -1);
+        });
     }
 
     function rebuild() {
         var $input = $('input[name="' + metaKey + '"]');
         if (!$input.length) return;
+
         var cur  = $input.val() || selected;
-        var list = getList();
+        var list = getEntities();
 
-        var $old = $('.wec-wrap');
-        var $html = $(buildHTML(list, cur));
-        $old.replaceWith($html);
+        var $wrap = $input.siblings('.wec-wrap');
+        if (!$wrap.length) { render($input); return; }
 
-        bindEvents($('.wec-wrap'), $input);
-    }
+        // Solo reemplazar las opciones, no todo el componente
+        var $panel = $wrap.find('.wec-panel');
+        var $trigger = $wrap.find('.wec-trigger');
 
-    function listenOrigen() {
-        var sels = [
-            'select[name="' + origenTax + '"]',
-            'select[name="tax_input[' + origenTax + ']"]',
-            '.vehica-field[data-id="41298"] select',
-            '.vehica-field:has(label:contains("Origen")) select',
-        ];
-        $.each(sels, function (_, sel) {
-            $(document).on('change', sel, rebuild);
-        });
-        $(document).on('change', 'input[name="' + origenTax + '"]', rebuild);
+        // Nuevo panel
+        var $newPanel = $(buildPanel(list.items, cur));
+        $panel.replaceWith($newPanel);
+
+        // Actualizar trigger
+        var txt = '— Seleccionar ' + list.label.toLowerCase() + ' —';
+        for (var i = 0; i < list.items.length; i++) {
+            if (String(list.items[i].id) === String(cur)) {
+                txt = list.items[i].title;
+                break;
+            }
+        }
+        $trigger.html(esc(txt) + ' <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#999;font-size:10px;">▼</span>');
+
+        // Actualizar select oculto
+        var $select = $wrap.find('select');
+        var opts = '<option value="">—</option>';
+        for (var i = 0; i < list.items.length; i++) {
+            var s = (String(list.items[i].id) === String(cur)) ? ' selected' : '';
+            opts += '<option value="' + list.items[i].id + '"' + s + '>' + esc(list.items[i].title) + '</option>';
+        }
+        $select.html(opts);
+
+        bindEvents($wrap, $input);
     }
 
     function init() {
-        if (replaceField()) { listenOrigen(); return; }
-        var obs = new MutationObserver(function () {
-            if (replaceField()) { obs.disconnect(); listenOrigen(); }
+        var $input = $('input[name="' + metaKey + '"]');
+        if (!$input.length) {
+            // Esperar a que Vue renderice
+            var obs = new MutationObserver(function () {
+                $input = $('input[name="' + metaKey + '"]');
+                if ($input.length) { obs.disconnect(); render($input); listenChanges(); }
+            });
+            obs.observe(document.body, { childList: true, subtree: true });
+            setTimeout(function () { obs.disconnect(); }, 15000);
+            return;
+        }
+        render($input);
+        listenChanges();
+    }
+
+    function listenChanges() {
+        // Escuchar TODOS los cambios de select y radio en la página
+        $(document).on('change', 'select', function () {
+            var v = $(this).val();
+            if (ORIGINS.indexOf(v) !== -1) rebuild();
         });
-        obs.observe(document.body, { childList: true, subtree: true });
-        setTimeout(function () { obs.disconnect(); }, 15000);
+        $(document).on('change', 'input[type="radio"]', function () {
+            var v = $(this).val();
+            if (ORIGINS.indexOf(v) !== -1) rebuild();
+        });
     }
 
     $(init);

@@ -673,35 +673,27 @@
     }
 }
 
-/* ─── Entity Select with Search (Vehica editor) ─── */
+/* ─── Entity Select — Propietario (Vehica editor) ─── */
 .wec-wrap {
-    margin-top: 6px;
     position: relative;
+    margin-top: 4px;
 }
 
-.wec-search:focus {
+.wec-trigger:hover {
     border-color: #2271b1 !important;
-    box-shadow: 0 0 0 1px #2271b1 !important;
-    outline: none !important;
 }
 
-.wec-options {
+.wec-panel {
     position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    width: 100%;
+    max-width: 400px;
     z-index: 99999;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .wec-opt:hover {
     background: #f0f7ff !important;
-}
-
-.wec-opt-sel {
-    background: #e5f0fa;
-    font-weight: 600;
-}
-
-.wec-selected:hover {
-    border-color: #2271b1 !important;
 }
 
 /* ─── Print ─── */
