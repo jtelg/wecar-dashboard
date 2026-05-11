@@ -673,6 +673,26 @@
     }
 }
 
+/* ─── Entity Select Search (Vehica editor) ─── */
+.wecar-entity-select-wrap {
+    margin-top: 6px;
+}
+
+.wecar-entity-search:focus {
+    border-color: #2271b1 !important;
+    box-shadow: 0 0 0 1px #2271b1 !important;
+    outline: none !important;
+}
+
+.wecar-entity-search::-webkit-calendar-picker-indicator {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.wecar-entity-search::placeholder {
+    color: #999;
+}
+
 /* ─── Print ─── */
 @media print {
     .wecar-dashboard { margin: 0; padding: 0; }
