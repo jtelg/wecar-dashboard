@@ -8,7 +8,9 @@ $includes = [
     'includes/class-wecar-fields.php',
     'includes/class-wecar-metrics.php',
     'includes/class-wecar-dashboard.php',
-    'includes/class-wecar-partner-cpt.php', // Partners CPT + dropdown
+    'includes/class-wecar-partner-cpt.php',     // Partners CPT + dropdown
+    'includes/class-wecar-particular-cpt.php',  // Particulares CPT
+    'includes/class-wecar-propio-cpt.php',      // Propios CPT
 ];
 
 foreach ($includes as $file) {

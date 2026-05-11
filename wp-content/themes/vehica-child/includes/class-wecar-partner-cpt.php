@@ -56,21 +56,22 @@ class WeCar_Partner {
     }
 
     /**
-     * Agregar submenú en WeCar NSM → "Administrar Partners"
+     * Agregar submenú en WeCar NSM → "Administrar Datos"
      */
     public static function add_admin_menu() {
         add_submenu_page(
             'wecar-dashboard',
-            'Administrar Partners — WeCar',
-            'Administrar Partners',
+            'Administrar Datos — WeCar',
+            'Administrar Datos',
             'manage_options',
-            'edit.php?post_type=' . self::POST_TYPE,
-            ''
+            'wecar-admin-datos',
+            ['WeCar_Dashboard', 'render_admin_datos']
         );
     }
 
     /**
-     * Encolar JS que reemplaza el input texto por un dropdown
+     * Encolar JS que reemplaza el input texto por un dropdown dinámico
+     * según el Origen seleccionado (PARTNER / PARTICULAR / PROPIO).
      */
     public static function admin_scripts($hook) {
         global $post;
@@ -87,9 +88,12 @@ class WeCar_Partner {
         $current = get_post_meta($post->ID, self::META_KEY, true);
 
         $data = [
-            'metaKey'  => self::META_KEY,
-            'selected' => $current,
-            'partners' => [],
+            'metaKey'      => self::META_KEY,
+            'selected'     => $current,
+            'origenTax'    => WeCar_Fields::$origen_tax ?: 'vehica_41298',
+            'partners'     => [],
+            'particulares' => [],
+            'propios'      => [],
         ];
 
         foreach ($partners as $p) {
@@ -99,15 +103,33 @@ class WeCar_Partner {
             ];
         }
 
+        if (class_exists('WeCar_Particular')) {
+            foreach (WeCar_Particular::get_all() as $p) {
+                $data['particulares'][] = [
+                    'id'    => $p->ID,
+                    'title' => $p->post_title,
+                ];
+            }
+        }
+
+        if (class_exists('WeCar_Propio')) {
+            foreach (WeCar_Propio::get_all() as $p) {
+                $data['propios'][] = [
+                    'id'    => $p->ID,
+                    'title' => $p->post_title,
+                ];
+            }
+        }
+
         wp_enqueue_script(
-            'wecar-partner-select',
-            get_stylesheet_directory_uri() . '/dashboard/assets/partner-select.js',
+            'wecar-entity-select',
+            get_stylesheet_directory_uri() . '/dashboard/assets/entity-select.js',
             ['jquery'],
-            '1.0.0',
+            '1.1.0',
             true
         );
 
-        wp_localize_script('wecar-partner-select', 'wecarPartnerData', $data);
+        wp_localize_script('wecar-entity-select', 'wecarEntityData', $data);
     }
 
     /**

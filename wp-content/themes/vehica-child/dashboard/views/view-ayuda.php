@@ -10,14 +10,14 @@
         <h2>🎯 ¿Qué cambió?</h2>
         <p>Agregamos campos nuevos a los anuncios que permiten medir el <strong>NSM (North Star Metric)</strong>:
         el porcentaje de stock de terceros (partners + particulares) sobre el total de activos.</p>
-        <p>Los <strong>Partners</strong> se administran desde un listado propio en <strong>WeCar NSM → Administrar Partners</strong>.</p>
+        <p>Los <strong>Partners</strong> se administran desde un listado propio en <strong>WeCar NSM → Administrar Datos</strong>.</p>
     </div>
 
     <div class="wecar-section">
         <h2>🏢 Partners — Cómo administrarlos</h2>
         <p><strong>Primero:</strong> crear los partners en el listado.</p>
         <ol style="margin:10px 0 10px 24px;">
-            <li>Andá a <strong>WeCar NSM → Administrar Partners</strong></li>
+            <li>Andá a <strong>WeCar NSM → Administrar Datos</strong></li>
             <li>Hacé click en <strong>"Agregar nuevo"</strong></li>
             <li>Escribí el nombre de la concesionaria → <strong>Publicar</strong></li>
         </ol>
@@ -45,7 +45,7 @@
                 <tr>
                     <td><strong>Partner</strong></td>
                     <td>Dropdown en sidebar</td>
-                    <td>Seleccionar la concesionaria. <strong>Primero crearla en Administrar Partners.</strong></td>
+                    <td>Seleccionar la concesionaria. <strong>Primero crearla en Administrar Datos.</strong></td>
                 </tr>
                 <tr>
                     <td><strong>Estado del vehículo</strong></td>
@@ -78,7 +78,7 @@
                 <tr><td><strong>Partners</strong></td><td>Detalle de cada concesionaria: activos, vendidos, retirados, días promedio</td></tr>
                 <tr><td><strong>Particulares</strong></td><td>Métricas de vehículos de particulares</td></tr>
                 <tr><td><strong>Histórica</strong></td><td>Evolución de métricas día a día (últimos 90 días)</td></tr>
-                <tr><td><strong>Administrar Partners</strong></td><td>Listado para agregar/editar/borrar concesionarias</td></tr>
+                <tr><td><strong>Administrar Datos</strong></td><td>Listado para agregar/editar/borrar concesionarias</td></tr>
                 <tr><td><strong>Ayuda</strong></td><td>Esta guía</td></tr>
             </tbody>
         </table>
@@ -167,7 +167,7 @@
         <h2>✅ Checklist diario</h2>
         <ol style="margin:0 0 0 24px;line-height:2;">
             <li><strong>Dar de alta un partner (hacerlo UNA SOLA VEZ):</strong><br>
-                WeCar NSM → Administrar Partners → Agregar nuevo → nombre → Publicar</li>
+                WeCar NSM → Administrar Datos → Agregar nuevo → nombre → Publicar</li>
             <li><strong>Nuevos vehículos de concesionarias:</strong><br>
                 Origen → PARTNER &nbsp;|&nbsp; Partner → seleccionar &nbsp;|&nbsp; Estado → ACTIVO</li>
             <li><strong>Vehículos vendidos:</strong><br>
@@ -203,7 +203,7 @@
         </div>
         <div style="margin-bottom:0;">
             <p><strong>¿Se pueden editar los partners después?</strong></p>
-            <p style="color:#666;">Sí, desde WeCar NSM → Administrar Partners pueden editar nombre o eliminar.</p>
+            <p style="color:#666;">Sí, desde WeCar NSM → Administrar Datos pueden editar nombre o eliminar.</p>
         </div>
     </div>
 </div>

@@ -68,6 +68,17 @@ class WeCar_Dashboard {
     }
 
     /**
+     * Render: Vista Administrar Datos
+     */
+    public static function render_admin_datos() {
+        if (!current_user_can('manage_options')) {
+            wp_die('No tenés permisos para ver esta página.');
+        }
+
+        include get_stylesheet_directory() . '/dashboard/views/view-admin-datos.php';
+    }
+
+    /**
      * Encolar assets del dashboard
      */
     public static function enqueue_assets($hook) {

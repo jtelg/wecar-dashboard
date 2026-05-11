@@ -4,7 +4,7 @@
 
 WeCar NSM is a WordPress-based dashboard inside the **Vehica 1.0.87** child theme that measures the **North Star Metric**: the percentage of third-party inventory (partner dealerships + private sellers) over total active listings. Target: 75%.
 
-It adds custom fields to vehicle listings (`vehica_car` post type), a management system for partner dealerships (custom post type `wecar_partner`), and 6 admin views.
+It adds custom fields to vehicle listings (`vehica_car` post type), a management system for partner dealerships, private sellers, and own dealerships (custom post types `wecar_partner`, `wecar_particular`, and `wecar_propio`), and a custom admin page ("Administrar Datos") that unifies all three entity types.
 
 ---
 
@@ -70,20 +70,43 @@ Registers `wecar_partner` post type:
 - `WeCar_Partner::get_all()` — Returns all partners as `WP_Post[]`
 - `WeCar_Partner::get_name($post_id)` — Returns partner title by post ID
 
-**Key**: This class also enqueues `partner-select.js` and localizes the partner data to JavaScript.
+**Key**: This class enqueues `entity-select.js` and localizes data for all three entity types (partners, particulares, propios) to JavaScript.
+
+### 3b. `class-wecar-particular-cpt.php` — Particular CPT
+
+Registers `wecar_particular` post type with the same flags as `wecar_partner`.
+
+**Public Methods:**
+- `WeCar_Particular::get_all()` — Returns all private sellers as `WP_Post[]`
+- `WeCar_Particular::get_name($post_id)` — Returns seller title by post ID
+
+### 3c. `class-wecar-propio-cpt.php` — Propio CPT
+
+Registers `wecar_propio` post type with the same flags as `wecar_partner`.
+
+**Public Methods:**
+- `WeCar_Propio::get_all()` — Returns all own dealerships as `WP_Post[]`
+- `WeCar_Propio::get_name($post_id)` — Returns dealership title by post ID
 
 ### 4. `class-wecar-dashboard.php` — Admin Pages
 
 Registers the "WeCar NSM" top-level menu and 6 submenu pages via `admin_menu` hook:
 
 ```php
-add_menu_page('WeCar NSM', ...)           // view-main.php
-add_submenu_page('wecar-nsm', 'Partners', ...)     // view-partners.php
-add_submenu_page('wecar-nsm', 'Particulares', ...) // view-particulares.php
-add_submenu_page('wecar-nsm', 'Histórica', ...)    // view-historica.php
-add_submenu_page('wecar-nsm', 'Adm. Partners', ...) // (redirects to edit.php?post_type=wecar_partner)
-add_submenu_page('wecar-nsm', 'Ayuda', ...)         // view-ayuda.php
+add_menu_page('WeCar NSM', ...)                 // view-main.php
+add_submenu_page('wecar-nsm', 'Partners', ...)         // view-partners.php
+add_submenu_page('wecar-nsm', 'Particulares', ...)     // view-particulares.php
+add_submenu_page('wecar-nsm', 'Histórica', ...)        // view-historica.php
+add_submenu_page('wecar-nsm', 'Adm. Datos', ..., 'wecar-admin-datos') // view-admin-datos.php
+add_submenu_page('wecar-nsm', 'Ayuda', ...)             // view-ayuda.php
 ```
+
+"Administrar Datos" (`wecar-admin-datos`) is a custom page that shows three sections:
+- **Partners**: table of partner CPT entries with links to add/edit
+- **Particulares**: table of particular CPT entries with links to add/edit
+- **Propios**: table of propio CPT entries with links to add/edit
+
+It replaced the previous "Administrar Partners" which only redirected to the CPT list.
 
 Also enqueues `dashboard.css` and `dashboard.js`, and sets the icon.
 
@@ -103,10 +126,12 @@ User edits listing →
   │
   ▼
 Vehica Vue editor renders
+  ├─ Origen field (vehica_41298) rendered by Vue
   └─ Partner field (vehica_41299) hidden input rendered by Vue
-     └─ MutationObserver in partner-select.js detects it
-        └─ Replaces with <select>, hides original input
-           └─ On change: syncs value back to hidden input
+     └─ MutationObserver in entity-select.js detects it
+        └─ Reads current Origen value → selects entity list (partner/particular/propio)
+           └─ Replaces with <select>, hides original input
+              └─ On change: syncs value back to hidden input
   │
   ▼
 User saves (Publish/Update)
@@ -114,7 +139,7 @@ User saves (Publish/Update)
   ▼
 save_post hook fires
   ├─ WeCar_Fields auto-sets origen/estado/fechas
-  └─ Post meta saved (including partner ID)
+  └─ Post meta saved (including entity ID in vehica_41299)
   │
   ▼
 Dashboard refresh
