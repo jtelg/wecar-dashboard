@@ -314,6 +314,100 @@ class WeCar_Metrics {
     }
 
     /**
+     * Stock por propio (concesionaria propia)
+     * Los propios se gestionan via CPT wecar_propio
+     */
+    public static function get_propios() {
+        $propios = [];
+        $propio_posts = WeCar_Propio::get_all();
+
+        // Inicializar estructura para cada propio registrado
+        foreach ($propio_posts as $pp) {
+            $propios[$pp->post_title] = [
+                'activos'    => 0,
+                'vendidos'   => 0,
+                'retirados'  => 0,
+                'dias_total' => 0,
+                'dias_count' => 0,
+            ];
+        }
+
+        // Consultar todos los vehículos con origen = PROPIO
+        $query = new WP_Query([
+            'post_type'      => 'vehica_car',
+            'post_status'    => 'any',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+            'tax_query'      => [[
+                'taxonomy' => self::origen_tax(),
+                'field'    => 'slug',
+                'terms'    => 'propio',
+            ]],
+        ]);
+
+        foreach ($query->posts as $post_id) {
+            $propio_id = get_post_meta($post_id, self::partner_meta(), true);
+
+            if (empty($propio_id)) {
+                $propio_name = 'Sin asignar';
+            } else {
+                $propio_name = WeCar_Propio::get_name($propio_id);
+                if (empty($propio_name)) {
+                    $propio_name = 'Sin asignar';
+                }
+            }
+
+            if (!isset($propios[$propio_name])) {
+                $propios[$propio_name] = [
+                    'activos'    => 0,
+                    'vendidos'   => 0,
+                    'retirados'  => 0,
+                    'dias_total' => 0,
+                    'dias_count' => 0,
+                ];
+            }
+
+            $estado_terms = wp_get_post_terms($post_id, self::estado_tax(), ['fields' => 'slugs']);
+            $estado = !empty($estado_terms) ? $estado_terms[0] : 'activo';
+
+            $fecha_pub  = get_post_meta($post_id, self::fecha_pub(), true);
+            $fecha_baja = get_post_meta($post_id, self::fecha_baja(), true);
+
+            if ($estado === 'activo') {
+                $propios[$propio_name]['activos']++;
+            } elseif ($estado === 'vendido') {
+                $propios[$propio_name]['vendidos']++;
+                if ($fecha_pub && $fecha_baja) {
+                    $dias = (int)diff_days($fecha_pub, $fecha_baja);
+                    $propios[$propio_name]['dias_total'] += $dias;
+                    $propios[$propio_name]['dias_count']++;
+                }
+            } elseif ($estado === 'retirado') {
+                $propios[$propio_name]['retirados']++;
+            }
+        }
+
+        foreach ($propios as $name => &$data) {
+            $data['dias_promedio'] = $data['dias_count'] > 0
+                ? round($data['dias_total'] / $data['dias_count'])
+                : 0;
+
+            $data['status'] = 'activo';
+            if ($data['dias_promedio'] > 60) {
+                $data['status'] = 'baja_rotacion';
+            }
+
+            unset($data['dias_total'], $data['dias_count']);
+        }
+
+        uasort($propios, function ($a, $b) {
+            return $b['activos'] - $a['activos'];
+        });
+
+        return $propios;
+    }
+
+    /**
      * Obtener histórico paginado
      */
     public static function get_historico($limit = 30, $page = 1) {

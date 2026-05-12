@@ -93,4 +93,86 @@
             <a href="admin.php?page=wecar-partners" class="wecar-link">Ver todos los partners →</a>
         </p>
     </div>
+
+    <div class="wecar-section">
+        <h2>Particulares — Resumen</h2>
+        <div class="wecar-table-wrapper"><table class="wecar-table">
+            <thead>
+                <tr>
+                    <th>Particular</th>
+                    <th>Autos Activos</th>
+                    <th>Vendidos</th>
+                    <th>Retirados</th>
+                    <th>Días Prom.</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($particulares)): ?>
+                    <tr><td colspan="6">No hay particulares cargados todavía.</td></tr>
+                <?php else: ?>
+                    <?php foreach (array_slice($particulares, 0, 10) as $name => $data): ?>
+                        <tr>
+                            <td><strong><?php echo esc_html($name); ?></strong></td>
+                            <td><?php echo esc_html($data['activos']); ?></td>
+                            <td><?php echo esc_html($data['vendidos']); ?></td>
+                            <td><?php echo esc_html($data['retirados']); ?></td>
+                            <td><?php echo esc_html($data['dias_promedio']); ?></td>
+                            <td>
+                                <?php if ($data['status'] === 'activo'): ?>
+                                    <span class="wecar-badge wecar-badge-active">Activo</span>
+                                <?php else: ?>
+                                    <span class="wecar-badge wecar-badge-warning">Baja rotación</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table></div>
+        <p class="wecar-table-footer">
+            <a href="admin.php?page=wecar-particulares" class="wecar-link">Ver todos los particulares →</a>
+        </p>
+    </div>
+
+    <div class="wecar-section">
+        <h2>Propios — Resumen</h2>
+        <div class="wecar-table-wrapper"><table class="wecar-table">
+            <thead>
+                <tr>
+                    <th>Propio</th>
+                    <th>Autos Activos</th>
+                    <th>Vendidos</th>
+                    <th>Retirados</th>
+                    <th>Días Prom.</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($propios)): ?>
+                    <tr><td colspan="6">No hay propios cargados todavía.</td></tr>
+                <?php else: ?>
+                    <?php foreach (array_slice($propios, 0, 10) as $name => $data): ?>
+                        <tr>
+                            <td><strong><?php echo esc_html($name); ?></strong></td>
+                            <td><?php echo esc_html($data['activos']); ?></td>
+                            <td><?php echo esc_html($data['vendidos']); ?></td>
+                            <td><?php echo esc_html($data['retirados']); ?></td>
+                            <td><?php echo esc_html($data['dias_promedio']); ?></td>
+                            <td>
+                                <?php if ($data['status'] === 'activo'): ?>
+                                    <span class="wecar-badge wecar-badge-active">Activo</span>
+                                <?php else: ?>
+                                    <span class="wecar-badge wecar-badge-warning">Baja rotación</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table></div>
+        <p class="wecar-table-footer">
+            <a href="admin.php?page=wecar-admin-datos" class="wecar-link">Ver todos los propios →</a>
+        </p>
+    </div>
 </div>
