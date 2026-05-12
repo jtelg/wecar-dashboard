@@ -25,16 +25,30 @@ vehica-child/
 ├── style.css                        # Theme header (Template: vehica)
 ├── AGENTS.md                        # ← YOU ARE HERE
 ├── includes/
-│   ├── class-wecar-fields.php       # Field constants + auto-set hooks
-│   ├── class-wecar-metrics.php      # Metrics engine (NSM, mix, partners, historica)
-│   ├── class-wecar-dashboard.php    # Admin pages (6 tabs)
-│   └── class-wecar-partner-cpt.php  # CPT wecar_partner + dropdown JS enqueue
+│   ├── class-wecar-fields.php          # Field constants + auto-set hooks
+│   ├── class-wecar-metrics.php         # Metrics engine (NSM, mix, partners, historica)
+│   ├── class-wecar-dashboard.php       # Admin pages (6 tabs)
+│   ├── class-wecar-partner-cpt.php     # CPT wecar_partner + entity-select JS enqueue
+│   ├── class-wecar-particular-cpt.php  # CPT wecar_particular
+│   └── class-wecar-propio-cpt.php      # CPT wecar_propio
 ├── dashboard/
 │   ├── assets/
 │   │   ├── dashboard.css            # v5 — Muli, 100% clamp(), responsive
 │   │   ├── dashboard.js             # General dashboard JS
-│   │   └── partner-select.js        # Replaces Vehica input with dropdown (MutationObserver)
+│   │   └── entity-select.js         # Replaces Vehica input with dynamic dropdown (MutationObserver)
 │   └── views/
+│       ├── view-main.php            # Main panel: NSM, stock mix, partner summary
+│       ├── view-partners.php        # Per-partner detail table
+│       ├── view-particulares.php    # Private seller metrics
+│       ├── view-historica.php       # Daily evolution (paginated)
+│       └── view-ayuda.php           # Team guide
+├── dashboard/
+│   ├── assets/
+│   │   ├── dashboard.css            # v5 — Muli, 100% clamp(), responsive
+│   │   ├── dashboard.js             # General dashboard JS
+│   │   └── entity-select.js         # Replaces Vehica input with dynamic dropdown (MutationObserver)
+│   └── views/
+│       ├── view-admin-datos.php     # Administrar Datos: partners, particulares, propios
 │       ├── view-main.php            # Main panel: NSM, stock mix, partner summary
 │       ├── view-partners.php        # Per-partner detail table
 │       ├── view-particulares.php    # Private seller metrics
@@ -47,7 +61,9 @@ vehica-child/
 
 ## Menu Structure
 
-WeCar NSM has 6 tabs: **WeCar NSM** | **Partners** | **Particulares** | **Histórica** | **Administrar Partners** | **Ayuda**
+WeCar NSM has 6 tabs: **WeCar NSM** | **Partners** | **Particulares** | **Histórica** | **Administrar Datos** | **Ayuda**
+
+"Administrar Datos" reemplazó a "Administrar Partners". Es una página custom que agrupa gestión de Partners (vínculo al CPT), Particulares y Propios en un solo lugar.
 
 "Orígenes" and "Estados" were removed — only 3 terms each, not worth separate pages.
 
@@ -58,14 +74,14 @@ Defined in `WeCar_Fields` constants, auto-set via `save_post` / `set_object_term
 | Field | Type | Slugs | Behavior |
 |-------|------|-------|----------|
 | `vehica_41298` — Origen | Taxonomy | `propio`, `partner`, `particular` | Auto-set to `propio` if empty on save |
-| `vehica_41299` — Partner | Post Meta | Integer (CPT ID) | Hidden input, replaced by dropdown JS |
+| `vehica_41299` — Entidad | Post Meta | Integer (CPT ID) | Hidden input, replaced by dynamic dropdown JS (partner / particular / propio) |
 | `vehica_41300` — Fecha publicación | Meta (date) | — | Auto-set on creation |
 | `vehica_41301` — Estado | Taxonomy | `activo`, `vendido`, `retirado` | Auto-set to `activo` if empty |
 | `vehica_41302` — Fecha baja | Meta (date) | — | Auto-set on VENDIDO/RETIRADO, cleared on ACTIVO |
 
 ## Key Behaviors & Gotchas
 
-1. **Vehica editor is Vue.js** — The Partner field (vehica_41299) is rendered dynamically by Vue. `partner-select.js` uses `MutationObserver` to detect when the input appears, then replaces it with a `<select>`. The original input stays hidden (`hide()`) for Vue compatibility.
+1. **Vehica editor is Vue.js** — The Partner field (vehica_41299) is rendered dynamically by Vue. `entity-select.js` uses `MutationObserver` to detect when the input appears, then replaces it with a `<select>` whose options depend on the selected Origen (partner / particular / propio). The original input stays hidden (`hide()`) for Vue compatibility.
 
 2. **No extra HTML in Vehica wrappers** — Never insert `<p>`, notices, or any elements inside `.vehica-edit__section__inner`. It breaks Vue's layout.
 
