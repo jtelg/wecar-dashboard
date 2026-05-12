@@ -88,14 +88,14 @@ class WeCar_Partner {
             'wecar-entity-select',
             get_stylesheet_directory_uri() . '/dashboard/assets/dashboard.css',
             [],
-            '1.1.0'
+            '1.4.0'
         );
 
         wp_enqueue_script(
             'wecar-entity-select',
             get_stylesheet_directory_uri() . '/dashboard/assets/entity-select.js',
             ['jquery'],
-            '1.1.0',
+            '1.4.0',
             true
         );
     }
@@ -117,17 +117,20 @@ class WeCar_Partner {
     }
 
     /**
-     * Output entity data inline in admin footer (more reliable than wp_localize_script)
+     * Output entity data inline in admin footer
+     * Uses same $_GET detection as admin_scripts() — get_current_screen() is unreliable with Vehica
      */
     public static function output_entity_data() {
-        $screen = get_current_screen();
-        if (!$screen) return;
-
-        $is_edit = in_array($screen->id, ['post', 'vehica_car'], true);
-        $is_new  = ($screen->id === 'post' && isset($_GET['post_type']) && $_GET['post_type'] === 'vehica_car');
-        if (!$is_edit && !$is_new) return;
-
         $post_id = isset($_GET['post']) ? (int)$_GET['post'] : 0;
+        $post_type = isset($_GET['post_type']) ? $_GET['post_type'] : '';
+
+        if (!$post_id && !$post_type) return;
+        if ($post_id) {
+            $post = get_post($post_id);
+            $post_type = $post ? $post->post_type : '';
+        }
+        if ($post_type !== 'vehica_car') return;
+
         $current = $post_id ? get_post_meta($post_id, self::META_KEY, true) : '';
 
         $data = [
@@ -154,7 +157,7 @@ class WeCar_Partner {
             }
         }
 
-        echo '<script>var wecarEntityData = ' . wp_json_encode($data) . ';</script>';
+        echo '<script>window.wecarEntityData = ' . wp_json_encode($data) . ';console.log("[WeCar] Entity data loaded:", wecarEntityData);</script>';
     }
 
     /**
