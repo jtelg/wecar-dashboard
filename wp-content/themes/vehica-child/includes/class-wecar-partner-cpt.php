@@ -91,24 +91,6 @@ class WeCar_Partner {
             '1.4.0'
         );
 
-        if (class_exists('WeCar_Particular')) {
-            foreach (WeCar_Particular::get_all() as $p) {
-                $data['particulares'][] = [
-                    'id'    => $p->ID,
-                    'title' => $p->post_title,
-                ];
-            }
-        }
-
-        if (class_exists('WeCar_Propio')) {
-            foreach (WeCar_Propio::get_all() as $p) {
-                $data['propios'][] = [
-                    'id'    => $p->ID,
-                    'title' => $p->post_title,
-                ];
-            }
-        }
-
         wp_enqueue_script(
             'wecar-entity-select',
             get_stylesheet_directory_uri() . '/dashboard/assets/entity-select.js',
