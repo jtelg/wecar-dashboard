@@ -104,6 +104,13 @@
         } catch(e) {}
     }
 
+    function entityTypeForId(id) {
+        for (var i = 0; i < partners.length; i++) if (String(partners[i].id) === String(id)) return 'partner';
+        for (var i = 0; i < particulares.length; i++) if (String(particulares[i].id) === String(id)) return 'particular';
+        for (var i = 0; i < propios.length; i++) if (String(propios[i].id) === String(id)) return 'propio';
+        return '';
+    }
+
     // ─── Search / Filter ──────────────────────────────────────────
     function buildOptions(list, filterText) {
         var html = '';
@@ -195,11 +202,14 @@
         // Save on select change
         $select.off('change.wecar').on('change.wecar', function () {
             var val = $(this).val();
+            var type = entityTypeForId(val);
             currentSelection = val;
             $container.find('input[name="' + metaKey + '"]').val(val);
             // Also set on the original hidden input if exists
             var $orig = $('input[name="' + metaKey + '"]').first();
             if ($orig.length) $orig.val(val);
+            // Auto-set Origen
+            if (type) setOrigen(type);
         });
     }
 
