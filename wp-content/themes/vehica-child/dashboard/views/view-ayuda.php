@@ -204,7 +204,7 @@
         </div>
         <div style="margin-bottom:12px;">
             <p><strong>¿Cada cuánto se actualiza la vista Histórica?</strong></p>
-            <p style="color:#666;">El sistema toma una foto de las métricas todos los días a la 1:33 AM.</p>
+            <p style="color:#666;">El sistema toma una foto de las métricas una vez por semana.</p>
         </div>
         <div style="margin-bottom:0;">
             <p><strong>¿Se pueden editar los partners después?</strong></p>

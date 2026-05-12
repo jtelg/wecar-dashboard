@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: WeCar Snapshot Cron
- * Description: Registra métricas diarias de NSM en wp_wecar_snapshots.
- * Version: 1.0.0
+ * Description: Registra métricas semanales de NSM en wp_wecar_snapshots.
+ * Version: 1.1.0
  */
 
 defined('ABSPATH') || exit;
@@ -12,9 +12,11 @@ class WeCar_Snapshot_Cron {
 
     public static function init() {
         register_activation_hook(__FILE__, [self::class, 'create_table']);
+        register_activation_hook(__FILE__, [self::class, 'schedule_snapshot']);
+        register_deactivation_hook(__FILE__, [self::class, 'unschedule_snapshot']);
 
-        add_filter('cron_schedules', [self::class, 'add_daily_schedule']);
-        add_action('wecar_daily_snapshot', [self::class, 'take_snapshot']);
+        add_filter('cron_schedules', [self::class, 'add_weekly_schedule']);
+        add_action('wecar_weekly_snapshot', [self::class, 'take_snapshot']);
     }
 
     public static function create_table() {
@@ -41,25 +43,28 @@ class WeCar_Snapshot_Cron {
         dbDelta($sql);
     }
 
-    public static function add_daily_schedule($schedules) {
-        $schedules['wecar_daily'] = [
-            'interval' => 86400,
-            'display'  => 'Una vez por día',
+    public static function add_weekly_schedule($schedules) {
+        $schedules['wecar_weekly'] = [
+            'interval' => 604800,
+            'display'  => 'Una vez por semana',
         ];
         return $schedules;
     }
 
     public static function schedule_snapshot() {
-        if (!wp_next_scheduled('wecar_daily_snapshot')) {
-            wp_schedule_event(time(), 'wecar_daily', 'wecar_daily_snapshot');
+        self::unschedule_snapshot(); // limpia schedule viejo si existía
+        if (!wp_next_scheduled('wecar_weekly_snapshot')) {
+            wp_schedule_event(time(), 'wecar_weekly', 'wecar_weekly_snapshot');
         }
     }
 
     public static function unschedule_snapshot() {
-        $timestamp = wp_next_scheduled('wecar_daily_snapshot');
-        if ($timestamp) {
-            wp_unschedule_event($timestamp, 'wecar_daily_snapshot');
-        }
+        // Limpiar schedule viejo (diario) y nuevo (semanal)
+        $old = wp_next_scheduled('wecar_daily_snapshot');
+        if ($old) wp_unschedule_event($old, 'wecar_daily_snapshot');
+
+        $current = wp_next_scheduled('wecar_weekly_snapshot');
+        if ($current) wp_unschedule_event($current, 'wecar_weekly_snapshot');
     }
 
     public static function take_snapshot() {
