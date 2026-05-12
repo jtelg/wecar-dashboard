@@ -30,14 +30,14 @@ It adds custom fields to vehicle listings (`vehica_car` post type), a management
 Defines 5 custom fields as class constants. Hooks into `save_post` and `set_object_terms` to auto-set defaults:
 
 - `WeCar_Fields::init()` — Registers all hooks
-- `self::auto_set_origen()` — Sets Origen to "propio" if empty
-- `self::auto_set_estado()` — Sets Estado to "activo" if empty
-- `self::auto_set_fechas()` — Sets fecha_pub on create, fecha_baja on VENDIDO/RETIRADO, clears on ACTIVO
-- `self::auto_set_partner_default()` — Reserved for future use
+- `set_fecha_publicacion()` — Sets fecha_pub on create (wp_insert_post, priority 10)
+- `set_fecha_baja()` — Sets fecha_baja on VENDIDO/RETIRADO, clears on ACTIVO (set_object_terms, priority 10)
+- `set_origen_desde_propietario()` — Auto-sets Origen from selected Propietario when Origen is empty (save_post, priority 20). Reads the entity's post_type to determine the correct Origen term.
 
 Hook list:
-- `save_post_vehica_car` → `auto_set_origen`, `auto_set_estado`, `auto_set_fechas`
-- `set_object_terms` → `auto_set_fechas` (triggers when Estado changes via quick-edit)
+- `wp_insert_post` → `set_fecha_publicacion`
+- `set_object_terms` → `set_fecha_baja`
+- `save_post` → `set_origen_desde_propietario`
 
 ### 2. `class-wecar-metrics.php` — Metrics Engine
 
@@ -52,6 +52,7 @@ Central query engine. All dashboard views source data through this class.
 | `get_resumen(period)` | array | `{altas, bajas, nsm_anterior}` for period ('month' or 'week') |
 | `get_partners()` | array | Keyed by partner name: `{activos, vendidos, retirados, dias_promedio, status}` |
 | `get_particulares()` | array | `{total, activos, vendidos, retirados, conversion}` |
+| `get_particulares_detail()` | array | Keyed by particular name: `{activos, vendidos, retirados, dias_promedio, status}` |
 | `get_historico(limit, page)` | array | Paginated rows from `wp_wecar_snapshots` |
 
 **Helper function `diff_days($from, $to)`**: Calculates absolute days between two dates. Used for `dias_promedio`.
@@ -93,12 +94,12 @@ Registers `wecar_propio` post type with the same flags as `wecar_partner`.
 Registers the "WeCar NSM" top-level menu and 6 submenu pages via `admin_menu` hook:
 
 ```php
-add_menu_page('WeCar NSM', ...)                 // view-main.php
-add_submenu_page('wecar-nsm', 'Partners', ...)         // view-partners.php
-add_submenu_page('wecar-nsm', 'Particulares', ...)     // view-particulares.php
-add_submenu_page('wecar-nsm', 'Histórica', ...)        // view-historica.php
-add_submenu_page('wecar-nsm', 'Adm. Datos', ..., 'wecar-admin-datos') // view-admin-datos.php
-add_submenu_page('wecar-nsm', 'Ayuda', ...)             // view-ayuda.php
+add_menu_page('WeCar NSM', ...)                                    // view-main.php
+add_submenu_page('wecar-dashboard', 'Partners', ...)               // view-partners.php
+add_submenu_page('wecar-dashboard', 'Particulares', ...)           // view-particulares.php
+add_submenu_page('wecar-dashboard', 'Histórica', ...)              // view-historica.php
+add_submenu_page('wecar-dashboard', 'Adm. Datos', ...)             // view-admin-datos.php
+add_submenu_page('wecar-dashboard', 'Ayuda', ...)                  // view-ayuda.php
 ```
 
 "Administrar Datos" (`wecar-admin-datos`) is a custom page that shows three sections:
@@ -127,24 +128,24 @@ User edits listing →
   ▼
 Vehica Vue editor renders
   ├─ Origen field (vehica_41298) rendered by Vue
-  └─ Partner field (vehica_41299) hidden input rendered by Vue
-     └─ MutationObserver in entity-select.js detects it
+  └─ Propietario field (vehica_41299) rendered by Vue as hidden input
+     └─ entity-select.js injects custom dropdown with search
         └─ Reads current Origen value → selects entity list (partner/particular/propio)
-           └─ Replaces with <select>, hides original input
-              └─ On change: syncs value back to hidden input
+        └─ On entity selection: auto-sets Origen via setOrigen(), updates hidden input
   │
   ▼
 User saves (Publish/Update)
   │
   ▼
-save_post hook fires
-  ├─ WeCar_Fields auto-sets origen/estado/fechas
+save_post hook fires (priority 20)
+  ├─ WeCar_Fields::set_origen_desde_propietario(): if Origen empty + Propietario set,
+  │  reads entity's post_type and auto-assigns Origen term
   └─ Post meta saved (including entity ID in vehica_41299)
   │
   ▼
 Dashboard refresh
   └─ class-wecar-metrics.php queries DB
-     └─ get_nsm(), get_mix(), get_partners() etc.
+     └─ get_nsm(), get_mix(), get_partners(), get_particulares(), etc.
 ```
 
 ---

@@ -25,35 +25,24 @@ vehica-child/
 ├── style.css                        # Theme header (Template: vehica)
 ├── AGENTS.md                        # ← YOU ARE HERE
 ├── includes/
-│   ├── class-wecar-fields.php          # Field constants + auto-set hooks
-│   ├── class-wecar-metrics.php         # Metrics engine (NSM, mix, partners, historica)
-│   ├── class-wecar-dashboard.php       # Admin pages (6 tabs)
-│   ├── class-wecar-partner-cpt.php     # CPT wecar_partner + entity-select JS enqueue
+│   ├── class-wecar-fields.php          # Field constants + auto-set hooks + Origen fallback
+│   ├── class-wecar-metrics.php         # Metrics engine (NSM, mix, partners, particulares, historica)
+│   ├── class-wecar-dashboard.php       # Admin pages (7 tabs: main, partners, particulares, historica, admin-datos, ayuda)
+│   ├── class-wecar-partner-cpt.php     # CPT wecar_partner + entity-select JS/CSS + entity data output
 │   ├── class-wecar-particular-cpt.php  # CPT wecar_particular
 │   └── class-wecar-propio-cpt.php      # CPT wecar_propio
 ├── dashboard/
 │   ├── assets/
 │   │   ├── dashboard.css            # v5 — Muli, 100% clamp(), responsive
 │   │   ├── dashboard.js             # General dashboard JS
-│   │   └── entity-select.js         # Replaces Vehica input with dynamic dropdown (MutationObserver)
+│   │   └── entity-select.js         # Dynamic "Propietario" dropdown: filters by Origen, auto-sets entity type
 │   └── views/
 │       ├── view-main.php            # Main panel: NSM, stock mix, partner summary
 │       ├── view-partners.php        # Per-partner detail table
-│       ├── view-particulares.php    # Private seller metrics
+│       ├── view-particulares.php    # Private seller metrics + funnel + per-seller detail table
 │       ├── view-historica.php       # Daily evolution (paginated)
-│       └── view-ayuda.php           # Team guide
-├── dashboard/
-│   ├── assets/
-│   │   ├── dashboard.css            # v5 — Muli, 100% clamp(), responsive
-│   │   ├── dashboard.js             # General dashboard JS
-│   │   └── entity-select.js         # Replaces Vehica input with dynamic dropdown (MutationObserver)
-│   └── views/
-│       ├── view-admin-datos.php     # Administrar Datos: partners, particulares, propios
-│       ├── view-main.php            # Main panel: NSM, stock mix, partner summary
-│       ├── view-partners.php        # Per-partner detail table
-│       ├── view-particulares.php    # Private seller metrics
-│       ├── view-historica.php       # Daily evolution (paginated)
-│       └── view-ayuda.php           # Team guide
+│       ├── view-ayuda.php           # Team guide
+│       └── view-admin-datos.php     # Unified management: partners, particulares, propios
 ├── docs/
 │   ├── ARCHITECTURE.md              # Full architecture documentation
 │   └── SETUP.md                     # SSH access & development setup
@@ -74,14 +63,14 @@ Defined in `WeCar_Fields` constants, auto-set via `save_post` / `set_object_term
 | Field | Type | Slugs | Behavior |
 |-------|------|-------|----------|
 | `vehica_41298` — Origen | Taxonomy | `propio`, `partner`, `particular` | Auto-set to `propio` if empty on save |
-| `vehica_41299` — Entidad | Post Meta | Integer (CPT ID) | Hidden input, replaced by dynamic dropdown JS (partner / particular / propio) |
+| `vehica_41299` — Propietario | Post Meta | Integer (CPT ID) | Hidden input, replaced by dynamic dropdown JS. Shows partners/particulares/propios based on Origen selection. Label changes to "Propietario" via JS. |
 | `vehica_41300` — Fecha publicación | Meta (date) | — | Auto-set on creation |
 | `vehica_41301` — Estado | Taxonomy | `activo`, `vendido`, `retirado` | Auto-set to `activo` if empty |
 | `vehica_41302` — Fecha baja | Meta (date) | — | Auto-set on VENDIDO/RETIRADO, cleared on ACTIVO |
 
 ## Key Behaviors & Gotchas
 
-1. **Vehica editor is Vue.js** — The Partner field (vehica_41299) is rendered dynamically by Vue. `entity-select.js` uses `MutationObserver` to detect when the input appears, then replaces it with a `<select>` whose options depend on the selected Origen (partner / particular / propio). The original input stays hidden (`hide()`) for Vue compatibility.
+1. **Vehica editor is Vue.js** — The Propietario field (vehica_41299) is rendered dynamically by Vue. `entity-select.js` injects a custom dropdown with search. Options depend on the selected Origen. When selecting an entity without Origen, the JS auto-sets Origen based on entity type. If Vue doesn't update visually, the PHP fallback `set_origen_desde_propietario()` in `WeCar_Fields` ensures data integrity on save.
 
 2. **No extra HTML in Vehica wrappers** — Never insert `<p>`, notices, or any elements inside `.vehica-edit__section__inner`. It breaks Vue's layout.
 
@@ -90,3 +79,7 @@ Defined in `WeCar_Fields` constants, auto-set via `save_post` / `set_object_term
 4. **Estado badge logic** — `Activo` if avg days to sell ≤ 60. `Baja rotación` if > 60. Only applies to partners with at least one sale.
 
 5. **Historical data** — `wp_wecar_snapshots` table populated by WP-Cron daily at 1:33 AM. 90 days retention. Plugin: `wecar-snapshot-cron`.
+
+6. **Particulares page** — Shows aggregate metrics (activos, vendidos, retirados) + funnel visualization + per-seller detail table with días promedio and estado badges. Tasa de Conversión = `Vendidos / (Vendidos + Retirados) × 100`. Particulares CPT entries are managed via `WeCar NSM → Administrar Datos`.
+
+7. **Origen auto-set fallback** — `WeCar_Fields::set_origen_desde_propietario()` runs on `save_post` at priority 20. If Propietario is set but Origen is empty, it determines the Origen from the entity's post type (`wecar_partner` → `partner`, `wecar_particular` → `particular`, `wecar_propio` → `propio`).
