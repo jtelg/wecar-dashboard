@@ -106,10 +106,12 @@ class WeCar_Dashboard {
      * Render: Vista Principal
      */
     public static function render_main() {
-        $nsm      = WeCar_Metrics::get_nsm();
-        $mix      = WeCar_Metrics::get_mix();
-        $resumen  = WeCar_Metrics::get_resumen();
-        $partners = WeCar_Metrics::get_partners();
+        $nsm          = WeCar_Metrics::get_nsm();
+        $mix          = WeCar_Metrics::get_mix();
+        $resumen      = WeCar_Metrics::get_resumen();
+        $partners     = WeCar_Metrics::get_partners();
+        $particulares = WeCar_Metrics::get_particulares_detail();
+        $propios      = WeCar_Metrics::get_propios();
 
         include get_stylesheet_directory() . '/dashboard/views/view-main.php';
     }
