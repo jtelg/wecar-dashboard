@@ -16,6 +16,7 @@ class WeCar_Partner {
         add_action('init', [self::class, 'register_cpt']);
         add_action('admin_menu', [self::class, 'add_admin_menu'], 20);
         add_action('admin_enqueue_scripts', [self::class, 'admin_scripts']);
+        add_action('admin_footer', [self::class, 'output_entity_data']);
         add_action('save_post', [self::class, 'save_partner_field'], 10, 2);
     }
 
@@ -70,44 +71,33 @@ class WeCar_Partner {
     }
 
     /**
-     * Encolar JS que reemplaza el input texto por un dropdown
+     * Encolar JS y CSS del entity selector
      */
     public static function admin_scripts($hook) {
-        global $post;
+        $post_id = isset($_GET['post']) ? (int)$_GET['post'] : 0;
+        $post_type = isset($_GET['post_type']) ? $_GET['post_type'] : '';
 
-        if (!in_array($hook, ['post.php', 'post-new.php'], true)) {
-            return;
+        if (!$post_id && !$post_type) return;
+        if ($post_id) {
+            $post = get_post($post_id);
+            $post_type = $post ? $post->post_type : '';
         }
+        if ($post_type !== 'vehica_car') return;
 
-        if (!$post || $post->post_type !== 'vehica_car') {
-            return;
-        }
-
-        $partners = self::get_all();
-        $current = get_post_meta($post->ID, self::META_KEY, true);
-
-        $data = [
-            'metaKey'  => self::META_KEY,
-            'selected' => $current,
-            'partners' => [],
-        ];
-
-        foreach ($partners as $p) {
-            $data['partners'][] = [
-                'id'    => $p->ID,
-                'title' => $p->post_title,
-            ];
-        }
-
-        wp_enqueue_script(
-            'wecar-partner-select',
-            get_stylesheet_directory_uri() . '/dashboard/assets/partner-select.js',
-            ['jquery'],
-            '1.0.0',
-            true
+        wp_enqueue_style(
+            'wecar-entity-select',
+            get_stylesheet_directory_uri() . '/dashboard/assets/dashboard.css',
+            [],
+            '1.4.0'
         );
 
-        wp_localize_script('wecar-partner-select', 'wecarPartnerData', $data);
+        wp_enqueue_script(
+            'wecar-entity-select',
+            get_stylesheet_directory_uri() . '/dashboard/assets/entity-select.js',
+            ['jquery'],
+            '1.4.0',
+            true
+        );
     }
 
     /**
@@ -124,6 +114,50 @@ class WeCar_Partner {
         if (!isset($_POST[self::META_KEY])) {
             return;
         }
+    }
+
+    /**
+     * Output entity data inline in admin footer
+     * Uses same $_GET detection as admin_scripts() — get_current_screen() is unreliable with Vehica
+     */
+    public static function output_entity_data() {
+        $post_id = isset($_GET['post']) ? (int)$_GET['post'] : 0;
+        $post_type = isset($_GET['post_type']) ? $_GET['post_type'] : '';
+
+        if (!$post_id && !$post_type) return;
+        if ($post_id) {
+            $post = get_post($post_id);
+            $post_type = $post ? $post->post_type : '';
+        }
+        if ($post_type !== 'vehica_car') return;
+
+        $current = $post_id ? get_post_meta($post_id, self::META_KEY, true) : '';
+
+        $data = [
+            'metaKey'      => self::META_KEY,
+            'selected'     => $current,
+            'partners'     => [],
+            'particulares' => [],
+            'propios'      => [],
+        ];
+
+        foreach (self::get_all() as $p) {
+            $data['partners'][] = ['id' => $p->ID, 'title' => $p->post_title];
+        }
+
+        if (class_exists('WeCar_Particular')) {
+            foreach (WeCar_Particular::get_all() as $p) {
+                $data['particulares'][] = ['id' => $p->ID, 'title' => $p->post_title];
+            }
+        }
+
+        if (class_exists('WeCar_Propio')) {
+            foreach (WeCar_Propio::get_all() as $p) {
+                $data['propios'][] = ['id' => $p->ID, 'title' => $p->post_title];
+            }
+        }
+
+        echo '<script>window.wecarEntityData = ' . wp_json_encode($data) . ';console.log("[WeCar] Entity data loaded:", wecarEntityData);</script>';
     }
 
     /**

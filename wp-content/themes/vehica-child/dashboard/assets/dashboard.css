@@ -673,6 +673,29 @@
     }
 }
 
+/* ─── Entity Select — Propietario (Vehica editor) ─── */
+.wec-wrap {
+    position: relative;
+    margin-top: 4px;
+}
+
+.wec-trigger:hover {
+    border-color: #2271b1 !important;
+}
+
+.wec-panel {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    width: 100%;
+    max-width: 400px;
+    z-index: 99999;
+}
+
+.wec-opt:hover {
+    background: #f0f7ff !important;
+}
+
 /* ─── Print ─── */
 @media print {
     .wecar-dashboard { margin: 0; padding: 0; }
