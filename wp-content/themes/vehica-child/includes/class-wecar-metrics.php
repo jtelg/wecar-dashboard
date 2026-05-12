@@ -222,6 +222,98 @@ class WeCar_Metrics {
     }
 
     /**
+     * Detalle por particular (similar a get_partners pero para particulares)
+     * Cada particular con activos, vendidos, retirados, y días promedio
+     */
+    public static function get_particulares_detail() {
+        $particulares = [];
+        $particular_posts = WeCar_Particular::get_all();
+
+        foreach ($particular_posts as $pp) {
+            $particulares[$pp->post_title] = [
+                'activos'    => 0,
+                'vendidos'   => 0,
+                'retirados'  => 0,
+                'dias_total' => 0,
+                'dias_count' => 0,
+            ];
+        }
+
+        $query = new WP_Query([
+            'post_type'      => 'vehica_car',
+            'post_status'    => 'any',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+            'tax_query'      => [[
+                'taxonomy' => self::origen_tax(),
+                'field'    => 'slug',
+                'terms'    => 'particular',
+            ]],
+        ]);
+
+        foreach ($query->posts as $post_id) {
+            $particular_id = get_post_meta($post_id, self::partner_meta(), true);
+
+            if (empty($particular_id)) {
+                $particular_name = 'Sin asignar';
+            } else {
+                $particular_name = WeCar_Particular::get_name($particular_id);
+                if (empty($particular_name)) {
+                    $particular_name = 'Sin asignar';
+                }
+            }
+
+            if (!isset($particulares[$particular_name])) {
+                $particulares[$particular_name] = [
+                    'activos'    => 0,
+                    'vendidos'   => 0,
+                    'retirados'  => 0,
+                    'dias_total' => 0,
+                    'dias_count' => 0,
+                ];
+            }
+
+            $estado_terms = wp_get_post_terms($post_id, self::estado_tax(), ['fields' => 'slugs']);
+            $estado = !empty($estado_terms) ? $estado_terms[0] : 'activo';
+
+            $fecha_pub  = get_post_meta($post_id, self::fecha_pub(), true);
+            $fecha_baja = get_post_meta($post_id, self::fecha_baja(), true);
+
+            if ($estado === 'activo') {
+                $particulares[$particular_name]['activos']++;
+            } elseif ($estado === 'vendido') {
+                $particulares[$particular_name]['vendidos']++;
+                if ($fecha_pub && $fecha_baja) {
+                    $dias = (int)diff_days($fecha_pub, $fecha_baja);
+                    $particulares[$particular_name]['dias_total'] += $dias;
+                    $particulares[$particular_name]['dias_count']++;
+                }
+            } elseif ($estado === 'retirado') {
+                $particulares[$particular_name]['retirados']++;
+            }
+        }
+
+        foreach ($particulares as $name => &$data) {
+            $data['dias_promedio'] = $data['dias_count'] > 0
+                ? round($data['dias_total'] / $data['dias_count'])
+                : 0;
+
+            $data['status'] = 'activo';
+            if ($data['dias_promedio'] > 60) {
+                $data['status'] = 'baja_rotacion';
+            }
+
+            unset($data['dias_total'], $data['dias_count']);
+        }
+
+        uasort($particulares, function ($a, $b) {
+            return $b['activos'] - $a['activos'];
+        });
+
+        return $particulares;
+    }
+
+    /**
      * Obtener histórico paginado
      */
     public static function get_historico($limit = 30, $page = 1) {
