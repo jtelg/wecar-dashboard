@@ -127,6 +127,7 @@ class WeCar_Dashboard {
      */
     public static function render_particulares() {
         $data = WeCar_Metrics::get_particulares();
+        $particulares = WeCar_Metrics::get_particulares_detail();
         include get_stylesheet_directory() . '/dashboard/views/view-particulares.php';
     }
 

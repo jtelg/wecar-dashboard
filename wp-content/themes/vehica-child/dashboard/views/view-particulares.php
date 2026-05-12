@@ -49,4 +49,41 @@
             </div>
         </div>
     </div>
+
+    <div class="wecar-section">
+        <div class="wecar-table-wrapper"><table class="wecar-table">
+            <thead>
+                <tr>
+                    <th>Particular</th>
+                    <th>Autos Activos</th>
+                    <th>Vendidos</th>
+                    <th>Retirados</th>
+                    <th>Días Prom.</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($particulares)): ?>
+                    <tr><td colspan="6">No hay particulares cargados todavía.</td></tr>
+                <?php else: ?>
+                    <?php foreach ($particulares as $name => $pdata): ?>
+                        <tr>
+                            <td><strong><?php echo esc_html($name); ?></strong></td>
+                            <td><?php echo esc_html($pdata['activos']); ?></td>
+                            <td><?php echo esc_html($pdata['vendidos']); ?></td>
+                            <td><?php echo esc_html($pdata['retirados']); ?></td>
+                            <td><?php echo esc_html($pdata['dias_promedio']); ?></td>
+                            <td>
+                                <?php if ($pdata['status'] === 'activo'): ?>
+                                    <span class="wecar-badge wecar-badge-active">Activo</span>
+                                <?php else: ?>
+                                    <span class="wecar-badge wecar-badge-warning">Baja rotación</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table></div>
+    </div>
 </div>
