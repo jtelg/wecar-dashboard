@@ -696,6 +696,122 @@
     background: #f0f7ff !important;
 }
 
+/* ─── Date Filter Bar ──────────────────────────── */
+.wecar-filter-bar {
+    background: #fff;
+    border: 1px solid #e8eaef;
+    border-radius: clamp(10px, 1vw, 14px);
+    padding: clamp(10px, 1.2vw, 18px) clamp(14px, 1.8vw, 24px);
+    margin-bottom: clamp(12px, 1.5vw, 20px);
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 16px);
+    flex-wrap: wrap;
+}
+
+.wecar-filter-label {
+    font-size: clamp(11px, 0.85vw, 13px);
+    font-weight: 700;
+    color: #3a3a4a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.wecar-filter-input {
+    border: 1.5px solid #d0d5dd;
+    border-radius: 6px;
+    padding: clamp(4px, 0.4vw, 8px) clamp(6px, 0.6vw, 10px);
+    font-size: clamp(11px, 0.85vw, 13px);
+    font-family: inherit;
+    color: #3a3a4a;
+    background: #fff;
+    max-width: 150px;
+    transition: border-color 0.15s ease;
+}
+
+.wecar-filter-input:focus {
+    border-color: #0E6FD1;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(14, 111, 209, 0.1);
+}
+
+.wecar-filter-sep {
+    color: #aaa;
+    font-size: clamp(12px, 0.9vw, 14px);
+    font-weight: 600;
+}
+
+.wecar-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(4px, 0.4vw, 8px) clamp(10px, 0.8vw, 16px);
+    border: 1.5px solid #d0d5dd;
+    border-radius: 6px;
+    background: #fff;
+    color: #3a3a4a;
+    font-size: clamp(11px, 0.8vw, 12px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    font-family: inherit;
+    line-height: 1.4;
+}
+
+.wecar-filter-btn:hover {
+    border-color: #0E6FD1;
+    color: #0E6FD1;
+    background: #f8faff;
+}
+
+.wecar-filter-btn-primary {
+    background: #0E6FD1;
+    border-color: #0E6FD1;
+    color: #fff;
+}
+
+.wecar-filter-btn-primary:hover {
+    background: #0a5bb0;
+    border-color: #0a5bb0;
+    color: #fff;
+}
+
+.wecar-filter-btn-danger {
+    color: #c62828;
+    border-color: #ffcdd2;
+}
+
+.wecar-filter-btn-danger:hover {
+    background: #ffebee;
+    border-color: #c62828;
+    color: #c62828;
+}
+
+.wecar-filter-active {
+    background: #e3f2fd;
+    border: 1.5px solid #0E6FD1;
+    border-radius: 6px;
+    padding: clamp(6px, 0.6vw, 10px) clamp(10px, 0.8vw, 16px);
+    font-size: clamp(11px, 0.8vw, 12px);
+    color: #0E6FD1;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.wecar-filter-active::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0E6FD1;
+    flex-shrink: 0;
+}
+
 /* ─── Print ─── */
 @media print {
     .wecar-dashboard { margin: 0; padding: 0; }

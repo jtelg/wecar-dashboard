@@ -68,6 +68,16 @@ class WeCar_Dashboard {
     }
 
     /**
+     * Obtener filtro de fechas desde GET params
+     * Retorna array con 'desde' y 'hasta', o null
+     */
+    public static function get_date_filter() {
+        $desde = !empty($_GET['wf_desde']) ? sanitize_text_field($_GET['wf_desde']) : null;
+        $hasta = !empty($_GET['wf_hasta']) ? sanitize_text_field($_GET['wf_hasta']) : null;
+        return ($desde || $hasta) ? ['desde' => $desde, 'hasta' => $hasta] : null;
+    }
+
+    /**
      * Render: Vista Administrar Datos
      */
     public static function render_admin_datos() {
@@ -90,14 +100,14 @@ class WeCar_Dashboard {
             'wecar-dashboard',
             get_stylesheet_directory_uri() . '/dashboard/assets/dashboard.css',
             [],
-            '1.0.5'
+            '1.0.6'
         );
 
         wp_enqueue_script(
             'wecar-dashboard',
             get_stylesheet_directory_uri() . '/dashboard/assets/dashboard.js',
             ['jquery'],
-            '1.0.0',
+            '1.1.0',
             true
         );
     }
@@ -106,12 +116,13 @@ class WeCar_Dashboard {
      * Render: Vista Principal
      */
     public static function render_main() {
+        $filtro       = self::get_date_filter();
         $nsm          = WeCar_Metrics::get_nsm();
         $mix          = WeCar_Metrics::get_mix();
         $resumen      = WeCar_Metrics::get_resumen();
-        $partners     = WeCar_Metrics::get_partners();
-        $particulares = WeCar_Metrics::get_particulares_detail();
-        $propios      = WeCar_Metrics::get_propios();
+        $partners     = WeCar_Metrics::get_partners($filtro['desde'] ?? null, $filtro['hasta'] ?? null);
+        $particulares = WeCar_Metrics::get_particulares_detail($filtro['desde'] ?? null, $filtro['hasta'] ?? null);
+        $propios      = WeCar_Metrics::get_propios($filtro['desde'] ?? null, $filtro['hasta'] ?? null);
 
         include get_stylesheet_directory() . '/dashboard/views/view-main.php';
     }
@@ -120,7 +131,8 @@ class WeCar_Dashboard {
      * Render: Vista Partners
      */
     public static function render_partners() {
-        $partners = WeCar_Metrics::get_partners();
+        $filtro  = self::get_date_filter();
+        $partners = WeCar_Metrics::get_partners($filtro['desde'] ?? null, $filtro['hasta'] ?? null);
         include get_stylesheet_directory() . '/dashboard/views/view-partners.php';
     }
 
@@ -128,8 +140,9 @@ class WeCar_Dashboard {
      * Render: Vista Particulares
      */
     public static function render_particulares() {
-        $data = WeCar_Metrics::get_particulares();
-        $particulares = WeCar_Metrics::get_particulares_detail();
+        $filtro       = self::get_date_filter();
+        $data         = WeCar_Metrics::get_particulares();
+        $particulares = WeCar_Metrics::get_particulares_detail($filtro['desde'] ?? null, $filtro['hasta'] ?? null);
         include get_stylesheet_directory() . '/dashboard/views/view-particulares.php';
     }
 
@@ -141,8 +154,9 @@ class WeCar_Dashboard {
             wp_die('No tenés permisos para ver esta página.');
         }
 
-        $page = isset($_GET['p']) ? max(1, (int)$_GET['p']) : 1;
-        $historico = WeCar_Metrics::get_historico(30, $page);
+        $filtro  = self::get_date_filter();
+        $page    = isset($_GET['p']) ? max(1, (int)$_GET['p']) : 1;
+        $historico = WeCar_Metrics::get_historico(30, $page, $filtro['desde'] ?? null, $filtro['hasta'] ?? null);
         include get_stylesheet_directory() . '/dashboard/views/view-historica.php';
     }
 

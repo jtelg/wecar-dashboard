@@ -83,10 +83,28 @@ class WeCar_Metrics {
     }
 
     /**
+     * Construir meta_query para filtrar por fecha de publicación
+     */
+    private static function build_fecha_meta_query($fecha_desde, $fecha_hasta) {
+        if (empty($fecha_desde) && empty($fecha_hasta)) {
+            return [];
+        }
+        return [[
+            'key'     => self::fecha_pub(),
+            'compare' => 'BETWEEN',
+            'value'   => [
+                $fecha_desde ?: '1970-01-01',
+                $fecha_hasta ?: '2099-12-31',
+            ],
+            'type'    => 'DATE',
+        ]];
+    }
+
+    /**
      * Stock por partner (concesionaria)
      * Los partners se gestionan via CPT wecar_partner
      */
-    public static function get_partners() {
+    public static function get_partners($fecha_desde = null, $fecha_hasta = null) {
         $partners = [];
         $partner_posts = WeCar_Partner::get_all();
 
@@ -102,7 +120,8 @@ class WeCar_Metrics {
         }
 
         // Consultar todos los vehículos con origen = PARTNER
-        $query = new WP_Query([
+        $meta_fecha = self::build_fecha_meta_query($fecha_desde, $fecha_hasta);
+        $query_args = [
             'post_type'      => 'vehica_car',
             'post_status'    => 'any',
             'posts_per_page' => -1,
@@ -112,7 +131,11 @@ class WeCar_Metrics {
                 'field'    => 'slug',
                 'terms'    => 'partner',
             ]],
-        ]);
+        ];
+        if (!empty($meta_fecha)) {
+            $query_args['meta_query'] = $meta_fecha;
+        }
+        $query = new WP_Query($query_args);
 
         foreach ($query->posts as $post_id) {
             $partner_id = get_post_meta($post_id, self::partner_meta(), true);
@@ -225,7 +248,7 @@ class WeCar_Metrics {
      * Detalle por particular (similar a get_partners pero para particulares)
      * Cada particular con activos, vendidos, retirados, y días promedio
      */
-    public static function get_particulares_detail() {
+    public static function get_particulares_detail($fecha_desde = null, $fecha_hasta = null) {
         $particulares = [];
         $particular_posts = WeCar_Particular::get_all();
 
@@ -239,7 +262,8 @@ class WeCar_Metrics {
             ];
         }
 
-        $query = new WP_Query([
+        $meta_fecha = self::build_fecha_meta_query($fecha_desde, $fecha_hasta);
+        $query_args = [
             'post_type'      => 'vehica_car',
             'post_status'    => 'any',
             'posts_per_page' => -1,
@@ -249,7 +273,11 @@ class WeCar_Metrics {
                 'field'    => 'slug',
                 'terms'    => 'particular',
             ]],
-        ]);
+        ];
+        if (!empty($meta_fecha)) {
+            $query_args['meta_query'] = $meta_fecha;
+        }
+        $query = new WP_Query($query_args);
 
         foreach ($query->posts as $post_id) {
             $particular_id = get_post_meta($post_id, self::partner_meta(), true);
@@ -317,7 +345,7 @@ class WeCar_Metrics {
      * Stock por propio (concesionaria propia)
      * Los propios se gestionan via CPT wecar_propio
      */
-    public static function get_propios() {
+    public static function get_propios($fecha_desde = null, $fecha_hasta = null) {
         $propios = [];
         $propio_posts = WeCar_Propio::get_all();
 
@@ -333,7 +361,8 @@ class WeCar_Metrics {
         }
 
         // Consultar todos los vehículos con origen = PROPIO
-        $query = new WP_Query([
+        $meta_fecha = self::build_fecha_meta_query($fecha_desde, $fecha_hasta);
+        $query_args = [
             'post_type'      => 'vehica_car',
             'post_status'    => 'any',
             'posts_per_page' => -1,
@@ -343,7 +372,11 @@ class WeCar_Metrics {
                 'field'    => 'slug',
                 'terms'    => 'propio',
             ]],
-        ]);
+        ];
+        if (!empty($meta_fecha)) {
+            $query_args['meta_query'] = $meta_fecha;
+        }
+        $query = new WP_Query($query_args);
 
         foreach ($query->posts as $post_id) {
             $propio_id = get_post_meta($post_id, self::partner_meta(), true);
@@ -410,7 +443,7 @@ class WeCar_Metrics {
     /**
      * Obtener histórico paginado
      */
-    public static function get_historico($limit = 30, $page = 1) {
+    public static function get_historico($limit = 30, $page = 1, $fecha_desde = null, $fecha_hasta = null) {
         global $wpdb;
 
         $table = self::SNAPSHOT_TABLE;
@@ -418,16 +451,28 @@ class WeCar_Metrics {
         $current_page = max(1, (int)$page);
         $offset = ($current_page - 1) * $per_page;
 
-        $total_rows = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$table}");
+        $where = '';
+        $params = [];
+        if ($fecha_desde && $fecha_hasta) {
+            $where = 'WHERE fecha >= %s AND fecha <= %s';
+            $params = [$fecha_desde, $fecha_hasta];
+        } elseif ($fecha_desde) {
+            $where = 'WHERE fecha >= %s';
+            $params = [$fecha_desde];
+        } elseif ($fecha_hasta) {
+            $where = 'WHERE fecha <= %s';
+            $params = [$fecha_hasta];
+        }
+
+        $count_sql = "SELECT COUNT(*) FROM {$table} {$where}";
+        $total_rows = !empty($params)
+            ? (int) $wpdb->get_var($wpdb->prepare($count_sql, $params))
+            : (int) $wpdb->get_var($count_sql);
         $total_pages = max(1, (int)ceil($total_rows / $per_page));
 
-        $rows = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM {$table} ORDER BY fecha DESC LIMIT %d OFFSET %d",
-                $per_page,
-                $offset
-            )
-        );
+        $data_sql = "SELECT * FROM {$table} {$where} ORDER BY fecha DESC LIMIT %d OFFSET %d";
+        $data_params = array_merge($params, [$per_page, $offset]);
+        $rows = $wpdb->get_results($wpdb->prepare($data_sql, $data_params));
 
         return [
             'rows'         => array_reverse($rows),
