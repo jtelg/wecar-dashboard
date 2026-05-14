@@ -88,14 +88,14 @@ class WeCar_Partner {
             'wecar-entity-select',
             get_stylesheet_directory_uri() . '/dashboard/assets/dashboard.css',
             [],
-            '1.4.0'
+            '1.5.0'
         );
 
         wp_enqueue_script(
             'wecar-entity-select',
             get_stylesheet_directory_uri() . '/dashboard/assets/entity-select.js',
             ['jquery'],
-            '1.4.0',
+            '1.5.0',
             true
         );
     }

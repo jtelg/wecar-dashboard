@@ -13,3 +13,6 @@ desktop.ini
 # OS temp directories
 tmp/
 temp/
+
+# Agent artifacts
+.atl/
