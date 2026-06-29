@@ -1,0 +1,33 @@
+schema: spec-driven
+
+context: |
+  Tech stack: WordPress (HostGator shared hosting), Vehica 1.0.87 parent theme, custom child theme vehica-child, custom plugin wecar-snapshot-cron
+  Architecture: WordPress child theme with custom CPTs (wecar_partner, wecar_particular, wecar_propio), admin dashboard pages, Vue.js editor integration, WP-Cron daily snapshots
+  Languages: PHP (OOP classes), vanilla JS, CSS (100% clamp(), Muli font)
+  Deployment: SCP directly to production (no staging); flush WP cache after changes
+  Testing: No test runner, no test files, no CI/CD detected
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes; production has no staging environment
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    - Follow existing code patterns in includes/ and dashboard/
+    - Always SCP PHP files; never use PowerShell heredoc with $variables
+    - Always flush WP cache after changes: wp cache flush --path=~/www/wecar.com.ar/public_html
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: ""
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas

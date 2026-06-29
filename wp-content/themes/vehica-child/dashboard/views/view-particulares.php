@@ -25,6 +25,23 @@
         </div>
     </div>
 
+    <div class="wecar-filter-bar">
+        <span class="wecar-filter-label">Filtrar por fecha</span>
+        <form class="wf-filter-form" style="display:contents;">
+            <input type="date" class="wecar-filter-input wf-desde" placeholder="Desde">
+            <span class="wecar-filter-sep">→</span>
+            <input type="date" class="wecar-filter-input wf-hasta" placeholder="Hasta">
+            <button type="submit" class="wecar-filter-btn wecar-filter-btn-primary wf-submit">Filtrar</button>
+        </form>
+        <button class="wecar-filter-btn wf-preset" data-days="7">7 días</button>
+        <button class="wecar-filter-btn wf-preset" data-days="30">30 días</button>
+        <button class="wecar-filter-btn wf-preset" data-days="90">90 días</button>
+        <?php if (!empty($filtro)): ?>
+            <span class="wecar-filter-active"><?php echo esc_html($filtro['desde']); ?> → <?php echo esc_html($filtro['hasta']); ?></span>
+            <button class="wecar-filter-btn wecar-filter-btn-danger wf-clear">Limpiar</button>
+        <?php endif; ?>
+    </div>
+
     <div class="wecar-section">
         <h2>Detalle del Funnel</h2>
         <div class="wecar-funnel">
