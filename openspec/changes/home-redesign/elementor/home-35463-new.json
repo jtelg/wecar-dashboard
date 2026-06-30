@@ -7,7 +7,6 @@
       "background_background": "classic",
       "background_color": "#FFFFFF",
       "padding": { "unit": "px", "top": "10", "right": "20", "bottom": "10", "left": "20", "isLinked": false },
-      "html_tag": "header",
       "sticky": "top",
       "sticky_on": ["desktop", "tablet", "mobile"],
       "sticky_effects_offset": 0,
@@ -50,14 +49,10 @@
           {
             "id": "h01w002",
             "elType": "widget",
-            "widgetType": "nav-menu",
+            "widgetType": "text-editor",
             "settings": {
-              "menu": "Main Nav",
-              "layout": "horizontal",
-              "align_items": "center",
-              "toggle": "hamburger",
-              "toggle_align": "center",
-              "_margin": { "unit": "px", "top": "0", "right": "0", "bottom": "0", "left": "0", "isLinked": false }
+              "editor": "<p style=\"text-align:center;\"><a href=\"/\">Inicio</a> &nbsp; <a href=\"/autos/\">Comprar</a> &nbsp; <a href=\"/cotiza/\">Vender</a> &nbsp; <a href=\"/faq/\">Nosotros</a> &nbsp; <a href=\"/blog/\">Blog</a></p>",
+              "align": "center"
             }
           }
         ]
@@ -114,7 +109,7 @@
             "widgetType": "icon-box",
             "settings": {
               "position": "top",
-              "icon": "car",
+              "selected_icon": { "value": "fas fa-car", "library": "fa-solid" },
               "icon_size": { "unit": "px", "size": 40 },
               "icon_padding": { "unit": "em", "top": "0.5", "right": "0.5", "bottom": "0.5", "left": "0.5", "isLinked": true },
               "icon_color": "#FFFFFF",
@@ -124,7 +119,7 @@
               "description_text": "Encontr\u00e1 el veh\u00edculo ideal para vos. Explor\u00e1 nuestro stock con financiaci\u00f3n y garant\u00eda.",
               "title_color": "#FFFFFF",
               "description_color": "rgba(255,255,255,0.9)",
-              "title_size": { "unit": "px", "size": 28 },
+              "title_size": "h2",
               "background_background": "gradient",
               "background_gradient_first_color": "#5E3BE0",
               "background_gradient_second_color": "#4A2DB8",
@@ -168,7 +163,7 @@
             "widgetType": "icon-box",
             "settings": {
               "position": "top",
-              "icon": "tag",
+              "selected_icon": { "value": "fas fa-tag", "library": "fa-solid" },
               "icon_size": { "unit": "px", "size": 40 },
               "icon_padding": { "unit": "em", "top": "0.5", "right": "0.5", "bottom": "0.5", "left": "0.5", "isLinked": true },
               "icon_color": "#FFFFFF",
@@ -178,7 +173,7 @@
               "description_text": "Cotiz\u00e1 online, peritamos en sucursal y lo publicamos sin costo. R\u00e1pido y seguro.",
               "title_color": "#FFFFFF",
               "description_color": "rgba(255,255,255,0.9)",
-              "title_size": { "unit": "px", "size": 28 },
+              "title_size": "h2",
               "background_background": "gradient",
               "background_gradient_first_color": "#36BFFA",
               "background_gradient_second_color": "#06B6D4",
@@ -269,9 +264,7 @@
               "align": "center",
               "header_size": "h2",
               "title_color": "#5E3BE0",
-              "_css_classes": "wecar-step wecar-step--1",
-              "_element_id": "",
-              "html_tag": "div"
+              "_css_classes": "wecar-step wecar-step--1"
             }
           },
           {
@@ -314,8 +307,7 @@
               "align": "center",
               "header_size": "h2",
               "title_color": "#5E3BE0",
-              "_css_classes": "wecar-step wecar-step--2",
-              "html_tag": "div"
+              "_css_classes": "wecar-step wecar-step--2"
             }
           },
           {
@@ -358,8 +350,7 @@
               "align": "center",
               "header_size": "h2",
               "title_color": "#5E3BE0",
-              "_css_classes": "wecar-step wecar-step--3",
-              "html_tag": "div"
+              "_css_classes": "wecar-step wecar-step--3"
             }
           },
           {
@@ -485,7 +476,7 @@
             "widgetType": "icon-box",
             "settings": {
               "position": "top",
-              "icon": "star",
+              "selected_icon": { "value": "fas fa-star", "library": "fa-solid" },
               "icon_size": { "unit": "px", "size": 48 },
               "icon_color": "#5E3BE0",
               "title_text": "Confianza",
@@ -493,7 +484,7 @@
               "title_color": "#0F172A",
               "description_color": "#64748B",
               "align": "center",
-              "title_size": { "unit": "px", "size": 22 }
+              "title_size": "h3"
             }
           }
         ]
@@ -512,7 +503,7 @@
             "widgetType": "icon-box",
             "settings": {
               "position": "top",
-              "icon": "eye",
+              "selected_icon": { "value": "fas fa-eye", "library": "fa-solid" },
               "icon_size": { "unit": "px", "size": 48 },
               "icon_color": "#2563EB",
               "title_text": "Transparencia",
@@ -520,7 +511,7 @@
               "title_color": "#0F172A",
               "description_color": "#64748B",
               "align": "center",
-              "title_size": { "unit": "px", "size": 22 }
+              "title_size": "h3"
             }
           }
         ]
@@ -539,7 +530,7 @@
             "widgetType": "icon-box",
             "settings": {
               "position": "top",
-              "icon": "thumbs-up",
+              "selected_icon": { "value": "fas fa-thumbs-up", "library": "fa-solid" },
               "icon_size": { "unit": "px", "size": 48 },
               "icon_color": "#06B6D4",
               "title_text": "Facilidad",
@@ -547,7 +538,7 @@
               "title_color": "#0F172A",
               "description_color": "#64748B",
               "align": "center",
-              "title_size": { "unit": "px", "size": 22 }
+              "title_size": "h3"
             }
           }
         ]
