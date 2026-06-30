@@ -1,0 +1,112 @@
+/* =============================================================================
+   Home — Footer Section
+   Scoped under body.home
+   ============================================================================= */
+
+body.home .wecar-footer {
+  background: var(--wecar-footer-bg);
+  color: var(--wecar-footer-text);
+  padding: var(--wecar-space-16) 0;
+}
+
+body.home .wecar-footer .elementor-widget-image img {
+  max-width: 140px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+body.home .wecar-footer .elementor-heading-title {
+  font-family: var(--wecar-font-display);
+  font-weight: var(--wecar-weight-semibold);
+  font-size: var(--wecar-text-base);
+  color: var(--wecar-footer-text);
+}
+
+body.home .wecar-footer .elementor-widget-text-editor {
+  font-family: var(--wecar-font-body);
+  font-size: var(--wecar-text-sm);
+  color: var(--wecar-text-muted);
+  line-height: var(--wecar-line-relaxed);
+}
+
+/* Company description */
+body.home .wecar-footer__description {
+  font-family: var(--wecar-font-body);
+  font-size: var(--wecar-text-sm);
+  color: #94A3B8;
+  line-height: var(--wecar-line-relaxed);
+  margin-top: var(--wecar-space-4);
+}
+
+/* Phone number */
+body.home .wecar-footer__phone {
+  font-family: var(--wecar-font-display);
+  font-weight: var(--wecar-weight-semibold);
+  font-size: var(--wecar-text-lg);
+  color: var(--wecar-cyan);
+  text-decoration: none;
+  display: inline-block;
+  margin-top: var(--wecar-space-2);
+}
+
+body.home .wecar-footer__phone:hover {
+  color: var(--wecar-cyan-light);
+}
+
+/* Copyright */
+body.home .wecar-footer__copyright {
+  font-family: var(--wecar-font-body);
+  font-size: var(--wecar-text-sm);
+  color: #64748B;
+  text-align: right;
+  margin-top: var(--wecar-space-2);
+}
+
+/* Social links */
+body.home .wecar-footer__social {
+  display: flex;
+  gap: var(--wecar-space-4);
+  margin-top: var(--wecar-space-4);
+}
+
+body.home .wecar-footer__social a {
+  color: #94A3B8;
+  font-size: var(--wecar-text-lg);
+  transition: color 0.2s ease;
+}
+
+body.home .wecar-footer__social a:hover {
+  color: var(--wecar-cyan);
+}
+
+/* ── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  body.home .wecar-footer {
+    padding: var(--wecar-space-12) 0;
+  }
+
+  body.home .wecar-footer .elementor-column {
+    width: 100% !important;
+    text-align: center;
+  }
+
+  body.home .wecar-footer__copyright {
+    text-align: center;
+    margin-top: var(--wecar-space-6);
+  }
+
+  body.home .wecar-footer__social {
+    justify-content: center;
+  }
+
+  body.home .wecar-footer .elementor-widget-image img {
+    margin: 0 auto;
+  }
+}
+
+/* ── Tablet ────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body.home .wecar-footer {
+    padding: var(--wecar-space-12) 0;
+  }
+}
