@@ -324,7 +324,7 @@ feat/redesign (tracker, draft, no-merge)
 
 ### Phase 5: Production Migration
 
-- [ ] **TASK-018**: Backup `_elementor_data` of home 35463 in PRODUCTION
+- [x] **TASK-018**: Backup `_elementor_data` of home 35463 in PRODUCTION
   - **Description**: Same as TASK-001 but on production (`wecar.com.ar`, not test). Save backup to a `backups/prod/` subdirectory.
   - **Files**: `openspec/changes/home-redesign/backups/prod/_elementor_data-35463.json`
   - **Commands**:
@@ -335,7 +335,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #4
   - **Estimated LOC**: ~5
 
-- [ ] **TASK-019**: Deploy child theme files to production
+- [x] **TASK-019**: Deploy child theme files to production
   - **Description**: SCP all new child theme files (CSS, JS, shortcode, logo) from the local repo to `~/www/wecar.com.ar/public_html/wp-content/themes/vehica-child/` on the production server. Do NOT overwrite existing `functions.php` — use the modified version from the repo.
   - **Files**: Copy of all files from PR #1 and PR #2 to production server
   - **Commands**:
@@ -351,7 +351,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #4
   - **Estimated LOC**: ~10 (command documentation)
 
-- [ ] **TASK-020**: Apply new `_elementor_data` to production home
+- [x] **TASK-020**: Apply new `_elementor_data` to production home
   - **Description**: Same as TASK-012 but on production. Upload the validated Elementor JSON and apply via WP-CLI.
   - **Commands**:
     ```bash
@@ -362,7 +362,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #4
   - **Estimated LOC**: ~3
 
-- [ ] **TASK-021**: Cache flush in production
+- [x] **TASK-021**: Cache flush in production
   - **Description**: Same as TASK-013 but on production. Flush WP Rocket + SiteGround Optimizer caches. Verify with `curl -I`.
   - **Commands**:
     ```bash
@@ -372,14 +372,14 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #4
   - **Estimated LOC**: ~3
 
-- [ ] **TASK-022**: Visual validation in production
+- [x] **TASK-022**: Visual validation in production
   - **Description**: Repeat TASK-014/015/016 checklist on production. Capture screenshots. Ensure production matches test. Test rollback procedure mentally (backup exists, command known).
   - **Files**: (screenshot artifacts)
   - **Verification**: Production home matches test home visually. All sections render. Carousel works. Animations work. No regressions on other pages.
   - **PR**: Part of PR #4
   - **Estimated LOC**: ~10
 
-- [ ] **TASK-023**: Cleanup
+- [x] **TASK-023**: Cleanup
   - **Description**: Remove local backup files from the repo if they are no longer needed (only the production backup `.gitignore`-d or removed). Alternatively, keep them as historical record — decide with the team. Close the tracker PR. Clean up feature branches after all PRs are merged.
   - **Files**: Potential removal of `openspec/changes/home-redesign/backups/` files (if not needed)
   - **Verification**: No stale backup artifacts in working tree. Feature branches deleted locally and on remote.
@@ -441,10 +441,10 @@ Each task must pass verification before the next task begins. If any task fails,
 
 | Phase | Tasks | PR | Status |
 |---|---|---|---|
-| Phase 1: Backup & Safety Net | T001–T004 | PR #1 | 🔲 |
-| Phase 2: Design System Foundation | T005–T010 | PR #1 (T005, T006, T007 partial, T009) + PR #2 (T007 partial, T008, T010) | 🔲 |
-| Phase 3: Build New Home | T011–T013 | PR #3 | 🔲 |
-| Phase 4: Visual Validation | T014–T017 | PR #3 | 🔲 |
-| Phase 5: Production Migration | T018–T023 | PR #4 | 🔲 |
-| Branch cleanup (local + remote) | — | — | 🔲 |
-| Update AGENTS.md or README if needed | — | — | 🔲 |
+| Phase 1: Backup & Safety Net | T001–T004 | PR #1 | ✅ |
+| Phase 2: Design System Foundation | T005–T010 | PR #1 (T005, T006, T007 partial, T009) + PR #2 (T007 partial, T008, T010) | ✅ |
+| Phase 3: Build New Home | T011–T013 | PR #3 | ✅ |
+| Phase 4: Visual Validation | T014–T017 | PR #3 | ✅ |
+| Phase 5: Production Migration | T018–T023 | PR #4 | ✅ |
+| Branch cleanup (local + remote) | — | — | ✅ |
+| Update AGENTS.md or change log | — | — | ✅ |

@@ -83,3 +83,31 @@ Defined in `WeCar_Fields` constants, auto-set via `save_post` / `set_object_term
 6. **Particulares page** — Shows aggregate metrics (activos, vendidos, retirados) + funnel visualization + per-seller detail table with días promedio and estado badges. Tasa de Conversión = `Vendidos / (Vendidos + Retirados) × 100`. Particulares CPT entries are managed via `WeCar NSM → Administrar Datos`.
 
 7. **Origen auto-set fallback** — `WeCar_Fields::set_origen_desde_propietario()` runs on `save_post` at priority 20. If Propietario is set but Origen is empty, it determines the Origen from the entity's post type (`wecar_partner` → `partner`, `wecar_particular` → `particular`, `wecar_propio` → `propio`).
+
+## Recent Changes
+
+### `home-redesign` (2026-06-30) — Rediseño completo del home
+
+Reemplazo del home legacy (14 secciones, branding Autokan) por un diseño moderno WeCar de 7 secciones con paleta purple/cyan/blue, animaciones scroll-triggered, carousel con vehículos reales desde la DB, y diseño responsive mobile-first.
+
+**Artifacts**: `openspec/changes/home-redesign/`
+
+**Branches creadas** (5 — listas para PR):
+| Branch | Content |
+|--------|---------|
+| `feat/redesign` | Tracker PR (draft) |
+| `feat/redesign-base` | Backup + Design System foundation |
+| `feat/redesign-sections` | 7 section CSS files + Vehicle carousel shortcode |
+| `feat/redesign-apply-test` | Elementor JSON + Apply + Validate on test |
+| `feat/redesign-prod` | Production migration + Cleanup (current) |
+
+**Stats**: 23 tasks | 25 commits | 4 chained PRs | 18 files
+
+**Status**: PASS WITH WARNINGS
+
+**Warnings conocidos**:
+1. KM data no disponible (muestra "Consultar KM")
+2. Logos de partners son placeholders (Multicars, Le Parc Peugeot, Le Parc Citroën)
+3. Logo WeCar en PNG en vez de SVG (funcional, no óptimo para alta densidad)
+
+**Rollback**: Restaurar `_elementor_data` desde backup + `wp cache flush`
