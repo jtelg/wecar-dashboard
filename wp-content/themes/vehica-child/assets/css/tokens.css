@@ -1,0 +1,80 @@
+/* =============================================================================
+   WeCar Design System — CSS Custom Properties (Design Tokens)
+   =============================================================================
+   Loaded globally via functions.php after elementor-frontend.
+   Scope: available to all child theme CSS via var() references.
+   ============================================================================= */
+
+:root {
+  /* ── Colors ─────────────────────────────────────────────────── */
+  --wecar-purple: #5E3BE0;
+  --wecar-purple-dark: #4A2DB8;
+  --wecar-purple-light: #7B5CE8;
+
+  --wecar-cyan: #36BFFA;
+  --wecar-cyan-dark: #06B6D4;
+  --wecar-cyan-light: #76D6FF;
+
+  --wecar-blue: #2563EB;
+  --wecar-blue-dark: #1D4ED8;
+
+  --wecar-bg: #FFFFFF;
+  --wecar-surface: #F8FAFC;
+  --wecar-text: #0F172A;
+  --wecar-text-muted: #64748B;
+  --wecar-border: #E2E8F0;
+
+  --wecar-footer-bg: #0F172A;
+  --wecar-footer-text: #F8FAFC;
+
+  /* ── Typography ──────────────────────────────────────────────── */
+  --wecar-font-display: 'Montserrat', sans-serif;
+  --wecar-font-body: 'Open Sans', sans-serif;
+
+  --wecar-text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --wecar-text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --wecar-text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --wecar-text-lg: clamp(1.125rem, 1rem + 0.65vw, 1.5rem);
+  --wecar-text-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  --wecar-text-2xl: clamp(2rem, 1.6rem + 2vw, 3.5rem);
+
+  --wecar-line-tight: 1.1;
+  --wecar-line-normal: 1.5;
+  --wecar-line-relaxed: 1.7;
+
+  --wecar-weight-regular: 400;
+  --wecar-weight-semibold: 600;
+  --wecar-weight-bold: 700;
+
+  /* ── Spacing & Layout ────────────────────────────────────────── */
+  --wecar-space-1: 0.25rem;
+  --wecar-space-2: 0.5rem;
+  --wecar-space-3: 0.75rem;
+  --wecar-space-4: 1rem;
+  --wecar-space-6: 1.5rem;
+  --wecar-space-8: 2rem;
+  --wecar-space-12: 3rem;
+  --wecar-space-16: 4rem;
+  --wecar-space-20: 5rem;
+
+  --wecar-section-padding-y: clamp(3rem, 5vw, 6rem);
+  --wecar-container-max: 1280px;
+  --wecar-container-padding: clamp(1rem, 3vw, 2rem);
+
+  /* ── Radius & Shadows ────────────────────────────────────────── */
+  --wecar-radius-sm: 0.5rem;
+  --wecar-radius-md: 0.75rem;
+  --wecar-radius-lg: 1rem;
+  --wecar-radius-xl: 1.5rem;
+  --wecar-radius-full: 9999px;
+
+  --wecar-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --wecar-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --wecar-shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+  --wecar-shadow-hover: 0 20px 40px rgba(94, 59, 224, 0.18);
+}
+
+/* ── Breakpoints (for reference, use in media queries) ──────────── */
+/* Mobile:  max-width: 767px     */
+/* Tablet:  min-width: 768px and max-width: 1024px  */
+/* Desktop: min-width: 1025px    */
