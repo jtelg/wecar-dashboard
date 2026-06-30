@@ -1,0 +1,79 @@
+/* =============================================================================
+   Home — Elegí Wecar Section
+   Scoped under body.home
+   ============================================================================= */
+
+body.home .wecar-features-section {
+  text-align: center;
+}
+
+body.home .wecar-features-section .elementor-heading-title {
+  font-family: var(--wecar-font-display);
+  font-weight: var(--wecar-weight-bold);
+  font-size: var(--wecar-text-2xl);
+  color: var(--wecar-text);
+}
+
+body.home .wecar-features-section .elementor-widget-text-editor {
+  font-family: var(--wecar-font-body);
+  font-size: var(--wecar-text-lg);
+  color: var(--wecar-text-muted);
+  max-width: 600px;
+  margin: 0 auto var(--wecar-space-12);
+}
+
+/* ── Feature Card ──────────────────────────────────────────────── */
+body.home .wecar-feature-card {
+  text-align: center;
+  padding: var(--wecar-space-8) var(--wecar-space-6);
+  border-radius: var(--wecar-radius-lg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.home .wecar-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--wecar-shadow-md);
+}
+
+/* Icon */
+body.home .wecar-feature-card .elementor-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--wecar-space-4);
+}
+
+body.home .wecar-feature-card--confianza .elementor-icon {
+  color: var(--wecar-purple);
+}
+
+body.home .wecar-feature-card--transparencia .elementor-icon {
+  color: var(--wecar-blue);
+}
+
+body.home .wecar-feature-card--facilidad .elementor-icon {
+  color: var(--wecar-cyan);
+}
+
+/* Title */
+body.home .wecar-feature-card .elementor-heading-title {
+  font-family: var(--wecar-font-display);
+  font-weight: var(--wecar-weight-semibold);
+  font-size: var(--wecar-text-xl);
+  color: var(--wecar-text);
+  margin-bottom: var(--wecar-space-2);
+}
+
+/* Description */
+body.home .wecar-feature-card .elementor-widget-text-editor {
+  font-family: var(--wecar-font-body);
+  font-size: var(--wecar-text-base);
+  color: var(--wecar-text-muted);
+  line-height: var(--wecar-line-relaxed);
+}
+
+/* ── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  body.home .wecar-feature-card {
+    padding: var(--wecar-space-6) var(--wecar-space-4);
+    margin-bottom: var(--wecar-space-4);
+  }
+}
