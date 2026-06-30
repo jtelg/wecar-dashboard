@@ -1,0 +1,95 @@
+/* =============================================================================
+   Home — Hero Dual Section
+   Scoped under body.home
+   ============================================================================= */
+
+/* ── Card Base ─────────────────────────────────────────────────── */
+body.home .wecar-hero-card {
+  border-radius: var(--wecar-radius-lg);
+  padding: var(--wecar-space-8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+body.home .wecar-hero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--wecar-shadow-hover);
+}
+
+/* ── Comprar Card (purple) ─────────────────────────────────────── */
+body.home .wecar-hero-card--comprar {
+  background: linear-gradient(135deg, var(--wecar-purple), var(--wecar-purple-dark));
+  color: #fff;
+}
+
+body.home .wecar-hero-card--comprar .elementor-icon {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--wecar-radius-full);
+  padding: var(--wecar-space-4);
+}
+
+/* ── Vender Card (cyan) ────────────────────────────────────────── */
+body.home .wecar-hero-card--vender {
+  background: linear-gradient(135deg, var(--wecar-cyan), var(--wecar-cyan-dark));
+  color: #fff;
+}
+
+body.home .wecar-hero-card--vender .elementor-icon {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--wecar-radius-full);
+  padding: var(--wecar-space-4);
+}
+
+/* ── Card Title ────────────────────────────────────────────────── */
+body.home .wecar-hero-card .elementor-heading-title {
+  font-family: var(--wecar-font-display);
+  font-weight: var(--wecar-weight-bold);
+  font-size: var(--wecar-text-xl);
+  line-height: var(--wecar-line-tight);
+}
+
+/* ── Card Description ──────────────────────────────────────────── */
+body.home .wecar-hero-card .elementor-widget-text-editor {
+  font-family: var(--wecar-font-body);
+  font-size: var(--wecar-text-base);
+  line-height: var(--wecar-line-normal);
+  opacity: 0.9;
+}
+
+/* ── Card CTA ──────────────────────────────────────────────────── */
+body.home .wecar-hero-card .elementor-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--wecar-radius-full);
+  font-weight: var(--wecar-weight-semibold);
+  padding: var(--wecar-space-2) var(--wecar-space-6);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+body.home .wecar-hero-card .elementor-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+}
+
+/* ── Mobile: stack vertically ──────────────────────────────────── */
+@media (max-width: 767px) {
+  body.home .elementor-section .elementor-column[data-col="50"] {
+    width: 100%;
+    margin-bottom: var(--wecar-space-4);
+  }
+
+  body.home .wecar-hero-card {
+    padding: var(--wecar-space-6);
+  }
+}
+
+/* ── Tablet ────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body.home .wecar-hero-card {
+    padding: var(--wecar-space-6);
+  }
+}
