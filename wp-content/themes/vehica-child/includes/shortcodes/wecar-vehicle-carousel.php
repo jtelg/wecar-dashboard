@@ -30,7 +30,8 @@ add_shortcode('wecar_vehicle_carousel', 'wecar_render_vehicle_carousel');
 function wecar_render_vehicle_carousel($atts = [])
 {
     $atts = shortcode_atts([
-        'count' => 12,
+        'count'  => 12,
+        'status' => '', // Optional: filter by status taxonomy slug (e.g. 'activo')
     ], $atts, 'wecar_vehicle_carousel');
 
     $count = max(1, min(50, (int) $atts['count']));
@@ -42,14 +43,19 @@ function wecar_render_vehicle_carousel($atts = [])
         'posts_per_page' => $count,
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'tax_query'      => [
+    ];
+
+    // Optional status filter (taxonomy vehica_41301)
+    $status_filter = trim($atts['status']);
+    if (!empty($status_filter) && taxonomy_exists('vehica_41301')) {
+        $args['tax_query'] = [
             [
                 'taxonomy' => 'vehica_41301',
                 'field'    => 'slug',
-                'terms'    => 'activo',
+                'terms'    => $status_filter,
             ],
-        ],
-    ];
+        ];
+    }
 
     $query = new WP_Query($args);
 
