@@ -1,0 +1,61 @@
+/* =============================================================================
+   Home — Header Section
+   Scoped under body.home
+   ============================================================================= */
+
+body.home .wecar-home-header,
+body.home .elementor-section.elementor-sticky--active {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--wecar-shadow-sm);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.home .wecar-home-header .elementor-widget-image img {
+  max-width: var(--wecar-header-logo-width, 140px);
+  height: auto;
+}
+
+/* Sticky offset adjustment */
+body.home .wecar-home-header.elementor-sticky--active {
+  padding-top: var(--wecar-space-2);
+  padding-bottom: var(--wecar-space-2);
+}
+
+/* CTA Button */
+body.home .wecar-home-header .elementor-button {
+  background: var(--wecar-purple);
+  color: #fff;
+  border-radius: var(--wecar-radius-full);
+  padding: var(--wecar-space-2) var(--wecar-space-6);
+  font-family: var(--wecar-font-body);
+  font-weight: var(--wecar-weight-semibold);
+  font-size: var(--wecar-text-sm);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+body.home .wecar-home-header .elementor-button:hover {
+  background: var(--wecar-purple-dark);
+  transform: translateY(-1px);
+}
+
+/* Mobile hamburger */
+@media (max-width: 767px) {
+  body.home .wecar-home-header .elementor-widget-image img {
+    max-width: 100px;
+  }
+
+  body.home .wecar-home-header .elementor-nav-menu--dropdown {
+    background: var(--wecar-bg);
+    box-shadow: var(--wecar-shadow-lg);
+    border-radius: var(--wecar-radius-md);
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body.home .wecar-home-header .elementor-widget-image img {
+    max-width: 120px;
+  }
+}
