@@ -104,7 +104,7 @@ feat/redesign (tracker, draft, no-merge)
 
 ### Phase 1: Backup & Safety Net (test.wecar.com.ar)
 
-- [ ] **TASK-001**: Backup `_elementor_data` of home 35463 in test
+- [x] **TASK-001**: Backup `_elementor_data` of home 35463 in test
   - **Description**: Run `wp post meta get 35463 _elementor_data --format=json` on test.wecar.com.ar and save output to `openspec/changes/home-redesign/backups/_elementor_data-35463.json`. Store the backup JSON in the repo.
   - **Files**: `openspec/changes/home-redesign/backups/_elementor_data-35463.json`
   - **Commands**:
@@ -116,7 +116,7 @@ feat/redesign (tracker, draft, no-merge)
   - **Estimated LOC**: ~1,500 (auto-generated JSON dump, ~111 KB)
   - **Work unit guard**: Data artifact, not reviewable code — does not count against review budget.
 
-- [ ] **TASK-002**: Backup `_wp_page_template` of home 35463 in test
+- [x] **TASK-002**: Backup `_wp_page_template` of home 35463 in test
   - **Description**: Save the current page template meta value to a text file.
   - **Files**: `openspec/changes/home-redesign/backups/home-35463-page-template.txt`
   - **Commands**:
@@ -127,7 +127,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #1
   - **Estimated LOC**: ~5
 
-- [ ] **TASK-003**: Backup DB snapshot in test
+- [x] **TASK-003**: Backup DB snapshot in test (SKIPPED — _elementor_data backup sufficient; full SQL not required per user instruction)
   - **Description**: Run `wp db export` to create a full SQL snapshot of the test database before changes. This provides a last-resort rollback mechanism.
   - **Files**: `openspec/changes/home-redesign/backups/home-35463-pre-redesign-2026-06-30.sql`
   - **Commands**:
@@ -138,7 +138,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #1
   - **Estimated LOC**: ~5 (command), SQL file is auto-generated
 
-- [ ] **TASK-004**: Verify backup integrity
+- [x] **TASK-004**: Verify backup integrity
   - **Description**: Run a checksum on the backup JSON and SQL files. Optionally do a dry-run restore test by parsing the JSON and confirming Elementor structure is intact.
   - **Files** (none new — verification only)
   - **Commands**:
@@ -156,7 +156,7 @@ feat/redesign (tracker, draft, no-merge)
 
 ### Phase 2: Design System Foundation (test.wecar.com.ar)
 
-- [ ] **TASK-005**: Create wecar-design-system.css with design tokens
+- [x] **TASK-005**: Create wecar-design-system.css with design tokens
   - **Description**: Create `assets/css/wecar-design-system.css` with `:root` CSS custom properties for the full WeCar design system:
     - Colors: `--wecar-purple` (#5E3BE0), `--wecar-cyan` (#36BFFA), `--wecar-blue` (#2563EB) with dark/light variants
     - Typography: font stacks (Montserrat display, Open Sans body), fluid type scale (xs to 2xl), line heights, font weights
@@ -168,7 +168,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #1
   - **Estimated LOC**: ~100
 
-- [ ] **TASK-006**: Create home-animations.js (Intersection Observer)
+- [x] **TASK-006**: Create home-animations.js (Intersection Observer)
   - **Description**: Create `assets/js/home-animations.js` with:
     - Scope to `body.home` only (early return if not home page)
     - Intersection Observer with `threshold: 0.2` watching `.wecar-step` elements
@@ -181,7 +181,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #1
   - **Estimated LOC**: ~80
 
-- [ ] **TASK-007**: Update functions.php to enqueue new CSS/JS and register shortcode hook
+- [x] **TASK-007**: Update functions.php to enqueue new CSS/JS and register shortcode hook
   - **Description**: Add to `functions.php`:
     1. Enqueue `wecar-design-system.css` with dependency on `elementor-frontend`
     2. Enqueue all 7 section CSS files (`home-header.css`, `home-hero.css`, `home-steps.css`, `home-carousel.css`, `home-features.css`, `home-partners.css`, `home-footer.css`) scoped to condition `is_page(35463)` or `is_front_page()`
@@ -192,7 +192,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #1 (enqueues) and PR #2 (shortcode registration)
   - **Estimated LOC**: ~30 added to existing functions.php
 
-- [ ] **TASK-008**: Create wecar-vehicle-carousel.php shortcode
+- [x] **TASK-008**: Create wecar-vehicle-carousel.php shortcode
   - **Description**: Create `includes/shortcodes/wecar-vehicle-carousel.php` registering `[wecar_vehicles]` shortcode that:
     - Queries `vehica_car` posts with `post_status = publish`, meta query `vehica_41301 = activo`, `posts_per_page = 12`, ordered by date DESC
     - For each vehicle, renders a card with: featured image (fallback placeholder if none), title (make + model), short description/excerpt, price from `vehica_41400` meta, tags (year from `vehica_41300`, km, fuel type) as pills/badges
@@ -205,14 +205,14 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #2
   - **Estimated LOC**: ~120
 
-- [ ] **TASK-009**: Extract WeCar logo from current site
+- [x] **TASK-009**: Extract WeCar logo from current site
   - **Description**: Download the WeCar logo from production site (`wecar.com.ar`) or test. Inspect the current header to find the logo URL, download it at ≥ 2x mobile resolution. SVG is preferred; if only PNG exists, extract at ≥ 240px width. Save to child theme assets.
   - **Files**: `wp-content/themes/vehica-child/assets/images/logo-wecar.svg`
   - **Verification**: SVG file renders correctly in browser, scales proportionally, works on mobile @2x displays. Compare against current site logo for fidelity.
   - **PR**: Part of PR #1
   - **Estimated LOC**: ~10 (SVG markup)
 
-- [ ] **TASK-010**: Create 7 section-specific CSS files
+- [x] **TASK-010**: Create 7 section-specific CSS files
   - **Description**: Create one CSS file per home section, each scoped under `body.home` or a section-level class (e.g. `.wecar-home-header`):
     1. **home-header.css**: Sticky header, 3-column layout (logo/nav/CTA), mobile hamburger, backdrop blur on sticky, responsive logo sizing
     2. **home-hero.css**: Dual-card layout (50/50 desktop, stack mobile), purple/cyan card backgrounds, hover lift transition, icon circle styling, CTA button styling
@@ -235,7 +235,7 @@ feat/redesign (tracker, draft, no-merge)
 
 ### Phase 3: Build New Home (test.wecar.com.ar)
 
-- [ ] **TASK-011**: Construct new `_elementor_data` JSON for home 35463
+- [x] **TASK-011**: Construct new `_elementor_data` JSON for home 35463
   - **Description**: Hand-author the Elementor JSON for 7 sections. Each section follows Elementor's data structure (`elType`, `widgetType`, `settings`, `elements`). Structure:
     1. **Header section**: full-width, sticky enabled, 3-column inner section: Image widget (logo), Nav Menu widget (WP menu), Button widget (CTA)
     2. **Hero Dual section**: full-width, 2-column inner section (50/50), each with an Icon Box widget ("Comprar" / "Vender")
@@ -249,7 +249,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #3
   - **Estimated LOC**: ~560
 
-- [ ] **TASK-012**: Apply new `_elementor_data` to test home
+- [x] **TASK-012**: Apply new `_elementor_data` to test home
   - **Description**: Upload the new Elementor JSON to test server and apply it via WP-CLI. Then flush cache and verify.
   - **Files** (none — command execution)
   - **Commands**:
@@ -264,7 +264,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #3
   - **Estimated LOC**: ~3 (commands)
 
-- [ ] **TASK-013**: Cache flush in test
+- [x] **TASK-013**: Cache flush in test
   - **Description**: Run WP-CLI cache flush on test environment to ensure WP Rocket + SiteGround Optimizer serve fresh CSS/JS/HTML.
   - **Files** (none — command execution)
   - **Commands**:
@@ -280,21 +280,21 @@ feat/redesign (tracker, draft, no-merge)
 
 ### Phase 4: Visual Validation (test.wecar.com.ar)
 
-- [ ] **TASK-014**: Screenshot home in test (desktop 1440px)
+- [x] **TASK-014**: Screenshot home in test (desktop 1440px)
   - **Description**: Capture a full-page screenshot of `test.wecar.com.ar` at 1440×900 viewport. Save as reference artifact.
   - **Files**: (screenshot stored as artifact, not committed to repo unless explicitly decided)
   - **Verification**: All 7 sections visible, layout matches design spec (header, hero, 3-steps, carousel, elegí wecar, marcas, footer).
   - **PR**: Part of PR #3
   - **Estimated LOC**: ~5
 
-- [ ] **TASK-015**: Screenshot home in test (mobile 375px)
+- [x] **TASK-015**: Screenshot home in test (mobile 375px)
   - **Description**: Capture a full-page screenshot at 375×812 viewport (mobile). Verify responsive behavior: header hamburger, stacked hero cards, single-column steps, single carousel card, stacked footer.
   - **Files**: (screenshot artifact)
   - **Verification**: All sections stack vertically, no horizontal scroll, text is readable, CTA buttons are tappable.
   - **PR**: Part of PR #3
   - **Estimated LOC**: ~5
 
-- [ ] **TASK-016**: Manual QA with user
+- [x] **TASK-016**: Manual QA with user
   - **Description**: Walk through the home page checking all REQ-HOME scenarios from the spec:
     - Header sticky + logo + nav + CTA (REQ-HOME-001)
     - Hero dual cards with correct links (REQ-HOME-002)
@@ -311,7 +311,7 @@ feat/redesign (tracker, draft, no-merge)
   - **PR**: Part of PR #3
   - **Estimated LOC**: ~10 (checklist)
 
-- [ ] **TASK-017**: Iterate on issues found
+- [x] **TASK-017**: Iterate on issues found
   - **Description**: Fix any issues discovered during QA (TASK-016). Re-run backup before each iteration. Common issues:
     - Elementor ID regeneration: re-export and diff, adjust source JSON
     - CSS specificity conflicts: scope rules under `body.home`
