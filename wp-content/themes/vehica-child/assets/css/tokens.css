@@ -72,6 +72,13 @@
   --wecar-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
   --wecar-shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
   --wecar-shadow-hover: 0 20px 40px rgba(94, 59, 224, 0.18);
+
+  /* ── Home Correction 2026-07 ──────────────────────────────────── */
+  --wecar-lavender-bg: #F5F3FF;
+  --wecar-wavy-opacity: 0.1;
+  --wecar-step-1: var(--wecar-purple-light);
+  --wecar-step-2: var(--wecar-blue);
+  --wecar-step-3: var(--wecar-cyan-dark);
 }
 
 /* ── Breakpoints (for reference, use in media queries) ──────────── */

@@ -1,78 +1,68 @@
 /* =============================================================================
-   Home — Hero Dual Section
-   Scoped under body.home
+   Home — Hero Dual Cards (Corrected 2026-07)
+   No icons, no CTA buttons. Gradient backgrounds with wavy pattern overlay.
    ============================================================================= */
 
 /* ── Card Base ─────────────────────────────────────────────────── */
-body.home .wecar-hero-card {
-  border-radius: var(--wecar-radius-lg);
-  padding: var(--wecar-space-8);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+body.home .wecar-hero__card {
   position: relative;
   overflow: hidden;
+  border-radius: var(--wecar-radius-xl);
+  padding: var(--wecar-space-12) var(--wecar-space-8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-body.home .wecar-hero-card:hover {
+body.home .wecar-hero__card:hover {
   transform: translateY(-4px);
   box-shadow: var(--wecar-shadow-hover);
 }
 
-/* ── Comprar Card (purple) ─────────────────────────────────────── */
-body.home .wecar-hero-card--comprar {
-  background: linear-gradient(135deg, var(--wecar-purple), var(--wecar-purple-dark));
-  color: #fff;
+/* ── Left Card: white → light lavender gradient ────────────────── */
+body.home .wecar-hero__card--left {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F3FF 100%);
+  color: var(--wecar-text);
 }
 
-body.home .wecar-hero-card--comprar .elementor-icon {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: var(--wecar-radius-full);
-  padding: var(--wecar-space-4);
+/* ── Right Card: light blue → medium blue gradient ──────────────── */
+body.home .wecar-hero__card--right {
+  background: linear-gradient(180deg, #36BFFA 0%, #2563EB 100%);
+  color: #FFFFFF;
 }
 
-/* ── Vender Card (cyan) ────────────────────────────────────────── */
-body.home .wecar-hero-card--vender {
-  background: linear-gradient(135deg, var(--wecar-cyan), var(--wecar-cyan-dark));
-  color: #fff;
+/* ── Wavy Pattern Overlay ──────────────────────────────────────── */
+body.home .wecar-hero__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/wavy-pattern.svg');
+  background-repeat: repeat;
+  color: inherit;
+  opacity: var(--wecar-wavy-opacity);
+  pointer-events: none;
+  z-index: 0;
 }
 
-body.home .wecar-hero-card--vender .elementor-icon {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: var(--wecar-radius-full);
-  padding: var(--wecar-space-4);
+/* Keep content above the pattern */
+body.home .wecar-hero__card > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Card Title ────────────────────────────────────────────────── */
-body.home .wecar-hero-card .elementor-heading-title {
+body.home .wecar-hero__card .elementor-heading-title {
   font-family: var(--wecar-font-display);
   font-weight: var(--wecar-weight-bold);
-  font-size: var(--wecar-text-xl);
+  font-size: var(--wecar-text-2xl);
   line-height: var(--wecar-line-tight);
 }
 
 /* ── Card Description ──────────────────────────────────────────── */
-body.home .wecar-hero-card .elementor-widget-text-editor {
+body.home .wecar-hero__card .elementor-widget-text-editor {
   font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-base);
+  font-size: var(--wecar-text-lg);
   line-height: var(--wecar-line-normal);
-  opacity: 0.9;
-}
-
-/* ── Card CTA ──────────────────────────────────────────────────── */
-body.home .wecar-hero-card .elementor-button {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: var(--wecar-radius-full);
-  font-weight: var(--wecar-weight-semibold);
-  padding: var(--wecar-space-2) var(--wecar-space-6);
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-body.home .wecar-hero-card .elementor-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: #fff;
+  opacity: 0.85;
+  max-width: 480px;
 }
 
 /* ── Mobile: stack vertically ──────────────────────────────────── */
@@ -82,14 +72,14 @@ body.home .wecar-hero-card .elementor-button:hover {
     margin-bottom: var(--wecar-space-4);
   }
 
-  body.home .wecar-hero-card {
-    padding: var(--wecar-space-6);
+  body.home .wecar-hero__card {
+    padding: var(--wecar-space-8) var(--wecar-space-6);
   }
 }
 
 /* ── Tablet ────────────────────────────────────────────────────── */
 @media (min-width: 768px) and (max-width: 1024px) {
-  body.home .wecar-hero-card {
-    padding: var(--wecar-space-6);
+  body.home .wecar-hero__card {
+    padding: var(--wecar-space-8) var(--wecar-space-6);
   }
 }

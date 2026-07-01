@@ -25,8 +25,8 @@ body.home .wecar-home-header.elementor-sticky--active {
 
 /* CTA Button */
 body.home .wecar-home-header .elementor-button {
-  background: var(--wecar-purple);
-  color: #fff;
+  background: var(--wecar-purple-light);
+  color: #FFFFFF;
   border-radius: var(--wecar-radius-full);
   padding: var(--wecar-space-2) var(--wecar-space-6);
   font-family: var(--wecar-font-body);
@@ -36,7 +36,7 @@ body.home .wecar-home-header .elementor-button {
 }
 
 body.home .wecar-home-header .elementor-button:hover {
-  background: var(--wecar-purple-dark);
+  background: var(--wecar-purple);
   transform: translateY(-1px);
 }
 

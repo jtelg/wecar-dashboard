@@ -1,9 +1,11 @@
 /* =============================================================================
-   Home — Elegí Wecar Section
-   Scoped under body.home
+   Home — Elegí Wecar Section (Corrected 2026-07)
+   White→light-lavender gradient background, solid color cards with white text.
    ============================================================================= */
 
+/* ── Section Background ─────────────────────────────────────────── */
 body.home .wecar-features-section {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F3FF 100%);
   text-align: center;
 }
 
@@ -14,66 +16,53 @@ body.home .wecar-features-section .elementor-heading-title {
   color: var(--wecar-text);
 }
 
-body.home .wecar-features-section .elementor-widget-text-editor {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-text-muted);
-  max-width: 600px;
-  margin: 0 auto var(--wecar-space-12);
-}
-
 /* ── Feature Card ──────────────────────────────────────────────── */
-body.home .wecar-feature-card {
-  text-align: center;
-  padding: var(--wecar-space-8) var(--wecar-space-6);
+body.home .wecar-features__card {
+  padding: var(--wecar-space-8);
   border-radius: var(--wecar-radius-lg);
+  text-align: left;
+  min-height: 220px;
+  color: #FFFFFF;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-body.home .wecar-feature-card:hover {
+body.home .wecar-features__card:hover {
   transform: translateY(-4px);
   box-shadow: var(--wecar-shadow-md);
 }
 
+body.home .wecar-features__card--purple {
+  background: #5E3BE0;
+}
+
+body.home .wecar-features__card--blue {
+  background: #2563EB;
+}
+
+body.home .wecar-features__card--teal {
+  background: #06B6D4;
+}
+
 /* Icon */
-body.home .wecar-feature-card .elementor-icon {
+body.home .wecar-features__card .elementor-icon {
+  color: #FFFFFF;
   font-size: 2.5rem;
   margin-bottom: var(--wecar-space-4);
 }
 
-body.home .wecar-feature-card--confianza .elementor-icon {
-  color: var(--wecar-purple);
-}
-
-body.home .wecar-feature-card--transparencia .elementor-icon {
-  color: var(--wecar-blue);
-}
-
-body.home .wecar-feature-card--facilidad .elementor-icon {
-  color: var(--wecar-cyan);
-}
-
 /* Title */
-body.home .wecar-feature-card .elementor-heading-title {
-  font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-semibold);
-  font-size: var(--wecar-text-xl);
-  color: var(--wecar-text);
-  margin-bottom: var(--wecar-space-2);
-}
-
-/* Description */
-body.home .wecar-feature-card .elementor-widget-text-editor {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-base);
-  color: var(--wecar-text-muted);
-  line-height: var(--wecar-line-relaxed);
+body.home .wecar-features__card .elementor-heading-title {
+  color: #FFFFFF;
+  font-size: var(--wecar-text-lg);
+  font-weight: var(--wecar-weight-bold);
+  line-height: var(--wecar-line-tight);
 }
 
 /* ── Mobile ────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  body.home .wecar-feature-card {
+  body.home .wecar-features__card {
     padding: var(--wecar-space-6) var(--wecar-space-4);
     margin-bottom: var(--wecar-space-4);
+    min-height: auto;
   }
 }

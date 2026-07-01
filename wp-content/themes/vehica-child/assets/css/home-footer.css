@@ -1,25 +1,44 @@
 /* =============================================================================
-   Home — Footer Section
-   Scoped under body.home
+   Home — Footer Section (Corrected 2026-07)
+   White background, wavy pattern, lavender phone number, copyright kept.
    ============================================================================= */
 
 body.home .wecar-footer {
-  background: var(--wecar-footer-bg);
-  color: var(--wecar-footer-text);
+  background: #FFFFFF;
+  color: var(--wecar-text);
   padding: var(--wecar-space-16) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wavy pattern overlay */
+body.home .wecar-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/wavy-pattern.svg');
+  background-repeat: repeat;
+  color: var(--wecar-purple-light);
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home .wecar-footer > * {
+  position: relative;
+  z-index: 1;
 }
 
 body.home .wecar-footer .elementor-widget-image img {
   max-width: 140px;
   height: auto;
-  filter: brightness(0) invert(1);
 }
 
 body.home .wecar-footer .elementor-heading-title {
   font-family: var(--wecar-font-display);
   font-weight: var(--wecar-weight-semibold);
   font-size: var(--wecar-text-base);
-  color: var(--wecar-footer-text);
+  color: var(--wecar-text);
 }
 
 body.home .wecar-footer .elementor-widget-text-editor {
@@ -33,7 +52,7 @@ body.home .wecar-footer .elementor-widget-text-editor {
 body.home .wecar-footer__description {
   font-family: var(--wecar-font-body);
   font-size: var(--wecar-text-sm);
-  color: #94A3B8;
+  color: #64748B;
   line-height: var(--wecar-line-relaxed);
   margin-top: var(--wecar-space-4);
 }
@@ -43,14 +62,14 @@ body.home .wecar-footer__phone {
   font-family: var(--wecar-font-display);
   font-weight: var(--wecar-weight-semibold);
   font-size: var(--wecar-text-lg);
-  color: var(--wecar-cyan);
+  color: var(--wecar-purple-light);
   text-decoration: none;
   display: inline-block;
   margin-top: var(--wecar-space-2);
 }
 
 body.home .wecar-footer__phone:hover {
-  color: var(--wecar-cyan-light);
+  color: var(--wecar-purple);
 }
 
 /* Copyright */
@@ -70,13 +89,13 @@ body.home .wecar-footer__social {
 }
 
 body.home .wecar-footer__social a {
-  color: #94A3B8;
+  color: #64748B;
   font-size: var(--wecar-text-lg);
   transition: color 0.2s ease;
 }
 
 body.home .wecar-footer__social a:hover {
-  color: var(--wecar-cyan);
+  color: var(--wecar-purple-light);
 }
 
 /* ── Mobile ────────────────────────────────────────────────────── */

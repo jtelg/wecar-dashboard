@@ -1,13 +1,36 @@
 /* =============================================================================
-   Home — Marcas Asociadas Section
-   Scoped under body.home
+   Home — Respaldado por grandes marcas (Corrected 2026-07)
+   Lavender gradient background, wavy pattern overlay, placeholder logos.
    ============================================================================= */
 
-body.home .wecar-partners-section {
+/* ── Section Background ─────────────────────────────────────────── */
+body.home .wecar-partners {
+  background: linear-gradient(180deg, #C7B8FF 0%, #A78BFA 100%);
+  position: relative;
+  overflow: hidden;
   text-align: center;
 }
 
-body.home .wecar-partners-section .elementor-heading-title {
+/* Wavy pattern overlay */
+body.home .wecar-partners::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/wavy-pattern.svg');
+  background-repeat: repeat;
+  color: #5E3BE0;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home .wecar-partners > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Section Title ──────────────────────────────────────────────── */
+body.home .wecar-partners .elementor-heading-title {
   font-family: var(--wecar-font-display);
   font-weight: var(--wecar-weight-bold);
   font-size: var(--wecar-text-xl);
@@ -25,17 +48,6 @@ body.home .wecar-partners-strip {
   padding: var(--wecar-space-8) 0;
 }
 
-body.home .wecar-partners-strip .elementor-widget-image {
-  filter: grayscale(100%);
-  opacity: 0.6;
-  transition: filter 0.3s ease, opacity 0.3s ease;
-}
-
-body.home .wecar-partners-strip .elementor-widget-image:hover {
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
 body.home .wecar-partners-strip img {
   max-height: 60px;
   width: auto;
@@ -46,17 +58,17 @@ body.home .wecar-partner-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 160px;
-  height: 60px;
-  background: var(--wecar-surface);
-  border: 1px dashed var(--wecar-border);
+  width: 180px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.25);
   border-radius: var(--wecar-radius-md);
+  color: #FFFFFF;
   font-family: var(--wecar-font-body);
   font-size: var(--wecar-text-sm);
-  font-weight: var(--wecar-weight-semibold);
-  color: var(--wecar-text-muted);
+  font-weight: var(--wecar-weight-bold);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
+  border: none;
 }
 
 /* ── Mobile ────────────────────────────────────────────────────── */

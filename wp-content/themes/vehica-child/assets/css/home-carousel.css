@@ -1,7 +1,62 @@
 /* =============================================================================
-   Home — Vehicle Carousel Section
-   Scoped under body.home
+   Home — Vehicle Carousel Section (Corrected 2026-07)
+   Purple→blue diagonal gradient background, wavy pattern, "Ver todos" link,
+   bottom CTA button, restyled tag chips.
    ============================================================================= */
+
+/* ── Section Background ─────────────────────────────────────────── */
+body.home .wecar-carousel-section {
+  background: linear-gradient(135deg, #5E3BE0 0%, #2563EB 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wavy pattern overlay */
+body.home .wecar-carousel-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/wavy-pattern.svg');
+  background-repeat: repeat;
+  color: #FFFFFF;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home .wecar-carousel-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Section Header ─────────────────────────────────────────────── */
+body.home .wecar-carousel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--wecar-space-8);
+}
+
+body.home .wecar-carousel__title {
+  color: #FFFFFF;
+  font-size: var(--wecar-text-xl);
+  font-weight: var(--wecar-weight-bold);
+}
+
+body.home .wecar-carousel__link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: var(--wecar-text-base);
+  transition: opacity 0.2s ease;
+}
+
+body.home .wecar-carousel__link:hover {
+  opacity: 0.8;
+}
+
+body.home .wecar-carousel__link::after {
+  content: ' →';
+}
 
 /* ── Carousel Grid ─────────────────────────────────────────────── */
 body.home .wecar-carousel {
@@ -33,7 +88,7 @@ body.home .wecar-vehicle-card:hover {
 body.home .wecar-vehicle-card__image-wrap {
   position: relative;
   width: 100%;
-  padding-top: 66.67%; /* 3:2 aspect ratio */
+  padding-top: 66.67%;
   overflow: hidden;
   background: var(--wecar-surface);
 }
@@ -99,16 +154,28 @@ body.home .wecar-vehicle-card__tag {
   font-size: var(--wecar-text-xs);
   font-weight: var(--wecar-weight-semibold);
   padding: var(--wecar-space-1) var(--wecar-space-3);
-  border-radius: var(--wecar-radius-full);
-  background: var(--wecar-surface);
-  color: var(--wecar-text-muted);
-  border: 1px solid var(--wecar-border);
+  border-radius: var(--wecar-radius-sm);
+  background: #E0F2FE;
+  color: #1E3A8A;
+  border: none;
 }
 
-body.home .wecar-vehicle-card__tag--km {
+/* ── Bottom CTA ─────────────────────────────────────────────────── */
+body.home .wecar-carousel__cta {
+  display: inline-block;
+  background: #FFFFFF;
+  color: var(--wecar-purple);
+  border-radius: var(--wecar-radius-full);
+  padding: var(--wecar-space-3) var(--wecar-space-8);
+  font-weight: var(--wecar-weight-bold);
+  text-decoration: none;
+  margin-top: var(--wecar-space-8);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+body.home .wecar-carousel__cta:hover {
   background: var(--wecar-purple-light);
-  color: #fff;
-  border-color: var(--wecar-purple-light);
+  color: #FFFFFF;
 }
 
 /* ── Empty State ───────────────────────────────────────────────── */
@@ -150,6 +217,12 @@ body.home .wecar-carousel__empty-cta:hover {
 
 /* ── Mobile ────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
+  body.home .wecar-carousel__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--wecar-space-2);
+  }
+
   body.home .wecar-carousel {
     grid-template-columns: 1fr;
     gap: var(--wecar-space-4);
