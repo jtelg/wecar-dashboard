@@ -245,6 +245,35 @@ This spec covers the complete redesign of WeCar's front page (ID 35463): 7 secti
 - THEN the page renders with its original Elementor styles intact
 - AND no visual regressions are observed
 
+### REQ-HOME-017: Post-restore CSS Validation (Added 2026-07-01 after recovery incident)
+
+**Description**: After any apply operation that modifies `_elementor_data` for a post, the post-specific CSS file MUST be validated. The home page (post 35463) MUST have a CSS file > 50 KB after every change. A CSS file < 1 KB indicates the page is broken (the 2026-07-01 home-recovery incident).
+
+**Priority**: P0
+
+**Background**: On 2026-07-01, after a partial Elementor data restoration, the home page rendered without CSS. Root cause: only `_elementor_data` was restored; the other 26 `wp_postmeta` rows were missing, so Elementor regenerated only 639 bytes of CSS instead of ~115 KB. The page looked structurally correct but had no styling.
+
+**Scenario**:
+- GIVEN an apply operation completes for a change that modifies `_elementor_data`
+- WHEN the apply progress is recorded
+- THEN the post-specific CSS file size MUST be checked and recorded
+- AND if the file is < 1 KB, the apply MUST be marked as CRITICAL and the change MUST be remediated before proceeding to verify
+
+#### Scenario: CSS Validation Snippet
+
+- GIVEN a working SSH connection to the target environment
+- WHEN running `wc -c ~/www/{ENV}/public_html/wp-content/uploads/elementor/css/post-{POST_ID}.css`
+- THEN the output MUST be > 1024 bytes (1 KB) for any post with content
+- AND for the home page (post 35463), the output MUST be > 50000 bytes (50 KB)
+
+#### Scenario: Recovery from Broken CSS
+
+- GIVEN a page's CSS file is < 1 KB after apply
+- WHEN the dev follows the runbook in `openspec/specs/elementor-data-restoration.md`
+- THEN the 5-step recovery procedure restores all 27 `wp_postmeta` rows from the SQL backup
+- AND the CSS file regenerates to the expected size (> 10 KB)
+- AND the apply progress MUST be updated with the recovery details
+
 ## Non-Functional Requirements
 
 ### NFR-HOME-001: Performance
@@ -317,28 +346,54 @@ This spec covers the complete redesign of WeCar's front page (ID 35463): 7 secti
 
 **Priority**: P1
 
+### NFR-HOME-009: Post-restore CSS File Size (Added 2026-07-01 after recovery incident)
+
+**Description**: After any apply or verify operation that involves the home page (post 35463), the post-specific CSS file MUST be > 50 KB. A file < 1 KB indicates a broken restoration. The dev MUST run the validation snippet from `openspec/specs/elementor-css-validation.md` and record the file size in `apply-progress.md` / `verify-report.md`.
+
+**Priority**: P0
+
+**Background**: The original rollback procedure (restoring only `_elementor_data`) is INSUFFICIENT. The 2026-07-01 home-recovery incident proved that Elementor pages need all 27 `wp_postmeta` rows restored together. See `openspec/specs/elementor-data-restoration.md` for the full runbook.
+
 ## Migration & Rollback
 
 ### Backup Procedure
 
-1. Export `_elementor_data` meta for page 35463:
+1. Export `_elementor_data` meta for page 35463 (for diffing, NOT for restoring):
    ```bash
    wp post meta get 35463 _elementor_data --format=json > openspec/changes/home-redesign/backups/_elementor_data-35463.json
    ```
-2. Save a DB snapshot including all page meta for 35463.
-3. Store both artifacts in the repo under `openspec/changes/home-redesign/backups/`.
+2. Save the FULL WP DB snapshot including all page meta for 35463 to the production server at `~/wecar-db-backup-YYYYMMDD.sql`. This is the REAL recovery source.
+3. Store the JSON artifact in the repo for diffing; the SQL backup stays on the production server for recovery.
 
-### Rollback Procedure
+### Rollback Procedure (Updated 2026-07-01)
 
-1. Restore the original `_elementor_data`:
+> **Warning**: Restoring only `_elementor_data` is INSUFFICIENT. It produces a page with broken CSS (639 bytes instead of ~115 KB). Use the full runbook in `openspec/specs/elementor-data-restoration.md`.
+
+**Recommended (full recovery)**:
+
+1. Extract the 27 `wp_postmeta` rows for post 35463 from the SQL backup on the production server. Use the Python script in the runbook.
+2. Import the rows:
    ```bash
-   wp post meta update 35463 _elementor_data < openspec/changes/home-redesign/backups/_elementor_data-35463.json
+   ssh wecar "wp db import /tmp/35463-restore.sql --path=/home/u2131-yaziskitlmmv/www/wecar.com.ar/public_html --allow-root"
    ```
-2. Flush all caches:
+3. Delete the stale CSS file:
    ```bash
-   wp cache flush
+   ssh wecar "rm /home/u2131-yaziskitlmmv/www/wecar.com.ar/public_html/wp-content/uploads/elementor/css/post-35463.css"
    ```
-3. Verify the home page reverts to the pre-redesign state by visiting the URL and checking the 14 original sections are restored.
+4. Clear Elementor cache:
+   ```bash
+   ssh wecar "wp eval 'Elementor\Plugin::instance()->files_manager->clear_cache();' --path=... --allow-root"
+   ```
+5. Flush WP cache and trigger a page load:
+   ```bash
+   ssh wecar "wp cache flush --path=... --allow-root"
+   ssh wecar "curl -s -o /dev/null https://wecar.com.ar/"
+   ```
+6. Verify the CSS file is > 50 KB:
+   ```bash
+   ssh wecar "wc -c /home/u2131-yaziskitlmmv/www/wecar.com.ar/public_html/wp-content/uploads/elementor/css/post-35463.css"
+   ```
+7. Verify the home page reverts to the pre-redesign state by visiting the URL and checking the 14 original sections are restored.
 
 ### Test-First Workflow
 
