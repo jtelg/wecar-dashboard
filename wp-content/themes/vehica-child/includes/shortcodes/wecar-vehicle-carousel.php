@@ -103,7 +103,6 @@ function wecar_render_vehicle_card($post_id)
     $version       = wecar_get_term_name($post_id, 'vehica_19226');
     $year          = wecar_get_term_name($post_id, 'vehica_19270');
     $transmission  = wecar_get_term_name($post_id, 'vehica_6662');
-    $fuel          = wecar_get_term_name($post_id, 'vehica_6663');
     ?>
     <div class="wecar-vehicle-card">
         <div class="wecar-vehicle-card__image-wrap">
@@ -127,14 +126,10 @@ function wecar_render_vehicle_card($post_id)
             <?php endif; ?>
 
             <div class="wecar-vehicle-card__tags">
+                <span class="wecar-vehicle-card__tag"><?php echo esc_html__('Consultar KM', 'vehica'); ?></span>
+
                 <?php if ($year) : ?>
                     <span class="wecar-vehicle-card__tag"><?php echo esc_html($year); ?></span>
-                <?php endif; ?>
-
-                <span class="wecar-vehicle-card__tag wecar-vehicle-card__tag--km">Consultar KM</span>
-
-                <?php if ($fuel) : ?>
-                    <span class="wecar-vehicle-card__tag"><?php echo esc_html($fuel); ?></span>
                 <?php endif; ?>
 
                 <?php if ($transmission) : ?>

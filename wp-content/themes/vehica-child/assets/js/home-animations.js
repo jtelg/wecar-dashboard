@@ -1,77 +1,59 @@
 /**
- * WeCar Home Animations — Scroll-Triggered 3-Step Process
- * =========================================================
- * - Intersection Observer with threshold 0.2
- * - Staggered entrance: 0ms, 150ms, 300ms based on CSS class (wecar-step--1/2/3)
- * - prefers-reduced-motion: reduce → immediate reveal, no transitions
+ * WeCar Home Animations — State-Based Scroll Animation
+ * =====================================================
+ * - Single IntersectionObserver on .wecar-steps section
+ * - 4 discrete frames based on intersectionRatio thresholds (25/50/75/100%)
+ * - Line fill scale via CSS custom property (GPU-accelerated transform: scaleX)
+ * - requestAnimationFrame for DOM class changes (avoids layout thrash)
+ * - prefers-reduced-motion: reduce → immediate frame 4, no observer
+ * - No IntersectionObserver support → immediate frame 4
  * - Scope: body.home only
- * - Graceful degradation: if JS fails, all content is visible by default
- * ========================================================= */
+ * ===================================================== */
 
 (function () {
   'use strict';
 
-  // Only run on home page
-  if (!document.body.classList.contains('home')) {
-    return;
-  }
+  // Scope to home page only
+  if (!document.body.classList.contains('home')) return;
 
-  // Respect reduced motion
+  const section = document.querySelector('.wecar-steps');
+  if (!section) return;
+
+  // Graceful degradation: reduced motion or no IO support
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Find all step elements
-  const steps = document.querySelectorAll('.wecar-step');
-
-  if (!steps.length) {
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    section.classList.add('wecar-steps--frame-4');
     return;
   }
 
-  // If reduced motion, immediately show all steps and exit
-  if (prefersReducedMotion) {
-    steps.forEach(function (step) {
-      step.classList.add('wecar-step--visible');
-    });
-    return;
-  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        const ratio = entry.intersectionRatio;
+        const target = entry.target;
+        let frame = 1;
+        if (ratio >= 0.75) frame = 4;
+        else if (ratio >= 0.5) frame = 3;
+        else if (ratio >= 0.25) frame = 2;
 
-  // Intersection Observer callback
-  function onIntersect(entries, observer) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) {
-        return;
-      }
+        requestAnimationFrame(() => {
+          // Update line fill scale
+          let fillScale = 0;
+          if (frame >= 4) fillScale = 1;
+          else if (frame >= 3) fillScale = 2 / 3;
+          else if (frame >= 2) fillScale = 1 / 3;
+          target.style.setProperty('--wecar-line-fill-scale', fillScale);
 
-      var step = entry.target;
-      // Derive index from CSS class (wecar-step--1, wecar-step--2, etc.)
-      var index = 0;
-      var classes = step.classList;
-      for (var i = 1; i <= 3; i++) {
-        if (classes.contains('wecar-step--' + i)) {
-          index = i;
-          break;
-        }
-      }
-      var delay = index * 150; // 0ms, 150ms, 300ms
+          // Replace frame class
+          target.className = target.className.replace(/wecar-steps--frame-\d+/g, '') + ' wecar-steps--frame-' + frame;
+        });
+      });
+    },
+    {
+      threshold: [0, 0.25, 0.5, 0.75, 1.0],
+      rootMargin: '0px',
+    }
+  );
 
-      setTimeout(function () {
-        step.classList.add('wecar-step--visible');
-      }, delay);
-
-      // Stop observing once revealed
-      observer.unobserve(step);
-    });
-  }
-
-  // Create observer
-  var observer = new IntersectionObserver(onIntersect, {
-    threshold: 0.2,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  // Observe each step
-  steps.forEach(function (step) {
-    // Start hidden
-    step.classList.add('wecar-step--hidden');
-    observer.observe(step);
-  });
+  observer.observe(section);
 })();

@@ -1,123 +1,256 @@
 /* =============================================================================
-   Home — 3 Pasos Section
+   Home — 3 Pasos Section (Corrected 2026-07)
+   Matches Elementor JSON class names: wecar-steps, wecar-steps__card, etc.
    Scoped under body.home
+   Includes: 4-frame scroll animation, gradient connecting line, 
+   numbered circles, card/CTA reveal transitions.
    ============================================================================= */
 
-body.home .wecar-steps-section {
+/* ── Section Wrapper ────────────────────────────────────────────── */
+body.home .wecar-steps {
   text-align: center;
+  position: relative;
 }
 
-body.home .wecar-steps-section .elementor-heading-title {
+body.home .wecar-steps .elementor-heading-title {
   font-family: var(--wecar-font-display);
   font-weight: var(--wecar-weight-bold);
   font-size: var(--wecar-text-2xl);
   color: var(--wecar-text);
-}
-
-body.home .wecar-steps-section .elementor-widget-text-editor {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-text-muted);
-  max-width: 600px;
+  max-width: 720px;
   margin: 0 auto var(--wecar-space-8);
+  text-align: center;
 }
 
-/* ── Step Card ─────────────────────────────────────────────────── */
-body.home .wecar-step {
-  text-align: center;
-  padding: var(--wecar-space-8) var(--wecar-space-6);
-  border-radius: var(--wecar-radius-lg);
-  background: var(--wecar-surface);
-  border: 1px solid var(--wecar-border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* ── Step Track (circle indicators + connecting line) ──────────── */
+body.home .wecar-steps__track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto var(--wecar-space-8);
   position: relative;
 }
 
-body.home .wecar-step:hover {
+/* Connecting line (full width track) */
+body.home .wecar-steps__line {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 160px);
+  width: 320px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--wecar-purple-light) 0%, var(--wecar-blue) 50%, var(--wecar-cyan-dark) 100%);
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+/* Filled portion of the connecting line — GPU-accelerated via scaleX */
+body.home .wecar-steps__line-fill {
+  width: 100%;
+  height: 100%;
+  transform: scaleX(var(--wecar-line-fill-scale, 0));
+  transform-origin: left center;
+  background: inherit;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Circle indicators */
+body.home .wecar-steps__circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--circle-color);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--wecar-text-xs);
+  font-weight: var(--wecar-weight-bold);
+  color: var(--circle-color);
+  transition: background-color 0.4s ease-out, color 0.4s ease-out;
+  z-index: 2;
+  position: relative;
+}
+
+body.home .wecar-steps__circle--1 { --circle-color: var(--wecar-step-1); }
+body.home .wecar-steps__circle--2 { --circle-color: var(--wecar-step-2); }
+body.home .wecar-steps__circle--3 { --circle-color: var(--wecar-step-3); }
+
+/* ── Step Card ──────────────────────────────────────────────────── */
+body.home .wecar-steps__card {
+  text-align: center;
+  padding: var(--wecar-space-6) var(--wecar-space-4);
+  border-radius: var(--wecar-radius-lg);
+  background: var(--wecar-surface, #FFFFFF);
+  border: 1px solid var(--wecar-border, #E5E7EB);
+  box-shadow: var(--wecar-shadow-md);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+body.home .wecar-steps__card:hover {
   transform: translateY(-4px);
   box-shadow: var(--wecar-shadow-md);
 }
 
-/* Step number */
-body.home .wecar-step__number {
-  font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-bold);
-  font-size: var(--wecar-text-2xl);
-  color: var(--wecar-purple);
-  margin-bottom: var(--wecar-space-2);
-  line-height: 1;
+/* Step title colors */
+body.home .wecar-steps__card--1 .elementor-heading-title {
+  color: var(--wecar-step-1, var(--wecar-purple-light));
 }
 
-/* Step title */
-body.home .wecar-step__title {
-  font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-semibold);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-text);
-  margin-bottom: var(--wecar-space-2);
+body.home .wecar-steps__card--2 .elementor-heading-title {
+  color: var(--wecar-step-2, var(--wecar-blue));
 }
 
-/* Step description */
-body.home .wecar-step__desc {
+body.home .wecar-steps__card--3 .elementor-heading-title {
+  color: var(--wecar-step-3, var(--wecar-cyan-dark));
+}
+
+/* ── Step Body Text ─────────────────────────────────────────────── */
+body.home .wecar-steps__card .elementor-widget-text-editor {
   font-family: var(--wecar-font-body);
   font-size: var(--wecar-text-sm);
-  color: var(--wecar-text-muted);
+  color: var(--wecar-text-muted, #6B7280);
   line-height: var(--wecar-line-relaxed);
 }
 
-/* ── Connector Lines (desktop only) ────────────────────────────── */
-@media (min-width: 1025px) {
-  body.home .wecar-step {
-    position: relative;
-  }
-
-  body.home .wecar-step::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -50%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--wecar-purple-light), var(--wecar-cyan));
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  body.home .wecar-step:last-child::before {
-    display: none;
-  }
-}
-
-/* ── Animation: hidden state ───────────────────────────────────── */
-body.home .wecar-step--hidden {
+/* ── CTA Button (pill, lavender) ────────────────────────────────── */
+body.home .wecar-steps__cta {
+  position: relative;
+  z-index: 1;
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
-/* ── Animation: visible state ──────────────────────────────────── */
-body.home .wecar-step--visible {
+body.home .wecar-steps__cta a,
+body.home .wecar-steps__cta .elementor-button {
+  display: inline-block;
+  background: var(--wecar-purple, #5E3BE0);
+  color: #FFFFFF;
+  border-radius: var(--wecar-radius-full, 9999px);
+  padding: var(--wecar-space-3, 12px) var(--wecar-space-8, 32px);
+  font-family: var(--wecar-font-body);
+  font-weight: var(--wecar-weight-bold);
+  font-size: var(--wecar-text-base, 16px);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+body.home .wecar-steps__cta a:hover,
+body.home .wecar-steps__cta .elementor-button:hover {
+  background: var(--wecar-purple-dark, #4C1D95);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   4-FRAME ANIMATION STATE CLASSES
+   JS adds .wecar-steps--frame-{N} to .wecar-steps wrapper.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Frame 1: title only, line fill 0 */
+body.home .wecar-steps--frame-1 {
+  --wecar-line-fill-scale: 0;
+}
+
+/* Frame 2: step 1 visible, circle 1 lit */
+body.home .wecar-steps--frame-2 {
+  --wecar-line-fill-scale: 0;
+}
+
+body.home .wecar-steps--frame-2 .wecar-steps__circle--1 {
+  background: var(--wecar-step-1);
+  color: #FFFFFF;
+}
+
+body.home .wecar-steps--frame-2 .wecar-steps__card--1 {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ── Reduced motion: skip animation ────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  body.home .wecar-step--hidden {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+/* Frame 3: steps 1+2 visible, circles 1-2 lit, line ~50% filled */
+body.home .wecar-steps--frame-3 {
+  --wecar-line-fill-scale: 0.5;
 }
 
-/* ── Mobile ────────────────────────────────────────────────────── */
+body.home .wecar-steps--frame-3 .wecar-steps__circle--1 {
+  background: var(--wecar-step-1);
+  color: #FFFFFF;
+}
+
+body.home .wecar-steps--frame-3 .wecar-steps__circle--2 {
+  background: var(--wecar-step-2);
+  color: #FFFFFF;
+}
+
+body.home .wecar-steps--frame-3 .wecar-steps__card--1,
+body.home .wecar-steps--frame-3 .wecar-steps__card--2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Frame 4: all steps visible, all circles lit, line 100%, CTA visible */
+body.home .wecar-steps--frame-4 {
+  --wecar-line-fill-scale: 1;
+}
+
+body.home .wecar-steps--frame-4 .wecar-steps__circle--1 {
+  background: var(--wecar-step-1);
+  color: #FFFFFF;
+}
+
+body.home .wecar-steps--frame-4 .wecar-steps__circle--2 {
+  background: var(--wecar-step-2);
+  color: #FFFFFF;
+}
+
+body.home .wecar-steps--frame-4 .wecar-steps__circle--3 {
+  background: var(--wecar-step-3);
+  color: #FFFFFF;
+}
+
+body.home .wecar-steps--frame-4 .wecar-steps__card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.home .wecar-steps--frame-4 .wecar-steps__cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NO-JS FALLBACK
+   If JS fails and no frame class is applied, show all content.
+   ═══════════════════════════════════════════════════════════════════ */
+body.home .wecar-steps:not([class*="wecar-steps--frame"]) .wecar-steps__card,
+body.home .wecar-steps:not([class*="wecar-steps--frame"]) .wecar-steps__cta {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  body.home .wecar-step {
+  body.home .wecar-steps__card {
     margin-bottom: var(--wecar-space-4);
     padding: var(--wecar-space-6) var(--wecar-space-4);
   }
 
-  body.home .wecar-step__number {
-    font-size: var(--wecar-text-xl);
+  body.home .wecar-steps__line {
+    width: 160px;
+    left: calc(50% - 80px);
+  }
+}
+
+/* ── Reduced Motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  body.home .wecar-steps__card,
+  body.home .wecar-steps__circle,
+  body.home .wecar-steps__line-fill,
+  body.home .wecar-steps__cta {
+    transition: none;
   }
 }
