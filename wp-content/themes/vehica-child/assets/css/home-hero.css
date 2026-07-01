@@ -48,6 +48,11 @@ body.home .wecar-hero__card > * {
   z-index: 1;
 }
 
+/* ── Hide placeholder icons (icon-box widgets without selected_icon render fa-star) */
+body.home .wecar-hero__card .elementor-icon {
+  display: none;
+}
+
 /* ── Card Title ────────────────────────────────────────────────── */
 body.home .wecar-hero__card .elementor-heading-title {
   font-family: var(--wecar-font-display);

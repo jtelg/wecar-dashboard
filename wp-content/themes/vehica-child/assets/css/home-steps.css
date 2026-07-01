@@ -1,123 +1,92 @@
 /* =============================================================================
-   Home — 3 Pasos Section
+   Home — 3 Pasos Section (Corrected 2026-07)
+   Matches Elementor JSON class names: wecar-steps, wecar-steps__card, etc.
    Scoped under body.home
    ============================================================================= */
 
-body.home .wecar-steps-section {
+/* ── Section Wrapper ────────────────────────────────────────────── */
+body.home .wecar-steps {
   text-align: center;
 }
 
-body.home .wecar-steps-section .elementor-heading-title {
+body.home .wecar-steps .elementor-heading-title {
   font-family: var(--wecar-font-display);
   font-weight: var(--wecar-weight-bold);
   font-size: var(--wecar-text-2xl);
   color: var(--wecar-text);
+  margin-bottom: var(--wecar-space-8);
 }
 
-body.home .wecar-steps-section .elementor-widget-text-editor {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-text-muted);
-  max-width: 600px;
-  margin: 0 auto var(--wecar-space-8);
-}
-
-/* ── Step Card ─────────────────────────────────────────────────── */
-body.home .wecar-step {
+/* ── Step Card ──────────────────────────────────────────────────── */
+body.home .wecar-steps__card {
   text-align: center;
-  padding: var(--wecar-space-8) var(--wecar-space-6);
+  padding: var(--wecar-space-6) var(--wecar-space-4);
   border-radius: var(--wecar-radius-lg);
-  background: var(--wecar-surface);
-  border: 1px solid var(--wecar-border);
+  background: var(--wecar-surface, #FFFFFF);
+  border: 1px solid var(--wecar-border, #E5E7EB);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
 }
 
-body.home .wecar-step:hover {
+body.home .wecar-steps__card:hover {
   transform: translateY(-4px);
   box-shadow: var(--wecar-shadow-md);
 }
 
-/* Step number */
-body.home .wecar-step__number {
-  font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-bold);
-  font-size: var(--wecar-text-2xl);
-  color: var(--wecar-purple);
-  margin-bottom: var(--wecar-space-2);
-  line-height: 1;
+/* ── Step Number (colored per step) ─────────────────────────────── */
+body.home .wecar-steps__card--1 .elementor-heading-title {
+  color: var(--wecar-step-1, var(--wecar-purple-light));
 }
 
-/* Step title */
-body.home .wecar-step__title {
-  font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-semibold);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-text);
-  margin-bottom: var(--wecar-space-2);
+body.home .wecar-steps__card--2 .elementor-heading-title {
+  color: var(--wecar-step-2, var(--wecar-blue));
 }
 
-/* Step description */
-body.home .wecar-step__desc {
+body.home .wecar-steps__card--3 .elementor-heading-title {
+  color: var(--wecar-step-3, var(--wecar-cyan-dark));
+}
+
+/* ── Step Body Text ─────────────────────────────────────────────── */
+body.home .wecar-steps__card .elementor-widget-text-editor {
   font-family: var(--wecar-font-body);
   font-size: var(--wecar-text-sm);
-  color: var(--wecar-text-muted);
+  color: var(--wecar-text-muted, #6B7280);
   line-height: var(--wecar-line-relaxed);
 }
 
-/* ── Connector Lines (desktop only) ────────────────────────────── */
-@media (min-width: 1025px) {
-  body.home .wecar-step {
-    position: relative;
-  }
-
-  body.home .wecar-step::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -50%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--wecar-purple-light), var(--wecar-cyan));
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  body.home .wecar-step:last-child::before {
-    display: none;
-  }
+/* ── CTA Button (pill, lavender) ────────────────────────────────── */
+body.home .wecar-steps__cta a,
+body.home .wecar-steps__cta .elementor-button {
+  display: inline-block;
+  background: var(--wecar-purple, #5E3BE0);
+  color: #FFFFFF;
+  border-radius: var(--wecar-radius-full, 9999px);
+  padding: var(--wecar-space-3, 12px) var(--wecar-space-8, 32px);
+  font-family: var(--wecar-font-body);
+  font-weight: var(--wecar-weight-bold);
+  font-size: var(--wecar-text-base, 16px);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* ── Animation: hidden state ───────────────────────────────────── */
-body.home .wecar-step--hidden {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+body.home .wecar-steps__cta a:hover,
+body.home .wecar-steps__cta .elementor-button:hover {
+  background: var(--wecar-purple-dark, #4C1D95);
+  transform: translateY(-2px);
 }
 
-/* ── Animation: visible state ──────────────────────────────────── */
-body.home .wecar-step--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── Reduced motion: skip animation ────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  body.home .wecar-step--hidden {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-/* ── Mobile ────────────────────────────────────────────────────── */
+/* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  body.home .wecar-step {
+  body.home .wecar-steps__card {
     margin-bottom: var(--wecar-space-4);
     padding: var(--wecar-space-6) var(--wecar-space-4);
   }
+}
 
-  body.home .wecar-step__number {
-    font-size: var(--wecar-text-xl);
+/* ── Reduced Motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  body.home .wecar-steps__card {
+    transition: none;
   }
 }
