@@ -81,8 +81,10 @@
   --wecar-step-3: var(--wecar-cyan-dark);
 
   /* ── Hero-specific ─────────────────────────────────────────────── */
-  --wecar-hero-title-size: clamp(2rem, 1.8rem + 2vw, 2.75rem);
-  --wecar-hero-body-size: clamp(1rem, 0.95rem + 0.4vw, 1.25rem);
+  --wecar-hero-title-size: clamp(2.2rem, 1.8rem + 2.5vw, 3rem);
+  --wecar-hero-body-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  --wecar-hero-min-height: 70vh;
+  --wecar-hero-radius: 32px;
 }
 
 /* ── Breakpoints (for reference, use in media queries) ──────────── */
