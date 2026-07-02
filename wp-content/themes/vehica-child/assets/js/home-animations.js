@@ -1,14 +1,14 @@
 /**
- * WeCar Home Hero — Accordion Toggle (Figma Exact 2026-07)
- * ==========================================================
- * Figma hero component has 3 states:
- *   default: both cards equal (598px each)
- *   step-2:  left card expanded (976px), right collapsed (220px)
- *   step-3:  right card expanded (976px), left collapsed (220px)
+ * WeCar Home Hero — Horizontal Accordion (Click)
+ * ==============================================
+ * Figma hero component (137:3003) has 3 states:
+ *   step-1: both cards equal (50/50)
+ *   step-2: left card expanded, right collapsed
+ *   step-3: right card expanded, left collapsed
  *
- * Clicking a card toggles: default → expanded → default
- * Clicking the other card switches the expanded side.
- * ==========================================================
+ * Click a card to expand it (collapses the other).
+ * Click the expanded card again to reset both to equal.
+ * ==============================================
  */
 
 (function () {
@@ -16,35 +16,32 @@
 
   if (!document.body.classList.contains('home')) return;
 
-  var container = document.querySelector('#wecar-hero .elementor-container');
-  if (!container) return;
-
   var leftCol = document.querySelector('#wecar-hero .elementor-column[data-id="h02c001"]');
   var rightCol = document.querySelector('#wecar-hero .elementor-column[data-id="h02c002"]');
   if (!leftCol || !rightCol) return;
 
-  var STATE_CLASS = 'wecar-hero__column--active';
-  var COLLAPSED_CLASS = 'wecar-hero__column--collapsed';
+  var ACTIVE = 'wecar-hero__column--active';
+  var COLLAPSED = 'wecar-hero__column--collapsed';
 
   function reset() {
-    leftCol.classList.remove(STATE_CLASS, COLLAPSED_CLASS);
-    rightCol.classList.remove(STATE_CLASS, COLLAPSED_CLASS);
+    leftCol.classList.remove(ACTIVE, COLLAPSED);
+    rightCol.classList.remove(ACTIVE, COLLAPSED);
   }
 
   function expandLeft() {
     reset();
-    leftCol.classList.add(STATE_CLASS);
-    rightCol.classList.add(COLLAPSED_CLASS);
+    leftCol.classList.add(ACTIVE);
+    rightCol.classList.add(COLLAPSED);
   }
 
   function expandRight() {
     reset();
-    rightCol.classList.add(STATE_CLASS);
-    leftCol.classList.add(COLLAPSED_CLASS);
+    rightCol.classList.add(ACTIVE);
+    leftCol.classList.add(COLLAPSED);
   }
 
   leftCol.addEventListener('click', function () {
-    if (leftCol.classList.contains(STATE_CLASS)) {
+    if (leftCol.classList.contains(ACTIVE)) {
       reset();
     } else {
       expandLeft();
@@ -52,7 +49,7 @@
   });
 
   rightCol.addEventListener('click', function () {
-    if (rightCol.classList.contains(STATE_CLASS)) {
+    if (rightCol.classList.contains(ACTIVE)) {
       reset();
     } else {
       expandRight();
