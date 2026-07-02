@@ -75,15 +75,15 @@
   --wecar-shadow-hover: 0 20px 40px rgba(94, 59, 224, 0.18);
 
   /* ── Home-specific tokens ──────────────────────────────────────── */
-  --wecar-wavy-opacity: 0.08;
+  --wecar-wavy-opacity: 0.12;
   --wecar-step-1: var(--wecar-purple-light);
   --wecar-step-2: var(--wecar-blue);
   --wecar-step-3: var(--wecar-cyan-dark);
 
   /* ── Hero-specific ─────────────────────────────────────────────── */
-  --wecar-hero-title-size: clamp(2.2rem, 1.8rem + 2.5vw, 3rem);
-  --wecar-hero-body-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
-  --wecar-hero-min-height: 70vh;
+  --wecar-hero-title-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  --wecar-hero-body-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+  --wecar-hero-min-height: clamp(380px, 52vh, 580px);
   --wecar-hero-radius: 32px;
 }
 

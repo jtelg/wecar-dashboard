@@ -8,7 +8,13 @@
 /* ── Section Wrapper — less horizontal margin ──────────────────── */
 body.home #wecar-hero .elementor-container {
   max-width: 100%;
-  gap: var(--wecar-space-6);
+  gap: 28px;
+}
+
+/* Reduce section horizontal padding so cards sit closer together */
+body.home #wecar-hero {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 body.home #wecar-hero .elementor-row,
@@ -22,8 +28,8 @@ body.home .wecar-hero__card {
   position: relative;
   overflow: hidden;
   border-radius: 32px;
-  min-height: 70vh;
-  padding: var(--wecar-space-20, 5rem) var(--wecar-space-12, 3rem);
+  min-height: clamp(380px, 52vh, 580px);
+  padding: 3.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -47,7 +53,7 @@ body.home #wecar-hero .elementor-column .elementor-widget-wrap {
 
 /* ── Left Card: white → light lavender gradient ────────────────── */
 body.home .wecar-hero__card--left {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F5F3FF 100%);
+  background: linear-gradient(135deg, #f0edff 0%, #f5f3ff 50%, #faf9ff 100%);
   color: var(--wecar-text);
 }
 
@@ -67,24 +73,29 @@ body.home .wecar-hero__card--right .elementor-widget-text-editor {
   color: #FFFFFF;
 }
 
-/* ── Texture Overlay (full card, very subtle) ──────────────────── */
+/* ── Texture Overlay (per-card opacity & position) ──────────────── */
 body.home .wecar-hero__card::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image: url('../images/texture.svg');
-  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.06;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Right card texture — lighter/white-tinted for readability on dark bg */
+/* Left card — visible wavy in bottom-right corner */
+body.home .wecar-hero__card--left::before {
+  opacity: 0.12;
+  background-position: bottom right;
+  background-size: 80% auto;
+}
+
+/* Right card — visible wavy across whole card */
 body.home .wecar-hero__card--right::before {
-  filter: brightness(8) saturate(0);
-  opacity: 0.08;
+  opacity: 0.15;
+  background-position: center;
+  background-size: cover;
 }
 
 /* ── Ensure content is above texture ───────────────────────────── */
@@ -96,24 +107,29 @@ body.home .wecar-hero__card .elementor-widget-wrap {
 /* ── Card Title ────────────────────────────────────────────────── */
 body.home .wecar-hero__card .elementor-heading-title {
   font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-bold);
-  font-size: var(--wecar-hero-title-size);
-  line-height: var(--wecar-line-tight);
+  font-weight: 800;
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  color: #1a1a2e;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  margin-bottom: var(--wecar-space-4);
+  margin-bottom: 1rem;
+}
+
+body.home .wecar-hero__card--right .elementor-heading-title {
+  color: #ffffff;
 }
 
 /* ── Card Body ─────────────────────────────────────────────────── */
 body.home .wecar-hero__card .elementor-widget-text-editor {
   font-family: var(--wecar-font-body);
-  font-size: var(--wecar-hero-body-size);
-  line-height: var(--wecar-line-relaxed);
-  opacity: 0.9;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+  color: #2d2d3a;
+  line-height: 1.5;
   max-width: 480px;
 }
 
 body.home .wecar-hero__card--right .elementor-widget-text-editor {
-  opacity: 0.92;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* ── Hide any lingering icon/button widgets ────────────────────── */
@@ -147,9 +163,13 @@ body.home .wecar-hero__card--right:hover {
   }
 
   body.home .wecar-hero__card {
-    min-height: 50vh;
-    padding: var(--wecar-space-12, 3rem) var(--wecar-space-6, 1.5rem);
+    min-height: 40vh;
+    padding: 2.5rem 1.5rem;
     width: 100%;
+  }
+
+  body.home #wecar-hero .elementor-container {
+    gap: 16px;
   }
 
   body.home .wecar-hero__card .elementor-widget-text-editor {
@@ -160,7 +180,11 @@ body.home .wecar-hero__card--right:hover {
 /* ── Tablet ────────────────────────────────────────────────────── */
 @media (min-width: 768px) and (max-width: 1024px) {
   body.home .wecar-hero__card {
-    min-height: 50vh;
-    padding: var(--wecar-space-16, 4rem) var(--wecar-space-10, 2.5rem);
+    min-height: 45vh;
+    padding: 3rem 2rem;
+  }
+
+  body.home #wecar-hero .elementor-container {
+    gap: 20px;
   }
 }

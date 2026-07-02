@@ -23,21 +23,23 @@ body.home .wecar-home-header.elementor-sticky--active {
   padding-bottom: var(--wecar-space-2);
 }
 
-/* CTA Button */
-body.home .wecar-home-header .elementor-button {
-  background: var(--wecar-purple);
-  color: #fff;
-  border-radius: var(--wecar-radius-full);
-  padding: var(--wecar-space-2) var(--wecar-space-6);
+/* CTA Button — outline style matching mockup */
+body.home #wecar-header .elementor-widget-button .elementor-button {
+  border: 2px solid #7c3aed !important;
+  background: transparent !important;
+  color: #7c3aed !important;
+  border-radius: 999px !important;
+  padding: 8px 20px !important;
+  font-weight: 600;
   font-family: var(--wecar-font-body);
-  font-weight: var(--wecar-weight-semibold);
   font-size: var(--wecar-text-sm);
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-body.home .wecar-home-header .elementor-button:hover {
-  background: var(--wecar-purple-dark);
-  transform: translateY(-1px);
+body.home #wecar-header .elementor-widget-button .elementor-button:hover {
+  background: rgba(124, 58, 237, 0.08) !important;
+  border-color: #6d28d9 !important;
+  color: #6d28d9 !important;
 }
 
 /* Mobile hamburger */
