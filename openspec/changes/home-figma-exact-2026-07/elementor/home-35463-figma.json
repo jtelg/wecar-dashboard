@@ -347,9 +347,10 @@
             "widgetType": "heading",
             "settings": {
               "title": "Vend\u00c3\u00a9 tu auto al mejor precio. Usalo hasta el \u00c3\u00baltimo d\u00c3\u00ada",
-              "align": "center",
+              "align": "left",
               "header_size": "h2",
-              "title_color": "#0F172A"
+              "title_color": "#0F172A",
+              "_css_classes": "wecar-steps__title"
             }
           }
         ]
@@ -371,7 +372,7 @@
               "align": "center",
               "header_size": "h3",
               "title_color": "#7B5CE8",
-              "_css_classes": "wecar-steps__card wecar-steps__card--1"
+              "_css_classes": "wecar-steps__badge wecar-steps__badge--1"
             }
           },
           {
@@ -414,7 +415,7 @@
               "align": "center",
               "header_size": "h3",
               "title_color": "#2563EB",
-              "_css_classes": "wecar-steps__card wecar-steps__card--2"
+              "_css_classes": "wecar-steps__badge wecar-steps__badge--2"
             }
           },
           {
@@ -457,7 +458,7 @@
               "align": "center",
               "header_size": "h3",
               "title_color": "#06B6D4",
-              "_css_classes": "wecar-steps__card wecar-steps__card--3"
+              "_css_classes": "wecar-steps__badge wecar-steps__badge--3"
             }
           },
           {
