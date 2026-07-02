@@ -1,171 +1,122 @@
-/* =============================================================================
-   Home — Vehicle Carousel Section
-   Scoped under body.home
-   ============================================================================= */
-
-/* ── Carousel Grid ─────────────────────────────────────────────── */
-body.home .wecar-carousel {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--wecar-space-6);
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-/* ── Vehicle Card ──────────────────────────────────────────────── */
-body.home .wecar-vehicle-card {
-  background: var(--wecar-bg);
-  border: 1px solid var(--wecar-border);
-  border-radius: var(--wecar-radius-lg);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-body.home .wecar-vehicle-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--wecar-shadow-lg);
-}
-
-/* Card image */
-body.home .wecar-vehicle-card__image-wrap {
+/* ── Home Carousel (Figma Exact 2026-07) ──────────────────── */
+body.home .wecar-carousel-section {
+  background: linear-gradient(180deg, #9949FF 0%, #0E6FD1 100%);
   position: relative;
-  width: 100%;
-  padding-top: 66.67%; /* 3:2 aspect ratio */
   overflow: hidden;
-  background: var(--wecar-surface);
 }
 
-body.home .wecar-vehicle-card__image {
+/* Corner radial textures */
+body.home .wecar-carousel-section::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
+  top: 0; left: 0;
+  width: 669px; height: 316px;
+  background: radial-gradient(circle at 99% 100%, rgba(255,255,255,0.1) 0%, rgba(153,73,255,0) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-body.home .wecar-vehicle-card:hover .wecar-vehicle-card__image {
-  transform: scale(1.05);
+body.home .wecar-carousel-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 669px; height: 316px;
+  background: radial-gradient(circle at 99% 100%, rgba(255,255,255,0.1) 0%, rgba(153,73,255,0) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Card body */
-body.home .wecar-vehicle-card__body {
-  padding: var(--wecar-space-4);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--wecar-space-1);
-}
+body.home .wecar-carousel-section > * { position: relative; z-index: 1; }
 
-body.home .wecar-vehicle-card__title {
+/* Header title left-aligned */
+body.home .wecar-carousel__header .elementor-heading-title {
+  text-align: left;
   font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-semibold);
-  font-size: var(--wecar-text-base);
-  color: var(--wecar-text);
-  margin: 0;
-  line-height: var(--wecar-line-tight);
+  font-size: 38px;
+  line-height: 44px;
+  color: #FFFFFF;
 }
 
-body.home .wecar-vehicle-card__version {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-sm);
-  color: var(--wecar-text-muted);
-  margin: 0;
-}
-
-body.home .wecar-vehicle-card__price {
+/* Ver todos link */
+body.home .wecar-carousel__link {
+  color: #FFFFFF;
+  text-decoration: none;
   font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-bold);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-purple);
-  margin: var(--wecar-space-2) 0;
+  font-size: 16px;
 }
 
-/* Tags row */
-body.home .wecar-vehicle-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--wecar-space-2);
-  margin-top: auto;
+body.home .wecar-carousel__link::after { content: ' →'; }
+
+/* Vehicle card gradient border */
+body.home .wecar-vehicle-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 24px;
+  overflow: hidden;
 }
 
+body.home .wecar-vehicle-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(180deg, #F9F9F9 0%, #CBCBCB 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Chip tags */
 body.home .wecar-vehicle-card__tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 10px;
   font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-xs);
-  font-weight: var(--wecar-weight-semibold);
-  padding: var(--wecar-space-1) var(--wecar-space-3);
-  border-radius: var(--wecar-radius-full);
-  background: var(--wecar-surface);
-  color: var(--wecar-text-muted);
-  border: 1px solid var(--wecar-border);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+body.home .wecar-vehicle-card__tag-icon {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
 }
 
 body.home .wecar-vehicle-card__tag--km {
-  background: var(--wecar-purple-light);
-  color: #fff;
-  border-color: var(--wecar-purple-light);
+  background: #E7F1FA;
+  color: #0F4C89;
 }
 
-/* ── Empty State ───────────────────────────────────────────────── */
-body.home .wecar-carousel--empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--wecar-space-16) var(--wecar-space-4);
-  text-align: center;
-  background: var(--wecar-surface);
-  border-radius: var(--wecar-radius-lg);
-  border: 2px dashed var(--wecar-border);
+body.home .wecar-vehicle-card__tag--year {
+  background: #E7F8FA;
+  color: #0F7789;
 }
 
-body.home .wecar-carousel__empty-text {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-text-muted);
-  margin-bottom: var(--wecar-space-6);
+body.home .wecar-vehicle-card__tag--transmission {
+  background: #F5EDFF;
+  color: #7B3DCB;
 }
 
-body.home .wecar-carousel__empty-cta {
-  display: inline-block;
-  font-family: var(--wecar-font-body);
-  font-weight: var(--wecar-weight-semibold);
-  padding: var(--wecar-space-3) var(--wecar-space-8);
-  background: var(--wecar-purple);
-  color: #fff;
-  border-radius: var(--wecar-radius-full);
-  text-decoration: none;
-  transition: background 0.2s ease;
+/* Bottom CTA pill */
+body.home .wecar-carousel__cta .elementor-button {
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  color: var(--wecar-figma-purple);
+  border-radius: 16px;
+  height: 44px;
+  padding: 11px 24px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
 }
 
-body.home .wecar-carousel__empty-cta:hover {
-  background: var(--wecar-purple-dark);
-  color: #fff;
-}
-
-/* ── Mobile ────────────────────────────────────────────────────── */
-@media (max-width: 767px) {
-  body.home .wecar-carousel {
-    grid-template-columns: 1fr;
-    gap: var(--wecar-space-4);
-  }
-}
-
-/* ── Tablet ────────────────────────────────────────────────────── */
-@media (min-width: 768px) and (max-width: 1024px) {
-  body.home .wecar-carousel {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ── Desktop ───────────────────────────────────────────────────── */
-@media (min-width: 1025px) {
-  body.home .wecar-carousel {
-    grid-template-columns: repeat(3, 1fr);
-  }
+body.home .wecar-carousel__cta .elementor-button:hover {
+  box-shadow: 0 2px 8px rgba(255,255,255,0.3);
 }

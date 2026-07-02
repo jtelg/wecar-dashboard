@@ -532,12 +532,12 @@
     "settings": {
       "stretch_section": "section-stretched",
       "background_background": "gradient",
-      "background_gradient_first_color": "#5E3BE0",
-      "background_gradient_second_color": "#2563EB",
+      "background_gradient_first_color": "#9949FF",
+      "background_gradient_second_color": "#0E6FD1",
       "background_gradient_type": "linear",
       "background_gradient_angle": {
         "unit": "deg",
-        "size": 135
+        "size": 180
       },
       "padding": {
         "unit": "px",
