@@ -117,16 +117,120 @@ body.home .wecar-hero__card .elementor-button:hover {
   filter: brightness(0.92);
 }
 
+/* ── Accordion: column width transitions ───────────────────── */
+body.home #wecar-hero .elementor-column[data-id="h02c001"],
+body.home #wecar-hero .elementor-column[data-id="h02c002"] {
+  width: auto !important;
+  flex: 1 1 598px !important;
+  max-width: 598px;
+  min-width: 0;
+  transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+/* Active/expanded column */
+body.home #wecar-hero .wecar-hero__column--active {
+  flex: 1 1 976px !important;
+  max-width: 976px !important;
+}
+
+/* Collapsed column */
+body.home #wecar-hero .wecar-hero__column--collapsed {
+  flex: 0 0 220px !important;
+  max-width: 220px !important;
+  min-width: 220px !important;
+}
+
+/* Collapsed: hide content inside card */
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card .elementor-widget-text-editor,
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__image,
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__cta,
+body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge-wrapper {
+  display: none;
+}
+
+/* ── Tab labels "Comprá" / "Vendé" ──────────────────────────── */
+body.home #wecar-hero .elementor-column[data-id="h02c001"]::before {
+  content: "Comprá";
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--wecar-figma-purple);
+  z-index: 5;
+  pointer-events: none;
+  text-transform: none;
+}
+
+body.home #wecar-hero .elementor-column[data-id="h02c002"]::before {
+  content: "Vendé";
+  position: absolute;
+  top: 24px;
+  right: 40px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--wecar-figma-purple);
+  z-index: 5;
+  pointer-events: none;
+  text-transform: none;
+}
+
+/* Collapsed card keeps the label at its original top position */
+
 /* Card gap */
 body.home .elementor-section[data-id="h02a001"] .elementor-container {
   gap: 20px;
 }
 
-/* Mobile stack */
+/* Mobile: stack vertically, no accordion */
 @media (max-width: 768px) {
-  body.home .wecar-hero__card { min-height: auto; padding: 24px; }
-  body.home .wecar-hero__card .elementor-heading-title { font-size: 28px; line-height: 36px; }
-  body.home .wecar-hero__card .elementor-widget-text-editor { font-size: 16px; line-height: 24px; }
+  body.home #wecar-hero .elementor-column[data-id="h02c001"],
+  body.home #wecar-hero .elementor-column[data-id="h02c002"] {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  body.home .wecar-hero__card {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  body.home .wecar-hero__card .elementor-heading-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  body.home .wecar-hero__card .elementor-widget-text-editor {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
   body.home .wecar-hero__card__image { display: none; }
   body.home .wecar-hero__card .elementor-button { font-size: 14px; height: 38px; padding: 8px 12px; }
+
+  /* Show all content on mobile */
+  body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card .elementor-widget-text-editor,
+  body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__image,
+  body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__cta,
+  body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title {
+    opacity: 1;
+  }
+
+  body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge-wrapper {
+    display: block;
+  }
+
+  body.home #wecar-hero .elementor-column::before {
+    display: none;
+  }
 }
