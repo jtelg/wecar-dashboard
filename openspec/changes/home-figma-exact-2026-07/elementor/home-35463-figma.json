@@ -693,19 +693,10 @@
             "widgetType": "heading",
             "settings": {
               "title": "Eleg\u00c3\u00ad WeCar",
-              "align": "center",
+              "align": "left",
               "header_size": "h2",
-              "title_color": "#0F172A"
-            }
-          },
-          {
-            "id": "h05w002",
-            "elType": "widget",
-            "widgetType": "text-editor",
-            "settings": {
-              "editor": "<p>Descubr\u00c3\u00ad por qu\u00c3\u00a9 somos la mejor opci\u00c3\u00b3n para comprar o vender tu auto.</p>",
-              "align": "center",
-              "text_color": "#64748B"
+              "title_color": "#0F172A",
+              "_css_classes": "wecar-features__title"
             }
           }
         ]
@@ -801,7 +792,7 @@
               "title_color": "#FFFFFF",
               "align": "left",
               "title_size": "h3",
-              "_css_classes": "wecar-features__card wecar-features__card--teal"
+              "_css_classes": "wecar-features__card wecar-features__card--cyan"
             }
           }
         ]
@@ -847,9 +838,10 @@
             "widgetType": "heading",
             "settings": {
               "title": "Respaldado por grandes marcas",
-              "align": "center",
+              "align": "left",
               "header_size": "h2",
-              "title_color": "#0F172A"
+              "title_color": "#0F172A",
+              "_css_classes": "wecar-partners__title"
             }
           }
         ]
@@ -868,18 +860,17 @@
             "widgetType": "image",
             "settings": {
               "image": {
-                "url": "",
+                "url": "/wp-content/themes/vehica-child/assets/images/partners/lg-multicars.svg",
                 "id": "",
-                "alt": "Multicars"
+                "size": "full"
               },
               "align": "center",
               "width": {
                 "unit": "%",
                 "size": 80
               },
-              "_css_classes": "wecar-partner-placeholder",
+              "_css_classes": "",
               "_element_id": "",
-              "caption": "Multicars",
               "caption_text_color": "#64748B"
             }
           }
@@ -899,17 +890,16 @@
             "widgetType": "image",
             "settings": {
               "image": {
-                "url": "",
+                "url": "/wp-content/themes/vehica-child/assets/images/partners/lg-leparc-peugeot.svg",
                 "id": "",
-                "alt": "Le Parc Peugeot"
+                "size": "full"
               },
               "align": "center",
               "width": {
                 "unit": "%",
                 "size": 80
               },
-              "_css_classes": "wecar-partner-placeholder",
-              "caption": "Le Parc Peugeot",
+              "_css_classes": "",
               "caption_text_color": "#64748B"
             }
           }
@@ -929,17 +919,16 @@
             "widgetType": "image",
             "settings": {
               "image": {
-                "url": "",
+                "url": "/wp-content/themes/vehica-child/assets/images/partners/lg-leparc-citroen.svg",
                 "id": "",
-                "alt": "Le Parc Citro\u00c3\u00abn"
+                "size": "full"
               },
               "align": "center",
               "width": {
                 "unit": "%",
                 "size": 80
               },
-              "_css_classes": "wecar-partner-placeholder",
-              "caption": "Le Parc Citro\u00c3\u00abn",
+              "_css_classes": "",
               "caption_text_color": "#64748B"
             }
           }
