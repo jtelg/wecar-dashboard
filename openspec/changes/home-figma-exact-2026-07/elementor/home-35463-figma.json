@@ -129,9 +129,20 @@
         "elType": "column",
         "settings": {
           "_column_size": 50,
-          "_inline_size": null
+          "_inline_size": null,
+          "_css_classes": "wecar-hero__card wecar-hero__card--left"
         },
         "elements": [
+          {
+            "id": "h02w003",
+            "elType": "widget",
+            "settings": {
+              "editor": "<span class=\"wecar-hero__card__badge\">Para compradores</span>",
+              "_css_classes": "wecar-hero__card__badge-wrapper"
+            },
+            "elements": [],
+            "widgetType": "text-editor"
+          },
           {
             "id": "h02w001",
             "elType": "widget",
@@ -168,6 +179,42 @@
               },
               "_css_classes": "wecar-hero__card wecar-hero__card--left"
             }
+          },
+          {
+            "id": "h02w006",
+            "elType": "widget",
+            "settings": {
+              "image": {
+                "url": "/wp-content/themes/vehica-child/assets/images/hero-car.png",
+                "id": "",
+                "size": "full"
+              },
+              "width": {
+                "unit": "%",
+                "size": 100
+              },
+              "_css_classes": "wecar-hero__card__image"
+            },
+            "elements": [],
+            "widgetType": "image"
+          },
+          {
+            "id": "h02w007",
+            "elType": "widget",
+            "settings": {
+              "text": "Quiero ver los modelos disponibles",
+              "link": {
+                "url": "/autos/",
+                "is_external": "",
+                "nofollow": "",
+                "custom_attributes": ""
+              },
+              "button_size": "sm",
+              "align": "left",
+              "_css_classes": "wecar-hero__card__cta"
+            },
+            "elements": [],
+            "widgetType": "button"
           }
         ]
       },
@@ -176,9 +223,20 @@
         "elType": "column",
         "settings": {
           "_column_size": 50,
-          "_inline_size": null
+          "_inline_size": null,
+          "_css_classes": "wecar-hero__card wecar-hero__card--right"
         },
         "elements": [
+          {
+            "id": "h02w008",
+            "elType": "widget",
+            "settings": {
+              "editor": "<span class=\"wecar-hero__card__badge\">Para vendedores</span>",
+              "_css_classes": "wecar-hero__card__badge-wrapper"
+            },
+            "elements": [],
+            "widgetType": "text-editor"
+          },
           {
             "id": "h02w002",
             "elType": "widget",
@@ -215,6 +273,42 @@
               },
               "_css_classes": "wecar-hero__card wecar-hero__card--right"
             }
+          },
+          {
+            "id": "h02w010",
+            "elType": "widget",
+            "settings": {
+              "image": {
+                "url": "/wp-content/themes/vehica-child/assets/images/hero-car.png",
+                "id": "",
+                "size": "full"
+              },
+              "width": {
+                "unit": "%",
+                "size": 100
+              },
+              "_css_classes": "wecar-hero__card__image"
+            },
+            "elements": [],
+            "widgetType": "image"
+          },
+          {
+            "id": "h02w011",
+            "elType": "widget",
+            "settings": {
+              "text": "Quiero vender mi auto",
+              "link": {
+                "url": "/vende-tu-auto/",
+                "is_external": "",
+                "nofollow": "",
+                "custom_attributes": ""
+              },
+              "button_size": "sm",
+              "align": "left",
+              "_css_classes": "wecar-hero__card__cta"
+            },
+            "elements": [],
+            "widgetType": "button"
           }
         ]
       }
