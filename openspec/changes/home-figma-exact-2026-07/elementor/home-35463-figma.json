@@ -987,25 +987,18 @@
                 "unit": "%",
                 "size": 40
               },
-              "align": "left"
+              "align": "left",
+              "_css_classes": "wecar-footer__logo"
             }
           },
           {
-            "id": "h07w002",
+            "id": "h07w004",
             "elType": "widget",
             "widgetType": "text-editor",
             "settings": {
-              "editor": "<p>WeCar es la plataforma l\u00c3\u00adder en compra y venta de veh\u00c3\u00adculos usados y 0km. Con m\u00c3\u00a1s de 10 a\u00c3\u00b1os en el mercado, te ofrecemos la mejor experiencia para comprar o vender tu auto con total confianza y transparencia.</p>",
-              "text_color": "#94A3B8"
-            }
-          },
-          {
-            "id": "h07w003",
-            "elType": "widget",
-            "widgetType": "text-editor",
-            "settings": {
-              "editor": "<p><strong>Tel\u00c3\u00a9fono:</strong> <a class=\"wecar-footer__phone\" href=\"tel:+5493534413243\" style=\"color:#7B5CE8;text-decoration:none;\">+54 9 3534 41-3243</a></p>",
-              "text_color": "#64748B"
+              "editor": "2026 Custer. All rights reserved.",
+              "text_color": "#64748B",
+              "_css_classes": "wecar-footer__copyright"
             }
           }
         ]
@@ -1020,12 +1013,23 @@
         },
         "elements": [
           {
-            "id": "h07w004",
+            "id": "h07w002",
             "elType": "widget",
             "widgetType": "text-editor",
             "settings": {
-              "editor": "<p style=\"text-align: right;\">&copy; 2026 Custer. All rights reserved.</p>",
-              "text_color": "#64748B"
+              "editor": "<p>Una plataforma moderna y segura para la compra y venta de veh\u00edculos nuevos y usados.</p><p>Formamos parte de Grupo Le Parc.</p>",
+              "text_color": "#94A3B8",
+              "_css_classes": "wecar-footer__description"
+            }
+          },
+          {
+            "id": "h07w003",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<a href=\"tel:+5493534413243\" class=\"wecar-footer__phone\">+54 9 3534 41-3243</a>",
+              "text_color": "#64748B",
+              "_css_classes": "wecar-footer__phone"
             }
           }
         ]
