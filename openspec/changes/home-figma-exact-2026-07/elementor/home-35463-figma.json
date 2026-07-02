@@ -347,7 +347,7 @@
             "widgetType": "heading",
             "settings": {
               "title": "Vend\u00c3\u00a9 tu auto al mejor precio. Usalo hasta el \u00c3\u00baltimo d\u00c3\u00ada",
-              "align": "left",
+              "align": "center",
               "header_size": "h2",
               "title_color": "#0F172A",
               "_css_classes": "wecar-steps__title"
@@ -360,7 +360,8 @@
         "elType": "column",
         "settings": {
           "_column_size": 33,
-          "_inline_size": null
+          "_inline_size": null,
+          "_css_classes": "wecar-steps__card wecar-steps__card--1"
         },
         "elements": [
           {
@@ -403,7 +404,8 @@
         "elType": "column",
         "settings": {
           "_column_size": 33,
-          "_inline_size": null
+          "_inline_size": null,
+          "_css_classes": "wecar-steps__card wecar-steps__card--2"
         },
         "elements": [
           {
@@ -446,7 +448,8 @@
         "elType": "column",
         "settings": {
           "_column_size": 33,
-          "_inline_size": null
+          "_inline_size": null,
+          "_css_classes": "wecar-steps__card wecar-steps__card--3"
         },
         "elements": [
           {
@@ -693,7 +696,7 @@
             "widgetType": "heading",
             "settings": {
               "title": "Eleg\u00c3\u00ad WeCar",
-              "align": "left",
+              "align": "center",
               "header_size": "h2",
               "title_color": "#0F172A",
               "_css_classes": "wecar-features__title"
@@ -838,7 +841,7 @@
             "widgetType": "heading",
             "settings": {
               "title": "Respaldado por grandes marcas",
-              "align": "left",
+              "align": "center",
               "header_size": "h2",
               "title_color": "#0F172A",
               "_css_classes": "wecar-partners__title"
@@ -862,16 +865,13 @@
               "image": {
                 "url": "/wp-content/themes/vehica-child/assets/images/partners/lg-multicars.svg",
                 "id": "",
-                "size": "full"
+                "alt": "Multicars"
               },
               "align": "center",
               "width": {
                 "unit": "%",
                 "size": 80
-              },
-              "_css_classes": "",
-              "_element_id": "",
-              "caption_text_color": "#64748B"
+              }
             }
           }
         ]
@@ -892,15 +892,13 @@
               "image": {
                 "url": "/wp-content/themes/vehica-child/assets/images/partners/lg-leparc-peugeot.svg",
                 "id": "",
-                "size": "full"
+                "alt": "Le Parc Peugeot"
               },
               "align": "center",
               "width": {
                 "unit": "%",
                 "size": 80
-              },
-              "_css_classes": "",
-              "caption_text_color": "#64748B"
+              }
             }
           }
         ]
@@ -921,15 +919,13 @@
               "image": {
                 "url": "/wp-content/themes/vehica-child/assets/images/partners/lg-leparc-citroen.svg",
                 "id": "",
-                "size": "full"
+                "alt": "Le Parc Citro\u00c3\u00abn"
               },
               "align": "center",
               "width": {
                 "unit": "%",
                 "size": 80
-              },
-              "_css_classes": "",
-              "caption_text_color": "#64748B"
+              }
             }
           }
         ]

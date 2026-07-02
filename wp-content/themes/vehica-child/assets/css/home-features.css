@@ -5,7 +5,7 @@ body.home .wecar-features-section {
 }
 
 body.home .wecar-features__title .elementor-heading-title {
-  text-align: left;
+  text-align: left !important;
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 38px;

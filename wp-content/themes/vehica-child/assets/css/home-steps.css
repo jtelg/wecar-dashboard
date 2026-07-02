@@ -1,7 +1,7 @@
 /* ── Home Steps (Figma Exact 2026-07) ─────────────────────── */
 /* Section title */
 body.home .wecar-steps__title .elementor-heading-title {
-  text-align: left;
+  text-align: left !important;
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 38px;
@@ -78,6 +78,16 @@ body.home .wecar-steps__card .elementor-heading-title {
 body.home .wecar-steps__card--1 .elementor-heading-title { color: var(--wecar-figma-purple); }
 body.home .wecar-steps__card--2 .elementor-heading-title { color: var(--wecar-figma-blue); }
 body.home .wecar-steps__card--3 .elementor-heading-title { color: var(--wecar-figma-cyan); }
+
+/* Badge heading (override card heading defaults — must come after card heading rules) */
+body.home .wecar-steps__badge .elementor-heading-title {
+  font-family: var(--wecar-font-body);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 38px;
+  color: #FFFFFF;
+  text-align: center;
+}
 
 /* Step body text */
 body.home .wecar-steps__card .elementor-widget-text-editor {

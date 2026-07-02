@@ -1,6 +1,6 @@
 /* ── Home Partners — Respaldado (Figma Exact 2026-07) ─────── */
 body.home .wecar-partners__title .elementor-heading-title {
-  text-align: left;
+  text-align: left !important;
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 38px;
