@@ -7,8 +7,11 @@ body.home .wecar-hero__card {
   padding: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
+
+/* Hide placeholder star icons */
+body.home .wecar-hero__card .elementor-icon { display: none !important; }
 
 body.home .wecar-hero__card--left {
   background: linear-gradient(135deg, #F5EDFF 0%, #CAE0F5 100%);
@@ -30,11 +33,16 @@ body.home .wecar-hero__card::after {
 
 body.home .wecar-hero__card > * { position: relative; z-index: 1; }
 
-/* Badge */
-body.home .wecar-hero__card__badge {
+/* Badge — positioned inside the card, top area */
+body.home .wecar-hero__card__badge-wrapper {
   position: absolute;
-  top: -54px;
+  top: 24px;
   left: 40px;
+  z-index: 5;
+}
+
+body.home .wecar-hero__card__badge {
+  display: inline-block;
   padding: 8px 18px;
   border-radius: 20px;
   font-family: var(--wecar-font-display);
@@ -42,11 +50,10 @@ body.home .wecar-hero__card__badge {
   font-size: 16px;
   line-height: 20px;
   color: #FFFFFF;
-  z-index: 2;
 }
 
-body.home .wecar-hero__card--left .wecar-hero__card__badge { background: var(--wecar-figma-blue); top: -54px; }
-body.home .wecar-hero__card--right .wecar-hero__card__badge { background: var(--wecar-figma-purple); top: -64px; }
+body.home .wecar-hero__card--left .wecar-hero__card__badge { background: var(--wecar-figma-blue); }
+body.home .wecar-hero__card--right .wecar-hero__card__badge { background: var(--wecar-figma-purple); }
 
 /* Title */
 body.home .wecar-hero__card .elementor-heading-title {
@@ -151,7 +158,8 @@ body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title {
   transition: opacity 0.3s ease;
 }
 
-body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge-wrapper {
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge-wrapper,
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge {
   display: none;
 }
 
@@ -174,7 +182,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"]::before {
   content: "Vendé";
   position: absolute;
   top: 24px;
-  right: 40px;
+  left: 40px;
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 18px;
