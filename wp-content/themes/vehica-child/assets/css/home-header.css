@@ -1,63 +1,79 @@
-/* =============================================================================
-   Home — Header Section
-   Scoped under body.home
-   ============================================================================= */
-
-body.home .wecar-home-header,
-body.home .elementor-section.elementor-sticky--active {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--wecar-shadow-sm);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+/* ── Home Header (Figma Exact 2026-07) ──────────────────────── */
+body.home #wecar-header {
+  padding: 20px 148px !important;
+  background: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-body.home .wecar-home-header .elementor-widget-image img {
-  max-width: var(--wecar-header-logo-width, 140px);
+body.home #wecar-header .elementor-section {
+  background: transparent;
+}
+
+/* Nav — keep text-editor widget, style as flex row */
+body.home #wecar-header .wecar-home-header__nav .elementor-widget-container,
+body.home #wecar-header .wecar-home-header__nav p {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+body.home #wecar-header .wecar-home-header__nav a {
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--wecar-figma-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.home #wecar-header .wecar-home-header__nav a:hover {
+  color: var(--wecar-figma-purple);
+}
+
+/* CTA pill — lavender gradient */
+body.home #wecar-header .wecar-home-header__cta .elementor-button {
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%) !important;
+  color: var(--wecar-figma-purple) !important;
+  border-radius: 12px !important;
+  padding: 11px 14px !important;
+  height: 32px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.home #wecar-header .wecar-home-header__cta .elementor-button:hover {
+  box-shadow: 0 2px 8px rgba(153,73,255,0.2) !important;
+}
+
+body.home #wecar-header .wecar-home-header__cta .elementor-button-text {
+  color: var(--wecar-figma-purple);
+}
+
+/* Logo sizing */
+body.home #wecar-header .elementor-widget-image img {
+  width: 170px;
   height: auto;
 }
 
-/* Sticky offset adjustment */
-body.home .wecar-home-header.elementor-sticky--active {
-  padding-top: var(--wecar-space-2);
-  padding-bottom: var(--wecar-space-2);
-}
-
-/* CTA Button — outline style matching mockup */
-body.home #wecar-header .elementor-widget-button .elementor-button {
-  border: 2px solid #7c3aed !important;
-  background: transparent !important;
-  color: #7c3aed !important;
-  border-radius: 999px !important;
-  padding: 8px 20px !important;
-  font-weight: 600;
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-sm);
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-body.home #wecar-header .elementor-widget-button .elementor-button:hover {
-  background: rgba(124, 58, 237, 0.08) !important;
-  border-color: #6d28d9 !important;
-  color: #6d28d9 !important;
-}
-
-/* Mobile hamburger */
+/* Mobile */
 @media (max-width: 767px) {
-  body.home .wecar-home-header .elementor-widget-image img {
-    max-width: 100px;
+  body.home #wecar-header {
+    padding: 10px 20px !important;
   }
-
-  body.home .wecar-home-header .elementor-nav-menu--dropdown {
-    background: var(--wecar-bg);
-    box-shadow: var(--wecar-shadow-lg);
-    border-radius: var(--wecar-radius-md);
+  body.home #wecar-header .wecar-home-header__nav .elementor-widget-container,
+  body.home #wecar-header .wecar-home-header__nav p {
+    gap: 16px;
   }
-}
-
-/* Tablet adjustments */
-@media (min-width: 768px) and (max-width: 1024px) {
-  body.home .wecar-home-header .elementor-widget-image img {
-    max-width: 120px;
+  body.home #wecar-header .elementor-widget-image img {
+    width: 120px;
   }
 }
