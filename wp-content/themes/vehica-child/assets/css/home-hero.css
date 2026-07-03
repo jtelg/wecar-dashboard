@@ -92,30 +92,30 @@ body.home .wecar-hero__card--left .wecar-hero__card__badge { background: var(--w
 body.home .wecar-hero__card--right .wecar-hero__card__badge { background: var(--wecar-figma-purple); }
 
 /* ── Title ──────────────────────────────────────────────────── */
-body.home .wecar-hero__card .elementor-heading-title {
+body.home .wecar-hero__card .elementor-icon-box-title {
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 46px;
   line-height: 54px;
   color: var(--wecar-figma-text);
-  margin-top: auto;
-  margin-bottom: 16px;
+  margin: 0 0 16px;
 }
 
-body.home .wecar-hero__card--right .elementor-heading-title { color: #F9F9F9; }
+body.home .wecar-hero__card--right .elementor-icon-box-title,
+body.home .wecar-hero__card--right .elementor-icon-box-title a { color: #F9F9F9; }
 
 /* ── Body ──────────────────────────────────────────────────── */
-body.home .wecar-hero__card .elementor-widget-text-editor {
+body.home .wecar-hero__card .elementor-icon-box-description {
   font-family: var(--wecar-font-body);
   font-weight: 400;
   font-size: 22px;
   line-height: 30px;
   color: var(--wecar-figma-text-muted);
   max-width: 412px;
-  margin-bottom: 24px;
+  margin: 0 0 24px;
 }
 
-body.home .wecar-hero__card--right .elementor-widget-text-editor { color: #F9F9F9; }
+body.home .wecar-hero__card--right .elementor-icon-box-description { color: #F9F9F9; }
 
 /* ── CTA buttons (hidden by default, appears on click) ─────── */
 body.home .wecar-hero__card__cta {
