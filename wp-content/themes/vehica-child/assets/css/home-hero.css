@@ -52,12 +52,12 @@ body.home .wecar-hero__card--right::before { opacity: 0.1; }
 body.home .wecar-hero__card__image {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 50%;
+  transform: translateY(-50%);
   object-fit: contain;
   z-index: 1;
   pointer-events: none;
   opacity: 0;
-  transform: translateX(20px);
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -84,7 +84,7 @@ body.home .wecar-hero__card__badge {
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 18px;
   color: #FFFFFF;
 }
 
@@ -179,7 +179,7 @@ body.home #wecar-hero .wecar-hero__column--active {
 
 body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__image {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(-50%);
 }
 
 body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__badge-wrapper {
@@ -224,7 +224,8 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"]::after {
   transform: translate(-50%, -50%);
   font-family: var(--wecar-font-display);
   font-weight: 700;
-  font-size: 22px;
+  font-size: 38px;
+  line-height: 44px;
   z-index: 5;
   pointer-events: none;
   opacity: 0;
