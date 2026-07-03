@@ -1,8 +1,8 @@
 /* ── Home Hero — Horizontal Accordion (Figma Exact 2026-07)
-   3 states:
+   3 states (click to toggle):
      default    50% + 50%   — title, subtitle, texture (bottom-left)
-     hover left 75% + 25%   — badge, CTA, car image appear (fade in)
-     hover right 25% + 75%  — opposite side expands
+     active     75% + 25%   — badge, CTA, car image appear (fade in)
+     collapsed  25% + 75%   — centered "Comprá" or "Vendé" label
    ──────────────────────────────────────────────────────────────── */
 
 body.home .wecar-hero__card {
@@ -48,7 +48,7 @@ body.home .wecar-hero__card::before {
 
 body.home .wecar-hero__card--right::before { opacity: 0.1; }
 
-/* ── Car image (hidden by default, appears on hover) ────────── */
+/* ── Car image (hidden by default, appears on click) ────────── */
 body.home .wecar-hero__card__image {
   position: absolute;
   right: 0;
@@ -65,7 +65,7 @@ body.home .wecar-hero__card__image {
 body.home .wecar-hero__card--left .wecar-hero__card__image { width: 490px; height: 250px; }
 body.home .wecar-hero__card--right .wecar-hero__card__image { width: 530px; height: 270px; }
 
-/* ── Badge (hidden by default, appears on hover) ────────────── */
+/* ── Badge (hidden by default, appears on click) ────────────── */
 body.home .wecar-hero__card__badge-wrapper {
   position: absolute;
   top: 24px;
@@ -117,7 +117,7 @@ body.home .wecar-hero__card .elementor-widget-text-editor {
 
 body.home .wecar-hero__card--right .elementor-widget-text-editor { color: #F9F9F9; }
 
-/* ── CTA buttons (hidden by default, appears on hover) ─────── */
+/* ── CTA buttons (hidden by default, appears on click) ─────── */
 body.home .wecar-hero__card__cta {
   opacity: 0;
   transform: translateY(8px);
