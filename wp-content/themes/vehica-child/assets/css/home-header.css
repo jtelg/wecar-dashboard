@@ -1,27 +1,54 @@
-/* ── Home Header (Figma Exact 2026-07) ──────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME HEADER — Navigation Bar (Figma Exact 2026-07)
+   Structure: Logo (25%) | Nav links (50%) | CTA button (25%)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Section container ─────────────────────────────────────────────── */
 body.home #wecar-header {
   padding: 20px 148px !important;
-  background: #FFFFFF;
+  background: #FFFFFF !important;
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-body.home #wecar-header .elementor-section {
-  background: transparent;
+body.home #wecar-header .elementor-container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
-/* Nav — keep text-editor widget, style as flex row */
-body.home #wecar-header .wecar-home-header__nav .elementor-widget-container,
-body.home #wecar-header .wecar-home-header__nav p {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
+/* ── Logo column (left, 25%) ───────────────────────────────────────── */
+body.home #wecar-header .elementor-column[data-id="h01c001"] {
+  flex: 0 0 auto !important;
+  width: auto !important;
 }
 
-body.home #wecar-header .wecar-home-header__nav a {
+body.home #wecar-header .elementor-column[data-id="h01c001"] img {
+  width: 170px;
+  height: auto;
+  display: block;
+}
+
+/* ── Nav links column (center, 50%) ────────────────────────────────── */
+body.home #wecar-header .elementor-column[data-id="h01c002"] {
+  flex: 1 1 auto !important;
+  width: auto !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c002"] .elementor-widget-container,
+body.home #wecar-header .elementor-column[data-id="h01c002"] p {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 40px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c002"] a {
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 14px;
@@ -29,51 +56,60 @@ body.home #wecar-header .wecar-home-header__nav a {
   color: var(--wecar-figma-text);
   text-decoration: none;
   white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
-body.home #wecar-header .wecar-home-header__nav a:hover {
+body.home #wecar-header .elementor-column[data-id="h01c002"] a:hover {
   color: var(--wecar-figma-purple);
 }
 
-/* CTA pill — lavender gradient */
-body.home #wecar-header .wecar-home-header__cta .elementor-button {
+/* ── CTA button column (right, 25%) ────────────────────────────────── */
+body.home #wecar-header .elementor-column[data-id="h01c003"] {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  text-align: right !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button {
   background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%) !important;
   color: var(--wecar-figma-purple) !important;
   border-radius: 12px !important;
-  padding: 11px 14px !important;
-  height: 32px;
+  padding: 11px 28px !important;
+  height: auto !important;
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 14px;
   line-height: 18px;
   border: none !important;
   box-shadow: none !important;
+  display: inline-block !important;
+  transition: box-shadow 0.2s ease;
 }
 
-body.home #wecar-header .wecar-home-header__cta .elementor-button:hover {
+body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button:hover {
   box-shadow: 0 2px 8px rgba(153,73,255,0.2) !important;
 }
 
-body.home #wecar-header .wecar-home-header__cta .elementor-button-text {
-  color: var(--wecar-figma-purple);
+body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-text {
+  color: var(--wecar-figma-purple) !important;
 }
 
-/* Logo sizing */
-body.home #wecar-header .elementor-widget-image img {
-  width: 170px;
-  height: auto;
-}
-
-/* Mobile */
+/* ── Mobile ────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   body.home #wecar-header {
     padding: 10px 20px !important;
   }
-  body.home #wecar-header .wecar-home-header__nav .elementor-widget-container,
-  body.home #wecar-header .wecar-home-header__nav p {
-    gap: 16px;
+
+  body.home #wecar-header .elementor-container {
+    flex-wrap: wrap;
   }
-  body.home #wecar-header .elementor-widget-image img {
+
+  body.home #wecar-header .elementor-column[data-id="h01c002"] .elementor-widget-container,
+  body.home #wecar-header .elementor-column[data-id="h01c002"] p {
+    gap: 16px !important;
+  }
+
+  body.home #wecar-header .elementor-column[data-id="h01c001"] img {
     width: 120px;
   }
 }
