@@ -41,6 +41,7 @@
   }
 
   leftCol.addEventListener('click', function () {
+    // If already active, reset to default. Otherwise expand left.
     if (leftCol.classList.contains(ACTIVE)) {
       reset();
     } else {

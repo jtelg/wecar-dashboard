@@ -1,59 +1,113 @@
-/* ── Home Features — Elegí Wecar (Figma Exact 2026-07) ────── */
-body.home .wecar-features-section {
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME FEATURES — Elegí WeCar (Figma Exact 2026-07)
+   Node: 28:624 — 3 cards in a row with gradient backgrounds + icon + title
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body.home #wecar-features {
   background: radial-gradient(circle at 50% 101%, rgba(153,73,255,1) 0%, rgba(255,255,255,0) 100%);
   position: relative;
 }
 
-body.home .wecar-features__title .elementor-heading-title {
+/* ── Title ──────────────────────────────────────────────────────────── */
+body.home #wecar-features .wecar-features__title .elementor-heading-title {
   text-align: left !important;
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 38px;
   line-height: 44px;
   color: var(--wecar-figma-text);
+  margin-bottom: 40px;
 }
 
-/* Cards */
-body.home .wecar-features__card {
+/* ── Ensure 3 cards in a row ───────────────────────────────────────── */
+body.home #wecar-features .elementor-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+body.home #wecar-features .elementor-column[data-id="h05c002"],
+body.home #wecar-features .elementor-column[data-id="h05c003"],
+body.home #wecar-features .elementor-column[data-id="h05c004"] {
+  width: calc(33.333% - 14px) !important; /* account for 20px gap between cards */
+}
+
+/* ── Card widget (the actual card visual) ──────────────────────────── */
+body.home #wecar-features .wecar-features__card {
   padding: 28px;
   border-radius: 16px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid #FFFFFF;
   color: #FFFFFF;
   min-height: 200px;
+  box-sizing: border-box;
 }
 
-body.home .wecar-features__card--purple {
+/* Force icon + text side by side (Figma card layout is a ROW) */
+body.home #wecar-features .wecar-features__card .elementor-icon-box-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+body.home #wecar-features .wecar-features__card .elementor-icon-box-icon {
+  margin-bottom: 0 !important;  /* override Elementor default */
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Card backgrounds ──────────────────────────────────────────────── */
+body.home #wecar-features .wecar-features__card--purple {
   background: linear-gradient(136deg, #9949FF 0%, #6634A5 100%);
 }
 
-body.home .wecar-features__card--blue {
+body.home #wecar-features .wecar-features__card--blue {
   background: linear-gradient(136deg, #0E6FD1 0%, #0F5AA7 100%);
 }
 
-body.home .wecar-features__card--cyan {
+body.home #wecar-features .wecar-features__card--cyan {
   background: linear-gradient(136deg, #0EB5D1 0%, #0F91A7 100%);
 }
 
-/* Icon */
-body.home .wecar-features__card__icon {
+/* ── Card icon (42x42px, white) ───────────────────────────────────── */
+body.home #wecar-features .wecar-features__card .elementor-icon {
   width: 42px;
   height: 42px;
-  margin-bottom: 16px;
-  display: block;
+  font-size: 42px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body.home .wecar-features__card__icon img,
-body.home .wecar-features__card__icon svg {
-  width: 42px;
-  height: 42px;
-  filter: brightness(0) invert(1);
+body.home #wecar-features .wecar-features__card .elementor-icon i {
+  color: #FFFFFF;
 }
 
-/* Card title */
-body.home .wecar-features__card .elementor-heading-title {
+/* ── Card title ────────────────────────────────────────────────────── */
+body.home #wecar-features .wecar-features__card .elementor-icon-box-title {
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
   color: #FFFFFF;
+  margin: 0;
+}
+
+body.home #wecar-features .wecar-features__card .elementor-icon-box-title span {
+  color: #FFFFFF;
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body.home #wecar-features .elementor-column[data-id="h05c002"],
+  body.home #wecar-features .elementor-column[data-id="h05c003"],
+  body.home #wecar-features .elementor-column[data-id="h05c004"] {
+    width: 100% !important;
+  }
+
+  body.home #wecar-features .wecar-features__title .elementor-heading-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
 }

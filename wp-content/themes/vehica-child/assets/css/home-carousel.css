@@ -1,12 +1,17 @@
-/* ── Home Carousel (Figma Exact 2026-07) ──────────────────── */
-body.home .wecar-carousel-section {
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME CAROUSEL — Vehicle Cards (Figma Exact 2026-07)
+   Node: 25:237 — Horizontal scrollable row of 380px vehicle cards
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Section background ───────────────────────────────────────────── */
+body.home #wecar-carousel {
   background: linear-gradient(180deg, #9949FF 0%, #0E6FD1 100%);
   position: relative;
   overflow: hidden;
 }
 
 /* Corner radial textures */
-body.home .wecar-carousel-section::before {
+body.home #wecar-carousel::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
@@ -16,61 +21,163 @@ body.home .wecar-carousel-section::before {
   z-index: 0;
 }
 
-body.home .wecar-carousel-section::after {
+body.home #wecar-carousel::after {
   content: '';
   position: absolute;
   bottom: 0; right: 0;
   width: 669px; height: 316px;
-  background: radial-gradient(circle at 99% 100%, rgba(255,255,255,0.1) 0%, rgba(153,73,255,0) 100%);
+  background: radial-gradient(circle at 99% 100%, rgba(255,255,255,0.1) 0%, rgba(14,181,209,0) 100%);
   pointer-events: none;
   z-index: 0;
 }
 
-body.home .wecar-carousel-section > * { position: relative; z-index: 1; }
+body.home #wecar-carousel > .elementor-container { position: relative; z-index: 1; }
 
-/* Header title left-aligned */
-body.home .wecar-carousel__header .elementor-heading-title {
+/* ── Header title ──────────────────────────────────────────────────── */
+body.home #wecar-carousel .elementor-heading-title {
   text-align: left;
   font-family: var(--wecar-font-display);
+  font-weight: 700;
   font-size: 38px;
   line-height: 44px;
   color: #FFFFFF;
 }
 
-/* Ver todos link */
-body.home .wecar-carousel__link {
+/* ── "Ver todos" link ──────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-carousel__link a {
   color: #FFFFFF;
   text-decoration: none;
   font-family: var(--wecar-font-display);
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
 }
 
-body.home .wecar-carousel__link::after { content: ' →'; }
+body.home #wecar-carousel .wecar-carousel__link a::after { content: ' →'; }
 
-/* Vehicle card gradient border */
-body.home .wecar-vehicle-card {
+/* ═══════════════════════════════════════════════════════════════════════
+   CAROUSEL — Horizontal Scroll Container
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* The shortcode wrapper */
+body.home #wecar-carousel .wecar-carousel {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px; /* room for scrollbar */
+  margin-top: 24px;
+}
+
+/* Hide scrollbar (Webkit) */
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar { height: 4px; }
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 2px; }
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
+
+/* ═══════ VEHICLE CARD ═══════ */
+body.home #wecar-carousel .wecar-vehicle-card {
+  flex: 0 0 380px;
+  scroll-snap-align: start;
   position: relative;
   background: #FFFFFF;
   border-radius: 24px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-body.home .wecar-vehicle-card::before {
+/* Gradient border using pseudo-element */
+body.home #wecar-carousel .wecar-vehicle-card::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 24px;
   padding: 1px;
   background: linear-gradient(180deg, #F9F9F9 0%, #CBCBCB 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
   pointer-events: none;
 }
 
-/* Chip tags */
-body.home .wecar-vehicle-card__tag {
+/* ── Card image ──────────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-vehicle-card__image-wrap {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: #F5F5F5;
+}
+
+body.home #wecar-carousel .wecar-vehicle-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Card body ────────────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-vehicle-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+/* Title (brand + model) */
+body.home #wecar-carousel .wecar-vehicle-card__title {
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #111111;
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F9F9F9;
+}
+
+/* Version */
+body.home #wecar-carousel .wecar-vehicle-card__version {
+  font-family: var(--wecar-font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #464646;
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F9F9F9;
+}
+
+/* Price */
+body.home #wecar-carousel .wecar-vehicle-card__price {
+  font-family: var(--wecar-font-body);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--wecar-figma-purple);
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F9F9F9;
+}
+
+/* Tags row */
+body.home #wecar-carousel .wecar-vehicle-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+}
+
+/* Individual tag chip */
+body.home #wecar-carousel .wecar-vehicle-card__tag {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -82,29 +189,29 @@ body.home .wecar-vehicle-card__tag {
   line-height: 14px;
 }
 
-body.home .wecar-vehicle-card__tag-icon {
+body.home #wecar-carousel .wecar-vehicle-card__tag-icon {
   width: 12px;
   height: 12px;
   display: inline-block;
 }
 
-body.home .wecar-vehicle-card__tag--km {
+body.home #wecar-carousel .wecar-vehicle-card__tag--km {
   background: #E7F1FA;
   color: #0F4C89;
 }
 
-body.home .wecar-vehicle-card__tag--year {
+body.home #wecar-carousel .wecar-vehicle-card__tag--year {
   background: #E7F8FA;
   color: #0F7789;
 }
 
-body.home .wecar-vehicle-card__tag--transmission {
+body.home #wecar-carousel .wecar-vehicle-card__tag--transmission {
   background: #F5EDFF;
   color: #7B3DCB;
 }
 
-/* Bottom CTA pill */
-body.home .wecar-carousel__cta .elementor-button {
+/* ── Bottom CTA pill ──────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-carousel__cta .elementor-button {
   background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
   color: var(--wecar-figma-purple);
   border-radius: 16px;
@@ -115,8 +222,47 @@ body.home .wecar-carousel__cta .elementor-button {
   font-size: 16px;
   line-height: 20px;
   border: none;
+  display: inline-flex;
+  align-items: center;
 }
 
-body.home .wecar-carousel__cta .elementor-button:hover {
+body.home #wecar-carousel .wecar-carousel__cta .elementor-button:hover {
   box-shadow: 0 2px 8px rgba(255,255,255,0.3);
+}
+
+/* ── Empty state ──────────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-carousel--empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+body.home #wecar-carousel .wecar-carousel__empty-text {
+  font-family: var(--wecar-font-body);
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+body.home #wecar-carousel .wecar-carousel__empty-cta {
+  display: inline-block;
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  color: var(--wecar-figma-purple);
+  border-radius: 16px;
+  padding: 11px 24px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body.home #wecar-carousel .wecar-vehicle-card {
+    flex: 0 0 300px;
+  }
+
+  body.home #wecar-carousel .elementor-heading-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
 }
