@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    HOME CAROUSEL — Vehicle Cards
-   REGLA: Grid layout, aspect-ratio para imágenes, fallback gris
+   REGLA: Header FIJO, contenedor de scroll SOLO para tarjetas
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Section background ───────────────────────────────────────────── */
@@ -34,6 +34,18 @@ body.home #wecar-carousel::after {
 
 body.home #wecar-carousel > .elementor-container { position: relative; z-index: 1; }
 
+/* ── Header section: NO scroll, fixed position ───────────────────── */
+body.home #wecar-carousel .elementor-section[data-id="h04s001"] {
+  overflow: visible !important;
+  margin-bottom: 32px;
+}
+
+body.home #wecar-carousel .elementor-section[data-id="h04s001"] .elementor-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
 /* ── Header title ──────────────────────────────────────────────────── */
 body.home #wecar-carousel .elementor-heading-title {
   text-align: left;
@@ -42,7 +54,7 @@ body.home #wecar-carousel .elementor-heading-title {
   font-size: 38px;
   line-height: 44px;
   color: #FFFFFF;
-  margin-bottom: 32px;
+  margin: 0;
 }
 
 /* ── "Ver todos" link ──────────────────────────────────────────────── */
@@ -58,25 +70,39 @@ body.home #wecar-carousel .wecar-carousel__link a {
 body.home #wecar-carousel .wecar-carousel__link a::after { content: ' →'; }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   CAROUSEL — Grid Layout
+   CAROUSEL — Horizontal Scroll Container (SOLO tarjetas)
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* The shortcode wrapper */
+/* The shortcode wrapper: SOLO este tiene overflow */
 body.home #wecar-carousel .wecar-carousel {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  display: flex !important;
+  flex-direction: row !important;
   gap: 24px !important;
-  margin-top: 24px;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  margin-top: 0;
 }
+
+/* Hide scrollbar (Webkit) */
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar { height: 4px; }
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 2px; }
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
 
 /* ═══════ VEHICLE CARD ═══════ */
 body.home #wecar-carousel .wecar-vehicle-card {
+  flex: 0 0 300px !important;
+  scroll-snap-align: start;
   position: relative;
   background: #FFFFFF;
   border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  white-space: normal;
 }
 
 /* Gradient border using pseudo-element */
@@ -256,8 +282,8 @@ body.home #wecar-carousel .wecar-carousel__empty-cta {
 
 /* ── Mobile ───────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  body.home #wecar-carousel .wecar-carousel {
-    grid-template-columns: 1fr !important;
+  body.home #wecar-carousel .wecar-vehicle-card {
+    flex: 0 0 280px !important;
   }
 
   body.home #wecar-carousel .elementor-heading-title {

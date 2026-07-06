@@ -149,7 +149,7 @@ body.home .wecar-hero__card .elementor-icon-box-description {
 body.home .wecar-hero__card--right .elementor-icon-box-description { color: #F9F9F9; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   IMAGEN DEL AUTO: ABSOLUTA, bottom-0, right-0, z-index 0
+   IMAGEN DEL AUTO: ABSOLUTA, bottom-0, right-0, z-index 1
    ═══════════════════════════════════════════════════════════════════════════ */
 body.home .wecar-hero__card__image {
   position: absolute !important;
@@ -157,16 +157,16 @@ body.home .wecar-hero__card__image {
   right: 0 !important;
   left: auto !important;
   top: auto !important;
-  width: auto !important;
+  max-width: 60% !important;
   height: 80% !important;
-  z-index: 0 !important;
+  z-index: 1 !important;
   pointer-events: none !important;
   opacity: 0;
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.home .wecar-hero__card__image img {
-  width: auto !important;
+  width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
   display: block !important;
