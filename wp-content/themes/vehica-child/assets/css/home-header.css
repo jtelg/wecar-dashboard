@@ -35,9 +35,9 @@ body.home #wecar-header .wecar-home-header__nav a:hover {
   color: var(--wecar-figma-purple);
 }
 
-/* CTA — transparent, purple border, purple text (Figma exact) */
+/* CTA pill — lavender gradient */
 body.home #wecar-header .wecar-home-header__cta .elementor-button {
-  background: transparent !important;
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%) !important;
   color: var(--wecar-figma-purple) !important;
   border-radius: 12px !important;
   padding: 11px 14px !important;
@@ -46,18 +46,16 @@ body.home #wecar-header .wecar-home-header__cta .elementor-button {
   font-weight: 700;
   font-size: 14px;
   line-height: 18px;
-  border: 1.5px solid var(--wecar-figma-purple) !important;
+  border: none !important;
   box-shadow: none !important;
 }
 
 body.home #wecar-header .wecar-home-header__cta .elementor-button:hover {
-  background: var(--wecar-figma-purple) !important;
-  color: #FFFFFF !important;
-  border-color: var(--wecar-figma-purple) !important;
+  box-shadow: 0 2px 8px rgba(153,73,255,0.2) !important;
 }
 
 body.home #wecar-header .wecar-home-header__cta .elementor-button-text {
-  color: inherit;
+  color: var(--wecar-figma-purple);
 }
 
 /* Logo sizing */

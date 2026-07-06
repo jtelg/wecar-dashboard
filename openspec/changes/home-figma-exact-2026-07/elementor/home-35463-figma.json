@@ -86,7 +86,7 @@
             "elType": "widget",
             "widgetType": "button",
             "settings": {
-              "text": "Contacto",
+              "text": "Contactanos",
               "link": {
                 "url": "/contactanos/"
               },
