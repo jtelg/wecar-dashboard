@@ -3,11 +3,13 @@
    REGLA CRÍTICA: Imágenes ABSOLUTAS, contenedor con altura FIJA
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Contenedor principal del Hero (ALTURA FIJA) ──────────────────── */
+/* ── Contenedor principal del Hero (responsive, max 1216px) ──────── */
 body.home #wecar-hero {
-  min-height: 460px !important;
-  height: 460px !important;
+  min-height: clamp(320px, 42vw, 460px) !important;
+  height: clamp(320px, 42vw, 460px) !important;
   overflow: hidden !important;
+  max-width: 1216px !important;
+  margin: 0 auto !important;
 }
 
 body.home #wecar-hero .elementor-container {
@@ -15,15 +17,18 @@ body.home #wecar-hero .elementor-container {
   flex-direction: row !important;
   gap: 20px !important;
   height: 100% !important;
+  max-width: 1216px !important;
+  margin: 0 auto !important;
   align-items: stretch !important;
 }
 
-/* ── Columnas: flex inicial 50/50 ─────────────────────────────────── */
+/* ── Columnas: flex responsivo (50/50 / active 80% / collapsed 20%) ─ */
 body.home #wecar-hero .elementor-column[data-id="h02c001"],
 body.home #wecar-hero .elementor-column[data-id="h02c002"] {
   position: relative !important;
   width: auto !important;
-  flex: 0 0 598px !important;
+  flex: 1 1 0 !important;
+  min-width: 180px !important;
   transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
   cursor: pointer;
   overflow: hidden !important;
@@ -37,14 +42,15 @@ body.home #wecar-hero .elementor-column .elementor-widget-wrap {
   overflow: hidden !important;
 }
 
-/* ── Estado activo: 976px exacto ──────────────────────────────────── */
+/* ── Estado activo: ~80% del container ────────────────────────────── */
 body.home #wecar-hero .wecar-hero__column--active {
-  flex: 0 0 976px !important;
+  flex: 4 1 0 !important;
 }
 
-/* ── Estado colapsado: 220px exacto ───────────────────────────────── */
+/* ── Estado colapsado: ~20% del container (mínimo 180px) ──────────── */
 body.home #wecar-hero .wecar-hero__column--collapsed {
-  flex: 0 0 220px !important;
+  flex: 1 1 0 !important;
+  min-width: 180px !important;
 }
 
 /* ── Tarjeta base (icon-box) ──────────────────────────────────────── */
@@ -169,8 +175,10 @@ body.home .wecar-hero__card__image {
   right: 0 !important;
   left: auto !important;
   top: auto !important;
-  width: 530px !important;
-  height: 270px !important;
+  width: 60% !important;
+  max-width: 530px !important;
+  height: 60% !important;
+  max-height: 270px !important;
   z-index: 3 !important;
   pointer-events: none !important;
   opacity: 0;
@@ -179,7 +187,7 @@ body.home .wecar-hero__card__image {
               height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__image {
+body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__image {
   right: -10% !important;
 }
 
@@ -235,8 +243,10 @@ body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__image {
 }
 
 body.home #wecar-hero .elementor-column[data-id="h02c001"].wecar-hero__column--active .wecar-hero__card__image {
-  width: 490px !important;
-  height: 250px !important;
+  width: 55% !important;
+  max-width: 490px !important;
+  height: 55% !important;
+  max-height: 250px !important;
 }
 
 body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__badge-wrapper {
