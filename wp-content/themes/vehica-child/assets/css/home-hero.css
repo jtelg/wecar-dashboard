@@ -23,7 +23,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c001"],
 body.home #wecar-hero .elementor-column[data-id="h02c002"] {
   position: relative !important;
   width: auto !important;
-  flex: 1 1 50% !important;
+  flex: 0 0 598px !important;
   transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
   cursor: pointer;
   overflow: hidden !important;
@@ -37,15 +37,14 @@ body.home #wecar-hero .elementor-column .elementor-widget-wrap {
   overflow: hidden !important;
 }
 
-/* ── Estado activo: 75% ───────────────────────────────────────────── */
+/* ── Estado activo: 976px exacto ──────────────────────────────────── */
 body.home #wecar-hero .wecar-hero__column--active {
-  flex: 3 1 0% !important;
+  flex: 0 0 976px !important;
 }
 
-/* ── Estado colapsado: 25% ────────────────────────────────────────── */
+/* ── Estado colapsado: 220px exacto ───────────────────────────────── */
 body.home #wecar-hero .wecar-hero__column--collapsed {
-  flex: 1 1 0% !important;
-  min-width: 180px !important;
+  flex: 0 0 220px !important;
 }
 
 /* ── Tarjeta base (icon-box) ──────────────────────────────────────── */
@@ -71,7 +70,7 @@ body.home .wecar-hero__card--right {
   background: linear-gradient(135deg, #A4E3EE 0%, #0E6FD1 100%);
 }
 
-/* ── Textura de fondo ─────────────────────────────────────────────── */
+/* ── Textura de fondo: CSS radial-gradient por panel ──────────────── */
 body.home .wecar-hero__card::before {
   content: '';
   position: absolute;
@@ -79,16 +78,27 @@ body.home .wecar-hero__card::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/texture.svg');
-  background-size: cover;
-  background-position: bottom left;
-  background-repeat: no-repeat;
   z-index: 0;
-  opacity: 0.12;
   pointer-events: none;
 }
 
-body.home .wecar-hero__card--right::before { opacity: 0.1; }
+body.home .wecar-hero__card--left::before {
+  background:
+    radial-gradient(circle at 99% 100%, rgba(153,73,255,0.10) 0%, rgba(14,181,209,0) 100%),
+    rgba(153,73,255,0.04);
+  background-size: 423px 200px, auto;
+  background-position: bottom right, 0 0;
+  background-repeat: no-repeat, repeat;
+}
+
+body.home .wecar-hero__card--right::before {
+  background:
+    radial-gradient(circle at 99% 100%, rgba(245,237,255,0.20) 0%, rgba(14,181,209,0) 100%),
+    radial-gradient(circle at 99% 100%, rgba(249,253,254,0.20) 0%, rgba(14,181,209,0) 100%);
+  background-size: 423px 200px, 423px 200px;
+  background-position: bottom right, bottom right;
+  background-repeat: no-repeat, no-repeat;
+}
 
 /* ── Badge (absolute top-left) ────────────────────────────────────── */
 body.home .wecar-hero__card__badge-wrapper {
@@ -97,9 +107,9 @@ body.home .wecar-hero__card__badge-wrapper {
   left: 40px !important;
   z-index: 10 !important;
   opacity: 0;
-  transform: translateY(-104px);
-  transition: opacity 0.3s ease 0.05s,
-              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease-out 0.1s,
+              transform 0.3s ease-out 0.1s;
   pointer-events: none;
 }
 
@@ -129,6 +139,7 @@ body.home .wecar-hero__card .elementor-icon-box-title {
   max-width: 500px;
   position: relative;
   z-index: 2;
+  transition: opacity 0.2s ease-out;
 }
 
 body.home .wecar-hero__card--right .elementor-icon-box-title,
@@ -144,12 +155,13 @@ body.home .wecar-hero__card .elementor-icon-box-description {
   margin: 0 0 24px;
   position: relative;
   z-index: 2;
+  transition: opacity 0.2s ease-out;
 }
 
 body.home .wecar-hero__card--right .elementor-icon-box-description { color: #F9F9F9; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   IMAGEN DEL AUTO: ABSOLUTA, bottom-0, right-0, z-index 1
+   IMAGEN DEL AUTO: ABSOLUTA, bottom-0, right-0, z-index SOBRE la card
    ═══════════════════════════════════════════════════════════════════════════ */
 body.home .wecar-hero__card__image {
   position: absolute !important;
@@ -157,12 +169,18 @@ body.home .wecar-hero__card__image {
   right: 0 !important;
   left: auto !important;
   top: auto !important;
-  max-width: 60% !important;
-  height: 80% !important;
-  z-index: 1 !important;
+  width: 530px !important;
+  height: 270px !important;
+  z-index: 3 !important;
   pointer-events: none !important;
   opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s ease-out,
+              width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__image {
+  right: -10% !important;
 }
 
 body.home .wecar-hero__card__image img {
@@ -177,9 +195,9 @@ body.home .wecar-hero__card__cta {
   position: relative !important;
   z-index: 5 !important;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.3s ease 0.1s,
-              transform 0.3s ease 0.1s;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease-out 0.1s,
+              transform 0.3s ease-out 0.1s;
 }
 
 body.home .wecar-hero__card__cta .elementor-button {
@@ -216,6 +234,11 @@ body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__image {
   opacity: 1;
 }
 
+body.home #wecar-hero .elementor-column[data-id="h02c001"].wecar-hero__column--active .wecar-hero__card__image {
+  width: 490px !important;
+  height: 250px !important;
+}
+
 body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__badge-wrapper {
   opacity: 1;
   transform: translateY(0);
@@ -235,6 +258,7 @@ body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__cta {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
+  transition: none !important;
 }
 
 body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title,
@@ -258,7 +282,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"]::after {
   z-index: 10;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease 0.2s;
+  transition: opacity 0.3s ease 0.25s;
 }
 
 body.home #wecar-hero .elementor-column[data-id="h02c001"]::after {
@@ -286,6 +310,7 @@ body.home #wecar-hero .wecar-hero__column--collapsed::after {
   body.home #wecar-hero .elementor-column[data-id="h02c002"] {
     flex: 1 1 100% !important;
     min-width: 100% !important;
+    transition: none !important;
   }
 
   body.home .wecar-hero__card {

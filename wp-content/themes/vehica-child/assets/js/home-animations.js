@@ -16,6 +16,12 @@
 
   if (!document.body.classList.contains('home')) return;
 
+  // ── Force eager loading on hero car images (lazy + hidden opacity = no load) ──
+  var heroImages = document.querySelectorAll('#wecar-hero .wecar-hero__card__image img');
+  for (var i = 0; i < heroImages.length; i++) {
+    heroImages[i].setAttribute('loading', 'eager');
+  }
+
   var leftCol = document.querySelector('#wecar-hero .elementor-column[data-id="h02c001"]');
   var rightCol = document.querySelector('#wecar-hero .elementor-column[data-id="h02c002"]');
   if (!leftCol || !rightCol) return;
@@ -41,6 +47,7 @@
   }
 
   leftCol.addEventListener('click', function () {
+    if (window.innerWidth < 768) return;
     // If already active, reset to default. Otherwise expand left.
     if (leftCol.classList.contains(ACTIVE)) {
       reset();
@@ -50,6 +57,7 @@
   });
 
   rightCol.addEventListener('click', function () {
+    if (window.innerWidth < 768) return;
     if (rightCol.classList.contains(ACTIVE)) {
       reset();
     } else {
