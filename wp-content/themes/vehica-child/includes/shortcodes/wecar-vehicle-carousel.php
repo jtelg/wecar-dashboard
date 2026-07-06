@@ -126,14 +126,23 @@ function wecar_render_vehicle_card($post_id)
             <?php endif; ?>
 
             <div class="wecar-vehicle-card__tags">
-                <span class="wecar-vehicle-card__tag"><?php echo esc_html__('Consultar KM', 'vehica'); ?></span>
+                <span class="wecar-vehicle-card__tag wecar-vehicle-card__tag--km">
+                    <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/ic-gauge.svg'); ?>" alt="" aria-hidden="true" class="wecar-vehicle-card__tag-icon">
+                    <?php echo esc_html__('Consultar KM', 'vehica'); ?>
+                </span>
 
                 <?php if ($year) : ?>
-                    <span class="wecar-vehicle-card__tag"><?php echo esc_html($year); ?></span>
+                    <span class="wecar-vehicle-card__tag wecar-vehicle-card__tag--year">
+                        <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/ic-calendar.svg'); ?>" alt="" aria-hidden="true" class="wecar-vehicle-card__tag-icon">
+                        <?php echo esc_html($year); ?>
+                    </span>
                 <?php endif; ?>
 
                 <?php if ($transmission) : ?>
-                    <span class="wecar-vehicle-card__tag"><?php echo esc_html($transmission); ?></span>
+                    <span class="wecar-vehicle-card__tag wecar-vehicle-card__tag--transmission">
+                        <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/ic-transmission.svg'); ?>" alt="" aria-hidden="true" class="wecar-vehicle-card__tag-icon">
+                        <?php echo esc_html($transmission); ?>
+                    </span>
                 <?php endif; ?>
             </div>
         </div>

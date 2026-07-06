@@ -1,111 +1,82 @@
-/* =============================================================================
-   Home — Footer Section
-   Scoped under body.home
-   ============================================================================= */
-
+/* ── Home Footer (Figma Exact 2026-07) ────────────────────── */
 body.home .wecar-footer {
-  background: var(--wecar-footer-bg);
-  color: var(--wecar-footer-text);
-  padding: var(--wecar-space-16) 0;
+  background: #FFFFFF;
+  color: var(--wecar-figma-text);
+  position: relative;
+  overflow: hidden;
 }
 
-body.home .wecar-footer .elementor-widget-image img {
-  max-width: 140px;
+/* Corner radial textures */
+body.home .wecar-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 466px; height: 220px;
+  background: radial-gradient(circle at 99% 100%, rgba(153,73,255,0.04) 0%, rgba(14,181,209,0) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home .wecar-footer::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 466px; height: 220px;
+  background: radial-gradient(circle at 99% 100%, rgba(153,73,255,0.1) 0%, rgba(14,181,209,0) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home .wecar-footer > * { position: relative; z-index: 1; }
+
+/* 4-quadrant layout via CSS grid */
+body.home .wecar-footer .elementor-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px 0;
+  max-width: 1216px;
+  margin: 0 auto;
+}
+
+/* Logo top-left */
+body.home .wecar-footer .wecar-footer__logo img {
+  width: 316px;
   height: auto;
+  display: block;
 }
 
-body.home .wecar-footer .elementor-heading-title {
-  font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-semibold);
-  font-size: var(--wecar-text-base);
-  color: var(--wecar-footer-text);
-}
-
-body.home .wecar-footer .elementor-widget-text-editor {
+/* Description top-right */
+body.home .wecar-footer .wecar-footer__description {
   font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-sm);
-  color: var(--wecar-text-muted);
-  line-height: var(--wecar-line-relaxed);
-}
-
-/* Company description */
-body.home .wecar-footer__description {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-sm);
-  color: #94A3B8;
-  line-height: var(--wecar-line-relaxed);
-  margin-top: var(--wecar-space-4);
-}
-
-/* Phone number */
-body.home .wecar-footer__phone {
-  font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-semibold);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-cyan);
-  text-decoration: none;
-  display: inline-block;
-  margin-top: var(--wecar-space-2);
-}
-
-body.home .wecar-footer__phone:hover {
-  color: var(--wecar-cyan-light);
-}
-
-/* Copyright */
-body.home .wecar-footer__copyright {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-sm);
-  color: #64748B;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--wecar-figma-text-muted);
   text-align: right;
-  margin-top: var(--wecar-space-2);
+  max-width: 292px;
+  margin-left: auto;
 }
 
-/* Social links */
-body.home .wecar-footer__social {
-  display: flex;
-  gap: var(--wecar-space-4);
-  margin-top: var(--wecar-space-4);
+/* Copyright bottom-left */
+body.home .wecar-footer .wecar-footer__copyright {
+  font-family: var(--wecar-font-footer);
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--wecar-figma-text-muted);
+  text-align: left;
 }
 
-body.home .wecar-footer__social a {
-  color: #94A3B8;
-  font-size: var(--wecar-text-lg);
-  transition: color 0.2s ease;
+/* Phone bottom-right */
+body.home .wecar-footer .wecar-footer__phone {
+  font-family: var(--wecar-font-body);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--wecar-figma-purple);
+  text-align: right;
+  text-decoration: none;
 }
 
-body.home .wecar-footer__social a:hover {
-  color: var(--wecar-cyan);
-}
-
-/* ── Mobile ────────────────────────────────────────────────────── */
-@media (max-width: 767px) {
-  body.home .wecar-footer {
-    padding: var(--wecar-space-12) 0;
-  }
-
-  body.home .wecar-footer .elementor-column {
-    width: 100% !important;
-    text-align: center;
-  }
-
-  body.home .wecar-footer__copyright {
-    text-align: center;
-    margin-top: var(--wecar-space-6);
-  }
-
-  body.home .wecar-footer__social {
-    justify-content: center;
-  }
-
-  body.home .wecar-footer .elementor-widget-image img {
-    margin: 0 auto;
-  }
-}
-
-/* ── Tablet ────────────────────────────────────────────────────── */
-@media (min-width: 768px) and (max-width: 1024px) {
-  body.home .wecar-footer {
-    padding: var(--wecar-space-12) 0;
-  }
+body.home .wecar-footer .wecar-footer__phone:hover {
+  text-decoration: underline;
 }

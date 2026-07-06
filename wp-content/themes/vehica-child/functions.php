@@ -44,6 +44,14 @@ add_action('wp_enqueue_scripts', static function () {
         wp_get_theme()->get('Version')
     );
 
+    // ── Google Fonts: Syne (display) + Exo 2 (body) from Figma spec ────
+    wp_enqueue_style(
+        'wecar-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Syne:wght@400;700&display=swap',
+        [],
+        wp_get_theme()->get('Version')
+    );
+
     // ── Home page only: section CSS + animations JS ──────────────
     if (is_front_page() || is_page(35463)) {
         $section_css = [

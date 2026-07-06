@@ -1,79 +1,59 @@
-/* =============================================================================
-   Home — Elegí Wecar Section
-   Scoped under body.home
-   ============================================================================= */
-
+/* ── Home Features — Elegí Wecar (Figma Exact 2026-07) ────── */
 body.home .wecar-features-section {
-  text-align: center;
+  background: radial-gradient(circle at 50% 101%, rgba(153,73,255,1) 0%, rgba(255,255,255,0) 100%);
+  position: relative;
 }
 
-body.home .wecar-features-section .elementor-heading-title {
+body.home .wecar-features__title .elementor-heading-title {
+  text-align: left !important;
   font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-bold);
-  font-size: var(--wecar-text-2xl);
-  color: var(--wecar-text);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 44px;
+  color: var(--wecar-figma-text);
 }
 
-body.home .wecar-features-section .elementor-widget-text-editor {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-lg);
-  color: var(--wecar-text-muted);
-  max-width: 600px;
-  margin: 0 auto var(--wecar-space-12);
+/* Cards */
+body.home .wecar-features__card {
+  padding: 28px;
+  border-radius: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #FFFFFF;
+  min-height: 200px;
 }
 
-/* ── Feature Card ──────────────────────────────────────────────── */
-body.home .wecar-feature-card {
-  text-align: center;
-  padding: var(--wecar-space-8) var(--wecar-space-6);
-  border-radius: var(--wecar-radius-lg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+body.home .wecar-features__card--purple {
+  background: linear-gradient(136deg, #9949FF 0%, #6634A5 100%);
 }
 
-body.home .wecar-feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--wecar-shadow-md);
+body.home .wecar-features__card--blue {
+  background: linear-gradient(136deg, #0E6FD1 0%, #0F5AA7 100%);
+}
+
+body.home .wecar-features__card--cyan {
+  background: linear-gradient(136deg, #0EB5D1 0%, #0F91A7 100%);
 }
 
 /* Icon */
-body.home .wecar-feature-card .elementor-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--wecar-space-4);
+body.home .wecar-features__card__icon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 16px;
+  display: block;
 }
 
-body.home .wecar-feature-card--confianza .elementor-icon {
-  color: var(--wecar-purple);
+body.home .wecar-features__card__icon img,
+body.home .wecar-features__card__icon svg {
+  width: 42px;
+  height: 42px;
+  filter: brightness(0) invert(1);
 }
 
-body.home .wecar-feature-card--transparencia .elementor-icon {
-  color: var(--wecar-blue);
-}
-
-body.home .wecar-feature-card--facilidad .elementor-icon {
-  color: var(--wecar-cyan);
-}
-
-/* Title */
-body.home .wecar-feature-card .elementor-heading-title {
+/* Card title */
+body.home .wecar-features__card .elementor-heading-title {
   font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-semibold);
-  font-size: var(--wecar-text-xl);
-  color: var(--wecar-text);
-  margin-bottom: var(--wecar-space-2);
-}
-
-/* Description */
-body.home .wecar-feature-card .elementor-widget-text-editor {
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-base);
-  color: var(--wecar-text-muted);
-  line-height: var(--wecar-line-relaxed);
-}
-
-/* ── Mobile ────────────────────────────────────────────────────── */
-@media (max-width: 767px) {
-  body.home .wecar-feature-card {
-    padding: var(--wecar-space-6) var(--wecar-space-4);
-    margin-bottom: var(--wecar-space-4);
-  }
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
 }

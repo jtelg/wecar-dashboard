@@ -1,77 +1,24 @@
-/* =============================================================================
-   Home — Marcas Asociadas Section
-   Scoped under body.home
-   ============================================================================= */
-
-body.home .wecar-partners-section {
-  text-align: center;
-}
-
-body.home .wecar-partners-section .elementor-heading-title {
+/* ── Home Partners — Respaldado (Figma Exact 2026-07) ─────── */
+body.home .wecar-partners__title .elementor-heading-title {
+  text-align: left !important;
   font-family: var(--wecar-font-display);
-  font-weight: var(--wecar-weight-bold);
-  font-size: var(--wecar-text-xl);
-  color: var(--wecar-text);
-  margin-bottom: var(--wecar-space-8);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 44px;
+  color: var(--wecar-figma-text);
 }
 
-/* ── Logo Strip ────────────────────────────────────────────────── */
-body.home .wecar-partners-strip {
+/* Logo strip: flex row centered with 60px gap */
+body.home .wecar-partners .elementor-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: var(--wecar-space-12);
+  align-items: center;
+  gap: 60px;
   flex-wrap: wrap;
-  padding: var(--wecar-space-8) 0;
 }
 
-body.home .wecar-partners-strip .elementor-widget-image {
-  filter: grayscale(100%);
-  opacity: 0.6;
-  transition: filter 0.3s ease, opacity 0.3s ease;
-}
-
-body.home .wecar-partners-strip .elementor-widget-image:hover {
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
-body.home .wecar-partners-strip img {
+body.home .wecar-partners .elementor-container img {
   max-height: 60px;
   width: auto;
-}
-
-/* ── Placeholder logo styling ──────────────────────────────────── */
-body.home .wecar-partner-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 160px;
-  height: 60px;
-  background: var(--wecar-surface);
-  border: 1px dashed var(--wecar-border);
-  border-radius: var(--wecar-radius-md);
-  font-family: var(--wecar-font-body);
-  font-size: var(--wecar-text-sm);
-  font-weight: var(--wecar-weight-semibold);
-  color: var(--wecar-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* ── Mobile ────────────────────────────────────────────────────── */
-@media (max-width: 767px) {
-  body.home .wecar-partners-strip {
-    gap: var(--wecar-space-6);
-  }
-
-  body.home .wecar-partners-strip img {
-    max-height: 40px;
-  }
-
-  body.home .wecar-partner-placeholder {
-    width: 120px;
-    height: 44px;
-    font-size: var(--wecar-text-xs);
-  }
+  object-fit: contain;
 }

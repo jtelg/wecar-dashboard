@@ -1,190 +1,307 @@
-/* =============================================================================
-   Home — Hero Dual Cards (Corrected 2026-07 PR2)
-   Scoped under body.home
-   Matches mockup: TWO SIDE-BY-SIDE CARDS, 70-80vh height, texture overlay,
-   left-aligned text, no icons/buttons, gradients per mockup
-   ============================================================================= */
+/* ── Home Hero — Horizontal Accordion (Figma Exact 2026-07)
+   3 states (click to toggle):
+     default    50% + 50%   — title, subtitle, texture (bottom-left)
+     active     75% + 25%   — badge, CTA, car image appear (fade in)
+     collapsed  25% + 75%   — centered "Comprá" or "Vendé" label
+   ──────────────────────────────────────────────────────────────── */
 
-/* ── Section Wrapper — less horizontal margin ──────────────────── */
-body.home #wecar-hero .elementor-container {
-  max-width: 100%;
-  gap: 28px;
-}
-
-/* Reduce section horizontal padding so cards sit closer together */
-body.home #wecar-hero {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-body.home #wecar-hero .elementor-row,
-body.home #wecar-hero .elementor-container {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-/* ── Card Base — both cards must be equal height ──────────────── */
 body.home .wecar-hero__card {
   position: relative;
   overflow: hidden;
-  border-radius: 32px;
-  min-height: clamp(380px, 52vh, 580px);
-  padding: 3.5rem 2.5rem;
+  border-radius: 40px;
+  min-height: 460px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Ensure columns have equal height */
-body.home .elementor-section[data-id="h02a001"] .elementor-column,
-body.home #wecar-hero .elementor-column {
-  display: flex;
-}
+body.home .wecar-hero__card .elementor-icon { display: none !important; }
 
-body.home #wecar-hero .elementor-column .elementor-widget-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  text-align: left;
-}
-
-/* ── Left Card: white → light lavender gradient ────────────────── */
+/* ── Backgrounds ────────────────────────────────────────────── */
 body.home .wecar-hero__card--left {
-  background: linear-gradient(135deg, #f0edff 0%, #f5f3ff 50%, #faf9ff 100%);
-  color: var(--wecar-text);
+  background: linear-gradient(135deg, #F5EDFF 0%, #CAE0F5 100%);
 }
 
-body.home .wecar-hero__card--left .elementor-heading-title,
-body.home .wecar-hero__card--left .elementor-widget-text-editor {
-  color: var(--wecar-text);
-}
-
-/* ── Right Card: cyan → blue gradient ──────────────────────────── */
 body.home .wecar-hero__card--right {
-  background: linear-gradient(180deg, #36BFFA 0%, #2563EB 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #A4E3EE 0%, #0E6FD1 100%);
 }
 
-body.home .wecar-hero__card--right .elementor-heading-title,
-body.home .wecar-hero__card--right .elementor-widget-text-editor {
-  color: #FFFFFF;
-}
+body.home .wecar-hero__card > * { position: relative; z-index: 2; }
 
-/* ── Texture Overlay (per-card opacity & position) ──────────────── */
+/* ── Texture overlay (always visible, bottom-left, scales with card) ── */
 body.home .wecar-hero__card::before {
   content: '';
   position: absolute;
-  inset: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url('../images/texture.svg');
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Left card — visible wavy in bottom-right corner */
-body.home .wecar-hero__card--left::before {
-  opacity: 0.12;
-  background-position: bottom right;
-  background-size: 80% auto;
-}
-
-/* Right card — visible wavy across whole card */
-body.home .wecar-hero__card--right::before {
-  opacity: 0.15;
-  background-position: center;
   background-size: cover;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.12;
+  pointer-events: none;
 }
 
-/* ── Ensure content is above texture ───────────────────────────── */
-body.home .wecar-hero__card .elementor-widget-wrap {
+body.home .wecar-hero__card--right::before { opacity: 0.1; }
+
+/* ── Car image (hidden by default, appears on click) ────────── */
+body.home .wecar-hero__card__image {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  object-fit: contain;
+  z-index: 1; /* decorative background — stays BEHIND text */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.home .wecar-hero__card--left .wecar-hero__card__image { width: 490px; height: 250px; }
+body.home .wecar-hero__card--right .wecar-hero__card__image { width: 530px; height: 270px; }
+
+/* ── Badge (hidden by default, appears on click) ────────────── */
+body.home .wecar-hero__card__badge-wrapper {
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease 0.05s,
+              transform 0.3s ease 0.05s;
+}
+
+body.home .wecar-hero__card__badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #FFFFFF;
+}
+
+body.home .wecar-hero__card--left .wecar-hero__card__badge { background: var(--wecar-figma-blue); }
+body.home .wecar-hero__card--right .wecar-hero__card__badge { background: var(--wecar-figma-purple); }
+
+/* ── Title ──────────────────────────────────────────────────── */
+body.home .wecar-hero__card .elementor-icon-box-title {
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 54px;
+  color: var(--wecar-figma-text);
+  margin: 0 0 16px;
+}
+
+body.home .wecar-hero__card--right .elementor-icon-box-title,
+body.home .wecar-hero__card--right .elementor-icon-box-title a { color: #F9F9F9; }
+
+/* ── Body ──────────────────────────────────────────────────── */
+body.home .wecar-hero__card .elementor-icon-box-description {
+  font-family: var(--wecar-font-body);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  color: var(--wecar-figma-text-muted);
+  max-width: 412px;
+  margin: 0 0 24px;
+}
+
+body.home .wecar-hero__card--right .elementor-icon-box-description { color: #F9F9F9; }
+
+/* ── CTA buttons (hidden by default, appears on click) ─────── */
+body.home .wecar-hero__card__cta {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease 0.1s,
+              transform 0.3s ease 0.1s;
+}
+
+body.home .wecar-hero__card .elementor-button-wrapper { display: block !important; }
+
+body.home .wecar-hero__card--left .elementor-button {
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
+  color: #FFFFFF;
+  border-radius: 16px;
+  height: 44px;
+  padding: 11px 16px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+}
+
+body.home .wecar-hero__card--right .elementor-button {
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  color: var(--wecar-figma-purple);
+  border-radius: 16px;
+  height: 44px;
+  padding: 11px 16px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+}
+
+body.home .wecar-hero__card .elementor-button:hover { filter: brightness(0.92); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ACCORDION — CLICK INTERACTION
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Columns: flex sizing ──────────────────────────────────── */
+body.home #wecar-hero .elementor-column[data-id="h02c001"],
+body.home #wecar-hero .elementor-column[data-id="h02c002"] {
   position: relative;
+  width: auto !important;
+  flex: 1 1 50%;
+  transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+/* ═══════ Z-INDEX FIX: Proper stacking order ═══════ */
+
+/* Car image: decorative background, behind content */
+body.home .wecar-hero__card__image {
   z-index: 1;
 }
 
-/* ── Card Title ────────────────────────────────────────────────── */
-body.home .wecar-hero__card .elementor-heading-title {
+/* Card content (title + body): above car */
+body.home #wecar-hero .elementor-column .wecar-hero__card {
+  position: relative;
+  z-index: 3;
+}
+
+/* CTA button: above car, below title */
+body.home #wecar-hero .elementor-column .wecar-hero__card__cta {
+  position: relative;
+  z-index: 2;
+}
+
+body.home #wecar-hero .elementor-container {
+  gap: 20px;
+}
+
+/* ── Hovered/active column expands ─────────────────────────── */
+body.home #wecar-hero .wecar-hero__column--active {
+  flex: 3 1 0% !important;
+}
+
+body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__image {
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__badge-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Inactive column compresses ────────────────────────────── */
+body.home #wecar-hero .wecar-hero__column--collapsed {
+  flex: 0.6 1 0% !important;
+  min-width: 180px;
+}
+
+/* Collapsed: hide all text content */
+body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title,
+body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-description,
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__image,
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__cta,
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge-wrapper,
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge {
+  opacity: 0 !important;
+  transform: none;
+  pointer-events: none;
+}
+
+/* Keep texture visible when collapsed */
+body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card::before {
+  opacity: 0.12;
+}
+
+/* ── Collapsed labels ──────────────────────────────────────── */
+body.home #wecar-hero .elementor-column[data-id="h02c001"]::after,
+body.home #wecar-hero .elementor-column[data-id="h02c002"]::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--wecar-font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
-  color: #1a1a2e;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 44px;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.2s;
 }
 
-body.home .wecar-hero__card--right .elementor-heading-title {
-  color: #ffffff;
+body.home #wecar-hero .elementor-column[data-id="h02c001"]::after {
+  content: "Comprá";
+  color: var(--wecar-figma-text);
 }
 
-/* ── Card Body ─────────────────────────────────────────────────── */
-body.home .wecar-hero__card .elementor-widget-text-editor {
-  font-family: var(--wecar-font-body);
-  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
-  color: #2d2d3a;
-  line-height: 1.5;
-  max-width: 480px;
+body.home #wecar-hero .elementor-column[data-id="h02c002"]::after {
+  content: "Vendé";
+  color: var(--wecar-figma-cyan);
 }
 
-body.home .wecar-hero__card--right .elementor-widget-text-editor {
-  color: rgba(255, 255, 255, 0.9);
+body.home #wecar-hero .wecar-hero__column--collapsed::after {
+  opacity: 1;
 }
 
-/* ── Hide any lingering icon/button widgets ────────────────────── */
-body.home .wecar-hero__card .elementor-icon {
-  display: none !important;
-}
-
-body.home .wecar-hero__card .elementor-button-wrapper {
-  display: none !important;
-}
-
-/* ── Float: hidden icon-box wrapper (legacy fallback) ──────────── */
-body.home .wecar-hero__card .elementor-icon-box-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  width: 100%;
-}
-
-/* ── Right card: hover effect matching left card ───────────────── */
-body.home .wecar-hero__card--right:hover {
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.25);
-}
-
-/* ── Mobile: stack vertically ──────────────────────────────────── */
-@media (max-width: 767px) {
-  body.home #wecar-hero .elementor-row,
-  body.home #wecar-hero .elementor-container {
-    flex-wrap: wrap;
+/* ── Mobile: both cards stacked, full width, all visible ───── */
+@media (max-width: 768px) {
+  body.home #wecar-hero .elementor-column[data-id="h02c001"],
+  body.home #wecar-hero .elementor-column[data-id="h02c002"] {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
   }
 
   body.home .wecar-hero__card {
-    min-height: 40vh;
-    padding: 2.5rem 1.5rem;
-    width: 100%;
+    min-height: auto;
+    padding: 24px;
   }
 
-  body.home #wecar-hero .elementor-container {
-    gap: 16px;
+  body.home .wecar-hero__card .elementor-heading-title {
+    font-size: 28px;
+    line-height: 36px;
+    margin-top: 0;
   }
-
   body.home .wecar-hero__card .elementor-widget-text-editor {
-    max-width: 100%;
-  }
-}
-
-/* ── Tablet ────────────────────────────────────────────────────── */
-@media (min-width: 768px) and (max-width: 1024px) {
-  body.home .wecar-hero__card {
-    min-height: 45vh;
-    padding: 3rem 2rem;
+    font-size: 16px;
+    line-height: 24px;
   }
 
-  body.home #wecar-hero .elementor-container {
-    gap: 20px;
+  /* Show everything on mobile */
+  body.home .wecar-hero__card__image { display: none; }
+  body.home .wecar-hero__card .elementor-button { font-size: 14px; height: 38px; padding: 8px 12px; }
+  body.home .wecar-hero__card__cta { opacity: 1; transform: none; }
+  body.home .wecar-hero__card__badge-wrapper { opacity: 1; transform: none; }
+
+  body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title,
+  body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-description,
+  body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__cta,
+  body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__badge-wrapper {
+    opacity: 1 !important;
+    pointer-events: auto;
   }
+
+  body.home #wecar-hero .elementor-column::after { display: none; }
 }
