@@ -9,8 +9,8 @@ body.home #wecar-carousel {
   position: relative;
   overflow: hidden;
   padding: 64px 24px;
-  max-width: 1440px !important;
-  margin: 0 auto !important;
+  width: 100% !important; max-width: 100% !important;
+  margin: 0 !important;
 }
 
 /* Corner radial textures */
