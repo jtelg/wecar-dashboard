@@ -32,16 +32,16 @@ body.home #wecar-steps .elementor-column[data-id="h03c001"] {
   box-sizing: border-box !important;
 }
 
-/* ── Título (alineado a la izquierda como en Figma) ────────────────── */
+/* ── Título (centrado como en Figma) ───────────────────────────────── */
 body.home #wecar-steps .wecar-steps__title .elementor-heading-title {
-  text-align: left !important;
+  text-align: center !important;
   font-family: var(--wecar-font-display) !important;
   font-weight: 700 !important;
   font-size: clamp(1.75rem, 4vw, 2.375rem) !important;
   line-height: clamp(2.1875rem, 4.5vw, 2.75rem) !important;
   color: #111111 !important;
   max-width: 1200px !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   display: block !important;
 }
 
