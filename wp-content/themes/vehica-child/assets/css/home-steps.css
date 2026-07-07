@@ -6,7 +6,7 @@
 /* ─ Section wrapper ────────────────────────────────────────────────── */
 body.home #wecar-steps {
   max-width: 1440px !important;
-  margin: 0 auto !important;
+  margin: 4rem auto 0 !important;                                    /* separación de sección anterior */
   padding: 0 1.5rem !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -62,7 +62,7 @@ body.home #wecar-steps .elementor-column[data-id="h03c004"] {
 body.home #wecar-steps .elementor-container::before {
   content: '' !important;
   position: absolute !important;
-  top: 25px !important;
+  top: 23px !important;                                            /* centro de badges (46px/2) */
   left: 10% !important;
   right: 10% !important;
   width: 80% !important;
@@ -122,7 +122,7 @@ body.home #wecar-steps .wecar-steps__badge {
   line-height: 1 !important;
   color: #F9F9F9 !important;
   position: absolute !important;
-  top: 0 !important;
+  top: -50px !important;                                           /* subir sobre la card */
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 10 !important;
