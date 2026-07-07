@@ -89,7 +89,16 @@ function wecar_render_vehicle_card($post_id)
 {
     $post_id = (int) $post_id;
     $title   = get_the_title($post_id);
-    $image   = get_the_post_thumbnail_url($post_id, 'medium');
+
+    // Get first image from Vehica gallery meta (vehica_6673 = attachment IDs)
+    $image_ids = get_post_meta($post_id, 'vehica_6673', true);
+    if (!empty($image_ids)) {
+        $ids = explode(',', $image_ids);
+        $first_id = (int) trim($ids[0]);
+        $image = wp_get_attachment_image_url($first_id, 'medium');
+    } else {
+        $image = get_the_post_thumbnail_url($post_id, 'medium');
+    }
 
     if (!$image) {
         $image = esc_url(get_stylesheet_directory_uri() . '/assets/images/vehicle-placeholder.svg');
