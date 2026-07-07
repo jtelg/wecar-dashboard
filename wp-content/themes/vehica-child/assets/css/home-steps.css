@@ -1,68 +1,78 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    HOME STEPS — Sección "Vendé tu auto..." (3 pasos timeline)
    Figma node 121:7264 — responsive, max-w 1440px
-   DOM: #wecar-steps > .elementor-container > [h03c001: título] + [h03c002-004: pasos]
-   Layout: flex column natural de Elementor (título arriba, 3 columnas abajo)
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Section wrapper: max 1440px, padding lateral ───────────────────── */
+/* ─ Section wrapper ────────────────────────────────────────────────── */
 body.home #wecar-steps {
   max-width: 1440px !important;
   margin: 0 auto !important;
   padding: 0 1.5rem !important;
   width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 body.home #wecar-steps .elementor-container {
   max-width: 100% !important;
   margin: 0 auto !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 0 !important;
+  box-sizing: border-box !important;
 }
 
-/* ─ Columna del título: ocupa toda la fila ───────────────────────── */
+/* ─ Columna del título: fila propia ───────────────────────────────── */
 body.home #wecar-steps .elementor-column[data-id="h03c001"] {
   flex: 0 0 100% !important;
   width: 100% !important;
   max-width: 100% !important;
-  margin-bottom: 3rem !important;                              /* 48px gap below title */
+  margin-bottom: 3rem !important;
+  box-sizing: border-box !important;
 }
 
-/* ── Título responsive en rem ──────────────────────────────────────── */
+/* ── Título ─────────────────────────────────────────────────────────── */
 body.home #wecar-steps .wecar-steps__title .elementor-heading-title {
   text-align: center !important;
   font-family: var(--wecar-font-display) !important;
   font-weight: 700 !important;
-  font-size: clamp(1.75rem, 4vw, 2.375rem) !important;        /* 28→38px */
-  line-height: clamp(2.1875rem, 4.5vw, 2.75rem) !important;    /* 36→44px */
+  font-size: clamp(1.75rem, 4vw, 2.375rem) !important;
+  line-height: clamp(2.1875rem, 4.5vw, 2.75rem) !important;
   color: var(--wecar-figma-text) !important;
-  max-width: 56rem !important;                                  /* ~900px */
+  max-width: 56rem !important;
   margin: 0 auto !important;
+  display: block !important;
 }
 
-/* ── Columnas de los 3 pasos: flex row, 33% cada una ───────────────── */
+/* ── Columnas de los 3 pasos: fila de 3 ────────────────────────────── */
 body.home #wecar-steps .elementor-column[data-id="h03c002"],
 body.home #wecar-steps .elementor-column[data-id="h03c003"],
 body.home #wecar-steps .elementor-column[data-id="h03c004"] {
-  flex: 1 1 0 !important;
+  flex: 0 0 33.333% !important;
   width: 33.333% !important;
   max-width: 33.333% !important;
   position: relative !important;
-  padding-top: 40px !important;                                  /* espacio para badges */
+  padding-top: 50px !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
 }
 
-/* ── Línea conectora entre badges ──────────────────────────────────── */
+/* ── Línea conectora ────────────────────────────────────────────────── */
 body.home #wecar-steps .elementor-container::before {
-  content: '';
-  position: absolute;
-  top: 20px;                                                    /* centro de badges */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 2px;
-  background: linear-gradient(90deg, #C598FF 0%, #CAE0F5 50%, #CAEFF5 100%);
-  z-index: 0;
+  content: '' !important;
+  position: absolute !important;
+  top: 25px !important;
+  left: 10% !important;
+  right: 10% !important;
+  width: 80% !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, #C598FF 0%, #CAE0F5 50%, #CAEFF5 100%) !important;
+  z-index: 0 !important;
+  display: block !important;
 }
 
-/* ── Widget wrap = CARD visual ─────────────────────────────────────── */
+/* ── Widget wrap = CARD ─────────────────────────────────────────────── */
 body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-wrap,
 body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-wrap,
 body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-wrap {
@@ -77,9 +87,10 @@ body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-wr
   position: relative !important;
   height: 100% !important;
   background-clip: padding-box !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
 }
 
-/* Card backgrounds + borders por step */
 body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-wrap {
   background: #FCFAFF !important;
   border-color: #F5EDFF !important;
@@ -95,21 +106,23 @@ body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-wr
   border-color: #E7F8FA !important;
 }
 
-/* ── Badge (número) — posicionado arriba de la card ────────────────── */
+/* ── Badges ─────────────────────────────────────────────────────────── */
 body.home #wecar-steps .wecar-steps__badge {
   width: 46px !important;
   height: 46px !important;
-  border-radius: 16px !important;                                /* square rounded */
+  min-width: 46px !important;
+  min-height: 46px !important;
+  border-radius: 16px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-family: var(--wecar-font-body) !important;
   font-weight: 700 !important;
-  font-size: 1.75rem !important;                                /* 28px */
-  line-height: 2.375rem !important;                            /* 38px */
+  font-size: 1.75rem !important;
+  line-height: 1 !important;
   color: #F9F9F9 !important;
   position: absolute !important;
-  top: 0 !important;                                            /* al tope de la columna */
+  top: 0 !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 10 !important;
@@ -117,28 +130,31 @@ body.home #wecar-steps .wecar-steps__badge {
   padding: 0 !important;
 }
 
-body.home #wecar-steps .wecar-steps__badge--1 { background: var(--wecar-figma-purple) !important; }
-body.home #wecar-steps .wecar-steps__badge--2 { background: var(--wecar-figma-blue)   !important; }
-body.home #wecar-steps .wecar-steps__badge--3 { background: var(--wecar-figma-cyan)    !important; }
+body.home #wecar-steps .wecar-steps__badge--1 { background: #9949FF !important; }
+body.home #wecar-steps .wecar-steps__badge--2 { background: #0E6FD1 !important; }
+body.home #wecar-steps .wecar-steps__badge--3 { background: #0EB5D1 !important; }
 
 body.home #wecar-steps .wecar-steps__badge .elementor-heading-title {
   font-family: var(--wecar-font-body) !important;
   font-weight: 700 !important;
   font-size: 1.75rem !important;
-  line-height: 2.375rem !important;
+  line-height: 1 !important;
   color: #F9F9F9 !important;
   text-align: center !important;
   margin: 0 !important;
   padding: 0 !important;
+  display: block !important;
 }
 
-/* ── Título del paso (gradient border-bottom) ──────────────────────── */
+/* ── Títulos de los pasos ───────────────────────────────────────────── */
 body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge),
 body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-heading:not(.wecar-steps__badge),
 body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-heading:not(.wecar-steps__badge) {
   border-bottom: 1px solid !important;
   padding-bottom: 12px !important;
   margin-bottom: 4px !important;
+  display: block !important;
+  width: 100% !important;
 }
 
 body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge) {
@@ -156,11 +172,12 @@ body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-he
 body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge) h3.elementor-heading-title {
   font-family: var(--wecar-font-display) !important;
   font-weight: 700 !important;
-  font-size: 1.375rem !important;                                /* 22px */
-  line-height: 1.625rem !important;                             /* 26px */
-  color: var(--wecar-figma-purple) !important;
+  font-size: 1.375rem !important;
+  line-height: 1.625rem !important;
+  color: #9949FF !important;
   text-align: left !important;
   margin: 0 !important;
+  display: block !important;
 }
 
 body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-heading:not(.wecar-steps__badge) h3.elementor-heading-title {
@@ -168,9 +185,10 @@ body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-he
   font-weight: 700 !important;
   font-size: 1.375rem !important;
   line-height: 1.625rem !important;
-  color: var(--wecar-figma-blue) !important;
+  color: #0E6FD1 !important;
   text-align: left !important;
   margin: 0 !important;
+  display: block !important;
 }
 
 body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-heading:not(.wecar-steps__badge) h3.elementor-heading-title {
@@ -178,31 +196,33 @@ body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-he
   font-weight: 700 !important;
   font-size: 1.375rem !important;
   line-height: 1.625rem !important;
-  color: var(--wecar-figma-cyan) !important;
+  color: #0EB5D1 !important;
   text-align: left !important;
   margin: 0 !important;
+  display: block !important;
 }
 
-/* ── Texto descriptivo (body, alineado LEFT) ───────────────────────── */
+/* ── Texto descriptivo ──────────────────────────────────────────────── */
 body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-text-editor,
 body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-text-editor,
 body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-text-editor {
   text-align: left !important;
   font-family: var(--wecar-font-body) !important;
   font-weight: 400 !important;
-  font-size: 0.875rem !important;                                /* 14px */
-  line-height: 1.375rem !important;                              /* 22px */
-  color: var(--wecar-figma-text) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.375rem !important;
+  color: #111111 !important;
   max-width: 100% !important;
+  display: block !important;
 }
 
 body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-text-editor strong,
 body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-text-editor b {
-  color: var(--wecar-figma-purple) !important;
+  color: #9949FF !important;
   font-weight: 700 !important;
 }
 
-/* ── CTA final: centrado debajo de las cards ───────────────────────── */
+/* ── CTA ────────────────────────────────────────────────────────────── */
 body.home #wecar-steps .wecar-steps__cta {
   flex: 0 0 100% !important;
   width: 100% !important;
@@ -212,7 +232,7 @@ body.home #wecar-steps .wecar-steps__cta {
 }
 
 body.home #wecar-steps .wecar-steps__cta .elementor-button {
-  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%) !important;
   color: #F9F9F9 !important;
   border-radius: 16px !important;
   height: 44px !important;
@@ -225,13 +245,14 @@ body.home #wecar-steps .wecar-steps__cta .elementor-button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  text-decoration: none !important;
 }
 
 body.home #wecar-steps .wecar-steps__cta .elementor-button:hover {
   filter: brightness(0.92);
 }
 
-/* ── Mobile: stacked vertical ──────────────────────────────────────── */
+/* ── Mobile ─────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   body.home #wecar-steps {
     padding: 0 1rem !important;
@@ -256,7 +277,6 @@ body.home #wecar-steps .wecar-steps__cta .elementor-button:hover {
     margin-bottom: 2rem !important;
   }
 
-  /* hide horizontal connector line on mobile */
   body.home #wecar-steps .elementor-container::before {
     display: none !important;
   }
