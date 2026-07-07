@@ -3,10 +3,10 @@
    Figma node 121:7264 — responsive, max-w 1440px
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ─ Section wrapper ────────────────────────────────────────────────── */
+/* ─ Section wrapper ───────────────────────────────────────────────── */
 body.home #wecar-steps {
   max-width: 1440px !important;
-  margin: 4rem auto 0 !important;                                    /* separación de sección anterior */
+  margin: 4rem auto 0 !important;
   padding: 0 1.5rem !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -17,55 +17,59 @@ body.home #wecar-steps .elementor-container {
   margin: 0 auto !important;
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   align-items: flex-start !important;
   gap: 0 !important;
   box-sizing: border-box !important;
 }
 
-/* ─ Columna del título: fila propia ───────────────────────────────── */
+/* ─ Columna del título ─────────────────────────────────────────────── */
 body.home #wecar-steps .elementor-column[data-id="h03c001"] {
   flex: 0 0 100% !important;
   width: 100% !important;
   max-width: 100% !important;
-  margin-bottom: 3rem !important;
+  margin-bottom: 2rem !important;
   box-sizing: border-box !important;
 }
 
-/* ── Título ─────────────────────────────────────────────────────────── */
+/* ── Título (alineado a la izquierda como en Figma) ────────────────── */
 body.home #wecar-steps .wecar-steps__title .elementor-heading-title {
-  text-align: center !important;
+  text-align: left !important;
   font-family: var(--wecar-font-display) !important;
   font-weight: 700 !important;
   font-size: clamp(1.75rem, 4vw, 2.375rem) !important;
   line-height: clamp(2.1875rem, 4.5vw, 2.75rem) !important;
-  color: var(--wecar-figma-text) !important;
-  max-width: 56rem !important;
-  margin: 0 auto !important;
+  color: #111111 !important;
+  max-width: 1200px !important;
+  margin: 0 !important;
   display: block !important;
 }
 
-/* ── Columnas de los 3 pasos: fila de 3 ────────────────────────────── */
+/* ── Columnas de los 3 pasos ───────────────────────────────────────── */
 body.home #wecar-steps .elementor-column[data-id="h03c002"],
 body.home #wecar-steps .elementor-column[data-id="h03c003"],
 body.home #wecar-steps .elementor-column[data-id="h03c004"] {
-  flex: 0 0 33.333% !important;
-  width: 33.333% !important;
-  max-width: 33.333% !important;
+  flex: 0 0 auto !important;
+  width: 380px !important;
+  max-width: 380px !important;
   position: relative !important;
-  padding-top: 50px !important;
+  padding-top: 60px !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
+  margin-right: 32px !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c004"] {
+  margin-right: 0 !important;
 }
 
 /* ── Línea conectora ────────────────────────────────────────────────── */
 body.home #wecar-steps .elementor-container::before {
   content: '' !important;
   position: absolute !important;
-  top: 23px !important;                                            /* centro de badges (46px/2) */
-  left: 10% !important;
-  right: 10% !important;
-  width: 80% !important;
+  top: 30px !important;
+  left: 24px !important;
+  right: 24px !important;
+  width: calc(100% - 48px) !important;
   height: 2px !important;
   background: linear-gradient(90deg, #C598FF 0%, #CAE0F5 50%, #CAEFF5 100%) !important;
   z-index: 0 !important;
@@ -106,7 +110,7 @@ body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-wr
   border-color: #E7F8FA !important;
 }
 
-/* ── Badges ─────────────────────────────────────────────────────────── */
+/* ── Badges (alineados con el borde izquierdo de cada card) ────────── */
 body.home #wecar-steps .wecar-steps__badge {
   width: 46px !important;
   height: 46px !important;
@@ -122,9 +126,9 @@ body.home #wecar-steps .wecar-steps__badge {
   line-height: 1 !important;
   color: #F9F9F9 !important;
   position: absolute !important;
-  top: -50px !important;                                           /* subir sobre la card */
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  top: -60px !important;
+  left: 24px !important;
+  transform: none !important;
   z-index: 10 !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -273,12 +277,17 @@ body.home #wecar-steps .wecar-steps__cta .elementor-button:hover {
     flex: 0 0 100% !important;
     width: 100% !important;
     max-width: 100% !important;
-    padding-top: 35px !important;
+    padding-top: 50px !important;
+    margin-right: 0 !important;
     margin-bottom: 2rem !important;
   }
 
   body.home #wecar-steps .elementor-container::before {
     display: none !important;
+  }
+
+  body.home #wecar-steps .wecar-steps__badge {
+    left: 24px !important;
   }
 
   body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge) h3.elementor-heading-title,
