@@ -119,6 +119,22 @@
   --wecar-step-3: var(--wecar-figma-cyan);
 }
 
+/*
+ * Elementor stretch guard
+ * -----------------------
+ * Elementor's `section-stretched` script writes inline width/left values at
+ * runtime. When that calculation is wrong, home sections end up as a 1440px
+ * block stuck to the left edge. The section-specific CSS files own the real
+ * layout (`max-width` + `margin:auto`), so neutralize Elementor's inline
+ * stretch offsets for the custom WeCar home sections.
+ */
+body.home section[id^="wecar-"].elementor-section-stretched {
+  left: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  transform: none !important;
+}
+
 /* ── Breakpoints (for reference, use in media queries) ──────────── */
 /* Mobile:  max-width: 767px     */
 /* Tablet:  min-width: 768px and max-width: 1024px  */

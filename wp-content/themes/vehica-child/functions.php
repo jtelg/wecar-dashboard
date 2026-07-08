@@ -64,6 +64,8 @@ add_action('wp_enqueue_scripts', static function () {
             'wecar-footer'       => 'home-footer.css',
         ];
 
+        $version = wp_get_theme()->get('Version');
+
         foreach ($section_css as $handle => $file) {
             $path = get_stylesheet_directory() . '/assets/css/' . $file;
             if (file_exists($path)) {
@@ -71,7 +73,7 @@ add_action('wp_enqueue_scripts', static function () {
                     $handle,
                     get_stylesheet_directory_uri() . '/assets/css/' . $file,
                     ['wecar-tokens'],
-                    filemtime($path)
+                    $version
                 );
             }
         }
