@@ -6,9 +6,8 @@
 body.home #wecar-features {
   background: radial-gradient(circle at 50% 101%, rgba(153,73,255,1) 0%, rgba(255,255,255,0) 100%);
   position: relative;
-  max-width: 1440px !important;
-  margin: 0 auto !important;
-  padding: 0 1.5rem !important;
+  /* full-bleed background; items constrained in .elementor-container */
+  padding: 80px 1.5rem !important;
   box-sizing: border-box !important;
 }
 
@@ -27,6 +26,8 @@ body.home #wecar-features .wecar-features__title .elementor-heading-title {
 body.home #wecar-features .elementor-container {
   display: flex;
   flex-wrap: wrap;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
 }
 
 body.home #wecar-features .elementor-column[data-id="h05c002"],

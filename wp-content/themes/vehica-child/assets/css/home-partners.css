@@ -4,9 +4,8 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 body.home #wecar-partners {
-  max-width: 1440px !important;
-  margin: 0 auto !important;
-  padding: 0 1.5rem !important;
+  /* full-bleed background; items constrained in .elementor-container */
+  padding: 60px 1.5rem !important;
   box-sizing: border-box !important;
 }
 
@@ -27,6 +26,8 @@ body.home #wecar-partners .elementor-container {
   align-items: center;
   gap: 60px;
   flex-wrap: wrap;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
 }
 
 body.home #wecar-partners .elementor-column[data-id="h06c002"],
