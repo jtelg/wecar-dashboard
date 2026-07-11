@@ -113,8 +113,8 @@ body.home .wecar-hero__card__badge-wrapper {
   top: 40px !important;
   left: 40px !important;
   z-index: 10 !important;
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(10px);
   transition: opacity 0.3s ease-out 0.1s,
                transform 0.3s ease-out 0.1s;
   pointer-events: none;
@@ -199,7 +199,7 @@ body.home .wecar-hero__card__image {
   max-height: 270px !important;
   z-index: 1 !important;
   pointer-events: none !important;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 0.3s ease-out,
                width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -222,8 +222,8 @@ body.home .wecar-hero__card__cta {
   bottom: 40px !important;
   left: 40px !important;
   z-index: 5 !important;
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(10px);
   transition: opacity 0.3s ease-out 0.1s,
                transform 0.3s ease-out 0.1s;
 }
@@ -288,6 +288,10 @@ body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__cta {
   transform: translateY(0);
 }
 
+body.home #wecar-hero .wecar-hero__column--active::after {
+  opacity: 0;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    ESTADO COLAPSADO: ocultar TODO excepto label centrado
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -320,7 +324,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"]::after {
   line-height: 44px;
   z-index: 10;
   pointer-events: none;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease 0.25s;
 }
 
