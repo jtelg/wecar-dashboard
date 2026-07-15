@@ -108,6 +108,10 @@ function wecar_render_vehicle_card($post_id)
     $price_raw = get_post_meta($post_id, 'vehica_currency_6656_2476', true);
     $price     = !empty($price_raw) ? 'ARS ' . number_format((int) $price_raw, 0, ',', '.') : '';
 
+    // KM from meta
+    $km_raw = get_post_meta($post_id, 'vehica_6664', true);
+    $km     = !empty($km_raw) ? number_format((int) $km_raw, 0, ',', '.') . ' km' : 'Consultar KM';
+
     // Taxonomies
     $version       = wecar_get_term_name($post_id, 'vehica_19226');
     $year          = wecar_get_term_name($post_id, 'vehica_19270');
@@ -137,7 +141,7 @@ function wecar_render_vehicle_card($post_id)
             <div class="wecar-vehicle-card__tags">
                 <span class="wecar-vehicle-card__tag wecar-vehicle-card__tag--km">
                     <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/ic-gauge.svg'); ?>" alt="" aria-hidden="true" class="wecar-vehicle-card__tag-icon">
-                    <?php echo esc_html__('Consultar KM', 'vehica'); ?>
+                    <?php echo esc_html($km); ?>
                 </span>
 
                 <?php if ($year) : ?>
