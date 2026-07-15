@@ -10,6 +10,9 @@
 
 /* ── Contenedor principal del Hero (responsive, max 1440px) ──────── */
 body.home #wecar-hero {
+  --wecar-hero-offscreen: calc(100vw + 80px);
+  --wecar-hero-transition-duration: 1.2501229s;
+  --wecar-hero-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
   min-height: clamp(490px, 42vw, 520px) !important;
   height: clamp(490px, 42vw, 520px) !important;
   overflow: visible !important;
@@ -34,7 +37,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"] {
   position: relative !important;
   width: auto !important;
   flex: 1 1 0 !important;          /* step-1: ambos iguales */
-  transition: flex 500ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: flex var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing) !important;
   cursor: pointer;
   overflow: hidden !important; /* Clip container para reveal */
   height: 100% !important;
@@ -115,8 +118,9 @@ body.home .wecar-hero__card__badge-wrapper {
   top: 40px !important;
   left: 40px !important;
   z-index: 10 !important;
-  transform: translateX(600px); /* Fuera del viewport en step-1 y collapsed */
-  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-120px) !important; /* Fuera del viewport en step-1 y collapsed */
+  transition: transform var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing) !important;
+  will-change: transform;
   pointer-events: none;
 }
 
@@ -146,12 +150,13 @@ body.home .wecar-hero__card .elementor-icon-box-title {
   line-height: 54px;
   color: var(--wecar-figma-text);
   margin: 0 0 20px;
-  max-width: min(55%, 500px); /* responsive: 55% de card, tope 500px */
+  width: 489px;
+  max-width: 489px;
   text-align: left !important;
   overflow-wrap: break-word !important;
   word-break: break-word !important;
   transform: translateX(0);
-  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing) !important;
 }
 
 body.home .wecar-hero__card--right .elementor-icon-box-title,
@@ -163,11 +168,12 @@ body.home .wecar-hero__card .elementor-icon-box-description {
   font-size: 22px;
   line-height: 30px;
   color: var(--wecar-figma-text-muted);
-  max-width: min(45%, 412px); /* responsive: 45% de card, tope 412px */
+  width: 412px;
+  max-width: 412px;
   text-align: left !important;
   margin: 0 0 24px;
   transform: translateX(0);
-  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing) !important;
 }
 
 body.home .wecar-hero__card--right .elementor-icon-box-description { color: #F9F9F9; }
@@ -193,7 +199,7 @@ body.home .wecar-hero__card__image {
   z-index: 1 !important;
   pointer-events: none !important;
   /* Sin animación de slide — el container hace el reveal */
-  transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing);
 }
 
 /* Left card (Comprá) - auto a 6% del borde derecho */
@@ -221,8 +227,9 @@ body.home .wecar-hero__card__cta {
   bottom: 40px !important;
   left: 40px !important;
   z-index: 5 !important;
-  transform: translateX(600px); /* Fuera del viewport en step-1 y collapsed */
-  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(120px) !important; /* Fuera del viewport en step-1 y collapsed */
+  transition: transform var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing) !important;
+  will-change: transform;
 }
 
 body.home .wecar-hero__card__cta .elementor-button {
@@ -259,11 +266,17 @@ body.home #wecar-hero .wecar-hero__column--active .elementor-icon-box-descriptio
 body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__badge-wrapper,
 body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__cta,
 body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__image {
-  transform: translateX(0);
+  transform: translateX(0) !important;
 }
 
-body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__image {
-  width: 55% !important; /* responsive: igual para ambos activos */
+body.home #wecar-hero .elementor-column[data-id="h02c001"].wecar-hero__column--active .wecar-hero__card__image {
+  width: 50.204918% !important;
+  right: 2.049180% !important;
+}
+
+body.home #wecar-hero .elementor-column[data-id="h02c002"].wecar-hero__column--active .wecar-hero__card__image {
+  width: 54.303279% !important;
+  right: -7.581967% !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -272,13 +285,25 @@ body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__image {
    - Auto: transform en vez de opacity
    - Solo el label ::after permanece visible
    ═══════════════════════════════════════════════════════════════════════════ */
+/* Active cards reveal controls vertically, matching Figma. */
+body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__badge-wrapper,
+body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__cta {
+  transform: translateY(0) !important;
+}
+
+/* Figma keeps the text measures stable and only shifts the copy vertically. */
+body.home #wecar-hero .wecar-hero__column--active .elementor-icon-box-title,
+body.home #wecar-hero .wecar-hero__column--active .elementor-icon-box-description {
+  transform: translateY(28px) !important;
+}
+
 body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title,
 body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-description {
-  transform: translateX(600px);
+  transform: translateX(var(--wecar-hero-offscreen)) !important;
 }
 
 body.home #wecar-hero .wecar-hero__column--collapsed .wecar-hero__card__image {
-  transform: translateX(600px);
+  transform: translateX(var(--wecar-hero-offscreen)) !important;
   pointer-events: none !important;
 }
 
@@ -290,8 +315,8 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card {
 
 /* Car: default pushed-right fuera del viewport en step-1, con transición */
 body.home .wecar-hero__card__image {
-  transform: translateX(120%); /* 100%+ para ocultar completamente en step-1 */
-  transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform: translateX(120%) !important; /* 100%+ para ocultar completamente en step-1 */
+  transition: width var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing), right var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing), transform var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing) !important;
 }
 
 /* ── Label centrado "Comprá" / "Vendé" ────────────────────────────── */
@@ -309,7 +334,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"]::after {
   z-index: 10;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease 0.25s;
+  transition: opacity var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing);
 }
 
 body.home #wecar-hero .elementor-column[data-id="h02c001"]::after {
@@ -324,7 +349,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"]::after {
 
 body.home #wecar-hero .wecar-hero__column--collapsed::after {
   opacity: 1 !important;
-  transition: opacity 0.3s ease 0.25s;
+  transition: opacity var(--wecar-hero-transition-duration) var(--wecar-hero-transition-easing);
 }
 
 /* ── Mobile: stacked, todo visible ────────────────────────────────── */
@@ -360,12 +385,16 @@ body.home #wecar-hero .wecar-hero__column--collapsed::after {
     line-height: 36px;
     margin: 0 0 16px;
     transform: none !important;
+    width: auto;
+    max-width: 100%;
   }
 
   body.home .wecar-hero__card .elementor-icon-box-description {
     font-size: 16px;
     line-height: 24px;
     transform: none !important;
+    width: auto;
+    max-width: 100%;
   }
 
   body.home .wecar-hero__card__image { display: none !important; }
