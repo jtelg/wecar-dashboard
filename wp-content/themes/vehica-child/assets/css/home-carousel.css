@@ -8,7 +8,11 @@ body.home #wecar-carousel {
   background: linear-gradient(180deg, #9949FF 0%, #0E6FD1 100%);
   position: relative;
   overflow: hidden;
-  padding: 64px 24px;
+  /* !important needed: Elementor writes an inline padding (80px 20px) on this
+     section that would otherwise clip the right edge. Left aligns to the 1440px
+     container gutter (same as other sections); right bleeds to 100vw. */
+  --wecar-carousel-gutter: max(24px, calc((100vw - 1440px) / 2));
+  padding: 80px 0 80px var(--wecar-carousel-gutter) !important;
   width: 100% !important; max-width: 100% !important;
   margin: 0 !important;
 }
@@ -34,12 +38,16 @@ body.home #wecar-carousel::after {
   z-index: 0;
 }
 
-body.home #wecar-carousel > .elementor-container { position: relative; z-index: 1; }
+/* Break out of Elementor's boxed container so the carousel can reach 100vw.
+   Without this, everything (header + carousel) is trapped in a ~1140px centered box. */
+body.home #wecar-carousel > .elementor-container { position: relative; z-index: 1; max-width: 100% !important; }
 
 /* ── Header section: NO scroll, fixed position ───────────────────── */
 body.home #wecar-carousel .elementor-section[data-id="h04s001"] {
   overflow: visible !important;
   margin-bottom: 32px;
+  /* Keep the header balanced: title aligns left, "Ver todos" stays off the edge */
+  padding-right: max(24px, calc((100vw - 1440px) / 2));
 }
 
 body.home #wecar-carousel .elementor-section[data-id="h04s001"] .elementor-container {
@@ -69,30 +77,42 @@ body.home #wecar-carousel .wecar-carousel__link a {
   line-height: 18px;
 }
 
-body.home #wecar-carousel .wecar-carousel__link a::after { content: ' →'; }
-
 /* ═══════════════════════════════════════════════════════════════════════
    CAROUSEL — Horizontal Scroll Container (SOLO tarjetas)
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* The shortcode wrapper: SOLO este tiene overflow */
+/* The shortcode wrapper: native horizontal scroll viewport (JS drives the
+   ping-pong auto-scroll). width:100%+gutter so it scrolls within the section;
+   overflow-x hidden on the section clips it at 100vw. Scrollbar is hidden. */
 body.home #wecar-carousel .wecar-carousel {
   display: flex !important;
   flex-direction: row !important;
-  gap: 24px !important;
+  /* Break the viewport out to BOTH screen edges (0%..100vw). */
+  width: calc(100% + var(--wecar-carousel-gutter)) !important;
+  margin-left: calc(-1 * var(--wecar-carousel-gutter)) !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   white-space: nowrap !important;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
   padding-bottom: 8px;
   margin-top: 0;
+  cursor: grab;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* legacy Edge */
+  touch-action: pan-y;             /* allow vertical page scroll; capture horizontal drag */
 }
 
-/* Hide scrollbar (Webkit) */
-body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar { height: 4px; }
-body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 2px; }
-body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar { display: none; }
+body.home #wecar-carousel .wecar-carousel--dragging { cursor: grabbing; user-select: none; }
+
+/* Single group of cards. Ping-pong JS scrolls right to the end then reverses
+   back to the start — no cloning, no gap, no jump. */
+body.home #wecar-carousel .wecar-carousel__group {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px !important;
+  padding-right: 24px !important;
+  flex: 0 0 auto;
+}
 
 /* ═══════ VEHICLE CARD ═══════ */
 body.home #wecar-carousel .wecar-vehicle-card {
@@ -153,7 +173,8 @@ body.home #wecar-carousel .wecar-vehicle-card__body {
   flex: 1;
 }
 
-/* Title (brand + model) */
+/* Title (brand + model) — fixed 2-line height (2 × 18px) so cards align
+   regardless of whether the title is 1 or 2 lines. Overflow hidden. */
 body.home #wecar-carousel .wecar-vehicle-card__title {
   font-family: var(--wecar-font-display);
   font-weight: 700;
@@ -163,6 +184,8 @@ body.home #wecar-carousel .wecar-vehicle-card__title {
   margin: 0;
   padding: 0 0 8px;
   border-bottom: 1px solid #F9F9F9;
+  height: 36px;
+  overflow: hidden;
 }
 
 /* Version */
@@ -232,7 +255,11 @@ body.home #wecar-carousel .wecar-vehicle-card__tag--transmission {
 }
 
 /* ── Bottom CTA pill ──────────────────────────────────────────────── */
+/* Break out to full viewport width so the button centers on screen,
+   not just inside the Elementor column. */
 body.home #wecar-carousel .wecar-carousel__cta {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   display: flex;
   justify-content: center;
   margin-top: 32px;
