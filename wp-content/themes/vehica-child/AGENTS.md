@@ -137,7 +137,7 @@ If you restore only `_elementor_data`, the page renders without CSS. The full se
 
 ### Rule 2: CSS file size is a quality gate
 
-After any change to `_elementor_data`, the post-specific CSS file MUST be > 1 KB. A file < 1 KB means the page is broken. The home page (post 35463) is normally ~115 KB.
+After any change to `_elementor_data`, the post-specific CSS file MUST be > 1 KB. A file < 1 KB means the page is broken. Home baselines are architecture-specific: redesigned TEST is approximately 10,470 bytes; legacy production is approximately 115,910 bytes. Never compare or copy CSS or metadata between those architectures.
 
 **Check the size:**
 
@@ -150,6 +150,10 @@ ssh wecar "wc -c ~/www/wecar.com.ar/public_html/wp-content/uploads/elementor/css
 📖 **`openspec/specs/elementor-data-restoration.md`** — 5-step recovery procedure.
 
 📖 **`openspec/specs/elementor-css-validation.md`** — CSS size validation rules.
+
+### Theme-only TEST deploy invariant
+
+For any child-theme asset deploy, record the pre-deploy hash and size of TEST `wp-content/uploads/elementor/css/post-35463.css`, deploy only reviewed theme assets, and **NEVER** clear or regenerate Elementor CSS. Never copy legacy production CSS or metadata to redesigned TEST, and never restore only `_elementor_data`. After deployment, the generated CSS hash MUST equal the pre-deploy hash; otherwise stop, roll back the scoped theme assets, and investigate before continuing. See `openspec/specs/elementor-css-validation.md` for the detailed runbook.
 
 ### Rule 3: Local JSON backups are not enough
 
@@ -181,6 +185,8 @@ ssh wecar "wc -c ~/www/wecar.com.ar/public_html/wp-content/uploads/elementor/css
 ```
 
 ## Recent Changes
+
+Home steps animation architecture, exact Figma timing, TEST QA controls, verification, and rollback boundaries are documented in [docs/HOME-STEPS-ANIMATION.md](docs/HOME-STEPS-ANIMATION.md).
 
 ### `home-redesign` (2026-06-30) — Rediseño completo del home
 

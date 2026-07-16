@@ -68,6 +68,11 @@ body.home #wecar-steps .elementor-column[data-id="h03c004"] {
   margin-right: 0 !important;
 }
 
+/* Keep the connector behind the complete first item without changing layout. */
+body.home #wecar-steps .elementor-column[data-id="h03c002"] {
+  z-index: 1 !important;
+}
+
 /* ── Línea conectora (centro a centro de badges) ──────────────────────
    Anclada a la columna del medio (h03c003). El badge NO está anclado a la
    columna sino a la tarjeta (.elementor-widget-wrap), que arranca 60px más
@@ -290,6 +295,126 @@ body.home #wecar-steps .wecar-steps__cta .elementor-button:hover {
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */
+/* -- Sequential reveal: 1 rises, then 2 and 3 enter left-to-right -- */
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--motion-ready .wecar-steps__cta {
+  --wecar-steps-figma-duration: 1250.1229047775269ms;
+  --wecar-steps-figma-gap: 1.0000000474974513ms;
+  opacity: 0;
+  will-change: opacity, transform;
+  transition: none;
+}
+
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c002"] {
+  transform: translateY(36px);
+}
+
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c004"] {
+  transform: translateX(-36px);
+}
+
+body.home #wecar-steps.wecar-steps--motion-ready .wecar-steps__cta {
+  transform: translateY(36px);
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--revealed .wecar-steps__cta {
+  opacity: 1;
+  transform: translate(0, 0);
+  will-change: auto;
+  transition-property: opacity, transform;
+  transition-duration: var(--wecar-steps-figma-duration);
+  transition-timing-function: cubic-bezier(0, 0, 0.3, 1);
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c002"] {
+  transition-delay: 0ms;
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c003"] {
+  transition-delay: 1251.1229048250243513ms;
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c004"] {
+  transition-delay: 2502.2458096500487026ms;
+}
+
+body.home #wecar-steps.wecar-steps--revealed .wecar-steps__cta {
+  transition-delay: 3753.3687144750730539ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+  body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+  body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c004"],
+  body.home #wecar-steps.wecar-steps--motion-ready .wecar-steps__cta {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
+/* Temporary TEST-only replay control, injected by home-animations.js. */
+body.home .wecar-steps__test-replay {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99999;
+  padding: 12px 18px;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  background: #111111;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(17, 17, 17, 0.28);
+  font: 700 14px/1.2 var(--wecar-font-body);
+  cursor: pointer;
+}
+
+body.home .wecar-steps__test-replay:hover,
+body.home .wecar-steps__test-replay:focus-visible {
+  background: #9949FF;
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .wecar-steps__cta {
+  opacity: 0;
+  transition: none;
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .wecar-steps__cta {
+  transform: translateY(36px);
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c004"] {
+  transform: translateX(-36px);
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .wecar-steps__cta {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition-property: opacity, transform;
+  transition-duration: var(--wecar-steps-figma-duration);
+  transition-timing-function: cubic-bezier(0, 0, 0.3, 1);
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c002"] { transition-delay: 0ms; }
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c003"] { transition-delay: 1251.1229048250243513ms; }
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c004"] { transition-delay: 2502.2458096500487026ms; }
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .wecar-steps__cta { transition-delay: 3753.3687144750730539ms; }
+
 @media (max-width: 768px) {
   body.home #wecar-steps {
     padding: 0 1rem !important;
