@@ -90,7 +90,7 @@ body.home #wecar-partners .elementor-column[data-id="h06c004"] .elementor-widget
 /* Figma node 28:624 v2 ? opt-in only; legacy TEST remains the default. */
 body.home #wecar-partners.wecar-figma-28-624-v2 {
  box-sizing:border-box !important; min-height:344px; padding:100px clamp(24px,9.79vw,148px) !important;
-  background:radial-gradient(442.62% 101.45% at 50% -1.45%, #9949FF 0%, rgba(255, 255, 255, 0.00) 100%) !important;
+  background: radial-gradient(circle at 50% 101%, rgba(153, 73, 255, 1) 0%, rgba(255, 255, 255, 0) 100%) !important;
 }
 body.home #wecar-partners.wecar-figma-28-624-v2 > .elementor-container { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:40px 60px; max-width:1216px !important; margin:0 auto !important; }
 body.home #wecar-partners.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] { width:100% !important; }
