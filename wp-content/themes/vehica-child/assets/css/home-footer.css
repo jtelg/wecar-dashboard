@@ -1,13 +1,14 @@
 /* ── Home Footer (Figma Exact 2026-07) ────────────────────── */
-body.home .wecar-footer {
+body.home #wecar-footer {
   background: #FFFFFF;
-  color: var(--wecar-figma-text);
   position: relative;
   overflow: hidden;
+  padding: 60px clamp(24px, 9.79vw, 148px) !important;
+  min-height: 220px;
 }
 
 /* Corner radial textures */
-body.home .wecar-footer::before {
+body.home #wecar-footer::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
@@ -17,7 +18,7 @@ body.home .wecar-footer::before {
   z-index: 0;
 }
 
-body.home .wecar-footer::after {
+body.home #wecar-footer::after {
   content: '';
   position: absolute;
   top: 0; right: 0;
@@ -27,56 +28,82 @@ body.home .wecar-footer::after {
   z-index: 0;
 }
 
-body.home .wecar-footer > * { position: relative; z-index: 1; }
+body.home #wecar-footer > * { position: relative; z-index: 1; }
 
 /* 4-quadrant layout via CSS grid */
-body.home .wecar-footer .elementor-container {
+body.home #wecar-footer .elementor-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   gap: 24px 0;
-  max-width: 1440px;
+  max-width: 1216px;
   margin: 0 auto;
 }
 
 /* Logo top-left */
-body.home .wecar-footer .wecar-footer__logo img {
+body.home #wecar-footer .wecar-footer__logo img {
   width: 316px;
-  height: auto;
+  height: 56px;
   display: block;
 }
 
 /* Description top-right */
-body.home .wecar-footer .wecar-footer__description {
-  font-family: var(--wecar-font-body);
+body.home #wecar-footer .wecar-footer__description {
+  font-family: var(--wecar-font-body), 'Exo 2', sans-serif;
   font-size: 14px;
   line-height: 22px;
-  color: var(--wecar-figma-text-muted);
+  color: #111111;
   text-align: right;
   max-width: 292px;
   margin-left: auto;
+  margin: 0;
 }
 
 /* Copyright bottom-left */
-body.home .wecar-footer .wecar-footer__copyright {
-  font-family: var(--wecar-font-footer);
+body.home #wecar-footer .wecar-footer__copyright {
+  font-family: 'Gotham', sans-serif;
+  font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  color: var(--wecar-figma-text-muted);
+  color: #464646;
   text-align: left;
 }
 
 /* Phone bottom-right */
-body.home .wecar-footer .wecar-footer__phone {
-  font-family: var(--wecar-font-body);
+body.home #wecar-footer .wecar-footer__phone {
+  font-family: 'Exo 2', sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
-  color: var(--wecar-figma-purple);
+  color: #9949FF;
   text-align: right;
   text-decoration: none;
 }
 
-body.home .wecar-footer .wecar-footer__phone:hover {
+body.home #wecar-footer .wecar-footer__phone:hover {
   text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  body.home #wecar-footer {
+    padding: 40px 20px !important;
+  }
+  
+  body.home #wecar-footer .elementor-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  body.home #wecar-footer .wecar-footer__logo img {
+    width: 200px;
+    height: auto;
+  }
+  
+  body.home #wecar-footer .wecar-footer__description,
+  body.home #wecar-footer .wecar-footer__copyright,
+  body.home #wecar-footer .wecar-footer__phone {
+    text-align: left;
+    max-width: 100%;
+  }
 }
