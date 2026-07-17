@@ -28,20 +28,22 @@ if (is_admin()) {
 // ─── Enqueue styles ─────────────────────────────────────────────
 add_action('wp_enqueue_scripts', static function () {
     $deps = [];
+    $stylesheet_directory = get_stylesheet_directory();
+    $stylesheet_uri = get_stylesheet_directory_uri();
 
     if (class_exists(\Elementor\Plugin::class)) {
         $deps[] = 'elementor-frontend';
     }
 
     wp_enqueue_style('vehica', get_template_directory_uri() . '/style.css', $deps, VEHICA_VERSION);
-    wp_enqueue_style('vehica-child', get_stylesheet_directory_uri() . '/style.css', ['vehica']);
+    wp_enqueue_style('vehica-child', $stylesheet_uri . '/style.css', ['vehica']);
 
     // ── Design tokens (global, loaded after Elementor frontend) ──
     wp_enqueue_style(
         'wecar-tokens',
-        get_stylesheet_directory_uri() . '/assets/css/tokens.css',
+        $stylesheet_uri . '/assets/css/tokens.css',
         ['elementor-frontend'],
-        wp_get_theme()->get('Version')
+        filemtime($stylesheet_directory . '/assets/css/tokens.css')
     );
 
     // ── Google Fonts: Syne (display) + Exo 2 (body) from Figma spec ────
@@ -64,28 +66,30 @@ add_action('wp_enqueue_scripts', static function () {
             'wecar-footer'       => 'home-footer.css',
         ];
 
-        $version = wp_get_theme()->get('Version');
-
         foreach ($section_css as $handle => $file) {
-            $path = get_stylesheet_directory() . '/assets/css/' . $file;
+            $path = $stylesheet_directory . '/assets/css/' . $file;
             if (file_exists($path)) {
                 wp_enqueue_style(
                     $handle,
-                    get_stylesheet_directory_uri() . '/assets/css/' . $file,
+                    $stylesheet_uri . '/assets/css/' . $file,
                     ['wecar-tokens'],
-                    $version
+                    // Each Home asset changes URL only when that file changes.
+                    filemtime($path)
                 );
             }
         }
 
         // Animations JS (footer, deferred)
-        wp_enqueue_script(
-            'wecar-home-animations',
-            get_stylesheet_directory_uri() . '/assets/js/home-animations.js',
-            [],
-            $version,
-            ['strategy' => 'defer', 'in_footer' => true]
-        );
+        $animations_path = $stylesheet_directory . '/assets/js/home-animations.js';
+        if (file_exists($animations_path)) {
+            wp_enqueue_script(
+                'wecar-home-animations',
+                $stylesheet_uri . '/assets/js/home-animations.js',
+                [],
+                filemtime($animations_path),
+                ['strategy' => 'defer', 'in_footer' => true]
+            );
+        }
     }
 });
 
