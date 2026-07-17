@@ -1,206 +1,204 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   HOME FEATURES — Elegí WeCar (Figma Exact 2026-07)
-   Node: 28:624 — 3 cards in a row with gradient backgrounds + icon + title
+   SECTION 3 — Elegí WeCar + Respaldado por grandes marcas
+   Figma node 28:624 — ONE unified section with single gradient background
    ═══════════════════════════════════════════════════════════════════════════ */
 
-body.home #wecar-features {
-  background: radial-gradient(circle at 50% 101%, rgba(153,73,255,1) 0%, rgba(255,255,255,0) 100%);
-  position: relative;
-  /* full-bleed background; items constrained in .elementor-container */
-  padding: 80px 1.5rem !important;
+/* ── Section background (single gradient covering both titles) ── */
+body.home #wecar-section3.wecar-figma-28-624-v2 {
   box-sizing: border-box !important;
+  padding: 100px clamp(24px, 9.79vw, 148px) 0 !important;
+  background: radial-gradient(ellipse 300% 100% at 50% 100%, rgba(153, 73, 255, 1) 0%, rgba(255, 255, 255, 0) 100%) !important;
+  position: relative;
 }
 
-/* ── Title ──────────────────────────────────────────────────────────── */
-body.home #wecar-features .wecar-features__title .elementor-heading-title {
-  text-align: left !important;
-  font-family: var(--wecar-font-display);
-  font-weight: 700;
-  font-size: 38px;
-  line-height: 44px;
-  color: var(--wecar-figma-text);
-  margin-bottom: 40px;
-}
-
-/* ── Ensure 3 cards in a row ───────────────────────────────────────── */
-body.home #wecar-features .elementor-container {
+body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
   display: flex;
   flex-wrap: wrap;
-  max-width: 1440px !important;
+  align-items: stretch;
+  gap: 40px 20px;
+  max-width: 1216px !important;
   margin: 0 auto !important;
 }
 
-body.home #wecar-features .elementor-column[data-id="h05c002"],
-body.home #wecar-features .elementor-column[data-id="h05c003"],
-body.home #wecar-features .elementor-column[data-id="h05c004"] {
-  width: calc(33.333% - 14px) !important; /* account for 20px gap between cards */
+/* ── Titles ── */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c001"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+  width: 100% !important;
 }
 
-/* ── Card widget (the actual card visual) ──────────────────────────── */
-body.home #wecar-features .wecar-features__card {
-  padding: 28px;
-  border-radius: 16px;
-  border: 2px solid #FFFFFF;
-  color: #FFFFFF;
-  min-height: 200px;
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title .elementor-widget-container,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title .elementor-widget-container {
+  margin: 0 !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title .elementor-heading-title,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title .elementor-heading-title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-family: var(--wecar-font-display), Syne, sans-serif !important;
+  font-size: 38px !important;
+  font-weight: 700 !important;
+  line-height: 44px !important;
+  text-align: center !important;
+}
+
+/* ── Feature Cards ── */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
+  width: calc((100% - 40px) / 3) !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id^="h05c00"] > .elementor-column-wrap,
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id^="h05c00"] > .elementor-column-wrap > .elementor-widget-wrap,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card {
+  height: 100%;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card {
   box-sizing: border-box;
+  min-height: 100px;
+  padding: 28px;
+  overflow: hidden;
+  border: 2px solid #fff;
+  border-radius: 16px;
 }
 
-/* Force icon + text side by side (Figma card layout is a ROW) */
-body.home #wecar-features .wecar-features__card .elementor-icon-box-wrapper {
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card--purple {
+  background: linear-gradient(136deg, #9949ff 1.0861%, #6634a5 98.914%);
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card--blue {
+  background: linear-gradient(136deg, #0e6fd1 1.0861%, #0f5aa7 98.914%);
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card--cyan {
+  background: linear-gradient(136deg, #0eb5d1 1.0861%, #0f91a7 98.914%);
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-wrapper {
   display: flex !important;
-  flex-direction: row !important;
   align-items: center !important;
-  gap: 16px !important;
+  gap: 16px;
+  height: 100%;
+  text-align: left;
 }
 
-body.home #wecar-features .wecar-features__card .elementor-icon-box-icon {
-  margin-bottom: 0 !important;  /* override Elementor default */
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-img {
+  flex: 0 0 42px;
+  width: 42px !important;
+  margin: 0 !important;
 }
 
-/* ── Card backgrounds ──────────────────────────────────────────────── */
-body.home #wecar-features .wecar-features__card--purple {
-  background: linear-gradient(136deg, #9949FF 0%, #6634A5 100%);
-}
-
-body.home #wecar-features .wecar-features__card--blue {
-  background: linear-gradient(136deg, #0E6FD1 0%, #0F5AA7 100%);
-}
-
-body.home #wecar-features .wecar-features__card--cyan {
-  background: linear-gradient(136deg, #0EB5D1 0%, #0F91A7 100%);
-}
-
-/* ── Card icon (42x42px, white) ───────────────────────────────────── */
-body.home #wecar-features .wecar-features__card .elementor-icon {
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-img img {
+  display: block;
   width: 42px;
   height: 42px;
-  font-size: 42px;
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-body.home #wecar-features .wecar-features__card .elementor-icon i {
-  color: #FFFFFF;
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-content {
+  min-width: 0;
 }
 
-/* ── Card title ────────────────────────────────────────────────────── */
-body.home #wecar-features .wecar-features__card .elementor-icon-box-title {
-  font-family: var(--wecar-font-display);
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  color: #FFFFFF;
-  margin: 0;
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-title {
+  margin: 0 !important;
+  color: #fff !important;
+  font-family: var(--wecar-font-display), Syne, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 22px !important;
 }
 
-body.home #wecar-features .wecar-features__card .elementor-icon-box-title span {
-  color: #FFFFFF;
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-description {
+  display: none !important;
 }
 
-/* ── Mobile ────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  body.home #wecar-features .elementor-column[data-id="h05c002"],
-  body.home #wecar-features .elementor-column[data-id="h05c003"],
-  body.home #wecar-features .elementor-column[data-id="h05c004"] {
+/* ── Partner Logos ── */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c002"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] {
+  flex: 0 0 auto;
+  width: auto !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image,
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image .elementor-widget-container {
+  margin: 0 !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  object-fit: contain;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c002"] img { width: 244px; }
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"] img { width: 268px; }
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] img { width: 220px; }
+
+/* ── Spacing between features and partners blocks ── */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+  margin-top: 60px;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  body.home #wecar-section3.wecar-figma-28-624-v2 {
+    padding-top: 72px !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
+    width: calc((100% - 20px) / 2) !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+    margin-top: 40px;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
+    gap: 36px 40px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 767px) {
+  body.home #wecar-section3.wecar-figma-28-624-v2 {
+    padding: 56px 20px 0 !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
+    gap: 28px 0;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title .elementor-heading-title,
+  body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title .elementor-heading-title {
+    font-size: 30px !important;
+    line-height: 36px !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
     width: 100% !important;
   }
-
-  body.home #wecar-features .wecar-features__title .elementor-heading-title {
-    font-size: 28px;
-    line-height: 36px;
+  body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card {
+    min-height: 94px;
+    padding: 24px;
   }
-}
-
-
-/* Figma node 28:624 v2 ? opt-in only; legacy TEST remains the default. */
-body.home #wecar-features.wecar-figma-28-624-v2 {
-  box-sizing: border-box !important;
-  min-height: 284px;
-  padding: 100px clamp(24px, 9.79vw, 148px) 0 !important;
-  background: radial-gradient(ellipse 300% 100% at 50% 100%, rgba(153, 73, 255, 1) 0%, rgba(255, 255, 255, 0) 100%) !important;
-}
-body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container {
-  display:flex; flex-wrap:wrap; align-items:stretch; gap:40px 20px;
-  max-width:1216px !important; margin:0 auto !important;
-}
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c001"] { width:100% !important; }
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__title,
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__title .elementor-widget-container { margin:0 !important; }
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__title .elementor-heading-title {
-  margin:0 !important; color:#111 !important; font-family:var(--wecar-font-display), Syne, sans-serif !important;
-  font-size:38px !important; font-weight:700 !important; line-height:44px !important; text-align:center !important;
-}
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] { width:calc((100% - 40px)/3) !important; }
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id^="h05c00"] > .elementor-column-wrap,
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id^="h05c00"] > .elementor-column-wrap > .elementor-widget-wrap,
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__card { height:100%; }
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__card {
-  box-sizing:border-box; min-height:100px; padding:28px; overflow:hidden; border:2px solid #fff; border-radius:16px;
-}
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__card--purple { background:linear-gradient(136deg,#9949ff 1.0861%,#6634a5 98.914%); }
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__card--blue { background:linear-gradient(136deg,#0e6fd1 1.0861%,#0f5aa7 98.914%); }
-body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__card--cyan { background:linear-gradient(136deg,#0eb5d1 1.0861%,#0f91a7 98.914%); }
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-wrapper { display:flex !important; align-items:center !important; gap:16px; height:100%; text-align:left; }
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-img { flex:0 0 42px; width:42px !important; margin:0 !important; }
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-img img { display:block; width:42px; height:42px; }
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-content { min-width:0; }
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-title { margin:0 !important; color:#fff !important; font-family:var(--wecar-font-display), Syne, sans-serif !important; font-size:18px !important; font-weight:700 !important; line-height:22px !important; }
-body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-description { display:none !important; }
-@media (max-width:1024px) {
-  body.home #wecar-features.wecar-figma-28-624-v2 { padding-top:72px !important; }
- body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] { width:calc((100% - 20px)/2) !important; }
- body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] { margin-right:auto; margin-left:auto; }
-}
-@media (max-width:767px) {
-  body.home #wecar-features.wecar-figma-28-624-v2 { padding:56px 20px 0 !important; }
- body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container { gap:28px 0; }
- body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__title .elementor-heading-title { font-size:30px !important; line-height:36px !important; }
- body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] { width:100% !important; }
- body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__card { min-height:94px; padding:24px; }
-}
-
-
-/* Desktop geometry lock for the reviewed 1512px Figma frame. */
-@media (min-width:1025px) {
-  body.home #wecar-features.wecar-figma-28-624-v2 {
-    height:284px;
-    min-height:284px;
-    padding-right:0 !important;
-    padding-left:0 !important;
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+    margin-top: 32px;
   }
-  body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container {
-    width:1216px !important;
-    max-width:calc(100% - 40px) !important;
-    height:184px;
-    align-content:start;
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c002"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] {
+    width: 100% !important;
   }
-  body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container > .elementor-column > .elementor-column-wrap,
-  body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container > .elementor-column > .elementor-column-wrap > .elementor-widget-wrap,
-  body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container > .elementor-column > .elementor-widget-wrap.elementor-element-populated {
-    margin:0 !important;
-    padding:0 !important;
-  }
-  body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
-  body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
-  body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
-    flex:1 1 calc((100% - 40px)/3);
-    width:calc((100% - 40px)/3) !important;
-    max-width:392px;
-    margin:0 !important;
-    padding:0 !important;
-  }
-  body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__card {
-    width:100%;
-    height:100px;
-    min-height:100px;
-    margin:0 !important;
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image img {
+    max-width: min(100%, 268px);
+    height: 52px;
+    margin: 0 auto;
   }
 }
