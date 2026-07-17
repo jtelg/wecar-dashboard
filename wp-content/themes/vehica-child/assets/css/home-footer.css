@@ -30,47 +30,72 @@ body.home #wecar-footer::after {
 
 body.home #wecar-footer > * { position: relative; z-index: 1; }
 
-/* 4-quadrant layout via CSS grid */
+/* Override Elementor default styles */
 body.home #wecar-footer .elementor-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 24px 0;
+  display: block;
   max-width: 1216px;
   margin: 0 auto;
+  position: relative;
+  height: 100%;
 }
 
-/* Logo top-left */
-body.home #wecar-footer .wecar-footer__logo img {
+/* Grid 2x2 positioning */
+body.home #wecar-footer .elementor-column {
+  position: absolute;
+  width: 50% !important;
+}
+
+/* Top-left: Logo */
+body.home #wecar-footer .elementor-column[data-id="h07c001"] {
+  top: 0;
+  left: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c001"] .wecar-footer__logo img {
   width: 316px;
   height: 56px;
   display: block;
 }
 
-/* Description top-right */
-body.home #wecar-footer .wecar-footer__description {
-  font-family: var(--wecar-font-body), 'Exo 2', sans-serif;
+/* Top-right: Description */
+body.home #wecar-footer .elementor-column[data-id="h07c002"] {
+  top: 0;
+  right: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c002"] .wecar-footer__description {
+  font-family: 'Exo 2', sans-serif;
   font-size: 14px;
   line-height: 22px;
   color: #111111;
   text-align: right;
   max-width: 292px;
-  margin-left: auto;
-  margin: 0;
+  margin: 0 0 0 auto;
 }
 
-/* Copyright bottom-left */
-body.home #wecar-footer .wecar-footer__copyright {
+/* Bottom-left: Copyright */
+body.home #wecar-footer .elementor-column[data-id="h07c003"] {
+  top: 122px; /* 60 + 56 + 6 gap */
+  left: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c003"] .wecar-footer__copyright {
   font-family: 'Gotham', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
   color: #464646;
   text-align: left;
+  margin: 0;
 }
 
-/* Phone bottom-right */
-body.home #wecar-footer .wecar-footer__phone {
+/* Bottom-right: Phone */
+body.home #wecar-footer .elementor-column[data-id="h07c004"] {
+  top: 122px;
+  right: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone {
   font-family: 'Exo 2', sans-serif;
   font-weight: 700;
   font-size: 18px;
@@ -78,9 +103,15 @@ body.home #wecar-footer .wecar-footer__phone {
   color: #9949FF;
   text-align: right;
   text-decoration: none;
+  margin: 0;
 }
 
-body.home #wecar-footer .wecar-footer__phone:hover {
+body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone a {
+  color: #9949FF;
+  text-decoration: none;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone a:hover {
   text-decoration: underline;
 }
 
@@ -88,21 +119,28 @@ body.home #wecar-footer .wecar-footer__phone:hover {
 @media (max-width: 767px) {
   body.home #wecar-footer {
     padding: 40px 20px !important;
+    min-height: auto;
   }
   
   body.home #wecar-footer .elementor-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    position: static;
+    height: auto;
   }
   
-  body.home #wecar-footer .wecar-footer__logo img {
+  body.home #wecar-footer .elementor-column {
+    position: static;
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  
+  body.home #wecar-footer .elementor-column[data-id="h07c001"] .wecar-footer__logo img {
     width: 200px;
     height: auto;
   }
   
-  body.home #wecar-footer .wecar-footer__description,
-  body.home #wecar-footer .wecar-footer__copyright,
-  body.home #wecar-footer .wecar-footer__phone {
+  body.home #wecar-footer .elementor-column[data-id="h07c002"] .wecar-footer__description,
+  body.home #wecar-footer .elementor-column[data-id="h07c003"] .wecar-footer__copyright,
+  body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone {
     text-align: left;
     max-width: 100%;
   }
