@@ -123,7 +123,7 @@ body.home #wecar-features.wecar-figma-28-624-v2 {
   box-sizing: border-box !important;
   min-height: 284px;
   padding: 100px clamp(24px, 9.79vw, 148px) 0 !important;
-  background: radial-gradient(ellipse 44.2619% 63.708px at 50% 101.446%, #9949ff 0%, rgba(179,119,255,.75) 25%, rgba(204,164,255,.5) 50%, rgba(255,255,255,0) 100%) center top / 100% 628px no-repeat !important;
+  background: radial-gradient(circle at 50% 101%, rgba(153, 73, 255, 1) 0%, rgba(255, 255, 255, 0) 100%) !important;
 }
 body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container {
   display:flex; flex-wrap:wrap; align-items:stretch; gap:40px 20px;
@@ -155,12 +155,12 @@ body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-content { m
 body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-title { margin:0 !important; color:#fff !important; font-family:var(--wecar-font-display), Syne, sans-serif !important; font-size:18px !important; font-weight:700 !important; line-height:22px !important; }
 body.home #wecar-features.wecar-figma-28-624-v2 .elementor-image-box-description { display:none !important; }
 @media (max-width:1024px) {
- body.home #wecar-features.wecar-figma-28-624-v2 { padding-top:72px !important; background-size:100% 680px !important; }
+  body.home #wecar-features.wecar-figma-28-624-v2 { padding-top:72px !important; }
  body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] { width:calc((100% - 20px)/2) !important; }
  body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] { margin-right:auto; margin-left:auto; }
 }
 @media (max-width:767px) {
- body.home #wecar-features.wecar-figma-28-624-v2 { padding:56px 20px 0 !important; background-size:100% 882px !important; }
+  body.home #wecar-features.wecar-figma-28-624-v2 { padding:56px 20px 0 !important; }
  body.home #wecar-features.wecar-figma-28-624-v2 > .elementor-container { gap:28px 0; }
  body.home #wecar-features.wecar-figma-28-624-v2 .wecar-features__title .elementor-heading-title { font-size:30px !important; line-height:36px !important; }
  body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"], body.home #wecar-features.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] { width:100% !important; }
