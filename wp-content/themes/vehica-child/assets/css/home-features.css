@@ -14,8 +14,6 @@ body.home #wecar-section3.wecar-figma-28-624-v2 {
     rgba(255, 255, 255, 0) 100%
   ) !important;
   position: relative;
-  max-width: 1390px !important;
-  margin: 0 auto !important;
 }
 
 body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
@@ -26,6 +24,7 @@ body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
   gap: 40px 20px;
   max-width: 1390px !important;
   margin: 0 auto !important;
+  width: 100% !important;
 }
 
 /* Titles */
