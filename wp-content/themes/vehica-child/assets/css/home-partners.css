@@ -6,6 +6,8 @@
 body.home #wecar-partners {
   padding: 60px 1.5rem !important;
   box-sizing: border-box !important;
+  max-width: 1390px !important;
+  margin: 0 auto !important;
 }
 
 body.home #wecar-partners .wecar-partners__title .elementor-heading-title {
