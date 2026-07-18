@@ -44,7 +44,7 @@ body.home #wecar-footer .elementor-container {
   margin: 0 auto;
   position: relative;
   height: 100%;
-  padding: 0 clamp(24px, 9.79vw, 148px) !important;
+  padding: 0 1.5rem !important;
   box-sizing: border-box !important;
 }
 
