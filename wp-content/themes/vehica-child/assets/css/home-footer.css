@@ -3,7 +3,7 @@ body.home #wecar-footer {
   background: #FFFFFF;
   position: relative;
   overflow: hidden;
-  padding: 60px clamp(24px, 9.79vw, 148px) !important;
+  padding: 60px 0 !important;
   min-height: 220px;
   max-width: 1390px !important;
   margin: 0 auto !important;
@@ -44,6 +44,8 @@ body.home #wecar-footer .elementor-container {
   margin: 0 auto;
   position: relative;
   height: 100%;
+  padding: 0 clamp(24px, 9.79vw, 148px) !important;
+  box-sizing: border-box !important;
 }
 
 /* Grid 2x2 positioning */

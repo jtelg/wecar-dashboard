@@ -6,7 +6,7 @@
 /* ─ Section wrapper ───────────────────────────────────────────────── */
 body.home #wecar-steps {
   margin: 6rem auto 4rem !important;
-  padding: 0 1.5rem !important;
+  padding: 0 !important;
   width: 100% !important;
   box-sizing: border-box !important;
 }
@@ -20,6 +20,7 @@ body.home #wecar-steps .elementor-container {
   align-items: stretch !important;
   gap: 0 !important;
   box-sizing: border-box !important;
+  padding: 0 1.5rem !important;
 }
 
 /* ─ Columna del título ─────────────────────────────────────────────── */

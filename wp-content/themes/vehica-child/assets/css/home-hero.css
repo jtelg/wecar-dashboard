@@ -38,6 +38,8 @@ body.home #wecar-hero .elementor-container {
   max-width: 1390px !important;
   margin: 0 auto !important;
   align-items: stretch !important;
+  padding: 0 1.5rem !important;
+  box-sizing: border-box !important;
 }
 
 /* ── Columnas: flex responsive (1fr / 4.44fr active / 1fr collapsed) ─ */
