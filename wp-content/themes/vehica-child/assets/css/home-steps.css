@@ -5,7 +5,6 @@
 
 /* ─ Section wrapper ───────────────────────────────────────────────── */
 body.home #wecar-steps {
-  max-width: 1390px !important;
   margin: 6rem auto 4rem !important;
   padding: 0 1.5rem !important;
   width: 100% !important;
@@ -13,7 +12,7 @@ body.home #wecar-steps {
 }
 
 body.home #wecar-steps .elementor-container {
-  max-width: 100% !important;
+  max-width: 1390px !important;
   margin: 0 auto !important;
   display: flex !important;
   flex-wrap: wrap !important;
@@ -56,8 +55,8 @@ body.home #wecar-steps .elementor-column[data-id="h03c002"],
 body.home #wecar-steps .elementor-column[data-id="h03c003"],
 body.home #wecar-steps .elementor-column[data-id="h03c004"] {
   flex: 0 0 auto !important;
-  width: 380px !important;
-  max-width: 380px !important;
+  width: calc((100% - 64px) / 3) !important;
+  max-width: calc((100% - 64px) / 3) !important;
   position: relative !important;
   padding-top: 60px !important;
   box-sizing: border-box !important;
@@ -74,20 +73,19 @@ body.home #wecar-steps .elementor-column[data-id="h03c002"] {
 }
 
 /* ── Línea conectora (centro a centro de badges) ──────────────────────
-   Anclada a la columna del medio (h03c003). El badge NO está anclado a la
-   columna sino a la tarjeta (.elementor-widget-wrap), que arranca 60px más
-   abajo por el padding-top de la columna. Badge: top:-60px desde la tarjeta
-   => su tope queda al nivel del tope de la columna y su centro a +23px
-   (46/2). Por eso la línea va a top:23px. Ancho 824px = centro↔centro
-   entre badge 1 y badge 3 = (380px + 32px gap) x2. Coincide con Figma
-   node 121:7264 (línea centro Y 227 = centro badges Y 227). */
+    Anclada a la columna del medio (h03c003). El badge NO está anclado a la
+    columna sino a la tarjeta (.elementor-widget-wrap), que arranca 60px más
+    abajo por el padding-top de la columna. Badge: top:-60px desde la tarjeta
+    => su tope queda al nivel del tope de la columna y su centro a +23px
+    (46/2). Por eso la línea va a top:23px. Ancho 948px = centro↔centro
+    entre badge 1 y badge 3 = (442px card + 32px gap) x2. */
 body.home #wecar-steps .elementor-column[data-id="h03c003"]::before {
   content: '' !important;
   position: absolute !important;
   top: 23px !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  width: 824px !important;
+  width: 948px !important;
   height: 2px !important;
   background: linear-gradient(90deg, #C598FF 0%, #CAE0F5 50%, #CAEFF5 100%) !important;
   z-index: 0 !important;
