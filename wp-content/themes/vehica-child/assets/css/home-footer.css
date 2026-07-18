@@ -10,13 +10,15 @@ body.home #wecar-footer {
   box-sizing: border-box !important;
 }
 
-/* Corner radial textures */
+/* Corner textures: SVG wavy patterns from Figma (466x220) */
 body.home #wecar-footer::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
   width: 466px; height: 220px;
-  background: radial-gradient(circle at 99% 100%, rgba(153,73,255,0.04) 0%, rgba(14,181,209,0) 100%);
+  background-image: url('../images/texture-footer-tl.svg');
+  background-repeat: no-repeat;
+  background-size: 466px 220px;
   pointer-events: none;
   z-index: 0;
 }
@@ -26,7 +28,9 @@ body.home #wecar-footer::after {
   position: absolute;
   top: 0; right: 0;
   width: 466px; height: 220px;
-  background: radial-gradient(circle at 99% 100%, rgba(153,73,255,0.1) 0%, rgba(14,181,209,0) 100%);
+  background-image: url('../images/texture-footer-br.svg');
+  background-repeat: no-repeat;
+  background-size: 466px 220px;
   pointer-events: none;
   z-index: 0;
 }
