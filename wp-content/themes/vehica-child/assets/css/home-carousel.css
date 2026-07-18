@@ -17,13 +17,15 @@ body.home #wecar-carousel {
   margin: 0 !important;
 }
 
-/* Corner radial textures */
+/* Corner textures — wavy scallop SVGs from Figma (669x316, radial-gradient fill) */
 body.home #wecar-carousel::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
   width: 669px; height: 316px;
-  background: radial-gradient(circle at 99% 100%, rgba(255,255,255,0.1) 0%, rgba(153,73,255,0) 100%);
+  background-image: url('../images/texture-carousel-tl.svg');
+  background-repeat: no-repeat;
+  background-size: 669px 316px;
   pointer-events: none;
   z-index: 0;
 }
@@ -33,7 +35,9 @@ body.home #wecar-carousel::after {
   position: absolute;
   bottom: 0; right: 0;
   width: 669px; height: 316px;
-  background: radial-gradient(circle at 99% 100%, rgba(255,255,255,0.1) 0%, rgba(14,181,209,0) 100%);
+  background-image: url('../images/texture-carousel-br.svg');
+  background-repeat: no-repeat;
+  background-size: 669px 316px;
   pointer-events: none;
   z-index: 0;
 }
