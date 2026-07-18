@@ -8,7 +8,7 @@
    - Car: transform + overflow clipping, NUNCA opacity como animación primaria
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Contenedor principal del Hero (responsive, max 1440px) ──────── */
+/* ── Contenedor principal del Hero (responsive, max 1390px) ──────── */
 body.home #wecar-hero {
   --wecar-hero-offscreen: calc(100vw + 80px);
   --wecar-hero-transition-duration: 1.2501229s;
@@ -20,6 +20,14 @@ body.home #wecar-hero {
   clip-path: inset(-40px 0 0 0 round 40px);
   max-width: 1390px !important;
   margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Override Elementor default section padding */
+body.home .elementor-element-h02a001,
+body.home .elementor-35463 .elementor-element.elementor-element-h02a001 {
+  padding: 0 !important;
 }
 
 body.home #wecar-hero .elementor-container {
