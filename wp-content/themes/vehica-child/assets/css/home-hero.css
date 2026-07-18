@@ -82,34 +82,43 @@ body.home .wecar-hero__card--right {
   background: linear-gradient(135deg, #A4E3EE 0%, #0E6FD1 100%);
 }
 
-/* ── Textura de fondo: CSS radial-gradient por panel ──────────────── */
-body.home .wecar-hero__card::before {
+/* ── Texturas de fondo: SVG wavy patterns from Figma (423x200) ────── */
+body.home .wecar-hero__card::before,
+body.home .wecar-hero__card::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  width: 423px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: 423px 200px;
   z-index: 0;
   pointer-events: none;
 }
 
+/* Left card: top-left texture at (0,0), bottom-right at (175,260) */
 body.home .wecar-hero__card--left::before {
-  background:
-    radial-gradient(circle at 99% 100%, rgba(153,73,255,0.10) 0%, rgba(14,181,209,0) 100%),
-    rgba(153,73,255,0.04);
-  background-size: 423px 200px, auto;
-  background-position: bottom right, 0 0;
-  background-repeat: no-repeat, repeat;
+  top: 0;
+  left: 0;
+  background-image: url('../images/texture-hero-left-tl.svg');
 }
 
+body.home .wecar-hero__card--left::after {
+  bottom: 0;
+  right: 0;
+  background-image: url('../images/texture-hero-left-br.svg');
+}
+
+/* Right card: top-left texture at (0,0), bottom-right at (175,260) */
 body.home .wecar-hero__card--right::before {
-  background:
-    radial-gradient(circle at 99% 100%, rgba(245,237,255,0.20) 0%, rgba(14,181,209,0) 100%),
-    radial-gradient(circle at 99% 100%, rgba(249,253,254,0.20) 0%, rgba(14,181,209,0) 100%);
-  background-size: 423px 200px, 423px 200px;
-  background-position: bottom right, bottom right;
-  background-repeat: no-repeat, no-repeat;
+  top: 0;
+  left: 0;
+  background-image: url('../images/texture-hero-right-tl.svg');
+}
+
+body.home .wecar-hero__card--right::after {
+  bottom: 0;
+  right: 0;
+  background-image: url('../images/texture-hero-right-br.svg');
 }
 
 /* ── Badge (absolute top-left) ────────────────────────────────────── */
