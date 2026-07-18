@@ -11,7 +11,7 @@ body.home #wecar-carousel {
   /* !important needed: Elementor writes an inline padding (80px 20px) on this
      section that would otherwise clip the right edge. Left aligns to the 1440px
      container gutter (same as other sections); right bleeds to 100vw. */
-  --wecar-carousel-gutter: max(24px, calc((100vw - 1440px) / 2));
+  --wecar-carousel-gutter: max(24px, calc((100vw - 1390px) / 2));
   padding: 80px 0 80px var(--wecar-carousel-gutter) !important;
   width: 100% !important; max-width: 100% !important;
   margin: 0 !important;
@@ -51,7 +51,7 @@ body.home #wecar-carousel .elementor-section[data-id="h04s001"] {
   overflow: visible !important;
   margin-bottom: 32px;
   /* Keep the header balanced: title aligns left, "Ver todos" stays off the edge */
-  padding-right: max(24px, calc((100vw - 1440px) / 2));
+  padding-right: max(24px, calc((100vw - 1390px) / 2));
 }
 
 body.home #wecar-carousel .elementor-section[data-id="h04s001"] .elementor-container {

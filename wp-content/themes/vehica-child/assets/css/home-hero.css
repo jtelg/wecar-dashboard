@@ -18,7 +18,7 @@ body.home #wecar-hero {
   height: clamp(490px, 42vw, 520px) !important;
   overflow: visible !important;
   clip-path: inset(-40px 0 0 0 round 40px);
-  max-width: 1440px !important;
+  max-width: 1390px !important;
   margin: 0 auto !important;
 }
 
@@ -27,7 +27,7 @@ body.home #wecar-hero .elementor-container {
   flex-direction: row !important;
   gap: 20px !important;
   height: 100% !important;
-  max-width: 1440px !important;
+  max-width: 1390px !important;
   margin: 0 auto !important;
   align-items: stretch !important;
 }
