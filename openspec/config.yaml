@@ -1,33 +1,48 @@
 schema: spec-driven
 
 context: |
-  Tech stack: WordPress (HostGator shared hosting), Vehica 1.0.87 parent theme, custom child theme vehica-child, custom plugin wecar-snapshot-cron
+  Tech stack: WordPress on HostGator shared hosting (SiteGround Optimizer), Vehica 1.0.87 parent theme, custom child theme vehica-child, custom plugin wecar-snapshot-cron
   Architecture: WordPress child theme with custom CPTs (wecar_partner, wecar_particular, wecar_propio), admin dashboard pages, Vue.js editor integration, WP-Cron daily snapshots
   Languages: PHP (OOP classes), vanilla JS, CSS (100% clamp(), Muli font)
-  Deployment: SCP directly to production (no staging); flush WP cache after changes
-  Testing: No test runner, no test files, no CI/CD detected
+  Environments: production (wecar.com.ar) + test (test.wecar.com.ar). See openspec/specs/environments.md for full inventory.
+  Deployment: Test FIRST (test.wecar.com.ar), then production (wecar.com.ar). NO direct production changes except emergency hotfixes.
+  Recovery: Full SQL backups available on the production server. See openspec/specs/elementor-data-restoration.md for the runbook.
+  Testing: No test runner, no test files, no CI/CD detected. Manual validation via SSH + curl + browser.
 
 rules:
   proposal:
-    - Include rollback plan for risky changes; production has no staging environment
+    - Include rollback plan for risky changes
+    - Identify which environment the change affects
+    - If the change modifies Elementor data (_elementor_data), tag with `affects: elementor-data`
   specs:
     - Use Given/When/Then for scenarios
     - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+    - Reference openspec/specs/ for permanent knowledge
   design:
     - Include sequence diagrams for complex flows
     - Document architecture decisions with rationale
   tasks:
     - Group by phase, use hierarchical numbering
     - Keep tasks completable in one session
+    - For Elementor data changes, add a CSS file size check task
   apply:
     - Follow existing code patterns in includes/ and dashboard/
     - Always SCP PHP files; never use PowerShell heredoc with $variables
     - Always flush WP cache after changes: wp cache flush --path=~/www/wecar.com.ar/public_html
+    - After modifying _elementor_data, ALWAYS validate CSS file size (see openspec/specs/elementor-css-validation.md)
+    - For Elementor data changes, the SDD apply phase MUST check the post-specific CSS file is > 1 KB before reporting success
+    - When restoring an Elementor page, restore ALL 27 wp_postmeta rows (not just _elementor_data). See openspec/specs/elementor-data-restoration.md.
+    - NEVER work directly in production. Test in test.wecar.com.ar first.
     tdd: false
     test_command: ""
   verify:
+    - Run the CSS file size check (see openspec/specs/elementor-css-validation.md)
+    - If any page's CSS file is < 1 KB, the change is CRITICAL
+    - For Elementor data changes, compare the CSS file size before and after
     test_command: ""
     build_command: ""
     coverage_threshold: 0
   archive:
     - Warn before merging destructive deltas
+    - Verify CSS file sizes are still > 1 KB at archive time
+    - For Elementor data changes, link to the runbook if any recovery was needed

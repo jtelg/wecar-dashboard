@@ -1,0 +1,313 @@
+/* ── Home Footer (Figma Exact 2026-07) ────────────────────── */
+body.home #wecar-footer {
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 0 !important;
+  min-height: 220px;
+  max-width: 1390px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Corner textures: SVG wavy patterns from Figma (466x220) */
+body.home #wecar-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 466px; height: 220px;
+  background-image: url('../images/texture-footer-tl.svg');
+  background-repeat: no-repeat;
+  background-size: 466px 220px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home #wecar-footer::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 466px; height: 220px;
+  background-image: url('../images/texture-footer-br.svg');
+  background-repeat: no-repeat;
+  background-size: 466px 220px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home #wecar-footer > * { position: relative; z-index: 1; }
+
+/* Override Elementor default styles */
+body.home #wecar-footer .elementor-container {
+  display: block;
+  max-width: 1390px;
+  margin: 0 auto;
+  position: relative;
+  height: 100%;
+  padding: 0 1.5rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Grid 2x2 positioning */
+body.home #wecar-footer .elementor-column {
+  position: absolute;
+  width: 50% !important;
+}
+
+/* Top-left: Logo */
+body.home #wecar-footer .elementor-column[data-id="h07c001"] {
+  top: 0;
+  left: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c001"] .wecar-footer__logo img {
+  width: 316px;
+  height: 56px;
+  display: block;
+}
+
+/* Top-right: Description */
+body.home #wecar-footer .elementor-column[data-id="h07c002"] {
+  top: 0;
+  right: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c002"] .wecar-footer__description {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  color: #111111;
+  text-align: right;
+  max-width: 292px;
+  margin: 0 0 0 auto;
+}
+
+/* Bottom-left: Copyright */
+body.home #wecar-footer .elementor-column[data-id="h07c003"] {
+  top: 122px; /* 60 + 56 + 6 gap */
+  left: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c003"] .wecar-footer__copyright {
+  font-family: 'Gotham', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #464646;
+  text-align: left;
+  margin: 0;
+}
+
+/* Bottom-right: Phone */
+body.home #wecar-footer .elementor-column[data-id="h07c004"] {
+  top: 122px;
+  right: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #9949FF;
+  text-align: right;
+  text-decoration: none;
+  margin: 0;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone a {
+  color: #9949FF;
+  text-decoration: none;
+}
+
+body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  body.home #wecar-footer {
+    padding: 40px 20px !important;
+    min-height: auto;
+  }
+  
+  body.home #wecar-footer .elementor-container {
+    position: static;
+    height: auto;
+  }
+  
+  body.home #wecar-footer .elementor-column {
+    position: static;
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  
+  body.home #wecar-footer .elementor-column[data-id="h07c001"] .wecar-footer__logo img {
+    width: 200px;
+    height: auto;
+  }
+  
+  body.home #wecar-footer .elementor-column[data-id="h07c002"] .wecar-footer__description,
+  body.home #wecar-footer .elementor-column[data-id="h07c003"] .wecar-footer__copyright,
+  body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phone {
+    text-align: left;
+    max-width: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL FOOTER — Semantic classes (non-Elementor pages)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+#wecar-footer-global {
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+#wecar-footer-global::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 466px; height: 220px;
+  background-image: url('../images/texture-footer-tl.svg');
+  background-repeat: no-repeat;
+  background-size: 466px 220px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#wecar-footer-global::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 466px; height: 220px;
+  background-image: url('../images/texture-footer-br.svg');
+  background-repeat: no-repeat;
+  background-size: 466px 220px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#wecar-footer-global > * {
+  position: relative;
+  z-index: 1;
+}
+
+.wecar-footer__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 30px 0;
+  max-width: 1390px;
+  width: 100%;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+.wecar-footer__col--logo {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.wecar-footer__col--logo .wecar-footer__logo {
+  width: 316px;
+  height: 56px;
+  display: block;
+}
+
+.wecar-footer__col--description {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+}
+
+.wecar-footer__description {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  color: #111111;
+  text-align: right;
+  max-width: 292px;
+  margin: 0 0 0 auto;
+}
+
+.wecar-footer__col--copyright {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.wecar-footer__copyright {
+  font-family: 'Gotham', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #464646;
+  text-align: left;
+  margin: 0;
+}
+
+.wecar-footer__col--phone {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: right;
+}
+
+.wecar-footer__phone {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #9949FF;
+  text-align: right;
+  margin: 0;
+}
+
+.wecar-footer__phone a {
+  color: #9949FF;
+  text-decoration: none;
+}
+
+.wecar-footer__phone a:hover {
+  text-decoration: underline;
+}
+
+/* Global footer mobile */
+@media (max-width: 767px) {
+  #wecar-footer-global {
+    padding: 40px 20px;
+    min-height: auto;
+  }
+
+  .wecar-footer__inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .wecar-footer__col--logo .wecar-footer__logo {
+    width: 200px;
+    height: auto;
+  }
+
+  .wecar-footer__col--description,
+  .wecar-footer__col--copyright,
+  .wecar-footer__col--phone {
+    text-align: left;
+  }
+
+  .wecar-footer__description {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .wecar-footer__phone {
+    text-align: left;
+  }
+}

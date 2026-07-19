@@ -1,0 +1,471 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME STEPS — Sección "Vendé tu auto..." (3 pasos timeline)
+   Figma node 121:7264 — responsive, max-w 1440px
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ─ Section wrapper ───────────────────────────────────────────────── */
+body.home #wecar-steps {
+  margin: 6rem auto 4rem !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+body.home #wecar-steps .elementor-container {
+  max-width: 1390px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  box-sizing: border-box !important;
+  padding: 0 1.5rem !important;
+}
+
+/* ─ Columna del título ─────────────────────────────────────────────── */
+body.home #wecar-steps .elementor-column[data-id="h03c001"] {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 2rem !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c001"] .elementor-widget-wrap {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* ── Título (centrado como en Figma) ───────────────────────────────── */
+body.home #wecar-steps .wecar-steps__title .elementor-heading-title {
+  text-align: center !important;
+  font-family: var(--wecar-font-display) !important;
+  font-weight: 700 !important;
+  font-size: clamp(1.75rem, 4vw, 2.375rem) !important;
+  line-height: clamp(2.1875rem, 4.5vw, 2.75rem) !important;
+  color: #111111 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* ── Columnas de los 3 pasos ───────────────────────────────────────── */
+body.home #wecar-steps .elementor-column[data-id="h03c002"],
+body.home #wecar-steps .elementor-column[data-id="h03c003"],
+body.home #wecar-steps .elementor-column[data-id="h03c004"] {
+  flex: 0 0 auto !important;
+  width: calc((100% - 64px) / 3) !important;
+  max-width: calc((100% - 64px) / 3) !important;
+  position: relative !important;
+  padding-top: 60px !important;
+  box-sizing: border-box !important;
+  margin-right: 32px !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c004"] {
+  margin-right: 0 !important;
+}
+
+/* Keep the connector behind the complete first item without changing layout. */
+body.home #wecar-steps .elementor-column[data-id="h03c002"] {
+  z-index: 1 !important;
+}
+
+/* ── Línea conectora (centro a centro de badges) ──────────────────────
+    Anclada a la columna del medio (h03c003). El badge NO está anclado a la
+    columna sino a la tarjeta (.elementor-widget-wrap), que arranca 60px más
+    abajo por el padding-top de la columna. Badge: top:-60px desde la tarjeta
+    => su tope queda al nivel del tope de la columna y su centro a +23px
+    (46/2). Por eso la línea va a top:23px. Ancho 948px = centro↔centro
+    entre badge 1 y badge 3 = (442px card + 32px gap) x2. */
+body.home #wecar-steps .elementor-column[data-id="h03c003"]::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 23px !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 948px !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, #C598FF 0%, #CAE0F5 50%, #CAEFF5 100%) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  display: block !important;
+}
+
+/* ── Widget wrap = CARD ─────────────────────────────────────────────── */
+body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-wrap,
+body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-wrap,
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  text-align: left !important;
+  padding: 28px !important;
+  border-radius: 24px !important;
+  border: 1px solid !important;
+  gap: 12px !important;
+  position: relative !important;
+  height: 100% !important;
+  background-clip: padding-box !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-wrap {
+  background: #FCFAFF !important;
+  border-color: #F5EDFF !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-wrap {
+  background: #F9FBFE !important;
+  border-color: #E7F1FA !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-wrap {
+  background: #F9FDFE !important;
+  border-color: #E7F8FA !important;
+}
+
+/* ── Badges (centrados sobre cada card) ─────────────────────────────── */
+/* Primary: class-based selectors (for when Elementor data has correct classes) */
+body.home #wecar-steps .wecar-steps__badge,
+/* Fallback: data-id selectors (works even if Elementor classes are wrong) */
+body.home #wecar-steps [data-id="h03w003"],
+body.home #wecar-steps [data-id="h03w006"],
+body.home #wecar-steps [data-id="h03w009"] {
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: var(--wecar-font-body) !important;
+  font-weight: 700 !important;
+  font-size: 1.75rem !important;
+  line-height: 1 !important;
+  color: #F9F9F9 !important;
+  position: absolute !important;
+  top: -60px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 10 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.home #wecar-steps .wecar-steps__badge--1,
+body.home #wecar-steps [data-id="h03w003"] { background: #9949FF !important; }
+body.home #wecar-steps .wecar-steps__badge--2,
+body.home #wecar-steps [data-id="h03w006"] { background: #0E6FD1 !important; }
+body.home #wecar-steps .wecar-steps__badge--3,
+body.home #wecar-steps [data-id="h03w009"] { background: #0EB5D1 !important; }
+
+body.home #wecar-steps .wecar-steps__badge .elementor-heading-title,
+body.home #wecar-steps [data-id="h03w003"] .elementor-heading-title,
+body.home #wecar-steps [data-id="h03w006"] .elementor-heading-title,
+body.home #wecar-steps [data-id="h03w009"] .elementor-heading-title {
+  font-family: var(--wecar-font-body) !important;
+  font-weight: 700 !important;
+  font-size: 1.75rem !important;
+  line-height: 1 !important;
+  color: #F9F9F9 !important;
+  text-align: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* ── Títulos de los pasos ───────────────────────────────────────────── */
+body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w003"]),
+body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w006"]),
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w009"]) {
+  border-bottom: 1px solid !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 4px !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w003"]) {
+  border-image: linear-gradient(90deg, #D7BAFF 0%, #F5EDFF 100%) 1 !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w006"]) {
+  border-image: linear-gradient(90deg, #A4C9EE 0%, #E7F1FA 100%) 1 !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w009"]) {
+  border-image: linear-gradient(90deg, #A4E3EE 0%, #E7F8FA 100%) 1 !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w003"]) h3.elementor-heading-title {
+  font-family: var(--wecar-font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.375rem !important;
+  line-height: 1.625rem !important;
+  color: #9949FF !important;
+  text-align: left !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w006"]) h3.elementor-heading-title {
+  font-family: var(--wecar-font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.375rem !important;
+  line-height: 1.625rem !important;
+  color: #0E6FD1 !important;
+  text-align: left !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w009"]) h3.elementor-heading-title {
+  font-family: var(--wecar-font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.375rem !important;
+  line-height: 1.625rem !important;
+  color: #0EB5D1 !important;
+  text-align: left !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* ── Texto descriptivo ──────────────────────────────────────────────── */
+body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-text-editor,
+body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-text-editor,
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-text-editor {
+  text-align: left !important;
+  font-family: var(--wecar-font-body) !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.375rem !important;
+  color: #111111 !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-text-editor strong,
+body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-text-editor b {
+  color: #9949FF !important;
+  font-weight: 700 !important;
+}
+
+/* ── CTA ────────────────────────────────────────────────────────────── */
+body.home #wecar-steps .wecar-steps__cta {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 3rem !important;
+  margin-bottom: 0 !important;
+}
+
+body.home #wecar-steps .wecar-steps__cta .elementor-widget-wrap {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+body.home #wecar-steps .wecar-steps__cta .elementor-button {
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%) !important;
+  color: #F9F9F9 !important;
+  border-radius: 16px !important;
+  height: 44px !important;
+  padding: 11px 32px !important;
+  font-family: var(--wecar-font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  line-height: 1.25rem !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+body.home #wecar-steps .wecar-steps__cta .elementor-button:hover {
+  filter: brightness(0.92);
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+/* -- Sequential reveal: 1 rises, then 2 and 3 enter left-to-right -- */
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--motion-ready .wecar-steps__cta {
+  --wecar-steps-figma-duration: 1250.1229047775269ms;
+  --wecar-steps-figma-gap: 1.0000000474974513ms;
+  opacity: 0;
+  will-change: opacity, transform;
+  transition: none;
+}
+
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c002"] {
+  transform: translateY(36px);
+}
+
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c004"] {
+  transform: translateX(-36px);
+}
+
+body.home #wecar-steps.wecar-steps--motion-ready .wecar-steps__cta {
+  transform: translateY(36px);
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--revealed .wecar-steps__cta {
+  opacity: 1;
+  transform: translate(0, 0);
+  will-change: auto;
+  transition-property: opacity, transform;
+  transition-duration: var(--wecar-steps-figma-duration);
+  transition-timing-function: cubic-bezier(0, 0, 0.3, 1);
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c002"] {
+  transition-delay: 0ms;
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c003"] {
+  transition-delay: 1251.1229048250243513ms;
+}
+
+body.home #wecar-steps.wecar-steps--revealed .elementor-column[data-id="h03c004"] {
+  transition-delay: 2502.2458096500487026ms;
+}
+
+body.home #wecar-steps.wecar-steps--revealed .wecar-steps__cta {
+  transition-delay: 3753.3687144750730539ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+  body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+  body.home #wecar-steps.wecar-steps--motion-ready .elementor-column[data-id="h03c004"],
+  body.home #wecar-steps.wecar-steps--motion-ready .wecar-steps__cta {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
+/* Temporary TEST-only replay control, injected by home-animations.js. */
+body.home .wecar-steps__test-replay {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99999;
+  padding: 12px 18px;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  background: #111111;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(17, 17, 17, 0.28);
+  font: 700 14px/1.2 var(--wecar-font-body);
+  cursor: pointer;
+}
+
+body.home .wecar-steps__test-replay:hover,
+body.home .wecar-steps__test-replay:focus-visible {
+  background: #9949FF;
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .wecar-steps__cta {
+  opacity: 0;
+  transition: none;
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .wecar-steps__cta {
+  transform: translateY(36px);
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--motion-ready .elementor-column[data-id="h03c004"] {
+  transform: translateX(-36px);
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c002"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c003"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c004"],
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .wecar-steps__cta {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition-property: opacity, transform;
+  transition-duration: var(--wecar-steps-figma-duration);
+  transition-timing-function: cubic-bezier(0, 0, 0.3, 1);
+}
+
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c002"] { transition-delay: 0ms; }
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c003"] { transition-delay: 1251.1229048250243513ms; }
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .elementor-column[data-id="h03c004"] { transition-delay: 2502.2458096500487026ms; }
+body.home #wecar-steps.wecar-steps--test-motion.wecar-steps--revealed .wecar-steps__cta { transition-delay: 3753.3687144750730539ms; }
+
+@media (max-width: 768px) {
+  body.home #wecar-steps {
+    padding: 0 1rem !important;
+  }
+
+  body.home #wecar-steps .wecar-steps__title .elementor-heading-title {
+    font-size: 1.75rem !important;
+    line-height: 2.25rem !important;
+  }
+
+  body.home #wecar-steps .elementor-column[data-id="h03c001"] {
+    margin-bottom: 2rem !important;
+  }
+
+  body.home #wecar-steps .elementor-column[data-id="h03c002"],
+  body.home #wecar-steps .elementor-column[data-id="h03c003"],
+  body.home #wecar-steps .elementor-column[data-id="h03c004"] {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-top: 50px !important;
+    margin-right: 0 !important;
+    margin-bottom: 2rem !important;
+  }
+
+  body.home #wecar-steps .elementor-column[data-id="h03c003"]::before {
+    display: none !important;
+  }
+
+  body.home #wecar-steps .wecar-steps__badge,
+  body.home #wecar-steps [data-id="h03w003"],
+  body.home #wecar-steps [data-id="h03w006"],
+  body.home #wecar-steps [data-id="h03w009"] {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w003"]) h3.elementor-heading-title,
+  body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w006"]) h3.elementor-heading-title,
+  body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-heading:not(.wecar-steps__badge):not([data-id="h03w009"]) h3.elementor-heading-title {
+    font-size: 1.125rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  body.home #wecar-steps .elementor-column[data-id="h03c002"] .elementor-widget-text-editor,
+  body.home #wecar-steps .elementor-column[data-id="h03c003"] .elementor-widget-text-editor,
+  body.home #wecar-steps .elementor-column[data-id="h03c004"] .elementor-widget-text-editor {
+    font-size: 0.9375rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  body.home #wecar-steps .wecar-steps__cta .elementor-button {
+    width: 100% !important;
+  }
+}

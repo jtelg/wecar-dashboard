@@ -1,0 +1,223 @@
+/* Section 3 - Elegi WeCar + Respaldado por grandes marcas */
+/* Figma node 28:624 - ONE unified section with single gradient background */
+
+/* Section background - single gradient covering both titles */
+body.home #wecar-section3.wecar-figma-28-624-v2 {
+  box-sizing: border-box !important;
+  padding: 100px 0 !important;
+  background-color: transparent !important;
+  background-image: radial-gradient(
+    ellipse 442.62% 101.45% at 50% 101.45%,
+    #9949ff 0%,
+    rgba(179, 119, 255, 0.75) 25%,
+    rgba(204, 164, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+  position: relative;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px 20px;
+  max-width: 1390px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Titles */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c001"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+  width: 100% !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title .elementor-widget-container,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title .elementor-widget-container {
+  margin: 0 !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title .elementor-heading-title,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title .elementor-heading-title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-family: var(--wecar-font-display), Syne, sans-serif !important;
+  font-size: 38px !important;
+  font-weight: 700 !important;
+  line-height: 44px !important;
+  text-align: center !important;
+}
+
+/* Feature Cards */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
+  width: calc((100% - 40px) / 3) !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id^="h05c00"] > .elementor-column-wrap,
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id^="h05c00"] > .elementor-column-wrap > .elementor-widget-wrap,
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card {
+  height: 100%;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card {
+  box-sizing: border-box;
+  min-height: 100px;
+  padding: 28px;
+  overflow: hidden;
+  border: 2px solid #fff;
+  border-radius: 16px;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card--purple {
+  background: linear-gradient(136deg, #9949ff 1.0861%, #6634a5 98.914%);
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card--blue {
+  background: linear-gradient(136deg, #0e6fd1 1.0861%, #0f5aa7 98.914%);
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card--cyan {
+  background: linear-gradient(136deg, #0eb5d1 1.0861%, #0f91a7 98.914%);
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px;
+  height: 100%;
+  text-align: left;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-img {
+  flex: 0 0 42px;
+  width: 42px !important;
+  margin: 0 !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-img img {
+  display: block;
+  width: 42px;
+  height: 42px;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-content {
+  min-width: 0;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-title {
+  margin: 0 !important;
+  color: #fff !important;
+  font-family: var(--wecar-font-display), Syne, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 22px !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-image-box-description {
+  display: none !important;
+}
+
+/* Partner Logos */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c002"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] {
+  flex: 0 0 auto;
+  width: auto !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"],
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] {
+  margin-left: 40px;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image,
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image .elementor-widget-container {
+  margin: 0 !important;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  object-fit: contain;
+}
+
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c002"] img { width: 244px; }
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"] img { width: 268px; }
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] img { width: 220px; }
+
+/* Spacing between features and partners blocks */
+body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+  margin-top: 60px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  body.home #wecar-section3.wecar-figma-28-624-v2 {
+    padding-top: 72px !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
+    width: calc((100% - 20px) / 2) !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+    margin-top: 40px;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] {
+    margin-left: 0;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
+    gap: 36px 40px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  body.home #wecar-section3.wecar-figma-28-624-v2 {
+    padding: 56px 0 !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 > .elementor-container {
+    gap: 28px 0;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__title .elementor-heading-title,
+  body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-partners__title .elementor-heading-title {
+    font-size: 30px !important;
+    line-height: 36px !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c002"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c003"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h05c004"] {
+    width: 100% !important;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .wecar-features__card {
+    min-height: 94px;
+    padding: 24px;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c001"] {
+    margin-top: 32px;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c002"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c003"],
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-column[data-id="h06c004"] {
+    width: 100% !important;
+    margin-left: 0;
+  }
+  body.home #wecar-section3.wecar-figma-28-624-v2 .elementor-widget-image img {
+    max-width: min(100%, 268px);
+    height: 52px;
+    margin: 0 auto;
+  }
+}

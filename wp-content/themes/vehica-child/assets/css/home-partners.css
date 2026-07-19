@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME PARTNERS — Legacy styles (pre-merge)
+   The merged section-3 uses home-features.css instead
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body.home #wecar-partners {
+  padding: 60px 1.5rem !important;
+  box-sizing: border-box !important;
+  max-width: 1390px !important;
+  margin: 0 auto !important;
+}
+
+body.home #wecar-partners .wecar-partners__title .elementor-heading-title {
+  text-align: left !important;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 44px;
+  color: var(--wecar-figma-text);
+  margin-bottom: 40px;
+}
+
+body.home #wecar-partners .elementor-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  max-width: 1390px !important;
+  margin: 0 auto !important;
+}
+
+body.home #wecar-partners .elementor-column[data-id="h06c002"],
+body.home #wecar-partners .elementor-column[data-id="h06c003"],
+body.home #wecar-partners .elementor-column[data-id="h06c004"] {
+  width: auto !important;
+  flex: 0 0 auto;
+}
+
+body.home #wecar-partners .elementor-widget-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.home #wecar-partners .elementor-widget-image img {
+  width: auto;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+body.home #wecar-partners .elementor-column[data-id="h06c002"] .elementor-widget-image img { max-width: 244px; }
+body.home #wecar-partners .elementor-column[data-id="h06c003"] .elementor-widget-image img { max-width: 268px; }
+body.home #wecar-partners .elementor-column[data-id="h06c004"] .elementor-widget-image img { max-width: 220px; }
+
+@media (max-width: 768px) {
+  body.home #wecar-partners .wecar-partners__title .elementor-heading-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  body.home #wecar-partners .elementor-container { gap: 30px; }
+  body.home #wecar-partners .elementor-column[data-id="h06c002"],
+  body.home #wecar-partners .elementor-column[data-id="h06c003"],
+  body.home #wecar-partners .elementor-column[data-id="h06c004"] {
+    width: 100% !important;
+    text-align: center;
+  }
+  body.home #wecar-partners .elementor-widget-image img { max-height: 40px; }
+}

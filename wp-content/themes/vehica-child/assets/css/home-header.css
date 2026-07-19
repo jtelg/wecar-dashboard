@@ -1,0 +1,227 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME HEADER — Navigation Bar (Figma Exact 2026-07)
+   Structure: Logo (25%) | Nav links (50%) | CTA button (25%)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Section container ─────────────────────────────────────────────── */
+body.home #wecar-header {
+  padding: 20px 0 !important;
+  background: #FFFFFF !important;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  max-width: 1390px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+body.home #wecar-header .elementor-container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  max-width: 100% !important;
+  padding: 0 1.5rem !important;
+  box-sizing: border-box !important;
+}
+
+/* ── Logo column (left, 25%) ───────────────────────────────────────── */
+body.home #wecar-header .elementor-column[data-id="h01c001"] {
+  flex: 0 0 auto !important;
+  width: auto !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c001"] img {
+  width: 170px;
+  height: auto;
+  display: block;
+}
+
+/* ── Nav links column (center, 50%) ────────────────────────────────── */
+body.home #wecar-header .elementor-column[data-id="h01c002"] {
+  flex: 1 1 auto !important;
+  width: auto !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c002"] .elementor-widget-container,
+body.home #wecar-header .elementor-column[data-id="h01c002"] p {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 40px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c002"] a {
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--wecar-figma-text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c002"] a:hover {
+  color: var(--wecar-figma-purple);
+}
+
+/* ── CTA button column (right, 25%) ────────────────────────────────── */
+body.home #wecar-header .elementor-column[data-id="h01c003"] {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  text-align: right !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button {
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%) !important;
+  color: var(--wecar-figma-purple) !important;
+  border-radius: 12px !important;
+  padding: 11px 28px !important;
+  height: auto !important;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  border: none !important;
+  box-shadow: none !important;
+  display: inline-block !important;
+  transition: box-shadow 0.2s ease;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button:hover {
+  box-shadow: 0 2px 8px rgba(153,73,255,0.2) !important;
+}
+
+body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-text {
+  color: var(--wecar-figma-purple) !important;
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  body.home #wecar-header {
+    padding: 10px 20px !important;
+  }
+
+  body.home #wecar-header .elementor-container {
+    flex-wrap: wrap;
+  }
+
+  body.home #wecar-header .elementor-column[data-id="h01c002"] .elementor-widget-container,
+  body.home #wecar-header .elementor-column[data-id="h01c002"] p {
+    gap: 16px !important;
+  }
+
+  body.home #wecar-header .elementor-column[data-id="h01c001"] img {
+    width: 120px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL HEADER — Semantic classes (non-Elementor pages)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+#wecar-header-global {
+  background: #FFFFFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.wecar-header__inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1390px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.wecar-header__logo {
+  flex: 0 0 auto;
+}
+
+.wecar-header__logo img {
+  width: 170px;
+  height: auto;
+  display: block;
+}
+
+.wecar-header__nav {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.wecar-header__nav a {
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--wecar-figma-text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.wecar-header__nav a:hover {
+  color: var(--wecar-figma-purple);
+}
+
+.wecar-header__cta {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.wecar-header__button {
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  color: var(--wecar-figma-purple);
+  border-radius: 12px;
+  padding: 11px 28px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  border: none;
+  box-shadow: none;
+  display: inline-block;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.wecar-header__button:hover {
+  box-shadow: 0 2px 8px rgba(153, 73, 255, 0.2);
+}
+
+/* Global header mobile */
+@media (max-width: 767px) {
+  #wecar-header-global {
+    padding: 10px 20px;
+  }
+
+  .wecar-header__inner {
+    flex-wrap: wrap;
+  }
+
+  .wecar-header__nav {
+    gap: 16px;
+  }
+
+  .wecar-header__logo img {
+    width: 120px;
+  }
+}

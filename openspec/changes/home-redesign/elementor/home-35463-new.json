@@ -1,0 +1,739 @@
+[
+  {
+    "id": "h01a001",
+    "elType": "section",
+    "settings": {
+      "stretch_section": "section-stretched",
+      "background_background": "classic",
+      "background_color": "#FFFFFF",
+      "padding": { "unit": "px", "top": "10", "right": "20", "bottom": "10", "left": "20", "isLinked": false },
+      "sticky": "top",
+      "sticky_on": ["desktop", "tablet", "mobile"],
+      "sticky_effects_offset": 0,
+      "_element_id": "wecar-header"
+    },
+    "elements": [
+      {
+        "id": "h01c001",
+        "elType": "column",
+        "settings": {
+          "_column_size": 25,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h01w001",
+            "elType": "widget",
+            "widgetType": "image",
+            "settings": {
+              "image": {
+                "url": "https://wecar.com.ar/wp-content/uploads/2021/12/wecar-logo.png",
+                "id": "",
+                "size": "",
+                "alt": "WeCar Logo"
+              },
+              "width": { "unit": "%", "size": 70 },
+              "align": "left"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h01c002",
+        "elType": "column",
+        "settings": {
+          "_column_size": 50,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h01w002",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p style=\"text-align:center;\"><a href=\"/\">Inicio</a> &nbsp; <a href=\"/autos/\">Comprar</a> &nbsp; <a href=\"/cotiza/\">Vender</a> &nbsp; <a href=\"/faq/\">Nosotros</a> &nbsp; <a href=\"/blog/\">Blog</a></p>",
+              "align": "center"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h01c003",
+        "elType": "column",
+        "settings": {
+          "_column_size": 25,
+          "_inline_size": null,
+          "content_position": "center"
+        },
+        "elements": [
+          {
+            "id": "h01w003",
+            "elType": "widget",
+            "widgetType": "button",
+            "settings": {
+              "text": "Contactanos",
+              "link": { "url": "/contactanos/" },
+              "align": "right",
+              "button_background_color": "#5E3BE0",
+              "button_text_color": "#FFFFFF",
+              "border_radius": { "unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true },
+              "padding": { "unit": "px", "top": "10", "right": "28", "bottom": "10", "left": "28", "isLinked": false }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "h02a001",
+    "elType": "section",
+    "settings": {
+      "stretch_section": "section-stretched",
+      "background_background": "classic",
+      "background_color": "#F8FAFC",
+      "padding": { "unit": "px", "top": "80", "right": "20", "bottom": "80", "left": "20", "isLinked": false },
+      "_element_id": "wecar-hero"
+    },
+    "elements": [
+      {
+        "id": "h02c001",
+        "elType": "column",
+        "settings": {
+          "_column_size": 50,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h02w001",
+            "elType": "widget",
+            "widgetType": "icon-box",
+            "settings": {
+              "position": "top",
+              "selected_icon": { "value": "fas fa-car", "library": "fa-solid" },
+              "icon_size": { "unit": "px", "size": 40 },
+              "icon_padding": { "unit": "em", "top": "0.5", "right": "0.5", "bottom": "0.5", "left": "0.5", "isLinked": true },
+              "icon_color": "#FFFFFF",
+              "icon_bg_color": "#5E3BE0",
+              "icon_border_radius": { "unit": "%", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true },
+              "title_text": "Comprar tu pr\u00f3ximo auto",
+              "description_text": "Encontr\u00e1 el veh\u00edculo ideal para vos. Explor\u00e1 nuestro stock con financiaci\u00f3n y garant\u00eda.",
+              "title_color": "#FFFFFF",
+              "description_color": "rgba(255,255,255,0.9)",
+              "title_size": "h2",
+              "background_background": "gradient",
+              "background_gradient_first_color": "#5E3BE0",
+              "background_gradient_second_color": "#4A2DB8",
+              "background_gradient_type": "linear",
+              "background_gradient_angle": { "unit": "deg", "size": 135 },
+              "padding": { "unit": "px", "top": "40", "right": "40", "bottom": "40", "left": "40", "isLinked": false },
+              "border_radius": { "unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true },
+              "_css_classes": "wecar-hero-card wecar-hero-card--comprar"
+            }
+          },
+          {
+            "id": "h02w002",
+            "elType": "widget",
+            "widgetType": "button",
+            "settings": {
+              "text": "Ver autos",
+              "link": { "url": "/autos/" },
+              "align": "left",
+              "button_background_color": "rgba(255,255,255,0.2)",
+              "button_text_color": "#FFFFFF",
+              "border_border": "solid",
+              "border_width": { "unit": "px", "top": "2", "right": "2", "bottom": "2", "left": "2", "isLinked": true },
+              "border_color": "rgba(255,255,255,0.4)",
+              "border_radius": { "unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true },
+              "padding": { "unit": "px", "top": "10", "right": "28", "bottom": "10", "left": "28", "isLinked": false }
+            }
+          }
+        ]
+      },
+      {
+        "id": "h02c002",
+        "elType": "column",
+        "settings": {
+          "_column_size": 50,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h02w003",
+            "elType": "widget",
+            "widgetType": "icon-box",
+            "settings": {
+              "position": "top",
+              "selected_icon": { "value": "fas fa-tag", "library": "fa-solid" },
+              "icon_size": { "unit": "px", "size": 40 },
+              "icon_padding": { "unit": "em", "top": "0.5", "right": "0.5", "bottom": "0.5", "left": "0.5", "isLinked": true },
+              "icon_color": "#FFFFFF",
+              "icon_bg_color": "#06B6D4",
+              "icon_border_radius": { "unit": "%", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true },
+              "title_text": "Vend\u00e9 tu auto",
+              "description_text": "Cotiz\u00e1 online, peritamos en sucursal y lo publicamos sin costo. R\u00e1pido y seguro.",
+              "title_color": "#FFFFFF",
+              "description_color": "rgba(255,255,255,0.9)",
+              "title_size": "h2",
+              "background_background": "gradient",
+              "background_gradient_first_color": "#36BFFA",
+              "background_gradient_second_color": "#06B6D4",
+              "background_gradient_type": "linear",
+              "background_gradient_angle": { "unit": "deg", "size": 135 },
+              "padding": { "unit": "px", "top": "40", "right": "40", "bottom": "40", "left": "40", "isLinked": false },
+              "border_radius": { "unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true },
+              "_css_classes": "wecar-hero-card wecar-hero-card--vender"
+            }
+          },
+          {
+            "id": "h02w004",
+            "elType": "widget",
+            "widgetType": "button",
+            "settings": {
+              "text": "Cotizar",
+              "link": { "url": "/cotiza/" },
+              "align": "left",
+              "button_background_color": "rgba(255,255,255,0.2)",
+              "button_text_color": "#FFFFFF",
+              "border_border": "solid",
+              "border_width": { "unit": "px", "top": "2", "right": "2", "bottom": "2", "left": "2", "isLinked": true },
+              "border_color": "rgba(255,255,255,0.4)",
+              "border_radius": { "unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true },
+              "padding": { "unit": "px", "top": "10", "right": "28", "bottom": "10", "left": "28", "isLinked": false }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "h03a001",
+    "elType": "section",
+    "settings": {
+      "stretch_section": "section-stretched",
+      "background_background": "classic",
+      "background_color": "#FFFFFF",
+      "padding": { "unit": "px", "top": "80", "right": "20", "bottom": "80", "left": "20", "isLinked": false },
+      "_element_id": "wecar-steps"
+    },
+    "elements": [
+      {
+        "id": "h03c001",
+        "elType": "column",
+        "settings": {
+          "_column_size": 100,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h03w001",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "Vend\u00e9 tu auto en 3 pasos",
+              "align": "center",
+              "header_size": "h2",
+              "title_color": "#0F172A"
+            }
+          },
+          {
+            "id": "h03w002",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p>Proceso r\u00e1pido, transparente y sin complicaciones. En d\u00edas h\u00e1biles ten\u00e9s tu auto publicado.</p>",
+              "align": "center",
+              "text_color": "#64748B"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h03c002",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h03w003",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "01",
+              "align": "center",
+              "header_size": "h2",
+              "title_color": "#5E3BE0",
+              "_css_classes": "wecar-step wecar-step--1"
+            }
+          },
+          {
+            "id": "h03w004",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "Cotiz\u00e1s online",
+              "align": "center",
+              "header_size": "h3",
+              "title_color": "#0F172A"
+            }
+          },
+          {
+            "id": "h03w005",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p>Complet\u00e1 el formulario con los datos de tu auto y recib\u00ed una cotizaci\u00f3n preliminar al instante.</p>",
+              "align": "center",
+              "text_color": "#64748B"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h03c003",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h03w006",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "02",
+              "align": "center",
+              "header_size": "h2",
+              "title_color": "#5E3BE0",
+              "_css_classes": "wecar-step wecar-step--2"
+            }
+          },
+          {
+            "id": "h03w007",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "Peritamos en sucursal",
+              "align": "center",
+              "header_size": "h3",
+              "title_color": "#0F172A"
+            }
+          },
+          {
+            "id": "h03w008",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p>Coordin\u00e1 un turno para que nuestros t\u00e9cnicos revisen tu auto en cualquiera de nuestras sucursales.</p>",
+              "align": "center",
+              "text_color": "#64748B"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h03c004",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h03w009",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "03",
+              "align": "center",
+              "header_size": "h2",
+              "title_color": "#5E3BE0",
+              "_css_classes": "wecar-step wecar-step--3"
+            }
+          },
+          {
+            "id": "h03w010",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "Lo publicamos",
+              "align": "center",
+              "header_size": "h3",
+              "title_color": "#0F172A"
+            }
+          },
+          {
+            "id": "h03w011",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p>Una vez aprobado, publicamos tu auto en nuestra plataforma y lo promocionamos para venderlo m\u00e1s r\u00e1pido.</p>",
+              "align": "center",
+              "text_color": "#64748B"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "h04a001",
+    "elType": "section",
+    "settings": {
+      "stretch_section": "section-stretched",
+      "background_background": "classic",
+      "background_color": "#F8FAFC",
+      "padding": { "unit": "px", "top": "80", "right": "20", "bottom": "80", "left": "20", "isLinked": false },
+      "_element_id": "wecar-carousel"
+    },
+    "elements": [
+      {
+        "id": "h04c001",
+        "elType": "column",
+        "settings": {
+          "_column_size": 100,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h04w001",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "Destacados",
+              "align": "center",
+              "header_size": "h2",
+              "title_color": "#0F172A"
+            }
+          },
+          {
+            "id": "h04w002",
+            "elType": "widget",
+            "widgetType": "shortcode",
+            "settings": {
+              "shortcode": "[wecar_vehicle_carousel count=\"12\"]"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "h05a001",
+    "elType": "section",
+    "settings": {
+      "stretch_section": "section-stretched",
+      "background_background": "classic",
+      "background_color": "#FFFFFF",
+      "padding": { "unit": "px", "top": "80", "right": "20", "bottom": "80", "left": "20", "isLinked": false },
+      "_element_id": "wecar-features"
+    },
+    "elements": [
+      {
+        "id": "h05c001",
+        "elType": "column",
+        "settings": {
+          "_column_size": 100,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h05w001",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "Eleg\u00ed WeCar",
+              "align": "center",
+              "header_size": "h2",
+              "title_color": "#0F172A"
+            }
+          },
+          {
+            "id": "h05w002",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p>Descubr\u00ed por qu\u00e9 somos la mejor opci\u00f3n para comprar o vender tu auto.</p>",
+              "align": "center",
+              "text_color": "#64748B"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h05c002",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h05w003",
+            "elType": "widget",
+            "widgetType": "icon-box",
+            "settings": {
+              "position": "top",
+              "selected_icon": { "value": "fas fa-star", "library": "fa-solid" },
+              "icon_size": { "unit": "px", "size": 48 },
+              "icon_color": "#5E3BE0",
+              "title_text": "Confianza",
+              "description_text": "Todos nuestros veh\u00edculos pasan por una revisi\u00f3n t\u00e9cnica exhaustiva antes de ser publicados.",
+              "title_color": "#0F172A",
+              "description_color": "#64748B",
+              "align": "center",
+              "title_size": "h3"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h05c003",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h05w004",
+            "elType": "widget",
+            "widgetType": "icon-box",
+            "settings": {
+              "position": "top",
+              "selected_icon": { "value": "fas fa-eye", "library": "fa-solid" },
+              "icon_size": { "unit": "px", "size": 48 },
+              "icon_color": "#2563EB",
+              "title_text": "Transparencia",
+              "description_text": "Precios claros, historial detallado y toda la informaci\u00f3n del veh\u00edculo a tu alcance.",
+              "title_color": "#0F172A",
+              "description_color": "#64748B",
+              "align": "center",
+              "title_size": "h3"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h05c004",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h05w005",
+            "elType": "widget",
+            "widgetType": "icon-box",
+            "settings": {
+              "position": "top",
+              "selected_icon": { "value": "fas fa-thumbs-up", "library": "fa-solid" },
+              "icon_size": { "unit": "px", "size": 48 },
+              "icon_color": "#06B6D4",
+              "title_text": "Facilidad",
+              "description_text": "Proceso 100% digital desde la cotizaci\u00f3n hasta la entrega. R\u00e1pido, seguro y sin vueltas.",
+              "title_color": "#0F172A",
+              "description_color": "#64748B",
+              "align": "center",
+              "title_size": "h3"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "h06a001",
+    "elType": "section",
+    "settings": {
+      "stretch_section": "section-stretched",
+      "background_background": "classic",
+      "background_color": "#F8FAFC",
+      "padding": { "unit": "px", "top": "60", "right": "20", "bottom": "60", "left": "20", "isLinked": false },
+      "_element_id": "wecar-partners"
+    },
+    "elements": [
+      {
+        "id": "h06c001",
+        "elType": "column",
+        "settings": {
+          "_column_size": 100,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h06w001",
+            "elType": "widget",
+            "widgetType": "heading",
+            "settings": {
+              "title": "Marcas asociadas",
+              "align": "center",
+              "header_size": "h2",
+              "title_color": "#0F172A"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h06c002",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h06w002",
+            "elType": "widget",
+            "widgetType": "image",
+            "settings": {
+              "image": {
+                "url": "",
+                "id": "",
+                "alt": "Multicars"
+              },
+              "align": "center",
+              "width": { "unit": "%", "size": 80 },
+              "_css_classes": "wecar-partner-placeholder",
+              "_element_id": "",
+              "caption": "Multicars",
+              "caption_text_color": "#64748B"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h06c003",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h06w003",
+            "elType": "widget",
+            "widgetType": "image",
+            "settings": {
+              "image": {
+                "url": "",
+                "id": "",
+                "alt": "Le Parc Peugeot"
+              },
+              "align": "center",
+              "width": { "unit": "%", "size": 80 },
+              "_css_classes": "wecar-partner-placeholder",
+              "caption": "Le Parc Peugeot",
+              "caption_text_color": "#64748B"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h06c004",
+        "elType": "column",
+        "settings": {
+          "_column_size": 33,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h06w004",
+            "elType": "widget",
+            "widgetType": "image",
+            "settings": {
+              "image": {
+                "url": "",
+                "id": "",
+                "alt": "Le Parc Citro\u00ebn"
+              },
+              "align": "center",
+              "width": { "unit": "%", "size": 80 },
+              "_css_classes": "wecar-partner-placeholder",
+              "caption": "Le Parc Citro\u00ebn",
+              "caption_text_color": "#64748B"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "h07a001",
+    "elType": "section",
+    "settings": {
+      "stretch_section": "section-stretched",
+      "background_background": "classic",
+      "background_color": "#0F172A",
+      "padding": { "unit": "px", "top": "60", "right": "20", "bottom": "40", "left": "20", "isLinked": false },
+      "_element_id": "wecar-footer"
+    },
+    "elements": [
+      {
+        "id": "h07c001",
+        "elType": "column",
+        "settings": {
+          "_column_size": 50,
+          "_inline_size": null
+        },
+        "elements": [
+          {
+            "id": "h07w001",
+            "elType": "widget",
+            "widgetType": "image",
+            "settings": {
+              "image": {
+                "url": "https://wecar.com.ar/wp-content/uploads/2021/12/wecar-logo.png",
+                "id": "",
+                "alt": "WeCar Logo"
+              },
+              "width": { "unit": "%", "size": 40 },
+              "align": "left"
+            }
+          },
+          {
+            "id": "h07w002",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p>WeCar es la plataforma l\u00edder en compra y venta de veh\u00edculos usados y 0km. Con m\u00e1s de 10 a\u00f1os en el mercado, te ofrecemos la mejor experiencia para comprar o vender tu auto con total confianza y transparencia.</p>",
+              "text_color": "#94A3B8"
+            }
+          },
+          {
+            "id": "h07w003",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p><strong>Tel\u00e9fono:</strong> <a href=\"tel:+5491112345678\" style=\"color:#36BFFA;text-decoration:none;\">+54 9 11 1234-5678</a></p>",
+              "text_color": "#94A3B8"
+            }
+          }
+        ]
+      },
+      {
+        "id": "h07c002",
+        "elType": "column",
+        "settings": {
+          "_column_size": 50,
+          "_inline_size": null,
+          "content_position": "bottom"
+        },
+        "elements": [
+          {
+            "id": "h07w004",
+            "elType": "widget",
+            "widgetType": "text-editor",
+            "settings": {
+              "editor": "<p style=\"text-align: right;\">&copy; 2026 Custer. All rights reserved.</p>",
+              "text_color": "#64748B"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

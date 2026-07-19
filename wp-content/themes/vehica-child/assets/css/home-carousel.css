@@ -1,0 +1,326 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME CAROUSEL — Vehicle Cards
+   REGLA: Header FIJO, contenedor de scroll SOLO para tarjetas
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Section background ───────────────────────────────────────────── */
+body.home #wecar-carousel {
+  background: linear-gradient(180deg, #9949FF 0%, #0E6FD1 100%);
+  position: relative;
+  overflow: hidden;
+  /* !important needed: Elementor writes an inline padding (80px 20px) on this
+     section that would otherwise clip the right edge. Left aligns to the 1440px
+     container gutter (same as other sections); right bleeds to 100vw. */
+  --wecar-carousel-gutter: max(24px, calc((100vw - 1390px) / 2));
+  padding: 80px 0 80px var(--wecar-carousel-gutter) !important;
+  width: 100% !important; max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Corner textures — wavy scallop SVGs from Figma (669x316, radial-gradient fill) */
+body.home #wecar-carousel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 669px; height: 316px;
+  background-image: url('../images/texture-carousel-tl.svg');
+  background-repeat: no-repeat;
+  background-size: 669px 316px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.home #wecar-carousel::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 669px; height: 316px;
+  background-image: url('../images/texture-carousel-br.svg');
+  background-repeat: no-repeat;
+  background-size: 669px 316px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Break out of Elementor's boxed container so the carousel can reach 100vw.
+   Without this, everything (header + carousel) is trapped in a ~1140px centered box. */
+body.home #wecar-carousel > .elementor-container { position: relative; z-index: 1; max-width: 100% !important; }
+
+/* ── Header section: NO scroll, fixed position ───────────────────── */
+body.home #wecar-carousel .elementor-section[data-id="h04s001"] {
+  overflow: visible !important;
+  margin-bottom: 32px;
+  /* Keep the header balanced: title aligns left, "Ver todos" stays off the edge */
+  padding-right: max(24px, calc((100vw - 1390px) / 2));
+}
+
+body.home #wecar-carousel .elementor-section[data-id="h04s001"] .elementor-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* ── Header title ──────────────────────────────────────────────────── */
+body.home #wecar-carousel .elementor-heading-title {
+  text-align: left;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 44px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* ── "Ver todos" link ──────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-carousel__link a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CAROUSEL — Horizontal Scroll Container (SOLO tarjetas)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* The shortcode wrapper: native horizontal scroll viewport (JS drives the
+   ping-pong auto-scroll). width:100%+gutter so it scrolls within the section;
+   overflow-x hidden on the section clips it at 100vw. Scrollbar is hidden. */
+body.home #wecar-carousel .wecar-carousel {
+  display: flex !important;
+  flex-direction: row !important;
+  /* Break the viewport out to BOTH screen edges (0%..100vw). */
+  width: calc(100% + var(--wecar-carousel-gutter)) !important;
+  margin-left: calc(-1 * var(--wecar-carousel-gutter)) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
+  padding-bottom: 8px;
+  margin-top: 0;
+  cursor: grab;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* legacy Edge */
+  touch-action: pan-y;             /* allow vertical page scroll; capture horizontal drag */
+}
+
+body.home #wecar-carousel .wecar-carousel::-webkit-scrollbar { display: none; }
+body.home #wecar-carousel .wecar-carousel--dragging { cursor: grabbing; user-select: none; }
+
+/* Single group of cards. Ping-pong JS scrolls right to the end then reverses
+   back to the start — no cloning, no gap, no jump. */
+body.home #wecar-carousel .wecar-carousel__group {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px !important;
+  padding-right: 24px !important;
+  flex: 0 0 auto;
+}
+
+/* ═══════ VEHICLE CARD ═══════ */
+body.home #wecar-carousel .wecar-vehicle-card {
+  flex: 0 0 300px !important;
+  scroll-snap-align: start;
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  white-space: normal;
+}
+
+/* Gradient border using pseudo-element */
+body.home #wecar-carousel .wecar-vehicle-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(180deg, #F9F9F9 0%, #CBCBCB 100%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Card image: aspect-ratio obligatorio ──────────────────────────── */
+body.home #wecar-carousel .wecar-vehicle-card__image-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #F5F5F5;
+  position: relative;
+}
+
+body.home #wecar-carousel .wecar-vehicle-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Card body ────────────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-vehicle-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+/* Title (brand + model) — fixed 2-line height (2 × 18px) so cards align
+   regardless of whether the title is 1 or 2 lines. Overflow hidden. */
+body.home #wecar-carousel .wecar-vehicle-card__title {
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #111111;
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F9F9F9;
+  height: 36px;
+  overflow: hidden;
+}
+
+/* Version */
+body.home #wecar-carousel .wecar-vehicle-card__version {
+  font-family: var(--wecar-font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #464646;
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F9F9F9;
+}
+
+/* Price */
+body.home #wecar-carousel .wecar-vehicle-card__price {
+  font-family: var(--wecar-font-body);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--wecar-figma-purple);
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F9F9F9;
+}
+
+/* Tags row */
+body.home #wecar-carousel .wecar-vehicle-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+}
+
+/* Individual tag chip */
+body.home #wecar-carousel .wecar-vehicle-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-family: var(--wecar-font-body);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+body.home #wecar-carousel .wecar-vehicle-card__tag-icon {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+
+body.home #wecar-carousel .wecar-vehicle-card__tag--km {
+  background: #E7F1FA;
+  color: #0F4C89;
+}
+
+body.home #wecar-carousel .wecar-vehicle-card__tag--year {
+  background: #E7F8FA;
+  color: #0F7789;
+}
+
+body.home #wecar-carousel .wecar-vehicle-card__tag--transmission {
+  background: #F5EDFF;
+  color: #7B3DCB;
+}
+
+/* ── Bottom CTA pill ──────────────────────────────────────────────── */
+/* Break out to full viewport width so the button centers on screen,
+   not just inside the Elementor column. */
+body.home #wecar-carousel .wecar-carousel__cta {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+body.home #wecar-carousel .wecar-carousel__cta .elementor-button {
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  color: var(--wecar-figma-purple);
+  border-radius: 16px;
+  height: 44px;
+  padding: 11px 24px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+body.home #wecar-carousel .wecar-carousel__cta .elementor-button:hover {
+  box-shadow: 0 2px 8px rgba(255,255,255,0.3);
+}
+
+/* ── Empty state ──────────────────────────────────────────────────── */
+body.home #wecar-carousel .wecar-carousel--empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+body.home #wecar-carousel .wecar-carousel__empty-text {
+  font-family: var(--wecar-font-body);
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+body.home #wecar-carousel .wecar-carousel__empty-cta {
+  display: inline-block;
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  color: var(--wecar-figma-purple);
+  border-radius: 16px;
+  padding: 11px 24px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body.home #wecar-carousel .wecar-vehicle-card {
+    flex: 0 0 280px !important;
+  }
+
+  body.home #wecar-carousel .elementor-heading-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}

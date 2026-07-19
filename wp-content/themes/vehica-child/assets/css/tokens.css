@@ -1,0 +1,141 @@
+/* =============================================================================
+   WeCar Design System — CSS Custom Properties (Design Tokens)
+   =============================================================================
+   Loaded globally via functions.php after elementor-frontend.
+   Scope: available to all child theme CSS via var() references.
+   ============================================================================= */
+
+:root {
+  /* ── Colors ─────────────────────────────────────────────────── */
+  --wecar-purple: #5E3BE0;
+  --wecar-purple-dark: #4A2DB8;
+  --wecar-purple-light: #7B5CE8;
+
+  --wecar-cyan: #36BFFA;
+  --wecar-cyan-dark: #06B6D4;
+  --wecar-cyan-light: #76D6FF;
+
+  --wecar-blue: #2563EB;
+  --wecar-blue-dark: #1D4ED8;
+
+  --wecar-bg: #FFFFFF;
+  --wecar-surface: #F8FAFC;
+  --wecar-text: #0F172A;
+  --wecar-text-muted: #64748B;
+  --wecar-border: #E2E8F0;
+
+  --wecar-footer-bg: #0F172A;
+  --wecar-footer-text: #F8FAFC;
+
+  /* ── Typography ──────────────────────────────────────────────── */
+  --wecar-font-display: 'Montserrat', sans-serif;
+  --wecar-font-body: 'Open Sans', sans-serif;
+
+  --wecar-text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --wecar-text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --wecar-text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --wecar-text-lg: clamp(1.125rem, 1rem + 0.65vw, 1.5rem);
+  --wecar-text-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  --wecar-text-2xl: clamp(2rem, 1.6rem + 2vw, 3.5rem);
+
+  --wecar-line-tight: 1.1;
+  --wecar-line-normal: 1.5;
+  --wecar-line-relaxed: 1.7;
+
+  --wecar-weight-regular: 400;
+  --wecar-weight-semibold: 600;
+  --wecar-weight-bold: 700;
+
+  /* ── Spacing & Layout ────────────────────────────────────────── */
+  --wecar-space-1: 0.25rem;
+  --wecar-space-2: 0.5rem;
+  --wecar-space-3: 0.75rem;
+  --wecar-space-4: 1rem;
+  --wecar-space-6: 1.5rem;
+  --wecar-space-8: 2rem;
+  --wecar-space-10: 2.5rem;
+  --wecar-space-12: 3rem;
+  --wecar-space-16: 4rem;
+  --wecar-space-20: 5rem;
+
+  --wecar-section-padding-y: clamp(3rem, 5vw, 6rem);
+  --wecar-container-max: 1280px;
+  --wecar-container-padding: clamp(1rem, 3vw, 2rem);
+
+  /* ── Radius & Shadows ────────────────────────────────────────── */
+  --wecar-radius-sm: 0.5rem;
+  --wecar-radius-md: 0.75rem;
+  --wecar-radius-lg: 1rem;
+  --wecar-radius-xl: 1.5rem;
+  --wecar-radius-full: 9999px;
+
+  --wecar-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --wecar-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --wecar-shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+  --wecar-shadow-hover: 0 20px 40px rgba(94, 59, 224, 0.18);
+
+  /* ── Home-specific tokens ──────────────────────────────────────── */
+  --wecar-wavy-opacity: 0.12;
+  --wecar-step-1: var(--wecar-purple-light);
+  --wecar-step-2: var(--wecar-blue);
+  --wecar-step-3: var(--wecar-cyan-dark);
+
+  /* ── Hero-specific ─────────────────────────────────────────────── */
+  --wecar-hero-title-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  --wecar-hero-body-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+  --wecar-hero-min-height: clamp(380px, 52vh, 580px);
+  --wecar-hero-radius: 32px;
+
+  /* ── Figma Exact 2026-07 ────────────────────────────────── */
+  /* Brand colors */
+  --wecar-figma-purple: #9949FF;
+  --wecar-figma-blue: #0E6FD1;
+  --wecar-figma-cyan: #0EB5D1;
+
+  /* Light tints */
+  --wecar-figma-purple-light: #F5EDFF;
+  --wecar-figma-blue-light: #E7F1FA;
+  --wecar-figma-cyan-light: #E7F8FA;
+
+  /* Text colors (footer flip from dark to white) */
+  --wecar-figma-text: #111111;
+  --wecar-figma-text-muted: #464646;
+
+  /* Font families (Figma: Syne + Exo 2; Gotham substitute: Inter) */
+  --wecar-font-display: 'Syne', sans-serif;
+  --wecar-font-body: 'Exo 2', sans-serif;
+  --wecar-font-footer: 'Inter', sans-serif;
+
+  /* Hero-specific tokens */
+  --wecar-hero-badge-color-1: var(--wecar-figma-blue);
+  --wecar-hero-badge-color-2: var(--wecar-figma-purple);
+  --wecar-hero-cta-gradient: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
+
+  /* Step badge tokens */
+  --wecar-step-badge-size: 46px;
+  --wecar-step-badge-radius: 16px;
+  --wecar-step-1: var(--wecar-figma-purple);
+  --wecar-step-2: var(--wecar-figma-blue);
+  --wecar-step-3: var(--wecar-figma-cyan);
+}
+
+/*
+ * Elementor stretch guard
+ * -----------------------
+ * Elementor's `section-stretched` script writes inline width/left values at
+ * runtime. When that calculation is wrong, home sections end up as a 1440px
+ * block stuck to the left edge. The section-specific CSS files own the real
+ * layout (`max-width` + `margin:auto`), so neutralize Elementor's inline
+ * stretch offsets for the custom WeCar home sections.
+ */
+body.home section[id^="wecar-"].elementor-section-stretched {
+  left: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  transform: none !important;
+}
+
+/* ── Breakpoints (for reference, use in media queries) ──────────── */
+/* Mobile:  max-width: 767px     */
+/* Tablet:  min-width: 768px and max-width: 1024px  */
+/* Desktop: min-width: 1025px    */
