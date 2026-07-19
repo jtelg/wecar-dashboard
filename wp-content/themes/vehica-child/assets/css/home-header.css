@@ -119,3 +119,109 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
     width: 120px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL HEADER — Semantic classes (non-Elementor pages)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+#wecar-header-global {
+  background: #FFFFFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.wecar-header__inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1390px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.wecar-header__logo {
+  flex: 0 0 auto;
+}
+
+.wecar-header__logo img {
+  width: 170px;
+  height: auto;
+  display: block;
+}
+
+.wecar-header__nav {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.wecar-header__nav a {
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--wecar-figma-text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.wecar-header__nav a:hover {
+  color: var(--wecar-figma-purple);
+}
+
+.wecar-header__cta {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.wecar-header__button {
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  color: var(--wecar-figma-purple);
+  border-radius: 12px;
+  padding: 11px 28px;
+  font-family: var(--wecar-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  border: none;
+  box-shadow: none;
+  display: inline-block;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.wecar-header__button:hover {
+  box-shadow: 0 2px 8px rgba(153, 73, 255, 0.2);
+}
+
+/* Global header mobile */
+@media (max-width: 767px) {
+  #wecar-header-global {
+    padding: 10px 20px;
+  }
+
+  .wecar-header__inner {
+    flex-wrap: wrap;
+  }
+
+  .wecar-header__nav {
+    gap: 16px;
+  }
+
+  .wecar-header__logo img {
+    width: 120px;
+  }
+}

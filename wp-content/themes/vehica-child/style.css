@@ -11,3 +11,19 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: translation-ready
 Text Domain: vehica
 */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HIDE HOME HEADER/FOOTER SECTIONS
+   These sections are now rendered globally via PHP templates.
+   Backup: .codex/elementor-data-backup-before-header-footer-removal.json
+   ═══════════════════════════════════════════════════════════════════════════ */
+body.home #wecar-header,
+body.home #wecar-footer {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
