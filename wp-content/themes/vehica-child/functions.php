@@ -106,6 +106,71 @@ add_action('wp_enqueue_scripts', static function () {
             );
         }
     }
+
+    // Dedicated "Vendé tu auto" page assets.
+    $request_path = isset($_SERVER['REQUEST_URI'])
+        ? trim((string) wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH), '/')
+        : '';
+    $is_sell_page = is_page('vende-tu-auto')
+        || is_page_template('templates/page-vende-tu-auto.php')
+        || $request_path === 'vende-tu-auto';
+
+    if ($is_sell_page) {
+        $sell_css_path = $stylesheet_directory . '/assets/css/vende-tu-auto.css';
+        $sell_js_path = $stylesheet_directory . '/assets/js/vende-tu-auto.js';
+
+        wp_enqueue_style(
+            'wecar-vende-tu-auto',
+            $stylesheet_uri . '/assets/css/vende-tu-auto.css',
+            ['wecar-tokens', 'wecar-header', 'wecar-footer'],
+            filemtime($sell_css_path)
+        );
+
+        wp_enqueue_script(
+            'wecar-vende-tu-auto',
+            $stylesheet_uri . '/assets/js/vende-tu-auto.js',
+            [],
+            filemtime($sell_js_path),
+            ['strategy' => 'defer', 'in_footer' => true]
+        );
+    }
+});
+
+// Serve the versioned page immediately, even before a matching WordPress page is created.
+add_filter('template_include', static function ($template) {
+    $request_path = isset($_SERVER['REQUEST_URI'])
+        ? trim((string) wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH), '/')
+        : '';
+
+    if ($request_path !== 'vende-tu-auto' && !is_page('vende-tu-auto')) {
+        return $template;
+    }
+
+    $sell_template = get_stylesheet_directory() . '/templates/page-vende-tu-auto.php';
+    if (!file_exists($sell_template)) {
+        return $template;
+    }
+
+    global $wp_query;
+    if ($wp_query instanceof WP_Query) {
+        $wp_query->is_404 = false;
+    }
+    status_header(200);
+
+    return $sell_template;
+}, 99);
+
+add_filter('body_class', static function ($classes) {
+    $request_path = isset($_SERVER['REQUEST_URI'])
+        ? trim((string) wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH), '/')
+        : '';
+
+    if ($request_path === 'vende-tu-auto' || is_page('vende-tu-auto')) {
+        $classes[] = 'wecar-vende-tu-auto-page';
+        $classes = array_values(array_diff($classes, ['error404']));
+    }
+
+    return $classes;
 });
 
 // ─── Text domain ────────────────────────────────────────────────
