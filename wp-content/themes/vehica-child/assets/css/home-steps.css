@@ -273,12 +273,10 @@ body.home #wecar-steps .wecar-steps__cta .elementor-widget-wrap {
 }
 
 body.home #wecar-steps .wecar-steps__cta .elementor-button {
-  --wecar-button-gradient-angle: 105deg;
-  --wecar-button-gradient-start: 0%;
-  --wecar-button-gradient-end: 101.96%;
-  --wecar-button-color-start: #9949FF;
-  --wecar-button-color-end: #0E6FD1;
-  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end)) !important;
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(105deg, #9949FF 0%, #0E6FD1 101.96%) !important;
   color: #F9F9F9 !important;
   border-radius: 16px !important;
   height: 44px !important;
@@ -292,18 +290,22 @@ body.home #wecar-steps .wecar-steps__cta .elementor-button {
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none !important;
-  transition:
-    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
+  transition: box-shadow 0.2s ease;
 }
 
-body.home #wecar-steps .wecar-steps__cta .elementor-button:hover {
-  --wecar-button-gradient-angle: 95.148771deg;
-  --wecar-button-gradient-start: 101.37%;
-  --wecar-button-gradient-end: 182.9%;
+body.home #wecar-steps .wecar-steps__cta .elementor-button::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(95.148771deg, #7B3FCC 0%, #0B5BA8 101.96%);
+  transform: translateX(-100%);
+  transition: transform 1250ms cubic-bezier(0, 0, 0.35, 1);
+}
+
+body.home #wecar-steps .wecar-steps__cta .elementor-button:hover::before,
+body.home #wecar-steps .wecar-steps__cta .elementor-button:focus-visible::before {
+  transform: translateX(0);
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */

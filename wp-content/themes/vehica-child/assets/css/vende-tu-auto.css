@@ -85,11 +85,9 @@
 }
 
 .wecar-sell__button {
-  --wecar-button-gradient-angle: 105deg;
-  --wecar-button-gradient-start: 0%;
-  --wecar-button-gradient-end: 101.96%;
-  --wecar-button-color-start: var(--sell-violet-500);
-  --wecar-button-color-end: var(--sell-blue-500);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   min-height: 44px;
   align-items: center;
@@ -101,18 +99,18 @@
   font-weight: 700;
   line-height: 20px;
   text-decoration: none;
-  background-image: linear-gradient(
-    var(--wecar-button-gradient-angle),
-    var(--wecar-button-color-start) var(--wecar-button-gradient-start),
-    var(--wecar-button-color-end) var(--wecar-button-gradient-end)
-  );
-  transition:
-    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    border-color 1.250123s cubic-bezier(0, 0, 0.35, 1);
+  background: linear-gradient(105deg, var(--sell-violet-500) 0%, var(--sell-blue-500) 101.96%);
+  transition: border-color 1.250123s cubic-bezier(0, 0, 0.35, 1);
+}
+
+.wecar-sell__button::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(95.148771deg, #7B3FCC 0%, #0B5BA8 101.96%);
+  transform: translateX(-100%);
+  transition: transform 1250ms cubic-bezier(0, 0, 0.35, 1);
 }
 
 .wecar-sell__button:focus-visible,
@@ -127,34 +125,33 @@
   color: #ffffff;
 }
 
-.wecar-sell__button--primary:hover,
-.wecar-sell__button--primary:focus-visible {
-  --wecar-button-gradient-angle: 95.148771deg;
-  --wecar-button-gradient-start: 101.37%;
-  --wecar-button-gradient-end: 182.9%;
+.wecar-sell__button--primary:hover::before,
+.wecar-sell__button--primary:focus-visible::before {
+  transform: translateX(0);
 }
 
 .wecar-sell__button--secondary {
-  --wecar-button-gradient-angle: 97.606466deg;
-  --wecar-button-gradient-start: 94.866%;
-  --wecar-button-gradient-end: 94.991%;
-  --wecar-button-color-start: var(--sell-violet-100);
-  --wecar-button-color-end: #ffffff;
+  background: linear-gradient(97.606466deg, var(--sell-violet-100) 94.866%, #ffffff 94.991%);
   border: 1px solid transparent;
   color: var(--sell-violet-500);
 }
 
+.wecar-sell__button--secondary::before {
+  background: linear-gradient(95.148771deg, var(--sell-violet-300) 101.37%, var(--sell-violet-100) 182.9%);
+}
+
+.wecar-sell__button--secondary:hover::before,
+.wecar-sell__button--secondary:focus-visible::before {
+  transform: translateX(0);
+}
+
 .wecar-sell__button--secondary:hover,
 .wecar-sell__button--secondary:focus-visible {
-  --wecar-button-gradient-angle: 95.148771deg;
-  --wecar-button-gradient-start: 101.37%;
-  --wecar-button-gradient-end: 182.9%;
-  --wecar-button-color-start: var(--sell-violet-300);
   border-color: #ffffff;
 }
 
 .wecar-sell__button--small {
-  --wecar-button-gradient-angle: 151.94317deg;
+  background: linear-gradient(151.94317deg, var(--sell-violet-500) 0%, var(--sell-blue-500) 101.96%);
   width: 100%;
   min-height: 32px;
   padding: 7px 16px;
@@ -163,11 +160,13 @@
   line-height: 18px;
 }
 
-.wecar-sell__button--small:hover,
-.wecar-sell__button--small:focus-visible {
-  --wecar-button-gradient-angle: 96.530139deg;
-  --wecar-button-gradient-start: 101.37%;
-  --wecar-button-gradient-end: 182.9%;
+.wecar-sell__button--small::before {
+  background: linear-gradient(96.530139deg, #7B3FCC 0%, #0B5BA8 101.96%);
+}
+
+.wecar-sell__button--small:hover::before,
+.wecar-sell__button--small:focus-visible::before {
+  transform: translateX(0);
 }
 
 .wecar-sell__icon {

@@ -267,48 +267,51 @@ body.home .wecar-hero__card__cta .elementor-button {
 }
 
 body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__cta .elementor-button {
-  --wecar-button-gradient-angle: 105deg;
-  --wecar-button-gradient-start: 0%;
-  --wecar-button-gradient-end: 101.96%;
-  --wecar-button-color-start: #9949FF;
-  --wecar-button-color-end: #0E6FD1;
-  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(105deg, #9949FF 0%, #0E6FD1 101.96%);
   color: #FFFFFF;
-  transition:
-    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
+  transition: box-shadow 0.2s ease;
 }
 
-body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__cta .elementor-button:hover {
-  --wecar-button-gradient-angle: 95.148771deg;
-  --wecar-button-gradient-start: 101.37%;
-  --wecar-button-gradient-end: 182.9%;
+body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__cta .elementor-button::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(95.148771deg, #7B3FCC 0%, #0B5BA8 101.96%);
+  transform: translateX(-100%);
+  transition: transform 1250ms cubic-bezier(0, 0, 0.35, 1);
+}
+
+body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__cta .elementor-button:hover::before,
+body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__cta .elementor-button:focus-visible::before {
+  transform: translateX(0);
 }
 
 body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__cta .elementor-button {
-  --wecar-button-gradient-angle: 97.606466deg;
-  --wecar-button-gradient-start: 94.866%;
-  --wecar-button-gradient-end: 94.991%;
-  --wecar-button-color-start: #F5EDFF;
-  --wecar-button-color-end: #FFFFFF;
-  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(97.606466deg, #F5EDFF 94.866%, #FFFFFF 94.991%);
   color: var(--wecar-figma-purple);
-  transition:
-    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
-    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
+  transition: box-shadow 0.2s ease;
 }
 
-body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__cta .elementor-button:hover {
-  --wecar-button-gradient-angle: 95.148771deg;
-  --wecar-button-gradient-start: 101.37%;
-  --wecar-button-gradient-end: 182.9%;
-  --wecar-button-color-start: #D9BAFF;
+body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__cta .elementor-button::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(95.148771deg, #D9BAFF 101.37%, #F5EDFF 182.9%);
+  transform: translateX(-100%);
+  transition: transform 1250ms cubic-bezier(0, 0, 0.35, 1);
+}
+
+body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__cta .elementor-button:hover::before,
+body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__cta .elementor-button:focus-visible::before {
+  transform: translateX(0);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
