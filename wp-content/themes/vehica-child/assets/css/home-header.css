@@ -152,7 +152,8 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 20px 148px;
+  max-width: 1390px !important;
+  padding: 20px 0px;
   box-sizing: border-box;
   transition: background 0.3s ease;
 }
@@ -187,7 +188,7 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
   display: flex;
   flex-direction: row;
   gap: 40px;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
   margin: 0;
   padding: 0;
