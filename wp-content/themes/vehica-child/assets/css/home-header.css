@@ -168,7 +168,7 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
   align-items: center;
   max-width: 1390px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -193,7 +193,7 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
   padding: 0;
 }
 
-.wecar-header__nav a {
+.wecar-header__nav a:not(.wecar-header__button) {
   font-family: var(--wecar-font-display);
   font-weight: 700;
   font-size: 14px;
@@ -204,13 +204,8 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
   transition: color 0.2s ease;
 }
 
-.wecar-header__nav a:hover {
+.wecar-header__nav a:not(.wecar-header__button):hover {
   color: var(--wecar-figma-purple);
-}
-
-.wecar-header__cta {
-  flex: 0 0 auto;
-  text-align: right;
 }
 
 .wecar-header__button {
