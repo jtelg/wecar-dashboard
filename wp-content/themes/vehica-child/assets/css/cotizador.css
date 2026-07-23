@@ -14,7 +14,7 @@ body.wecar-cotizador-page { margin: 0; }
   --quote-violet-900: #4c2978;
   box-sizing: border-box;
   width: 100%;
-  padding-top: 80px;
+  padding-top: 0;
   overflow: hidden;
   color: var(--quote-black);
   background: #ffffff;
