@@ -694,128 +694,6 @@
   line-height: 24px;
 }
 
-/* Section 6 — FAQ */
-.wecar-sell__faq {
-  padding-bottom: 100px;
-}
-
-.wecar-sell__faq h2 {
-  text-align: center;
-}
-
-.wecar-sell__tabs {
-  display: flex;
-  width: max-content;
-  max-width: 100%;
-  margin: 40px auto;
-  padding: 2px;
-  overflow-x: auto;
-  border-radius: 14px;
-  background: var(--sell-grey-100);
-}
-
-.wecar-sell__tabs button {
-  height: 28px;
-  padding: 4px 12px;
-  cursor: pointer;
-  white-space: nowrap;
-  border: 0;
-  border-radius: 14px;
-  color: var(--sell-black);
-  background: #ffffff;
-  font-family: var(--wecar-font-body, "Exo 2", sans-serif);
-  font-size: 14px;
-  line-height: 22px;
-}
-
-.wecar-sell__tabs button:hover {
-  color: var(--sell-black);
-  background: var(--sell-violet-100);
-}
-
-.wecar-sell__tabs button[aria-selected="true"] {
-  color: #ffffff;
-  background: var(--sell-violet-500);
-}
-
-.wecar-sell__tabpanel {
-  width: min(100%, 840px);
-  min-height: 0;
-  margin: 0 auto;
-}
-
-.wecar-sell__accordion {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 20px;
-  overflow: hidden;
-  border-radius: 24px;
-  background: var(--sell-violet-100);
-}
-
-.wecar-sell__faq-item {
-  border-bottom: 1px solid var(--sell-grey-250);
-}
-
-.wecar-sell__faq-item h3 {
-  margin: 0;
-}
-
-.wecar-sell__faq-item button {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 0;
-  cursor: pointer;
-  border: 0;
-  color: var(--sell-violet-500);
-  background: transparent;
-  font-family: var(--wecar-font-body, "Exo 2", sans-serif);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: left;
-}
-
-.wecar-sell__faq-item button[aria-expanded="false"] {
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-.wecar-sell__faq-item button span {
-  flex: 1;
-}
-
-.wecar-sell__faq-item button img {
-  width: 22px;
-  height: 22px;
-  transition: transform 0.4961703419685364s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.wecar-sell__faq-item button[aria-expanded="true"] img {
-  transform: rotate(180deg);
-}
-
-.wecar-sell__faq-panel {
-  height: auto;
-  padding: 8px 0 20px;
-  overflow: hidden;
-  font-size: 14px;
-  line-height: 22px;
-  opacity: 1;
-  transition:
-    height 0.4961703419685364s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.4961703419685364s cubic-bezier(0.4, 0, 0.2, 1),
-    padding-top 0.4961703419685364s cubic-bezier(0.4, 0, 0.2, 1),
-    padding-bottom 0.4961703419685364s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.wecar-sell__faq-panel:empty {
-  padding: 0;
-}
-
 /* Section 7 — final CTA */
 .wecar-sell__final-cta {
   padding-top: 0;
@@ -1051,16 +929,6 @@
     grid-column: auto;
   }
 
-  .wecar-sell__tabs {
-    width: 100%;
-    margin: 32px 0;
-  }
-
-  .wecar-sell__accordion {
-    padding: 16px;
-    border-radius: 20px;
-  }
-
   .wecar-sell__final-cta {
     padding-top: 0;
   }
@@ -1079,9 +947,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wecar-sell__button,
-  .wecar-sell__faq-item button img,
-  .wecar-sell__faq-panel {
+  .wecar-sell__button {
     transition: none;
   }
 }
