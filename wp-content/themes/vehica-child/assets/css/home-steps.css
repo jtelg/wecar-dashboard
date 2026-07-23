@@ -273,11 +273,16 @@ body.home #wecar-steps .wecar-steps__cta .elementor-widget-wrap {
 }
 
 body.home #wecar-steps .wecar-steps__cta .elementor-button {
-  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%) !important;
+  --wecar-button-gradient-angle: 105deg;
+  --wecar-button-gradient-start: 0%;
+  --wecar-button-gradient-end: 101.96%;
+  --wecar-button-color-start: #9949FF;
+  --wecar-button-color-end: #0E6FD1;
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end)) !important;
   color: #F9F9F9 !important;
   border-radius: 16px !important;
   height: 44px !important;
-  padding: 11px 32px !important;
+  padding: 11px 16px !important;
   font-family: var(--wecar-font-display) !important;
   font-weight: 700 !important;
   font-size: 1rem !important;
@@ -287,10 +292,18 @@ body.home #wecar-steps .wecar-steps__cta .elementor-button {
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none !important;
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
 }
 
 body.home #wecar-steps .wecar-steps__cta .elementor-button:hover {
-  filter: brightness(0.92);
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */

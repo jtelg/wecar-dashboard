@@ -77,7 +77,12 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] {
 }
 
 body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button {
-  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%) !important;
+  --wecar-button-gradient-angle: 97.606466deg;
+  --wecar-button-gradient-start: 94.866%;
+  --wecar-button-gradient-end: 94.991%;
+  --wecar-button-color-start: #F5EDFF;
+  --wecar-button-color-end: #FFFFFF;
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end)) !important;
   color: var(--wecar-figma-purple) !important;
   border-radius: 12px !important;
   padding: 11px 28px !important;
@@ -89,10 +94,20 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button {
   border: none !important;
   box-shadow: none !important;
   display: inline-block !important;
-  transition: box-shadow 0.2s ease;
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    box-shadow 0.2s ease;
 }
 
 body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button:hover {
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
+  --wecar-button-color-start: #D9BAFF;
   box-shadow: 0 2px 8px rgba(153,73,255,0.2) !important;
 }
 
@@ -188,7 +203,12 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
 }
 
 .wecar-header__button {
-  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  --wecar-button-gradient-angle: 97.606466deg;
+  --wecar-button-gradient-start: 94.866%;
+  --wecar-button-gradient-end: 94.991%;
+  --wecar-button-color-start: #F5EDFF;
+  --wecar-button-color-end: #FFFFFF;
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
   color: var(--wecar-figma-purple);
   border-radius: 12px;
   padding: 11px 28px;
@@ -200,10 +220,20 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
   box-shadow: none;
   display: inline-block;
   text-decoration: none;
-  transition: box-shadow 0.2s ease;
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    box-shadow 0.2s ease;
 }
 
 .wecar-header__button:hover {
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
+  --wecar-button-color-start: #D9BAFF;
   box-shadow: 0 2px 8px rgba(153, 73, 255, 0.2);
 }
 

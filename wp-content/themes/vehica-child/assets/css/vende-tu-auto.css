@@ -1,35 +1,5 @@
 /* WeCar — Vendé tu auto. Scoped to the dedicated page template. */
 
-@property --wecar-button-gradient-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 105deg;
-}
-
-@property --wecar-button-gradient-start {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 0%;
-}
-
-@property --wecar-button-gradient-end {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 101.96%;
-}
-
-@property --wecar-button-color-start {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #9949ff;
-}
-
-@property --wecar-button-color-end {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0e6fd1;
-}
-
 .wecar-sell {
   --sell-black: #111111;
   --sell-grey-900: #464646;

@@ -307,40 +307,39 @@ body.wecar-cotizador-modal-is-open {
 }
 
 .wecar-cotizador-modal__action-btn {
-  position: relative;
-  isolation: isolate;
   display: flex;
   width: 100%;
   height: 44px;
   align-items: center;
   justify-content: center;
   padding: 11px 16px;
-  overflow: hidden;
   cursor: pointer;
   border: 0;
   border-radius: 16px;
   color: #ffffff;
-  background: var(--wecar-figma-purple, #9949ff);
+  --wecar-button-gradient-angle: 105deg;
+  --wecar-button-gradient-start: 0%;
+  --wecar-button-gradient-end: 101.96%;
+  --wecar-button-color-start: var(--wecar-figma-purple, #9949ff);
+  --wecar-button-color-end: var(--wecar-figma-blue, #0e6fd1);
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
   font-family: var(--wecar-font-display, "Syne", sans-serif);
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  transition: opacity 150ms ease-out;
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
 }
 
-.wecar-cotizador-modal__action-btn::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  content: "";
-  background: linear-gradient(144deg, var(--wecar-figma-purple, #9949ff) 0%, var(--wecar-figma-blue, #0e6fd1) 100%);
-  transform: translateX(0);
-  transition: transform 1250ms cubic-bezier(0.35, 0, 0.35, 1);
-}
-
-.wecar-cotizador-modal__action-btn:hover::before,
-.wecar-cotizador-modal__action-btn:focus-visible::before {
-  transform: translateX(100%);
+.wecar-cotizador-modal__action-btn:hover,
+.wecar-cotizador-modal__action-btn:focus-visible {
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
 }
 
 .wecar-cotizador-modal__action-btn:focus-visible {
@@ -384,7 +383,7 @@ body.wecar-cotizador-modal-is-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wecar-cotizador-modal__action-btn::before {
+  .wecar-cotizador-modal__action-btn {
     transition: none;
   }
 }

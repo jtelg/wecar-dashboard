@@ -270,7 +270,12 @@ body.home #wecar-carousel .wecar-carousel__cta {
 }
 
 body.home #wecar-carousel .wecar-carousel__cta .elementor-button {
-  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  --wecar-button-gradient-angle: 97.606466deg;
+  --wecar-button-gradient-start: 94.866%;
+  --wecar-button-gradient-end: 94.991%;
+  --wecar-button-color-start: #F5EDFF;
+  --wecar-button-color-end: #FFFFFF;
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
   color: var(--wecar-figma-purple);
   border-radius: 16px;
   height: 44px;
@@ -282,10 +287,19 @@ body.home #wecar-carousel .wecar-carousel__cta .elementor-button {
   border: none;
   display: inline-flex;
   align-items: center;
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
 }
 
 body.home #wecar-carousel .wecar-carousel__cta .elementor-button:hover {
-  box-shadow: 0 2px 8px rgba(255,255,255,0.3);
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
+  --wecar-button-color-start: #D9BAFF;
 }
 
 /* ── Empty state ──────────────────────────────────────────────────── */
@@ -302,8 +316,12 @@ body.home #wecar-carousel .wecar-carousel__empty-text {
 }
 
 body.home #wecar-carousel .wecar-carousel__empty-cta {
-  display: inline-block;
-  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  --wecar-button-gradient-angle: 97.606466deg;
+  --wecar-button-gradient-start: 94.866%;
+  --wecar-button-gradient-end: 94.991%;
+  --wecar-button-color-start: #F5EDFF;
+  --wecar-button-color-end: #FFFFFF;
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
   color: var(--wecar-figma-purple);
   border-radius: 16px;
   padding: 11px 24px;
@@ -311,6 +329,20 @@ body.home #wecar-carousel .wecar-carousel__empty-cta {
   font-weight: 700;
   font-size: 16px;
   text-decoration: none;
+  display: inline-block;
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
+}
+
+body.home #wecar-carousel .wecar-carousel__empty-cta:hover {
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
+  --wecar-button-color-start: #D9BAFF;
 }
 
 /* ── Mobile ───────────────────────────────────────────────────────── */

@@ -267,16 +267,49 @@ body.home .wecar-hero__card__cta .elementor-button {
 }
 
 body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__cta .elementor-button {
-  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
+  --wecar-button-gradient-angle: 105deg;
+  --wecar-button-gradient-start: 0%;
+  --wecar-button-gradient-end: 101.96%;
+  --wecar-button-color-start: #9949FF;
+  --wecar-button-color-end: #0E6FD1;
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
   color: #FFFFFF;
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
+}
+
+body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__cta .elementor-button:hover {
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
 }
 
 body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__cta .elementor-button {
-  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
+  --wecar-button-gradient-angle: 97.606466deg;
+  --wecar-button-gradient-start: 94.866%;
+  --wecar-button-gradient-end: 94.991%;
+  --wecar-button-color-start: #F5EDFF;
+  --wecar-button-color-end: #FFFFFF;
+  background-image: linear-gradient(var(--wecar-button-gradient-angle), var(--wecar-button-color-start) var(--wecar-button-gradient-start), var(--wecar-button-color-end) var(--wecar-button-gradient-end));
   color: var(--wecar-figma-purple);
+  transition:
+    --wecar-button-gradient-angle 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-gradient-end 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-start 1.250123s cubic-bezier(0, 0, 0.35, 1),
+    --wecar-button-color-end 1.250123s cubic-bezier(0, 0, 0.35, 1);
 }
 
-body.home .wecar-hero__card__cta .elementor-button:hover { filter: brightness(0.92); }
+body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__cta .elementor-button:hover {
+  --wecar-button-gradient-angle: 95.148771deg;
+  --wecar-button-gradient-start: 101.37%;
+  --wecar-button-gradient-end: 182.9%;
+  --wecar-button-color-start: #D9BAFF;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    ESTADO ACTIVO: todo visible (translateX(0))

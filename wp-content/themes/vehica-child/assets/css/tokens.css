@@ -5,6 +5,44 @@
    Scope: available to all child theme CSS via var() references.
    ============================================================================= */
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   Animated Gradient — @property registrations
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@property --wecar-button-gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 105deg;
+}
+
+@property --wecar-button-gradient-start {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+@property --wecar-button-gradient-end {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 101.96%;
+}
+
+@property --wecar-button-color-start {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #9949ff;
+}
+
+@property --wecar-button-color-end {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0e6fd1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Design Tokens
+   ══════════════════════════════════════════════════════════════════════════ */
+
 :root {
   /* ── Colors ─────────────────────────────────────────────────── */
   --wecar-purple: #5E3BE0;
@@ -133,6 +171,22 @@ body.home section[id^="wecar-"].elementor-section-stretched {
   right: auto !important;
   width: 100% !important;
   transform: none !important;
+}
+
+/* ── Reduced motion: disable animated gradient transitions ──────── */
+@media (prefers-reduced-motion: reduce) {
+  body.home .wecar-header__button,
+  body.home .wecar-hero__card__cta .elementor-button,
+  body.home .wecar-steps__cta .elementor-button,
+  body.home .wecar-carousel__cta .elementor-button,
+  body.home .wecar-carousel__empty-cta,
+  body.home .wecar-steps__cta .elementor-button,
+  .wecar-cotizador__qualification-cta,
+  .wecar-cotizador__primary,
+  .wecar-cotizador-modal__action-btn,
+  .wecar-sell__button {
+    transition: none !important;
+  }
 }
 
 /* ── Breakpoints (for reference, use in media queries) ──────────── */
