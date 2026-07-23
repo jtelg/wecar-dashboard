@@ -361,6 +361,8 @@ body.home #wecar-steps.wecar-steps--revealed .wecar-steps__cta {
 
 /* Temporary TEST-only replay control, injected by home-animations.js. */
 body.home .wecar-steps__test-replay {
+  /* Keep the QA replay logic available while its control remains hidden. */
+  display: none !important;
   position: fixed;
   right: 20px;
   bottom: 20px;

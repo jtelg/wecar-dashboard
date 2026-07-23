@@ -1,0 +1,38 @@
+.wecar-faq {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 100px 0;
+  color: #111111;
+  background: #ffffff;
+  font-family: var(--wecar-font-body, "Exo 2", sans-serif);
+}
+
+.wecar-faq *, .wecar-faq *::before, .wecar-faq *::after { box-sizing: border-box; }
+.wecar-faq__container { width: min(calc(100% - 40px), 1216px); margin-inline: auto; }
+.wecar-faq h2 { margin: 0; color: #111111; font-family: var(--wecar-font-display, "Syne", sans-serif); font-size: 38px; font-weight: 700; line-height: 44px; text-align: center; }
+.wecar-faq__tabs { display: flex; width: max-content; max-width: 100%; margin: 40px auto; padding: 2px; overflow-x: auto; border-radius: 14px; background: #f9f9f9; }
+.wecar-faq__tabs button { height: 28px; padding: 4px 12px; cursor: pointer; white-space: nowrap; border: 0; border-radius: 14px; color: #111111; background: transparent; font-family: var(--wecar-font-body, "Exo 2", sans-serif); font-size: 14px; font-weight: 400; line-height: 22px; }
+.wecar-faq__tabs button:hover { color: #111111; background: #f5edff; }
+.wecar-faq__tabs button[aria-selected="true"], .wecar-faq__tabs button[aria-selected="true"]:hover { color: #ffffff; background: #9949ff; }
+.wecar-faq__tabs button:focus-visible, .wecar-faq__item button:focus-visible { outline: 3px solid #0e6fd1; outline-offset: 2px; }
+.wecar-faq__tabpanel { width: min(100%, 840px); margin: 0 auto; }
+.wecar-faq__accordion { display: flex; flex-direction: column; gap: 8px; padding: 20px; overflow: hidden; border-radius: 24px; background: #f5edff; }
+.wecar-faq__item { border-bottom: 1px solid #e7e7e7; }
+.wecar-faq__item h3, .wecar-faq__item p { margin: 0; }
+.wecar-faq__item button { display: flex; width: 100%; align-items: center; gap: 10px; padding: 10px 0; cursor: pointer; border: 0; border-radius: 8px; color: #9949ff; background: transparent; font-family: var(--wecar-font-body, "Exo 2", sans-serif); font-size: 16px; font-weight: 600; line-height: 24px; text-align: left; }
+.wecar-faq__item button[aria-expanded="false"] { padding-top: 12px; padding-bottom: 12px; }
+.wecar-faq__item button span { flex: 1; }
+.wecar-faq__item button img { display: block; width: 22px; height: 22px; transition: transform 496.1703419685364ms cubic-bezier(0.4, 0, 0.2, 1); }
+.wecar-faq__item button[aria-expanded="true"] img { transform: rotate(180deg); }
+.wecar-faq__panel { height: auto; padding: 8px 0 20px; overflow: hidden; font-size: 14px; line-height: 22px; opacity: 1; transition: height 496.1703419685364ms cubic-bezier(0.4, 0, 0.2, 1), opacity 496.1703419685364ms cubic-bezier(0.4, 0, 0.2, 1), padding-top 496.1703419685364ms cubic-bezier(0.4, 0, 0.2, 1), padding-bottom 496.1703419685364ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+@media (max-width: 767px) {
+  .wecar-faq { padding: 64px 0; }
+  .wecar-faq h2 { font-size: 30px; line-height: 36px; }
+  .wecar-faq__tabs { width: 100%; margin: 32px 0; }
+  .wecar-faq__accordion { padding: 16px; border-radius: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wecar-faq__item button img, .wecar-faq__panel { transition: none; }
+}

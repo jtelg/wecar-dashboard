@@ -16,3 +16,6 @@ temp/
 
 # Agent artifacts
 .atl/
+
+# Codex backup artifacts
+.codex-last-test-backup.txt

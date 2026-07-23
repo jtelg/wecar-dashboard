@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nueva cotización recibida - WeCar</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Exo 2', Arial, sans-serif; background-color: #f5f5f5;">
+  
+  <!-- Wrapper -->
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f5f5f5;">
+    <tr>
+      <td style="padding: 40px 20px;">
+        
+        <!-- Container -->
+        <table role="presentation" style="max-width: 600px; margin: 0 auto; border-collapse: collapse; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+          
+          <!-- Header with gradient -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #9949FF 0%, #0E6FD1 100%); padding: 30px; text-align: center; position: relative;">
+              
+              <!-- Logo -->
+              <img src="https://test.wecar.com.ar/wp-content/themes/vehica-child/assets/images/logo-wecar.svg" alt="WeCar" style="max-width: 120px; height: auto; margin-bottom: 16px;">
+              
+              <!-- Title -->
+              <h1 style="margin: 0; font-family: 'Syne', Arial, sans-serif; font-size: 24px; font-weight: 700; color: #ffffff; line-height: 1.3;">
+                Nueva cotización recibida
+              </h1>
+              
+            </td>
+          </tr>
+          
+          <!-- Alert Badge -->
+          <tr>
+            <td style="padding: 30px 30px 0;">
+              <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #E7F1FA; border-left: 4px solid #0E6FD1; border-radius: 8px;">
+                <tr>
+                  <td style="padding: 16px 20px;">
+                    <p style="margin: 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #0E6FD1; font-weight: 600; line-height: 1.5;">
+                      📋 Se recibió un nuevo cotizador desde el sitio web
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Contact Section -->
+          <tr>
+            <td style="padding: 30px 30px 20px;">
+              
+              <!-- Section Title -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+                <tr>
+                  <td style="padding-bottom: 10px; border-bottom: 2px solid #9949FF;">
+                    <h2 style="margin: 0; font-family: 'Syne', Arial, sans-serif; font-size: 16px; font-weight: 600; color: #9949FF;">
+                      Datos de contacto
+                    </h2>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- Data Table -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f8f9fa; border-radius: 12px; padding: 16px;">
+                <tr>
+                  <td style="padding: 16px;">
+                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; width: 110px; vertical-align: top;">Nombre:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.nombre }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Email:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; font-weight: 500;"><a href="mailto:{{ $json.mail }}" style="color: #0E6FD1; text-decoration: none;">{{ $json.mail }}</a></td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Teléfono:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; font-weight: 500;"><a href="tel:{{ $json.telefono }}" style="color: #0E6FD1; text-decoration: none;">{{ $json.telefono }}</a></td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Localidad:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.localidad }}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              
+            </td>
+          </tr>
+          
+          <!-- Vehicle Section -->
+          <tr>
+            <td style="padding: 0 30px 20px;">
+              
+              <!-- Section Title -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+                <tr>
+                  <td style="padding-bottom: 10px; border-bottom: 2px solid #0E6FD1;">
+                    <h2 style="margin: 0; font-family: 'Syne', Arial, sans-serif; font-size: 16px; font-weight: 600; color: #0E6FD1;">
+                      Vehículo
+                    </h2>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- Data Table -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f8f9fa; border-radius: 12px; padding: 16px;">
+                <tr>
+                  <td style="padding: 16px;">
+                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; width: 110px; vertical-align: top;">Marca:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.marca }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Modelo:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.modelo }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Año:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.anio }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Kilómetros:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.kilometros }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">GNC:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.gnc }}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              
+            </td>
+          </tr>
+          
+          <!-- Inspection Section -->
+          <tr>
+            <td style="padding: 0 30px 30px;">
+              
+              <!-- Section Title -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+                <tr>
+                  <td style="padding-bottom: 10px; border-bottom: 2px solid #0EB5D1;">
+                    <h2 style="margin: 0; font-family: 'Syne', Arial, sans-serif; font-size: 16px; font-weight: 600; color: #0EB5D1;">
+                      Peritaje
+                    </h2>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- Data Table -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f8f9fa; border-radius: 12px; padding: 16px;">
+                <tr>
+                  <td style="padding: 16px;">
+                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; width: 110px; vertical-align: top;">Día:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.dia }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Horario:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.horario }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 13px; color: #64748B; vertical-align: top;">Fecha:</td>
+                        <td style="padding: 6px 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #111111; font-weight: 500;">{{ $json.fecha }}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              
+            </td>
+          </tr>
+          
+          <!-- Action Section -->
+          <tr>
+            <td style="padding: 0 30px 30px; text-align: center;">
+              <p style="margin: 0 0 20px; font-family: 'Exo 2', Arial, sans-serif; font-size: 14px; color: #464646; line-height: 1.6;">
+                Contactar al cliente para confirmar el turno del peritaje
+              </p>
+              
+              <!-- Action Buttons -->
+              <table role="presentation" style="margin: 0 auto; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 0 8px;">
+                    <table role="presentation" style="border-collapse: collapse;">
+                      <tr>
+                        <td style="background: linear-gradient(135deg, #9949FF 0%, #0E6FD1 100%); border-radius: 10px;">
+                          <a href="tel:{{ $json.telefono }}" style="display: inline-block; padding: 12px 24px; font-family: 'Syne', Arial, sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; text-decoration: none;">
+                            📞 Llamar
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td style="padding: 0 8px;">
+                    <table role="presentation" style="border-collapse: collapse;">
+                      <tr>
+                        <td style="background: #ffffff; border: 2px solid #0E6FD1; border-radius: 10px;">
+                          <a href="mailto:{{ $json.mail }}" style="display: inline-block; padding: 12px 24px; font-family: 'Syne', Arial, sans-serif; font-size: 14px; font-weight: 600; color: #0E6FD1; text-decoration: none;">
+                            ✉️ Email
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- ID Badge -->
+          <tr>
+            <td style="padding: 0 30px 30px; text-align: center;">
+              <table role="presentation" style="margin: 0 auto; border-collapse: collapse; background-color: #F5EDFF; border-radius: 8px;">
+                <tr>
+                  <td style="padding: 12px 20px;">
+                    <p style="margin: 0; font-family: 'Exo 2', Arial, sans-serif; font-size: 12px; color: #9949FF;">
+                      <strong>ID:</strong> {{ $json.id }}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #0F172A; padding: 24px 30px; text-align: center;">
+              <p style="margin: 0 0 8px; font-family: 'Inter', Arial, sans-serif; font-size: 13px; color: #F8FAFC; font-weight: 600;">
+                Panel de Administración WeCar
+              </p>
+              <p style="margin: 0; font-family: 'Inter', Arial, sans-serif; font-size: 12px; color: rgba(248,250,252,0.6);">
+                Este es un email automático del sistema de cotizaciones
+              </p>
+            </td>
+          </tr>
+          
+        </table>
+        
+      </td>
+    </tr>
+  </table>
+  
+</body>
+</html>

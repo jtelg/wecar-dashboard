@@ -1,0 +1,352 @@
+{
+  "name": "WeCar Cotizador",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1uEb4N94f6lKcFAf-qZ5qJk6KcNQS5CwrK4hDYZ_ZQSI",
+          "mode": "list",
+          "cachedResultName": "COTIZACIONES (wecar.com.ar)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uEb4N94f6lKcFAf-qZ5qJk6KcNQS5CwrK4hDYZ_ZQSI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uEb4N94f6lKcFAf-qZ5qJk6KcNQS5CwrK4hDYZ_ZQSI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $json.timestamp }}",
+            "Fecha": "={{ $json.fecha }}",
+            "Email": "={{ $json.mail }}",
+            "Nombre": "={{ $json.nombre }}",
+            "Telefono": "={{ $json.telefono }}",
+            "Localidad": "={{ $json.localidad }}",
+            "Año": "={{ $json.anio }}",
+            "Marca": "={{ $json.marca }}",
+            "Modelo": "={{ $json.modelo }}",
+            "KM": "={{ $json.kilometros }}",
+            "GNC": "={{ $json.gnc }}",
+            "Día": "={{ $json.dia }}",
+            "Horario": "={{ $json.horario }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Localidad",
+              "displayName": "Localidad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Año",
+              "displayName": "Año",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Marca",
+              "displayName": "Marca",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Modelo",
+              "displayName": "Modelo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "KM",
+              "displayName": "KM",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "GNC",
+              "displayName": "GNC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Día",
+              "displayName": "Día",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Horario",
+              "displayName": "Horario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Notas",
+              "displayName": "Notas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "68539726-09ba-436a-a579-746c382a4f68",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [
+        2752,
+        272
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "WFF5h9IfYZqHdtD8",
+          "name": "jtelgarecz@custer.com.ar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@grupofonte.com.ar",
+        "toEmail": "=jtelgarecz@gmail.com",
+        "subject": "=Recibimos tu cotización - WeCar",
+        "text": "=Hola {{ $('get_body').item.json.nombre }},\n\nRecibimos tu consulta correctamente. Un asesor se va a contactar con vos para confirmar el turno del peritaje.\n\nResumen de lo que nos contaste:\n  Nombre:     {{ $('get_body').item.json.nombre }}\n  Email:      {{ $('get_body').item.json.mail }}\n  Teléfono:   {{ $('get_body').item.json.telefono }}\n  Localidad:  {{ $('get_body').item.json.localidad }}\n  Vehículo:   {{ $('get_body').item.json.marca }} {{ $('get_body').item.json.modelo }} ({{ $('get_body').item.json.anio }}) - {{ $('get_body').item.json.kilometros }} km\n  GNC:        {{ $('get_body').item.json.gnc }}\n  Peritaje:   {{ $('get_body').item.json.dia }} - {{ $('get_body').item.json.horario }}\n\nGracias por elegir WeCar.\nEl equipo de WeCar",
+        "options": {}
+      },
+      "id": "b6785b50-9801-413e-916b-0605299f758b",
+      "name": "Email al usuario",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        3104,
+        144
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "AiWxcLJdEZKBD4vJ",
+          "name": "no-reply@grupofonte.com.ar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@grupofonte.com.ar",
+        "toEmail": "jtelgarecz@gmail.com",
+        "subject": "Nuevo cotizador - {{ $json.nombre }}",
+        "text": "=Se recibió un nuevo cotizador.\n\nContacto:\n  Nombre:     {{ $('get_body').item.json.nombre }}\n  Email:      {{ $('get_body').item.json.mail }}\n  Teléfono:   {{ $('get_body').item.json.telefono }}\n  Localidad:  {{ $('get_body').item.json.localidad }}\n\nVehículo:\n  Marca:      {{ $('get_body').item.json.marca }}\n  Modelo:     {{ $('get_body').item.json.modelo }}\n  Año:        {{ $('get_body').item.json.anio }}\n  KM:         {{ $('get_body').item.json.kilometros }}\n  GNC:        {{ $('get_body').item.json.gnc }}\n\nPeritaje:\n  Día:        {{ $('get_body').item.json.dia }}\n  Horario:    {{ $('get_body').item.json.horario }}\n\nID: {{ $('get_body').item.json.timestamp }}",
+        "options": {}
+      },
+      "id": "55b77341-3330-4a2c-b030-0b843115bdce",
+      "name": "Email al admin",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        3104,
+        384
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "AiWxcLJdEZKBD4vJ",
+          "name": "no-reply@grupofonte.com.ar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🚗 WeCar Cotizador — Configuración\n\nAntes de activar este workflow:\n\n1. **Google Sheets** — Crea la planilla, copiá el Document ID (el ID largo de la URL de la sheet) y pegalo en el nodo Google Sheets → `documentId`. Configurá las credenciales OAuth2 de Google en n8n.\n\n2. **SMTP** — Configurá las credenciales SMTP en n8n (servidor, puerto, usuario, contraseña) para \"jtelgarecz@custer.com.ar\". Ambos nodos de email comparten las mismas credenciales.\n\n3. **Webhook URL** — Después de guardar, copiá la \"Test URL\" o \"Production URL\" del nodo Webhook. Esa URL la vas a poner en el handler de PHP en WordPress.\n\n4. **Probá** — Mandá un POST de prueba con curl o desde el editor de n8n antes de activar.\n\nFormato de datos que llegan desde WordPress:\n{\n  \"nombre\": \"...\", \"mail\": \"...\", \"telefono\": \"...\", \"localidad\": \"...\",\n  \"anio\": \"...\", \"marca\": \"...\", \"modelo\": \"...\", \"kilometros\": \"...\",\n  \"gnc\": \"instalado|tuvo|nunca\", \"dia\": \"Lun|Mar|Mie|Jue|Vie\",\n  \"horario\": \"Mañana|Tarde\", \"id\": \"abc123\", \"timestamp\": 1234567890123\n}",
+        "height": 528,
+        "width": 612
+      },
+      "id": "9aee3a4a-4666-4d55-b2c2-19b98e5c722d",
+      "name": "Setup instructions",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wecar-cotiza",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        2240,
+        272
+      ],
+      "id": "3c14bbac-385a-49ef-bfee-309d73f2a400",
+      "name": "Webhook1",
+      "webhookId": "425c111e-f4d1-4204-a9e3-8bf5e46388f5"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\n\nconst body = $input.first().json.body;\nconst fecha = new Date(+body.timestamp);\nconsole.log(fecha);\nconst dia = fecha.getDate();\nconst mes = fecha.getMonth() + 1;\nconst anio = fecha.getFullYear();\n\nbody.fecha = `${dia}/${mes}/${anio}`;\nreturn body;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2496,
+        272
+      ],
+      "id": "c96e2d06-b1da-4c6c-b7cb-2be934d3c3b3",
+      "name": "get_body"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Email al usuario",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email al admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "get_body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_body": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1,
+    "availableInMCP": false
+  },
+  "versionId": "522b6815-47fe-4ce5-a887-8ec1e19d82c1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8e548a029212c460639006ff1103a48e8fc8494a9d1ffaff46919c67cedc61bb"
+  },
+  "nodeGroups": [],
+  "id": "AJEFGLTYdQ6xCDSH",
+  "tags": []
+}
