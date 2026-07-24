@@ -13,7 +13,7 @@ body.home #wecar-header {
   right: 0;
   z-index: 100;
   box-sizing: border-box !important;
-  transition: background 0.3s ease;
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.home #wecar-header.scrolled {
@@ -152,10 +152,9 @@ body.home #wecar-header .elementor-column[data-id="h01c003"] .elementor-button-t
   left: 0;
   right: 0;
   z-index: 100;
-  max-width: 1390px !important;
   padding: 20px 0px;
   box-sizing: border-box;
-  transition: background 0.3s ease;
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #wecar-header-global.scrolled {
