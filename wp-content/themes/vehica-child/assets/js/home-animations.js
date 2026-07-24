@@ -1,10 +1,9 @@
 /**
- * WeCar Home Header — Scroll-based background transition
+ * WeCar Header — Scroll-based background transition
  * Header is transparent at scroll position 0, becomes white when scrolled.
  */
 (function () {
   'use strict';
-  if (!document.body.classList.contains('home')) return;
 
   var header = document.querySelector('#wecar-header');
   var globalHeader = document.getElementById('wecar-header-global');
