@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) exit;
       <a href="/">Inicio</a>
       <a href="/buscar/">Comprar</a>
       <a href="/vende-tu-auto/">Vender</a>
-      <a href="/faq/">Nosotros</a>
+      <a href="/acerca-de-nosotros/">Nosotros</a>
       <a href="/blog/">Blog</a>
-      <a href="/contactanos/" class="wecar-header__button">Contactanos</a>
+      <a href="/contactanos/" class="wecar-header__button">Contacto</a>
     </nav>
   </div>
 </header>
