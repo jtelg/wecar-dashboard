@@ -202,6 +202,11 @@ body.home .wecar-hero__card .elementor-icon-box-content {
   overflow: visible !important;
 }
 
+body.home #wecar-hero .elementor-column[data-id].wecar-hero__column--active .elementor-icon-box-content {
+  position: relative;
+  top: -40px;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    IMAGEN DEL AUTO: ABSOLUTA, bottom-0, right-0, z-index DEBAJO del contenido
    Container-clipped reveal: auto SIEMPRE en posición fija, card recorta
