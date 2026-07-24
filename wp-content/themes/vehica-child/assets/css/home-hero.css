@@ -202,11 +202,6 @@ body.home .wecar-hero__card .elementor-icon-box-content {
   overflow: visible !important;
 }
 
-body.home #wecar-hero .elementor-column[data-id].wecar-hero__column--active .elementor-icon-box-content {
-  position: relative;
-  top: -40px;
-}
-
 /* ═══════════════════════════════════════════════════════════════════════════
    IMAGEN DEL AUTO: ABSOLUTA, bottom-0, right-0, z-index DEBAJO del contenido
    Container-clipped reveal: auto SIEMPRE en posición fija, card recorta
@@ -355,7 +350,7 @@ body.home #wecar-hero .wecar-hero__column--active .wecar-hero__card__cta {
 /* Figma keeps the text measures stable and only shifts the copy vertically. */
 body.home #wecar-hero .wecar-hero__column--active .elementor-icon-box-title,
 body.home #wecar-hero .wecar-hero__column--active .elementor-icon-box-description {
-  transform: translateY(28px) !important;
+  transform: translateY(-28px) !important;
 }
 
 body.home #wecar-hero .wecar-hero__column--collapsed .elementor-icon-box-title,
