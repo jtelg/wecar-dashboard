@@ -320,7 +320,7 @@ body.wecar-cotizador-modal-is-open {
   border: 0;
   border-radius: 16px;
   color: #ffffff;
-  background: linear-gradient(105deg, var(--wecar-figma-purple, #9949ff) 0%, var(--wecar-figma-blue, #0e6fd1) 101.96%);
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
   font-family: var(--wecar-font-display, "Syne", sans-serif);
   font-size: 16px;
   font-weight: 700;

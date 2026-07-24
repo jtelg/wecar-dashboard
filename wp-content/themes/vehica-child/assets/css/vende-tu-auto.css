@@ -99,7 +99,7 @@
   font-weight: 700;
   line-height: 20px;
   text-decoration: none;
-  background: linear-gradient(105deg, var(--sell-violet-500) 0%, var(--sell-blue-500) 101.96%);
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
   transition: border-color 1.250123s cubic-bezier(0, 0, 0.35, 1);
 }
 
@@ -131,9 +131,9 @@
 }
 
 .wecar-sell__button--secondary {
-  background: linear-gradient(97.606466deg, var(--sell-violet-100) 94.866%, #ffffff 94.991%);
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
   border: 1px solid transparent;
-  color: var(--sell-violet-500);
+  color: #9949FF;
 }
 
 .wecar-sell__button--secondary::before {
@@ -151,7 +151,7 @@
 }
 
 .wecar-sell__button--small {
-  background: linear-gradient(151.94317deg, var(--sell-violet-500) 0%, var(--sell-blue-500) 101.96%);
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
   width: 100%;
   min-height: 32px;
   padding: 7px 16px;

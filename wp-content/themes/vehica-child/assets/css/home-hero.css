@@ -270,7 +270,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c001"] .wecar-hero__card__ct
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(105deg, #9949FF 0%, #0E6FD1 101.96%);
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%);
   color: #FFFFFF;
   transition: box-shadow 0.2s ease;
 }
@@ -294,7 +294,7 @@ body.home #wecar-hero .elementor-column[data-id="h02c002"] .wecar-hero__card__ct
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(97.606466deg, #F5EDFF 94.866%, #FFFFFF 94.991%);
+  background: linear-gradient(146deg, #F5EDFF 0%, #FFFFFF 93%);
   color: var(--wecar-figma-purple);
   transition: box-shadow 0.2s ease;
 }
