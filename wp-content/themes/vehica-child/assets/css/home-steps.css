@@ -273,11 +273,14 @@ body.home #wecar-steps .wecar-steps__cta .elementor-widget-wrap {
 }
 
 body.home #wecar-steps .wecar-steps__cta .elementor-button {
-  /* Uses .wecar-btn--primary from tokens.css */
+  position: relative !important;
+  overflow: hidden;
+  background: linear-gradient(144deg, #9949FF 0%, #0E6FD1 100%) !important;
+  color: #FFFFFF !important;
   border-radius: 16px !important;
   height: 44px !important;
   padding: 11px 16px !important;
-  font-family: var(--wecar-font-display) !important;
+  font-family: var(--wecar-font-display, "Syne", sans-serif) !important;
   font-weight: 700 !important;
   font-size: 16px !important;
   line-height: 20px !important;
@@ -285,7 +288,24 @@ body.home #wecar-steps .wecar-steps__cta .elementor-button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  cursor: pointer !important;
   text-decoration: none !important;
+  transition: box-shadow 0.2s ease;
+}
+
+body.home #wecar-steps .wecar-steps__cta .elementor-button::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(143deg, #9949FF 100%, #0E6FD1 100%);
+  transform: translateX(-100%);
+  transition: transform 1250ms cubic-bezier(0, 0, 0.35, 1);
+}
+
+body.home #wecar-steps .wecar-steps__cta .elementor-button:hover::before,
+body.home #wecar-steps .wecar-steps__cta .elementor-button:focus-visible::before {
+  transform: translateX(0);
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */
