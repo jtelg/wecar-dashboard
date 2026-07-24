@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) exit;
       <a href="/vende-tu-auto/">Vender</a>
       <a href="/acerca-de-nosotros/">Nosotros</a>
       <a href="/blog/">Blog</a>
-      <a href="/contactanos/" class="wecar-header__button">Contacto</a>
+      <a href="/contactanos/" class="wecar-header__button">Contactanos</a>
     </nav>
   </div>
 </header>
