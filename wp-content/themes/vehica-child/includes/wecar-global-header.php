@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) exit;
     </div>
     <nav class="wecar-header__nav">
       <a href="/">Inicio</a>
-      <a href="/autos/">Comprar</a>
+      <a href="/buscar/">Comprar</a>
       <a href="/vende-tu-auto/">Vender</a>
       <a href="/faq/">Nosotros</a>
       <a href="/blog/">Blog</a>

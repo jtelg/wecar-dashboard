@@ -73,7 +73,7 @@ function wecar_render_vehicle_carousel($atts = [])
         // Empty state
         echo '<div class="wecar-carousel wecar-carousel--empty">';
         echo '<p class="wecar-carousel__empty-text">' . esc_html__('Próximamente verás los vehículos disponibles', 'vehica') . '</p>';
-        echo '<a href="' . esc_url(home_url('/autos/')) . '" class="wecar-carousel__empty-cta">' . esc_html__('Ver todos los autos', 'vehica') . '</a>';
+        echo '<a href="' . esc_url(home_url('/buscar/')) . '" class="wecar-carousel__empty-cta">' . esc_html__('Ver todos los autos', 'vehica') . '</a>';
         echo '</div>';
     }
 
