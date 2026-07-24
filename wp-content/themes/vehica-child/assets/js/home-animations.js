@@ -1,43 +1,4 @@
 /**
- * WeCar Header — Scroll-based background transition
- * Header is transparent at scroll position 0, becomes white when scrolled.
- */
-(function () {
-  'use strict';
-
-  var header = document.querySelector('#wecar-header');
-  var globalHeader = document.getElementById('wecar-header-global');
-  var SCROLL_THRESHOLD = 10; // pixels
-
-  function handleHeaderScroll() {
-    var scrollY = window.scrollY || window.pageYOffset;
-    var shouldAddScrolled = scrollY > SCROLL_THRESHOLD;
-
-    if (header) {
-      if (shouldAddScrolled) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    }
-
-    if (globalHeader) {
-      if (shouldAddScrolled) {
-        globalHeader.classList.add('scrolled');
-      } else {
-        globalHeader.classList.remove('scrolled');
-      }
-    }
-  }
-
-  // Initial check
-  handleHeaderScroll();
-
-  // Listen for scroll
-  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
-})();
-
-/**
  * WeCar Home Hero — Horizontal Accordion (Click)
  * ==============================================
  * Figma hero component (137:3003) has 3 states:
