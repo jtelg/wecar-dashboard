@@ -240,7 +240,14 @@
     document.body.classList.remove("wecar-cotizador-modal-is-open");
     document.removeEventListener("keydown", handleKeydown);
 
-    persistDraft();
+    // Reset to step 1 and clear fields when closing
+    currentStep = 1;
+    FIELD_NAMES.forEach(function (name) {
+      fields[name] = "";
+    });
+    try {
+      window.localStorage.removeItem(KEY_DRAFT);
+    } catch (err) {}
 
     if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === "function") {
       window.setTimeout(function () {
