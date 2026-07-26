@@ -538,6 +538,7 @@ body.home #wecar-hero .wecar-hero__column--collapsed::after {
   }
 
   body.home #wecar-hero.wecar-hero--mobile-enhanced .elementor-column[data-id] {
+    flex: 0 0 auto !important;
     cursor: default;
     transition: height var(--wecar-hero-mobile-duration) var(--wecar-hero-mobile-easing) !important;
   }
