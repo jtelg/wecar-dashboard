@@ -1,69 +1,385 @@
 /**
- * WeCar Home Hero — Horizontal Accordion (Click)
- * ==============================================
- * Figma hero component (137:3003) has 3 states:
- *   step-1: both cards equal (50/50)
- *   step-2: left card expanded, right collapsed
- *   step-3: right card expanded, left collapsed
- *
- * Click a card to expand it (collapses the other).
- * Click the expanded card again to reset both to equal.
- * ==============================================
+ * WeCar Home Hero - desktop horizontal accordion + mobile vertical accordion.
+ * Mobile enhancement is opt-in: without JavaScript or its CSS marker, both
+ * cards remain complete and actionable.
  */
-
 (function () {
   'use strict';
 
   if (!document.body.classList.contains('home')) return;
 
-  // ── Force eager loading on hero car images (lazy + hidden opacity = no load) ──
-  var heroImages = document.querySelectorAll('#wecar-hero .wecar-hero__card__image img');
-  for (var i = 0; i < heroImages.length; i++) {
-    heroImages[i].setAttribute('loading', 'eager');
-  }
-
-  var leftCol = document.querySelector('#wecar-hero .elementor-column[data-id="h02c001"]');
-  var rightCol = document.querySelector('#wecar-hero .elementor-column[data-id="h02c002"]');
-  if (!leftCol || !rightCol) return;
-
   var ACTIVE = 'wecar-hero__column--active';
   var COLLAPSED = 'wecar-hero__column--collapsed';
+  var MOBILE_ENHANCED = 'wecar-hero--mobile-enhanced';
+  var MOBILE_CSS_MARKER = '--wecar-hero-mobile-css-ready';
+  var HERO_SELECTOR = '#wecar-hero';
+  var LEFT_SELECTOR = '.elementor-column[data-id="h02c001"]';
+  var RIGHT_SELECTOR = '.elementor-column[data-id="h02c002"]';
+  var mobileQuery = window.matchMedia('(max-width: 767px)');
+  var currentInstance = null;
+  var mutationObserver = null;
+  var syncScheduled = false;
+  var elementorWindow = null;
 
-  function reset() {
-    leftCol.classList.remove(ACTIVE, COLLAPSED);
-    rightCol.classList.remove(ACTIVE, COLLAPSED);
-  }
+  function createHeroInstance(hero, leftCol, rightCol) {
+    var savedAttributes = [];
+    var mobileEnabled = false;
+    var destroyed = false;
 
-  function expandLeft() {
-    reset();
-    leftCol.classList.add(ACTIVE);
-    rightCol.classList.add(COLLAPSED);
-  }
-
-  function expandRight() {
-    reset();
-    rightCol.classList.add(ACTIVE);
-    leftCol.classList.add(COLLAPSED);
-  }
-
-  leftCol.addEventListener('click', function () {
-    if (window.innerWidth < 768) return;
-    // If already active, reset to default. Otherwise expand left.
-    if (leftCol.classList.contains(ACTIVE)) {
-      reset();
-    } else {
-      expandLeft();
+    function findSavedAttribute(element, name) {
+      for (var index = 0; index < savedAttributes.length; index++) {
+        if (savedAttributes[index].element === element && savedAttributes[index].name === name) {
+          return savedAttributes[index];
+        }
+      }
+      return null;
     }
-  });
 
-  rightCol.addEventListener('click', function () {
-    if (window.innerWidth < 768) return;
-    if (rightCol.classList.contains(ACTIVE)) {
-      reset();
-    } else {
-      expandRight();
+    function rememberAttribute(element, name) {
+      if (findSavedAttribute(element, name)) return;
+      savedAttributes.push({
+        element: element,
+        name: name,
+        present: element.hasAttribute(name),
+        value: element.getAttribute(name)
+      });
     }
-  });
+
+    function restoreAttribute(element, name) {
+      var saved = findSavedAttribute(element, name);
+      if (!saved) return;
+      if (saved.present) element.setAttribute(name, saved.value);
+      else element.removeAttribute(name);
+    }
+
+    function restoreAllAttributes() {
+      for (var index = 0; index < savedAttributes.length; index++) {
+        var saved = savedAttributes[index];
+        if (saved.present) saved.element.setAttribute(saved.name, saved.value);
+        else saved.element.removeAttribute(saved.name);
+      }
+    }
+
+    function getContentBlocks(column) {
+      return column.querySelectorAll(
+        '.elementor-widget-icon-box, .wecar-hero__card__badge-wrapper, ' +
+        '.wecar-hero__card__image, .wecar-hero__card__cta'
+      );
+    }
+
+    function setBlockAvailability(block, available) {
+      var focusables = block.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+      var index;
+
+      rememberAttribute(block, 'aria-hidden');
+      rememberAttribute(block, 'inert');
+
+      if (available) {
+        restoreAttribute(block, 'aria-hidden');
+        restoreAttribute(block, 'inert');
+        if ('inert' in block) block.inert = block.hasAttribute('inert');
+        for (index = 0; index < focusables.length; index++) {
+          restoreAttribute(focusables[index], 'tabindex');
+        }
+        return;
+      }
+
+      block.setAttribute('aria-hidden', 'true');
+      block.setAttribute('inert', '');
+      if ('inert' in block) block.inert = true;
+      for (index = 0; index < focusables.length; index++) {
+        rememberAttribute(focusables[index], 'tabindex');
+        focusables[index].setAttribute('tabindex', '-1');
+      }
+    }
+
+    function setColumnAvailability(column, available) {
+      var blocks = getContentBlocks(column);
+      for (var index = 0; index < blocks.length; index++) {
+        setBlockAvailability(blocks[index], available);
+      }
+    }
+
+    function panelId(column) {
+      return column === leftCol ? 'wecar-hero-panel-comprar' : 'wecar-hero-panel-vender';
+    }
+
+    function triggerLabel(column) {
+      return column === leftCol ? 'Abrir opciones para comprar' : 'Abrir opciones para vender';
+    }
+
+    function widgetWrap(column) {
+      return column.querySelector(':scope > .elementor-widget-wrap') ||
+        column.querySelector('.elementor-widget-wrap');
+    }
+
+    function rememberMobileStructure(column) {
+      var attributes = ['role', 'tabindex', 'aria-expanded', 'aria-controls', 'aria-label'];
+      var wrap = widgetWrap(column);
+      for (var index = 0; index < attributes.length; index++) {
+        rememberAttribute(column, attributes[index]);
+      }
+      if (wrap) {
+        rememberAttribute(wrap, 'id');
+        wrap.id = panelId(column);
+      }
+    }
+
+    function setActiveSemantics(column) {
+      column.removeAttribute('role');
+      column.removeAttribute('tabindex');
+      column.removeAttribute('aria-expanded');
+      column.removeAttribute('aria-controls');
+      column.removeAttribute('aria-label');
+    }
+
+    function setCollapsedSemantics(column) {
+      column.setAttribute('role', 'button');
+      column.setAttribute('tabindex', '0');
+      column.setAttribute('aria-expanded', 'false');
+      column.setAttribute('aria-controls', panelId(column));
+      column.setAttribute('aria-label', triggerLabel(column));
+    }
+
+    function resetDesktopState() {
+      leftCol.classList.remove(ACTIVE, COLLAPSED);
+      rightCol.classList.remove(ACTIVE, COLLAPSED);
+    }
+
+    function expandDesktop(column, otherColumn) {
+      resetDesktopState();
+      column.classList.add(ACTIVE);
+      otherColumn.classList.add(COLLAPSED);
+    }
+
+    function setMobileState(activeColumn, collapsedColumn) {
+      activeColumn.classList.add(ACTIVE);
+      activeColumn.classList.remove(COLLAPSED);
+      collapsedColumn.classList.add(COLLAPSED);
+      collapsedColumn.classList.remove(ACTIVE);
+      setActiveSemantics(activeColumn);
+      setCollapsedSemantics(collapsedColumn);
+      setColumnAvailability(activeColumn, true);
+      setColumnAvailability(collapsedColumn, false);
+    }
+
+    function mobileCssReady() {
+      return window.getComputedStyle(hero).getPropertyValue(MOBILE_CSS_MARKER).trim() === '1';
+    }
+
+    function enableMobileAccordion() {
+      if (mobileEnabled || !mobileCssReady()) return;
+      mobileEnabled = true;
+      hero.classList.add(MOBILE_ENHANCED);
+      rememberMobileStructure(leftCol);
+      rememberMobileStructure(rightCol);
+      setMobileState(leftCol, rightCol);
+    }
+
+    function disableMobileAccordion() {
+      if (!mobileEnabled) {
+        hero.classList.remove(MOBILE_ENHANCED);
+        resetDesktopState();
+        return;
+      }
+      mobileEnabled = false;
+      hero.classList.remove(MOBILE_ENHANCED);
+      resetDesktopState();
+      restoreAllAttributes();
+      setColumnAvailability(leftCol, true);
+      setColumnAvailability(rightCol, true);
+    }
+
+    function isInteractiveTarget(target) {
+      return Boolean(target.closest('a, button, input, select, textarea, label'));
+    }
+
+    function handleColumnClick(column, otherColumn, event) {
+      if (mobileQuery.matches) {
+        if (!mobileEnabled || isInteractiveTarget(event.target)) return;
+        if (column.classList.contains(COLLAPSED)) {
+          setMobileState(column, otherColumn);
+        }
+        return;
+      }
+
+      if (isInteractiveTarget(event.target)) return;
+      if (column.classList.contains(ACTIVE)) resetDesktopState();
+      else expandDesktop(column, otherColumn);
+    }
+
+    function handleColumnKeydown(column, otherColumn, event) {
+      if (!mobileQuery.matches || !mobileEnabled || event.target !== column) return;
+      if (!column.classList.contains(COLLAPSED)) return;
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      setMobileState(column, otherColumn);
+    }
+
+    function handleLeftClick(event) {
+      handleColumnClick(leftCol, rightCol, event);
+    }
+
+    function handleRightClick(event) {
+      handleColumnClick(rightCol, leftCol, event);
+    }
+
+    function handleLeftKeydown(event) {
+      handleColumnKeydown(leftCol, rightCol, event);
+    }
+
+    function handleRightKeydown(event) {
+      handleColumnKeydown(rightCol, leftCol, event);
+    }
+
+    function syncMode() {
+      if (destroyed) return;
+      if (mobileQuery.matches && mobileCssReady()) enableMobileAccordion();
+      else disableMobileAccordion();
+    }
+
+    function destroy() {
+      if (destroyed) return;
+      destroyed = true;
+      disableMobileAccordion();
+      leftCol.removeEventListener('click', handleLeftClick);
+      rightCol.removeEventListener('click', handleRightClick);
+      leftCol.removeEventListener('keydown', handleLeftKeydown);
+      rightCol.removeEventListener('keydown', handleRightKeydown);
+    }
+
+    var heroImages = hero.querySelectorAll('.wecar-hero__card__image img');
+    for (var imageIndex = 0; imageIndex < heroImages.length; imageIndex++) {
+      heroImages[imageIndex].setAttribute('loading', 'eager');
+    }
+
+    leftCol.addEventListener('click', handleLeftClick);
+    rightCol.addEventListener('click', handleRightClick);
+    leftCol.addEventListener('keydown', handleLeftKeydown);
+    rightCol.addEventListener('keydown', handleRightKeydown);
+    syncMode();
+
+    return {
+      hero: hero,
+      leftCol: leftCol,
+      rightCol: rightCol,
+      syncMode: syncMode,
+      destroy: destroy
+    };
+  }
+
+  function findHeroNodes() {
+    var hero = document.querySelector(HERO_SELECTOR);
+    if (!hero) return null;
+    var leftCol = hero.querySelector(LEFT_SELECTOR);
+    var rightCol = hero.querySelector(RIGHT_SELECTOR);
+    if (!leftCol || !rightCol) return null;
+    return { hero: hero, leftCol: leftCol, rightCol: rightCol };
+  }
+
+  function syncHero() {
+    syncScheduled = false;
+    var nodes = findHeroNodes();
+    var sameInstance = currentInstance && nodes &&
+      currentInstance.hero === nodes.hero &&
+      currentInstance.leftCol === nodes.leftCol &&
+      currentInstance.rightCol === nodes.rightCol;
+
+    if (sameInstance) {
+      currentInstance.syncMode();
+      return;
+    }
+
+    if (currentInstance) {
+      currentInstance.destroy();
+      currentInstance = null;
+    }
+
+    if (nodes) {
+      currentInstance = createHeroInstance(nodes.hero, nodes.leftCol, nodes.rightCol);
+    }
+  }
+
+  function scheduleSync() {
+    if (syncScheduled) return;
+    syncScheduled = true;
+    window.requestAnimationFrame(syncHero);
+  }
+
+  function nodeTouchesHero(node) {
+    if (!node || node.nodeType !== 1) return false;
+    if (node.matches(HERO_SELECTOR + ', ' + LEFT_SELECTOR + ', ' + RIGHT_SELECTOR)) return true;
+    return Boolean(node.querySelector(HERO_SELECTOR + ', ' + LEFT_SELECTOR + ', ' + RIGHT_SELECTOR));
+  }
+
+  function mutationTouchesHero(records) {
+    if (currentInstance && (
+      !currentInstance.hero.isConnected ||
+      !currentInstance.leftCol.isConnected ||
+      !currentInstance.rightCol.isConnected
+    )) return true;
+
+    for (var recordIndex = 0; recordIndex < records.length; recordIndex++) {
+      var record = records[recordIndex];
+      if (record.target.nodeType === 1 && record.target.closest(HERO_SELECTOR)) return true;
+      for (var nodeIndex = 0; nodeIndex < record.addedNodes.length; nodeIndex++) {
+        if (nodeTouchesHero(record.addedNodes[nodeIndex])) return true;
+      }
+      for (nodeIndex = 0; nodeIndex < record.removedNodes.length; nodeIndex++) {
+        if (nodeTouchesHero(record.removedNodes[nodeIndex])) return true;
+      }
+    }
+    return false;
+  }
+
+  function handleMutations(records) {
+    if (mutationTouchesHero(records)) scheduleSync();
+  }
+
+  function handleResourceLoad(event) {
+    if (event.target && (event.target.tagName === 'LINK' || event.target.tagName === 'STYLE')) {
+      scheduleSync();
+    }
+  }
+
+  function handlePageShow(event) {
+    if (event.persisted) syncHero();
+  }
+
+  function shutdown(event) {
+    if (event && event.persisted) return;
+    if (mutationObserver) mutationObserver.disconnect();
+    mobileQuery.removeEventListener ?
+      mobileQuery.removeEventListener('change', scheduleSync) :
+      mobileQuery.removeListener(scheduleSync);
+    window.removeEventListener('load', scheduleSync);
+    window.removeEventListener('pagehide', shutdown);
+    window.removeEventListener('pageshow', handlePageShow);
+    window.removeEventListener('elementor/frontend/init', scheduleSync);
+    document.removeEventListener('load', handleResourceLoad, true);
+    if (elementorWindow) elementorWindow.off('.wecarHero');
+    if (currentInstance) {
+      currentInstance.destroy();
+      currentInstance = null;
+    }
+  }
+
+  mutationObserver = new MutationObserver(handleMutations);
+  mutationObserver.observe(document.body, { childList: true, subtree: true });
+  if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', scheduleSync);
+  else mobileQuery.addListener(scheduleSync);
+  window.addEventListener('load', scheduleSync);
+  window.addEventListener('pagehide', shutdown);
+  window.addEventListener('pageshow', handlePageShow);
+  window.addEventListener('elementor/frontend/init', scheduleSync);
+  document.addEventListener('load', handleResourceLoad, true);
+
+  if (window.jQuery) {
+    elementorWindow = window.jQuery(window);
+    elementorWindow.on('elementor/frontend/init.wecarHero', scheduleSync);
+  }
+
+  syncHero();
 })();
 
 /**
