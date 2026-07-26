@@ -728,32 +728,8 @@
 }
 
 @media (max-width: 767px) {
-  body.wecar-vende-tu-auto-page #wecar-header-global {
-    height: 64px;
-    padding: 10px 20px;
-  }
-
-  body.wecar-vende-tu-auto-page #wecar-header-global .wecar-header__inner {
-    height: 44px;
-    flex-wrap: nowrap;
-    padding: 0;
-  }
-
-  body.wecar-vende-tu-auto-page #wecar-header-global .wecar-header__nav {
-    display: none;
-  }
-
-  body.wecar-vende-tu-auto-page #wecar-header-global .wecar-header__logo img {
-    width: 120px;
-    max-height: 30px;
-  }
-
-  body.wecar-vende-tu-auto-page #wecar-header-global .wecar-header__button {
-    padding: 8px 14px;
-  }
-
   .wecar-sell {
-    padding-top: 64px;
+    padding-top: 0;
   }
 
   .wecar-sell__container {
@@ -875,6 +851,12 @@
   .wecar-sell__table-scroll {
     margin-top: 32px;
     padding-bottom: 10px;
+    overscroll-behavior-inline: contain;
+  }
+
+  /* Card CTAs remain comfortably tappable even when their desktop variant is compact. */
+  .wecar-sell__button--small {
+    min-height: 44px;
   }
 
   .wecar-sell__benefit-grid {

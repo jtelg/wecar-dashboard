@@ -85,7 +85,8 @@
       document.body.appendChild(button);
     }
 
-    if (reduced && !isTestHost) {
+    // The qualification cards are static on narrow screens, so restored/touch sessions never wait for a scroll trigger.
+    if (window.matchMedia("(max-width: 767px)").matches || (reduced && !isTestHost)) {
       started = true;
       finishImmediately();
       return;

@@ -259,7 +259,7 @@ get_header();
                         <path d="M20 34L28 42L44 24" stroke="#9949FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h2 class="wecar-cotizador-modal__title">¡Cotización enviada!</h2>
+                <h2 id="wecar-cotizador-success-title" class="wecar-cotizador-modal__title">¡Cotización enviada!</h2>
                 <p class="wecar-cotizador-modal__success-text">Te contactaremos a la brevedad</p>
             </div>
         </div>

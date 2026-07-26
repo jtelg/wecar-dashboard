@@ -10,6 +10,13 @@ body.wecar-cotizador-modal-is-open {
   overflow: hidden;
 }
 
+.wecar-cotizador-modal,
+.wecar-cotizador-modal *,
+.wecar-cotizador-modal *::before,
+.wecar-cotizador-modal *::after {
+  box-sizing: border-box;
+}
+
 /* ── Overlay / backdrop ──────────────────────────────────────────────────── */
 .wecar-cotizador-modal {
   position: fixed;
@@ -609,6 +616,15 @@ body.wecar-cotizador-modal-is-open {
 
 /* ── Responsive (PR 3) ─────────────────────────────────────────────────────── */
 /* QA 6.3: verify card width, grid columns, pill wrap, and map height at 360/660/1100px */
+/* Keep the native input scale on every mobile viewport to prevent iOS focus zoom. */
+@media (max-width: 767px) {
+  .wecar-cotizador-modal input,
+  .wecar-cotizador-modal select,
+  .wecar-cotizador-modal textarea {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 660px) {
   .wecar-cotizador-modal {
     padding: 10px 16px;
@@ -621,6 +637,23 @@ body.wecar-cotizador-modal-is-open {
     padding: 20px;
     gap: 40px;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* iOS zooms controls below 16px; keep every editable field at its native scale. */
+  .wecar-cotizador-modal__field-input,
+  .wecar-cotizador-modal__field-input::placeholder {
+    font-size: 16px;
+  }
+
+  .wecar-cotizador-modal__field-input {
+    min-height: 44px;
+  }
+
+  .wecar-cotizador-modal__radio,
+  .wecar-cotizador-modal__pill {
+    min-height: 44px;
   }
 
   .wecar-cotizador-modal__title {

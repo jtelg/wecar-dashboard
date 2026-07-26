@@ -236,7 +236,7 @@ body.home section[id^="wecar-"].elementor-section-stretched {
    Fixed Header Offset — pages using wecar-header-global
    ══════════════════════════════════════════════════════════════════════════ */
 
-body:not(.home):not(.wecar-vende-tu-auto-page):not(.blog) {
+body:not(.home):not(.wecar-vende-tu-auto-page):not(.wecar-cotizador-page):not(.blog) {
   padding-top: 80px;
 }
 

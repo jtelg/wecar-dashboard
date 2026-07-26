@@ -111,10 +111,16 @@
     var visible = modal.querySelector(".wecar-cotizador-modal__step--active") ||
                   modal.querySelector(".wecar-cotizador-modal__success.is-active");
     if (!visible) return [];
-    return Array.prototype.slice.call(visible.querySelectorAll(TABBABLE_SELECTOR))
-      .filter(function (el) {
-        return el.offsetParent !== null && !el.disabled && el.tabIndex >= 0;
-      });
+
+    var close = modal.querySelector(
+      ".wecar-cotizador-modal__close[data-wecar-cotizador-close]"
+    );
+    var candidates = close ? [close] : [];
+    candidates = candidates.concat(Array.prototype.slice.call(visible.querySelectorAll(TABBABLE_SELECTOR)));
+
+    return candidates.filter(function (el, index) {
+      return candidates.indexOf(el) === index && el.offsetParent !== null && !el.disabled && el.tabIndex >= 0;
+    });
   }
 
   function trapFocus(event) {
@@ -505,7 +511,16 @@
     }
 
     updateProgress(3);
-    focusFirstActiveField();
+    modal.setAttribute("aria-labelledby", "wecar-cotizador-success-title");
+
+    var close = modal.querySelector(
+      ".wecar-cotizador-modal__close[data-wecar-cotizador-close]"
+    );
+    if (close) {
+      window.setTimeout(function () {
+        close.focus();
+      }, 0);
+    }
 
     window.setTimeout(function () {
       closeModal();
