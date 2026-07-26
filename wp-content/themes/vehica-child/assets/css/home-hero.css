@@ -500,7 +500,7 @@ body.home #wecar-hero .wecar-hero__column--collapsed::after {
     width: clamp(82%, 88vw, 92%) !important;
     height: clamp(148px, 46vw, 230px) !important;
     max-width: 92% !important;
-    z-index: 2 !important;
+    z-index: 4 !important;
     align-items: center !important;
     justify-content: center !important;
     opacity: 1 !important;
