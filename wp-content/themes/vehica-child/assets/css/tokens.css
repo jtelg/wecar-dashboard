@@ -240,6 +240,14 @@ body:not(.home):not(.wecar-vende-tu-auto-page):not(.wecar-cotizador-page):not(.b
   padding-top: 80px;
 }
 
+/* Mobile: el header global mide ~50px; 66px = header + 16px de aire.
+   Evita la banda blanca muerta de 80px bajo el header transparente. */
+@media (max-width: 767px) {
+  body:not(.home):not(.wecar-vende-tu-auto-page):not(.wecar-cotizador-page):not(.blog) {
+    padding-top: 66px;
+  }
+}
+
 /* ── Breakpoints (for reference, use in media queries) ──────────── */
 /* Mobile:  max-width: 767px     */
 /* Tablet:  min-width: 768px and max-width: 1024px  */

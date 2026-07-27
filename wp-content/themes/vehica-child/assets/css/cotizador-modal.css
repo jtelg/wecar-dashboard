@@ -26,6 +26,10 @@ body.wecar-cotizador-modal-is-open {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  /* dvh: en mobile el viewport dinámico descuenta la barra del browser,
+     así el card nunca queda cortado debajo de la pantalla visible. */
+  height: 100vh;
+  height: 100dvh;
 }
 
 .wecar-cotizador-modal.is-open {
@@ -46,9 +50,10 @@ body.wecar-cotizador-modal-is-open {
   width: 100%;
   max-width: 660px;
   max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
   flex-direction: column;
-  gap: 60px;
-  padding: 30px;
+  gap: 24px;
+  padding: 24px 30px;
   overflow: auto;
   border-radius: 24px;
   background: #ffffff;
@@ -91,6 +96,7 @@ body.wecar-cotizador-modal-is-open {
   display: flex;
   width: 100%;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .wecar-cotizador-modal__progress-bar {
@@ -115,6 +121,9 @@ body.wecar-cotizador-modal-is-open {
   width: 100%;
   overflow: hidden;
   margin: 0px 0px -6px 0px;
+  /* Sin shrink: si el step es más alto que el card, el card scrollea en vez
+     de que steps se encoja y recorte el contenido con su overflow:hidden. */
+  flex-shrink: 0;
 }
 
 .wecar-cotizador-modal__step,
@@ -144,7 +153,7 @@ body.wecar-cotizador-modal-is-open {
 
 /* ── Step titles & body placeholders ─────────────────────────────────────── */
 .wecar-cotizador-modal__title {
-  margin: 0 0 32px;
+  margin: 0 0 16px;
   color: var(--quote-black, #111111);
   font-family: var(--wecar-font-display, "Syne", sans-serif);
   font-size: 38px;
@@ -155,7 +164,7 @@ body.wecar-cotizador-modal-is-open {
 .wecar-cotizador-modal__body {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .wecar-cotizador-modal__placeholder {
@@ -231,7 +240,7 @@ body.wecar-cotizador-modal-is-open {
 /* ── Form grid ─────────────────────────────────────────────────────────────── */
 .wecar-cotizador-modal__grid {
   display: grid;
-  gap: 20px;
+  gap: 14px;
 }
 
 .wecar-cotizador-modal__grid--2x2 {
@@ -309,8 +318,8 @@ body.wecar-cotizador-modal-is-open {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 12px;
-  margin-bottom: 40px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .wecar-cotizador-modal__action-btn {
@@ -509,7 +518,7 @@ body.wecar-cotizador-modal-is-open {
 .wecar-cotizador-modal__map {
   position: relative;
   width: 100%;
-  height: 240px;
+  height: 180px;
   overflow: hidden;
   border-radius: 14px;
   background: var(--quote-violet-100, #f5edff);
@@ -634,11 +643,50 @@ body.wecar-cotizador-modal-is-open {
     width: 100%;
     max-width: 100%;
     max-height: calc(100vh - 32px);
-    padding: 20px;
-    gap: 40px;
+    max-height: calc(100dvh - 32px);
+    padding: 16px;
+    gap: 12px;
     overflow-y: auto;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Compactación para que el step más alto entre sin scroll; si no entra,
+     el scroll interno del card (overflow-y + dvh) siempre funciona. */
+  .wecar-cotizador-modal__title {
+    margin: 0 0 10px;
+  }
+
+  .wecar-cotizador-modal__subtitle {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .wecar-cotizador-modal__body {
+    gap: 12px;
+  }
+
+  .wecar-cotizador-modal__grid {
+    gap: 12px;
+  }
+
+  .wecar-cotizador-modal__field-error {
+    min-height: 14px;
+  }
+
+  .wecar-cotizador-modal__notice {
+    padding: 4px 12px;
+  }
+
+  .wecar-cotizador-modal__notice-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .wecar-cotizador-modal__actions {
+    gap: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 
   /* iOS zooms controls below 16px; keep every editable field at its native scale. */
@@ -657,8 +705,8 @@ body.wecar-cotizador-modal-is-open {
   }
 
   .wecar-cotizador-modal__title {
-    font-size: 30px;
-    line-height: 36px;
+    font-size: 26px;
+    line-height: 32px;
   }
 
   .wecar-cotizador-modal__grid--2x2 {
@@ -682,7 +730,7 @@ body.wecar-cotizador-modal-is-open {
   }
 
   .wecar-cotizador-modal__map {
-    height: 180px;
+    height: 120px;
   }
 
   .wecar-cotizador-modal__map-tooltip {
@@ -706,13 +754,13 @@ body.wecar-cotizador-modal-is-open {
 
 @media (max-width: 380px) {
   .wecar-cotizador-modal__card {
-    padding: 16px;
-    gap: 32px;
+    padding: 12px;
+    gap: 10px;
   }
 
   .wecar-cotizador-modal__title {
-    font-size: 26px;
-    line-height: 32px;
+    font-size: 23px;
+    line-height: 28px;
   }
 
   .wecar-cotizador-modal__pill {

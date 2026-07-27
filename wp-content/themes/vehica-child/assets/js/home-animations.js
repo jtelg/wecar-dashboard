@@ -531,14 +531,41 @@
     var ticking = false;
     var hasScrolled = false;
     var scrollEventCount = 0;
+    var IDLE_REVEAL_MS = 3000;
+    var idleTimer = null;
 
     function cleanup() {
       debugLog('cleanup listeners', {
         scrollEventCount: scrollEventCount,
         revealed: section.classList.contains('wecar-steps--revealed')
       });
+      if (idleTimer) {
+        window.clearTimeout(idleTimer);
+        idleTimer = null;
+      }
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+    }
+
+    // Idle fallback: if the section is on screen and the scroll stays still
+    // for IDLE_REVEAL_MS, the reveal starts on its own so the cards never
+    // sit as a blank gap waiting for a scroll event.
+    function armIdleTimer() {
+      if (section.classList.contains('wecar-steps--revealed')) return;
+      if (idleTimer) window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(function () {
+        idleTimer = null;
+        var bounds = section.getBoundingClientRect();
+        var anyPartVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
+        debugLog('idle timer fired', {
+          scrollY: window.scrollY,
+          anyPartVisible: anyPartVisible,
+          revealed: section.classList.contains('wecar-steps--revealed')
+        });
+        if (!anyPartVisible) return;
+        playStepsAnimation('idle-timeout');
+        cleanup();
+      }, IDLE_REVEAL_MS);
     }
 
     function positionSnapshot() {
@@ -587,6 +614,7 @@
         ticking: ticking
       });
       requestCheck();
+      armIdleTimer();
     }
 
     function handleResize() {
@@ -607,21 +635,27 @@
     }
 
     // No initial requestCheck: restored scroll positions remain hidden until
-    // the user produces a real scroll event.
+    // the user produces a real scroll event. The idle timer covers the case
+    // where the section is visible but no scroll ever happens.
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize);
+    armIdleTimer();
     debugLog('listeners registered', {
       scroll: 'passive',
       resize: true,
-      initialRequestCheck: false
+      initialRequestCheck: false,
+      idleRevealMs: IDLE_REVEAL_MS
     });
   }
 
-  if (document.readyState === 'complete') {
-    initStepsReveal();
+  // Init as early as possible: with the deferred footer script the DOM is
+  // already parsed, so the motion-ready hidden state applies before first
+  // paint instead of waiting for `load` (which caused a visible→hidden flash
+  // of the step cards while page assets finished).
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStepsReveal, { once: true });
   } else {
-    // Elementor can still shift the section while page assets finish loading.
-    window.addEventListener('load', initStepsReveal, { once: true });
+    initStepsReveal();
   }
 })();
 

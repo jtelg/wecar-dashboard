@@ -171,7 +171,7 @@ get_header();
                         </div>
                         <div class="wecar-cotizador-modal__field">
                             <label class="wecar-cotizador-modal__field-label" for="wecar-cotizador-kilometros">Kilómetros</label>
-                            <input class="wecar-cotizador-modal__field-input" id="wecar-cotizador-kilometros" name="kilometros" type="text" inputmode="numeric" placeholder="Ingresá los kilometros" data-wecar-field="kilometros" aria-describedby="wecar-cotizador-error-kilometros">
+                            <input class="wecar-cotizador-modal__field-input" id="wecar-cotizador-kilometros" name="kilometros" type="text" inputmode="decimal" placeholder="Ingresá los kilometros" data-wecar-field="kilometros" aria-describedby="wecar-cotizador-error-kilometros">
                             <span class="wecar-cotizador-modal__field-error" id="wecar-cotizador-error-kilometros" data-wecar-error="kilometros"></span>
                         </div>
                     </div>

@@ -279,35 +279,68 @@ body.home #wecar-footer .elementor-column[data-id="h07c004"] .wecar-footer__phon
   text-decoration: underline;
 }
 
-/* Global footer mobile */
+/* Global footer mobile: stack centrado.
+   Reset de grid-column/row (de desktop) que si no rompen el layout:
+   el teléfono caía en una columna implícita a la derecha. */
 @media (max-width: 767px) {
   #wecar-footer-global {
-    padding: 40px 20px;
+    padding: 48px 24px 32px;
     min-height: auto;
+  }
+
+  /* Texturas escaladas y atenuadas para no tapar el contenido */
+  #wecar-footer-global::before,
+  #wecar-footer-global::after {
+    width: 280px;
+    height: 132px;
+    background-size: 280px 132px;
+    opacity: 0.5;
   }
 
   .wecar-footer__inner {
     grid-template-columns: 1fr;
     gap: 20px;
+    justify-items: center;
+  }
+
+  .wecar-footer__col {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .wecar-footer__col--logo .wecar-footer__logo {
-    width: 200px;
+    width: 180px;
     height: auto;
   }
 
-  .wecar-footer__col--description,
-  .wecar-footer__col--copyright,
-  .wecar-footer__col--phone {
-    text-align: left;
+  .wecar-footer__description {
+    max-width: 340px;
+    text-align: center;
+    margin: 0;
   }
 
-  .wecar-footer__description {
-    max-width: 100%;
-    text-align: left;
+  /* Teléfono destacado como pill, antes del copyright */
+  .wecar-footer__col--phone {
+    grid-row: 3;
+    text-align: center;
+  }
+
+  .wecar-footer__col--copyright {
+    grid-row: 4;
   }
 
   .wecar-footer__phone {
-    text-align: left;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 16px;
+    background: var(--wecar-figma-purple-light, #F5EDFF);
+    text-align: center;
+  }
+
+  .wecar-footer__copyright {
+    font-size: 12px;
+    line-height: 16px;
+    color: #767676;
+    text-align: center;
   }
 }

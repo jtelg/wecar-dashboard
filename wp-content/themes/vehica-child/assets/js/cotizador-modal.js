@@ -296,10 +296,13 @@
         return ERROR_MESSAGES.anio;
       }
     } else if (name === "kilometros") {
-      if (!/^\d+$/.test(value)) {
+      // Acepta separadores de miles con "." o "," (ej. 120.000 o 120,000);
+      // se normaliza a dígitos para validar el rango.
+      var kmDigits = value.replace(/[.,]/g, "");
+      if (!/^\d+$/.test(kmDigits)) {
         return ERROR_MESSAGES.kilometros;
       }
-      var kmNum = parseInt(value, 10);
+      var kmNum = parseInt(kmDigits, 10);
       if (kmNum < 1 || kmNum > 9999999) {
         return ERROR_MESSAGES.kilometros;
       }
@@ -538,7 +541,7 @@
       anio: fields.anio,
       marca: fields.marca,
       modelo: fields.modelo,
-      kilometros: fields.kilometros,
+      kilometros: (fields.kilometros || "").replace(/[.,]/g, ""),
       gnc: fields.gnc,
       dia: fields.dia,
       horario: fields.horario,
