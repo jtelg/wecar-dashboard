@@ -350,12 +350,34 @@ body.home #wecar-carousel .wecar-carousel__empty-cta:focus-visible::before {
 
 /* ── Mobile ───────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  body.home #wecar-carousel {
+    /* Title sits closer to the top (desktop keeps 80px) */
+    padding-top: 40px !important;
+  }
+
   body.home #wecar-carousel .wecar-vehicle-card {
     flex: 0 0 280px !important;
   }
 
+  /* Title takes the full row and wraps "Encontrá tu próximo / auto": at 26px
+     the first segment needs ~293px, which fits the mobile container (~312px
+     at 360px viewport). max-width keeps the same break on larger phones. */
   body.home #wecar-carousel .elementor-heading-title {
-    font-size: 28px;
-    line-height: 36px;
+    max-width: 340px;
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  body.home #wecar-carousel .elementor-section[data-id="h04s001"] {
+    /* "Ver todos" sits closer to the cards */
+    margin-bottom: 16px;
+  }
+
+  body.home #wecar-carousel .elementor-section[data-id="h04s001"] .elementor-column[data-id="h04c002"] {
+    width: 100% !important;
+  }
+
+  body.home #wecar-carousel .elementor-section[data-id="h04s001"] .elementor-widget-wrap {
+    padding: 0 !important;
   }
 }

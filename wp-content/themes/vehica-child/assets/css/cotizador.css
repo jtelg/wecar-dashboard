@@ -31,6 +31,7 @@ body.wecar-cotizador-page { margin: 0; padding-top: 0; }
 .wecar-cotizador__hero { position: relative; height: 236px; overflow: hidden; background: linear-gradient(90deg, #0e6fd1 0%, #9949ff 100%); }
 .wecar-cotizador__hero-inner { position: relative; z-index: 1; display: flex; height: 100%; align-items: flex-start; justify-content: center; }
 .wecar-cotizador__hero h1 { padding-top: 40px; color: #fff; font-size: 64px; line-height: 78px; text-align: center; }
+.wecar-cotizador__br--mobile { display: none; }
 .wecar-cotizador__texture { position: absolute; display: block; width: 669px; height: 316px; pointer-events: none; }
 .wecar-cotizador__texture--hero-left { top: 0; left: 0; transform: rotate(180deg); }
 .wecar-cotizador__texture--hero-right { right: 0; bottom: 0; }
@@ -177,10 +178,11 @@ body.wecar-cotizador-page { margin: 0; padding-top: 0; }
 }
 
 @media (max-width: 767px) {
-  .wecar-cotizador { padding-top: 0; }
+  .wecar-cotizador { padding-top: calc(64px + env(safe-area-inset-top, 0px)); }
   .wecar-cotizador__container { width: calc(100% - 40px); }
   .wecar-cotizador__hero { height: 236px; }
-  .wecar-cotizador__hero h1 { display: flex; align-items: center; height: 100%; padding: 0; font-size: clamp(34px, 10vw, 44px); line-height: 1.14; }
+  .wecar-cotizador__hero h1 { align-self: center; height: auto; padding: 0; font-size: clamp(24px, 8.5vw, 34px); line-height: 1.18; }
+  .wecar-cotizador__br--mobile { display: inline; }
   .wecar-cotizador__texture { width: 420px; height: auto; opacity: 0.82; }
   .wecar-cotizador__qualification { height: auto; padding: 64px 0; }
   .wecar-cotizador__qualification-inner { height: auto; }

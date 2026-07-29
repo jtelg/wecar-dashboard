@@ -19,7 +19,7 @@ get_header();
         <img class="wecar-cotizador__texture wecar-cotizador__texture--hero-left" src="<?php echo esc_url($asset_uri . 'hero-texture-left.svg'); ?>" alt="" aria-hidden="true" width="669" height="316">
         <img class="wecar-cotizador__texture wecar-cotizador__texture--hero-right" src="<?php echo esc_url($asset_uri . 'hero-texture-right.svg'); ?>" alt="" aria-hidden="true" width="669" height="316">
         <div class="wecar-cotizador__container wecar-cotizador__hero-inner">
-            <h1 id="wecar-cotizador-title">Estas muy cerca<br>de vender tu auto</h1>
+            <h1 id="wecar-cotizador-title">Estas muy cerca<br>de vender<br class="wecar-cotizador__br--mobile">tu auto</h1>
         </div>
     </section>
 
