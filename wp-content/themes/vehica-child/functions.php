@@ -206,6 +206,31 @@ add_action('wp_enqueue_scripts', static function () {
             );
         }
     }
+
+    // ── Scroll reveal animations (home + vende-tu-auto + cotizador) ──
+    if (is_front_page() || is_page(35463) || $is_sell_page || $is_quote_page) {
+        $reveal_css_path = $stylesheet_directory . '/assets/css/scroll-animations.css';
+        $reveal_js_path = $stylesheet_directory . '/assets/js/scroll-animations.js';
+
+        if (file_exists($reveal_css_path)) {
+            wp_enqueue_style(
+                'wecar-scroll-animations',
+                $stylesheet_uri . '/assets/css/scroll-animations.css',
+                ['wecar-tokens'],
+                filemtime($reveal_css_path)
+            );
+        }
+
+        if (file_exists($reveal_js_path)) {
+            wp_enqueue_script(
+                'wecar-scroll-animations',
+                $stylesheet_uri . '/assets/js/scroll-animations.js',
+                [],
+                filemtime($reveal_js_path),
+                ['strategy' => 'defer', 'in_footer' => true]
+            );
+        }
+    }
 });
 
 // Preempt WordPress' 404 handling so canonical/theme redirects cannot capture /cotizador.

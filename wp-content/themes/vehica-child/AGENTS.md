@@ -75,9 +75,11 @@ vehica-child/
 │   │   ├── home-carousel.css        # Home redesign: vehicle carousel
 │   │   ├── home-features.css        # Home redesign: "Elegí Wecar" features
 │   │   ├── home-partners.css        # Home redesign: "Marcas Asociadas"
-│   │   └── home-footer.css          # Home redesign: footer
+│   │   ├── home-footer.css          # Home redesign: footer
+│   │   └── scroll-animations.css    # Scroll reveal (home, vende-tu-auto, cotizador)
 │   ├── js/
-│   │   └── home-animations.js       # Home redesign: scroll-triggered animations
+│   │   ├── home-animations.js       # Home redesign: scroll-triggered animations
+│   │   └── scroll-animations.js     # Scroll reveal genérico (IntersectionObserver)
 │   ├── images/
 │   │   ├── logo-wecar.png           # Home redesign: WeCar logo
 │   │   └── vehicle-placeholder.svg  # Home redesign: empty state for carousel
