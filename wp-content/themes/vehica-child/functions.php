@@ -298,6 +298,11 @@ add_filter('template_include', static function ($template) {
     return $quote_template;
 }, 99);
 
+// Cotizador "Escribinos por Whatsapp" CTA — same URL as the site-wide floating button.
+add_filter('wecar/cotizador/whatsapp_url', static function () {
+    return 'https://wa.link/fu6938';
+});
+
 add_filter('body_class', static function ($classes) {
     $request_path = isset($_SERVER['REQUEST_URI'])
         ? trim((string) wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH), '/')

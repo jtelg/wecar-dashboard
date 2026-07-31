@@ -88,8 +88,8 @@ if ($icon_version !== false) {
                         $answer_id = $item_id . '-answer';
                         ?>
                         <article class="wecar-faq__item">
-                            <h3><button type="button" id="<?php echo esc_attr($question_id); ?>" aria-expanded="true" aria-controls="<?php echo esc_attr($answer_id); ?>"><span><?php echo esc_html($faq_item[0]); ?></span><img src="<?php echo esc_url($icon_uri); ?>" alt="" width="22" height="22"></button></h3>
-                            <div id="<?php echo esc_attr($answer_id); ?>" class="wecar-faq__panel" role="region" aria-labelledby="<?php echo esc_attr($question_id); ?>" aria-hidden="false"><p><?php echo esc_html($faq_item[1]); ?></p></div>
+                            <h3><button type="button" id="<?php echo esc_attr($question_id); ?>" aria-expanded="false" aria-controls="<?php echo esc_attr($answer_id); ?>"><span><?php echo esc_html($faq_item[0]); ?></span><img src="<?php echo esc_url($icon_uri); ?>" alt="" width="22" height="22"></button></h3>
+                            <div id="<?php echo esc_attr($answer_id); ?>" class="wecar-faq__panel" role="region" aria-labelledby="<?php echo esc_attr($question_id); ?>" aria-hidden="true" hidden><p><?php echo esc_html($faq_item[1]); ?></p></div>
                         </article>
                     <?php endforeach; ?>
                 </div>
