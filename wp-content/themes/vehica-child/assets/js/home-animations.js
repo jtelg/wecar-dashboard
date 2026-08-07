@@ -769,30 +769,55 @@
       }, RESUME_DELAY);
     }
 
-    // Drag to scroll manually
+    // Drag to scroll manually.
+    // NOTE: no setPointerCapture here. Pointer capture retargets the
+    // following click to the track (nearest common ancestor of the
+    // pointerdown/pointerup targets), so the card link would never
+    // receive it and navigation would silently fail. Drag listeners
+    // live on window instead: the drag keeps working even when the
+    // pointer leaves the track, and clicks reach the card links.
     var isDown = false, startX = 0, startScroll = 0;
-    function endDrag() {
+    // Set when a drag actually scrolled: suppress the browser click that
+    // follows pointerup so cards (now links) are not opened accidentally.
+    var suppressClick = false;
+
+    function endDrag(e) {
       if (!isDown) return;
       isDown = false;
       track.classList.remove('wecar-carousel--dragging');
+      if (e && Math.abs(e.clientX - startX) > 6) suppressClick = true;
       resumeAuto();
     }
+    function onDragMove(e) {
+      if (!isDown) return;
+      e.preventDefault();
+      track.scrollLeft = startScroll - (e.clientX - startX);
+    }
+    function onDragEnd(e) {
+      endDrag(e);
+      window.removeEventListener('pointermove', onDragMove);
+      window.removeEventListener('pointerup', onDragEnd);
+      window.removeEventListener('pointercancel', onDragEnd);
+    }
+
+    // Capture phase: intercept the click before it reaches a card link.
+    track.addEventListener('click', function (e) {
+      if (!suppressClick) return;
+      suppressClick = false;
+      e.preventDefault();
+      e.stopPropagation();
+    }, true);
     track.addEventListener('pointerdown', function (e) {
       isDown = true;
       startX = e.clientX;
       startScroll = track.scrollLeft;
       pauseAuto();
       track.classList.add('wecar-carousel--dragging');
-      try { track.setPointerCapture(e.pointerId); } catch (err) {}
+      window.addEventListener('pointermove', onDragMove);
+      window.addEventListener('pointerup', onDragEnd);
+      window.addEventListener('pointercancel', onDragEnd);
       e.preventDefault();
     });
-    track.addEventListener('pointermove', function (e) {
-      if (!isDown) return;
-      e.preventDefault();
-      track.scrollLeft = startScroll - (e.clientX - startX);
-    });
-    track.addEventListener('pointerup', endDrag);
-    track.addEventListener('pointercancel', endDrag);
 
     // Trackpad / wheel horizontal also counts as manual interaction
     track.addEventListener('wheel', function (e) {

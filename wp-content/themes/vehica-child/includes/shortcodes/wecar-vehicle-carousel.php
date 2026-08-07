@@ -89,6 +89,7 @@ function wecar_render_vehicle_card($post_id)
 {
     $post_id = (int) $post_id;
     $title   = get_the_title($post_id);
+    $url     = get_permalink($post_id);
 
     // Get first image from Vehica gallery meta (vehica_6673 = attachment IDs)
     $image_ids = get_post_meta($post_id, 'vehica_6673', true);
@@ -117,7 +118,7 @@ function wecar_render_vehicle_card($post_id)
     $year          = wecar_get_term_name($post_id, 'vehica_19270');
     $transmission  = wecar_get_term_name($post_id, 'vehica_6662');
     ?>
-    <div class="wecar-vehicle-card">
+    <a class="wecar-vehicle-card" href="<?php echo esc_url($url); ?>">
         <div class="wecar-vehicle-card__image-wrap">
             <img
                 class="wecar-vehicle-card__image"
@@ -159,7 +160,7 @@ function wecar_render_vehicle_card($post_id)
                 <?php endif; ?>
             </div>
         </div>
-    </div>
+    </a>
     <?php
 }
 

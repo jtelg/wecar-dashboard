@@ -129,6 +129,21 @@ body.home #wecar-carousel .wecar-vehicle-card {
   display: flex;
   flex-direction: column;
   white-space: normal;
+  /* Anchor reset: the card is a link to /anuncios/{slug}/ */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.home #wecar-carousel .wecar-vehicle-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+body.home #wecar-carousel .wecar-vehicle-card:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: -4px;
 }
 
 /* Gradient border using pseudo-element */
