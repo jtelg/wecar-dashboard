@@ -334,7 +334,7 @@ Si encontrás un problema o necesitás cambios en el sistema, contactá al equip
 | Hosting | SiteGround |
 | Automatización | n8n (bot.custer.com.ar) |
 | Base de datos | Google Sheets |
-| Correo saliente | SMTP no-reply@grupofonte.com.ar |
+| Correo saliente | SMTP no-reply@multicars.ar |
 | Repositorio | GitHub (desarrollo) |
 
 ---

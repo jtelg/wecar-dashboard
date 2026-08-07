@@ -202,7 +202,7 @@
     },
     {
       "parameters": {
-        "fromEmail": "no-reply@grupofonte.com.ar",
+        "fromEmail": "no-reply@multicars.ar",
         "toEmail": "=jtelgarecz@gmail.com",
         "subject": "=Recibimos tu cotización - WeCar",
         "text": "=Hola {{ $('get_body').item.json.nombre }},\n\nRecibimos tu consulta correctamente. Un asesor se va a contactar con vos para confirmar el turno del peritaje.\n\nResumen de lo que nos contaste:\n  Nombre:     {{ $('get_body').item.json.nombre }}\n  Email:      {{ $('get_body').item.json.mail }}\n  Teléfono:   {{ $('get_body').item.json.telefono }}\n  Localidad:  {{ $('get_body').item.json.localidad }}\n  Vehículo:   {{ $('get_body').item.json.marca }} {{ $('get_body').item.json.modelo }} ({{ $('get_body').item.json.anio }}) - {{ $('get_body').item.json.kilometros }} km\n  GNC:        {{ $('get_body').item.json.gnc }}\n  Peritaje:   {{ $('get_body').item.json.dia }} - {{ $('get_body').item.json.horario }}\n\nGracias por elegir WeCar.\nEl equipo de WeCar",
@@ -219,13 +219,13 @@
       "credentials": {
         "smtp": {
           "id": "AiWxcLJdEZKBD4vJ",
-          "name": "no-reply@grupofonte.com.ar"
+          "name": "no-reply@multicars.ar"
         }
       }
     },
     {
       "parameters": {
-        "fromEmail": "no-reply@grupofonte.com.ar",
+        "fromEmail": "no-reply@multicars.ar",
         "toEmail": "jtelgarecz@gmail.com",
         "subject": "Nuevo cotizador - {{ $json.nombre }}",
         "text": "=Se recibió un nuevo cotizador.\n\nContacto:\n  Nombre:     {{ $('get_body').item.json.nombre }}\n  Email:      {{ $('get_body').item.json.mail }}\n  Teléfono:   {{ $('get_body').item.json.telefono }}\n  Localidad:  {{ $('get_body').item.json.localidad }}\n\nVehículo:\n  Marca:      {{ $('get_body').item.json.marca }}\n  Modelo:     {{ $('get_body').item.json.modelo }}\n  Año:        {{ $('get_body').item.json.anio }}\n  KM:         {{ $('get_body').item.json.kilometros }}\n  GNC:        {{ $('get_body').item.json.gnc }}\n\nPeritaje:\n  Día:        {{ $('get_body').item.json.dia }}\n  Horario:    {{ $('get_body').item.json.horario }}\n\nID: {{ $('get_body').item.json.timestamp }}",
@@ -242,7 +242,7 @@
       "credentials": {
         "smtp": {
           "id": "AiWxcLJdEZKBD4vJ",
-          "name": "no-reply@grupofonte.com.ar"
+          "name": "no-reply@multicars.ar"
         }
       }
     },
